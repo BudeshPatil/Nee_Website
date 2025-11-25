@@ -1,0 +1,45 @@
+<!-- <div class="loader-overlay" [class.fade-out]="!loaderVisible">
+	<div class="loader-content">
+		<img src="{{ imageURL }}/loader-video/loader-logo.png" alt="Loading..." title="Loading..." loading="eager"
+			fetchpriority="high" width="0" height="0" />
+	</div>
+</div>
+
+<ng-container *ngIf="showIntro">
+	<div class="header-desktop position-relative">
+		<h1 class="d-none">Ghost Rentals — Car, Yacht & Chauffeur Rental Services Dubai</h1>
+		<h2 class="d-none">Book Ghost Rentals for car, yacht and chauffeur rental services in Dubai.</h2>
+	</div>
+	<div id="intro-overlay" class="intro-overlay" [class.fade-out]="!introVisible">
+
+		<picture *ngIf="thumbnailVisible" (click)="playVideo()">
+			<source media="(min-width: 992px)" srcset="{{ imageURL }}/loader-video/luxury-car-and-yacht-services.webp"
+				type="image/webp">
+
+			<source media="(max-width: 991px)" srcset="{{ imageURL }}/loader-video/rent-car-yacht-services-in-dubai.webp"
+				type="image/webp">
+
+			<img src="{{ imageURL }}/loader-video/luxury-car-and-yacht-services.webp"
+				alt="Ghost Rentals luxury car and yacht services" title="Ghost Rentals luxury car and yacht services"
+				loading="eager" width="100%" height="auto" class="cursor-pointer">
+		</picture>
+
+
+		<video #introDesktopVideo muted (ended)="onVideoEnd()" playsinline class="d-none d-lg-block" preload="auto">
+			<source src="{{ imageURL }}/loader-video/ghost-rental-desktop-video.mp4" type="video/mp4" />
+
+		</video>
+
+		<video #introMobileVideo muted (ended)="onVideoEnd()" playsinline preload="auto" class="d-block d-lg-none">
+			<source src="{{ imageURL }}/loader-video/ghost-rental-mobile-video.mp4" type="video/mp4" />
+
+		</video>
+
+	</div>
+</ng-container>
+
+<ng-container *ngIf="websiteVisible"> -->
+	<app-header></app-header>
+	<router-outlet></router-outlet>
+	<app-footer></app-footer>
+<!-- </ng-container> -->

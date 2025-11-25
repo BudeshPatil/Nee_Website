@@ -1,0 +1,885 @@
+<h1 class="size18 redhat-semibold opacity-0 ">Rent Cars & Yachts in Dubai</h1>
+<section class="min-h-100 sectionPadding search-container position-relative">
+	<div class="container-fluid">
+		<div class="row">
+
+			<div class="col-xl-3 col-lg-5 filter-section">
+
+				<div class="border border-2 p-xl-4 p-md-3 p-3 filter-container tabposition" #filterContainer [ngClass]="{
+						'': true,
+						cstposition: isMobileFilterVisible && isMobile,
+						'position-sticky': isTablate
+					}">
+
+					<div class="filter" [ngClass]="
+							vehicleType == 'Car' || vehicleType == 'Yachts'
+								? 'cstheight'
+								: 'cstheight2'
+						">
+
+						<div class="d-xl-flex d-none align-items-center justify-content-between">
+							<div class="d-flex align-items-center gap-2">
+								<img src="{{ imageURL }}/images/icons/filter.svg" title="Filter"
+									alt="Filter Dubai Car Rentals - Find Best Luxury Cars and Yachts" loading="eager" width="0" height="0"
+									class="img-fluid filter-icon" />
+								<h2 class="mb-0 size18 redhat-semibold gray-color">Filter</h2>
+							</div>
+							<div class="d-flex align-items-center gap-2">
+								<button class="size16 redhat-semibold text-capitalize border-0 outline-none bg-transparent gray-color"
+								aria-label="Reset Filter"
+									type="button" (click)="resetFilter()">
+									reset
+								</button>
+								<!-- <button
+									class="bg-transparent gray-color p-0 border-0 d-xl-none d-block ms-auto"
+									type="button"
+									[attr.aria-expanded]="isMobileFilterVisible"
+									aria-controls="filter-options"
+									(click)="toggleFilter()"
+								>
+									<lucide-icon
+										[name]="isMobileFilterVisible ? 'minus' : 'plus'"
+										size="20"
+										style="display: flex"
+									/>
+								</button> -->
+							</div>
+						</div>
+						<div class="d-xl-none d-flex align-items-center justify-content-between" (click)="toggleFilter()">
+							<div class="d-flex align-items-center gap-2">
+								<img src="{{ imageURL }}/images/icons/filter.svg" title="Filter"
+									alt="Filter Dubai Car Rentals - Find Best Luxury Cars and Yachts" loading="eager" width="0" height="0"
+									class="img-fluid filter-icon" />
+								<h2 class="mb-0 size18 redhat-semibold gray-color">Filter</h2>
+							</div>
+							<div class="d-flex align-items-center gap-2">
+								<button class="size16 redhat-semibold text-capitalize border-0 outline-none bg-transparent gray-color"
+									aria-label="Reset Filter"
+									type="button" (click)="resetFilter()">
+									reset
+								</button>
+								<button class="bg-transparent gray-color p-0 border-0 d-xl-none d-block ms-auto" type="button"
+									[attr.aria-expanded]="isMobileFilterVisible" aria-controls="filter-options" aria-label="Toggle Filter">
+									<lucide-icon [name]="isMobileFilterVisible ? 'minus' : 'plus'" size="20" class="d-flex" />
+								</button>
+							</div>
+						</div>
+
+						<!-- filter options -->
+
+						<div id="filter-options" [hidden]="isMobile && !isMobileFilterVisible" class="filter" [ngClass]="{
+								expanded: isMobile && isMobileFilterVisible,
+								'p-xl-4 p-md-3 py-3 px-0': isMobile
+							}">
+							<ng-container *ngIf="isMobileFilterVisible">
+								<label class="form-label gray-light-color size14 redhat-semibold mb-1 mt-xl-3 mt-lg-3 mt-0">Vehicle
+									Type</label>
+								<div class="filter-section">
+									<!-- <select
+										[(ngModel)]="vehicleType"
+										class="form-selection size16 redhat-semibold bg-white"
+										(click)="$event.stopPropagation()"
+										(blur)="onSelectBlur($event)"
+										(change)="setVehicleType()"
+									>
+										<option value="" disabled selected>
+											Select Vehicle Type
+										</option>
+										<option value="Car" class="gray-color">Cars</option>
+										<option value="Yachts" class="gray-color">Yachts</option>
+									</select>
+									<img
+										src="{{ imageURL }}/images/icons/down-arrow.svg"
+										alt="Arrow Down"
+										class="down-arrow"
+									/> -->
+									<div class="dropdown-toggle custom-dropdown form-select size16 redhat-medium"
+										(click)="toggleFilterDropdown('vehicleType')" tabindex="0">
+										<span class="selected-text size16 redhat-semibold text-capitalize bg-transparent cselect" [ngClass]="{
+												'placeholder-color': !vehicleType,
+												'gray-color': vehicleType
+											}">
+											{{ getVehicleTypeDisplay() }}
+										</span>
+										<img src="{{ imageURL }}/images/icons/down-arrow.svg" class="img-fluid down-arrow ms-2"
+											[ngClass]="{ rotate: vehicleTypeOpen }" loading="eager" width="0" height="0" title="arrow"
+											alt="Expand Options - Dubai Car Rental Categories and Yacht Types" />
+									</div>
+
+									<ul class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+										*ngIf="vehicleTypeOpen">
+										<li (click)="selectVehicleType('Car')"
+											class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+											cars
+										</li>
+										<li (click)="selectVehicleType('Yachts')"
+											class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+											yachts
+										</li>
+									</ul>
+								</div>
+								<!-- Car Brand -->
+								<label *ngIf="vehicleType == 'Car'" class="form-label size14 redhat-semibold mb-1 gray-light-color">Car
+									Brand</label>
+								<div class="filter-section" *ngIf="vehicleType == 'Car'">
+									<div class="dropdown-toggle custom-dropdown form-select size16 redhat-medium"
+										(click)="toggleFilterDropdown('brand')" tabindex="0">
+										<span class="selected-text size16 redhat-semibold text-capitalize bg-transparent cselect" [ngClass]="{
+												'placeholder-color': !selectedBrand,
+												'gray-color': selectedBrand
+											}">
+											{{ getSelectedBrandName() || "Select Brand" }}
+										</span>
+										<img src="{{ imageURL }}/images/icons/down-arrow.svg" class="img-fluid down-arrow ms-2"
+											[ngClass]="{ rotate: brandOpen }" loading="eager" width="0" height="0" title="arrow"
+											alt="Expand Options - Dubai Car Rental Categories and Yacht Brands" />
+									</div>
+
+									<ul class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+										*ngIf="brandOpen">
+										<li *ngFor="let item of brandData" (click)="selectBrand(item)"
+											class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+											{{ item.name }}
+										</li>
+									</ul>
+								</div>
+								<!-- Car Model -->
+								<label *ngIf="vehicleType == 'Car'" class="form-label size14 redhat-semibold mb-1 gray-light-color">Car
+									Model</label>
+								<div class="filter-section" *ngIf="vehicleType == 'Car'">
+									<div class="dropdown-toggle custom-dropdown form-select size16 redhat-medium"
+										(click)="toggleFilterDropdown('model')" tabindex="0">
+										<span class="selected-text size16 redhat-semibold text-capitalize bg-transparent cselect" [ngClass]="{
+												'placeholder-color': !selectedModel,
+												'gray-color': selectedModel
+											}">
+											{{ getSelectedModelName() || "Select Model" }}
+										</span>
+										<img src="{{ imageURL }}/images/icons/down-arrow.svg" class="img-fluid down-arrow ms-2"
+											[ngClass]="{ rotate: modelOpen }" loading="eager" width="0" height="0" title="arrow"
+											alt="Expand Options - Dubai Car Rental Categories and Yacht Models" />
+
+									</div>
+
+									<ul class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+										*ngIf="modelOpen">
+										<li *ngFor="let item of filteredModel" (click)="selectModel(item)"
+											class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+											{{ item.name }}
+										</li>
+									</ul>
+								</div>
+								<!-- Car Model -->
+
+								<!-- Body Type -->
+								<label *ngIf="vehicleType == 'Car'" class="form-label size14 redhat-semibold mb-1 gray-light-color">Body
+									Type</label>
+								<div class="filter-section" *ngIf="vehicleType == 'Car'">
+									<div class="dropdown-toggle custom-dropdown form-select size16 redhat-medium"
+										(click)="toggleFilterDropdown('bodytype')" tabindex="0">
+										<span class="selected-text size16 redhat-semibold text-capitalize bg-transparent cselect" [ngClass]="{
+												'placeholder-color': !selectedBodytype,
+												'gray-color': selectedBodytype
+											}">
+											{{ getSelectedBodyTypeName() || "Select Body Type" }}
+										</span>
+										<img src="{{ imageURL }}/images/icons/down-arrow.svg" class="img-fluid down-arrow ms-2"
+											[ngClass]="{ rotate: bodytypeOpen }" loading="eager" width="0" height="0" title="arrow"
+											alt="Expand Options - Dubai Car Rental Categories and Yacht Body Types" />
+									</div>
+
+									<ul class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+										*ngIf="bodytypeOpen">
+										<li *ngIf="bodyTypeData?.length === 0"
+											class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+											No body types available
+										</li>
+										<li *ngFor="let item of bodyTypeData" (click)="selectBodyType(item)"
+											class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+											{{ item.name }}
+										</li>
+									</ul>
+								</div>
+
+								<div *ngIf="vehicleType === 'Yachts'">
+									<label class="form-label size14 redhat-semibold mb-1 gray-light-color">Yacht Body Type</label>
+									<div class="filter-section">
+										<div class="dropdown-toggle custom-dropdown form-select size16 redhat-medium"
+											(click)="toggleFilterDropdown('yachtbodytype')" tabindex="0">
+											<span class="selected-text size16 redhat-semibold text-capitalize bg-transparent cselect"
+												[ngClass]="{
+													'placeholder-color': !selectedBodytype,
+													'gray-color': selectedBodytype
+												}">
+												{{ getSelectedBodyTypeName() || "Select Body Type" }}
+											</span>
+											<img src="{{ imageURL }}/images/icons/down-arrow.svg" class="img-fluid down-arrow ms-2"
+												[ngClass]="{ rotate: yachtBodytypeOpen }" loading="eager" width="0" height="0" title="arrow"
+												alt="Expand Options - Dubai Car Rental Categories and Yacht Body Types" />
+										</div>
+
+										<ul class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+											*ngIf="yachtBodytypeOpen">
+											<li *ngIf="bodyTypeData?.length === 0"
+												class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+												No body types available
+											</li>
+											<li *ngFor="let item of bodyTypeData" (click)="selectBodyType(item)"
+												class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+												{{ item.name }}
+											</li>
+										</ul>
+									</div>
+									<label class="form-label size14 redhat-semibold mb-1 gray-light-color">Length</label>
+									<div class="filter-section">
+										<div class="dropdown-toggle custom-dropdown form-select size16 redhat-medium"
+											(click)="toggleFilterDropdown('yachtlength')" tabindex="0">
+											<span class="selected-text size16 redhat-semibold text-capitalize bg-transparent cselect"
+												[ngClass]="{
+													'placeholder-color': !selectedLength,
+													'gray-color': selectedLength
+												}">
+												{{ selectedLength || "Select Length" }}
+											</span>
+											<img src="{{ imageURL }}/images/icons/down-arrow.svg" class="img-fluid down-arrow ms-2"
+												[ngClass]="{ rotate: yachtLengthOpen }" loading="eager" width="0" height="0" title="arrow"
+												alt="Expand Options - Dubai Car Rental Categories and Yacht Length" />
+										</div>
+
+										<ul class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+											*ngIf="yachtLengthOpen">
+											<li *ngFor="let item of yachtLengthOptions" (click)="selectYachtLength(item)"
+												class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+												{{ item }}
+											</li>
+										</ul>
+									</div>
+								</div>
+
+								<!-- Body Type -->
+
+								<!-- Special Number Plate -->
+								<label *ngIf="vehicleType == 'Car'"
+									class="form-label gray-light-color size14 redhat-semibold mb-1">Special Number Plate</label>
+								<div class="filter-section" *ngIf="vehicleType == 'Car'">
+									<div class="dropdown-toggle custom-dropdown form-select size16 redhat-medium"
+										(click)="toggleFilterDropdown('specialnumber')" tabindex="0">
+										<span class="selected-text size16 redhat-semibold text-capitalize bg-transparent cselect" [ngClass]="{
+												'placeholder-color': !selectedSpecialNumber,
+												'gray-color': selectedSpecialNumber
+											}">
+											{{
+											selectedSpecialNumber || "Select Special Number Plate"
+											}}
+										</span>
+										<img src="{{ imageURL }}/images/icons/down-arrow.svg" class="img-fluid down-arrow ms-2"
+											[ngClass]="{ rotate: specialnumberOpen }" loading="eager" width="0" height="0" title="arrow"
+											alt="Expand Options - Dubai Car Rental Categories and Yacht Special Number Plate" />
+									</div>
+
+									<ul class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+										*ngIf="specialnumberOpen">
+										<li (click)="selectSpecialNumber('true')"
+											class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+											Opt for Special Number Plate
+										</li>
+										<li (click)="selectSpecialNumber('false')"
+											class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color text-capitalize">
+											Do Not Opt
+										</li>
+									</ul>
+								</div>
+								<!-- Special Number Plate -->
+
+								<!-- Date From -->
+								<label class="form-label size14 redhat-semibold mb-1 gray-light-color">Date From</label>
+								<div class="filter-section datetime-selector" (click)="$event.stopPropagation()">
+									<!-- start date time -->
+									<input type="text" [value]="
+											selectedStartDate && selectedStartTime
+												? formatDate(selectedStartDate) +
+												  ' ' +
+												  selectedStartTime
+												: ''
+										" readonly placeholder="Select Pickup Date & Time"
+										class="form-controls size16 redhat-semibold bg-transparent gray-color date-height"
+										(click)="toggleDateTimeDropdown($event)" />
+
+									<img src="{{ imageURL }}/images/icons/down-arrow.svg" alt="Date From"
+										[ngClass]="{ rotate: showDateTimeDropdown }" class="down-arrow" width="0" height="0" loading="eager"
+										title="Date From" />
+
+									<div class="datetime-dropdown card" *ngIf="showDateTimeDropdown" (click)="$event.stopPropagation()">
+										<div class="view-toggle-buttons d-flex justify-content-center mb-2 gap-2">
+											<button class="black-button size16 redhat-bold text-capitalize px-2 py-1"
+												[class.active]="activeStartView === 'calendar'" (click)="showCalendarView('start')"
+												aria-label="Show Calendar"
+												data-text="Calendar">
+												<span>Calendar</span>
+											</button>
+											<button class="black-button size16 redhat-bold text-capitalize px-2 py-1"
+												[class.active]="activeStartView === 'time'" (click)="showTimeView('start')"
+												aria-label="Show Time"
+												data-text="Time">
+												<span>Time</span>
+											</button>
+										</div>
+
+										<div class="datetime-inner d-flex">
+											<div class="calendar-section" [class.slide-in]="activeStartView === 'calendar'"
+												[class.slide-out]="activeStartView !== 'calendar'">
+												<div class="d-flex justify-content-between align-items-center mb-2">
+													<button type="button" class="btn-nav" (click)="prevMonth()" [disabled]="!canGoPrevMonth()" aria-label="Previous Month">
+														‹
+													</button>
+
+													<strong class="size14">{{
+														currentMonth | date : "MMMM yyyy"
+														}}</strong>
+													<button type="button" class="btn-nav" (click)="nextMonth()" aria-label="Next Month">
+														›
+													</button>
+												</div>
+												<div class="calendar-grid">
+													<div class="day-name" *ngFor="let day of dayNames">
+														{{ day }}
+													</div>
+													<div class="day-cell" *ngFor="let date of calendarDates" [class.today]="isToday(date)"
+														[class.selected]="isSelectedStartDate(date)" [class.disabled]="
+															!isCurrentMonth(date) || isBeforeToday(date)
+														" (click)="
+															!isBeforeToday(date) &&
+																isCurrentMonth(date) &&
+																selectDate(date)
+														">
+														{{ date.getDate() }}
+													</div>
+												</div>
+											</div>
+
+											<!-- Time View -->
+											<div class="time-picker-section" [class.slide-in]="activeStartView === 'time'"
+												[class.slide-out]="activeStartView !== 'time'">
+												<div class="d-flex gap-2 scroller">
+													<div class="time-section">
+														<div class="time-section-label my-1 redhat-regular size12">
+															Hours
+														</div>
+														<div class="time-options">
+															<span *ngFor="let hour of displayHours"
+																class="time-option size14 redhat-medium text-center mb-1 rounded"
+																[class.selected]="isSelectedHour(hour)" [class.disabled]="
+																	isPastTime(hour, selectedMinute || '00')
+																" (click)="
+																	!isPastTime(hour, selectedMinute || '00') &&
+																		selectHour(hour)
+																">
+																{{ hour }}
+															</span>
+														</div>
+													</div>
+
+													<div class="time-section">
+														<div class="time-section-label my-1 redhat-regular size12">
+															Minutes
+														</div>
+														<div class="time-options">
+															<div *ngFor="let minute of minutes"
+																class="time-option size14 redhat-medium text-center mb-1 rounded"
+																[class.selected]="selectedMinute === minute" [class.disabled]="
+																	isPastTime(selectedHour || '00', minute)
+																" (click)="
+																	!isPastTime(selectedHour || '00', minute) &&
+																		selectMinute(minute)
+																">
+																{{ minute }}
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="time-actions mx-auto">
+											<button type="button" class="black-button size16 redhat-bold text-capitalize px-2 py-1"
+												(click)="resetDateTimeSelection()" data-text="Reset">
+												<span>Reset</span>
+											</button>
+											<button type="button" class="black-button size16 redhat-bold text-capitalize px-2 py-1"
+												[disabled]="
+													!selectedStartDate || !selectedHour || !selectedMinute
+												" (click)="confirmDateTime()" data-text="Confirm">
+												<span>Confirm</span>
+											</button>
+										</div>
+									</div>
+								</div>
+								<!-- Date To -->
+								<label class="form-label size14 redhat-semibold mb-1 gray-light-color">Date To</label>
+								<div class="filter-section datetime-selector" (click)="$event.stopPropagation()">
+									<!-- <span
+								*ngIf="!selectedEndDate"
+								class="size16 redhat-semibold position-absolute text-capitalize bg-white label-text"
+								style="pointer-events: none"
+								>End date</span
+							>
+
+							<input
+								type="datetime-local"
+								class="form-controls size16 redhat-semibold bg-transparent gray-color date-height"
+								[min]="dropofftoday"
+								[(ngModel)]="selectedEndDate"
+								(ngModelChange)="onSelectDropDate()"
+							/>
+							<lucide-icon name="calendar-days" size="20"></lucide-icon> -->
+
+									<!-- drop date and time -->
+
+									<input type="text" [value]="
+											selectedEndDate && selectedEndTime
+												? formatDate(selectedEndDate) + ' ' + selectedEndTime
+												: ''
+										" readonly placeholder="Select Drop Date & Time"
+										class="form-controls size16 redhat-semibold bg-transparent gray-color date-height"
+										(click)="toggleEndDateTimeDropdown($event)" />
+
+									<img src="{{ imageURL }}/images/icons/down-arrow.svg" alt="Date To"
+										[ngClass]="{ rotate: showEndDateTimeDropdown }" class="down-arrow" loading="eager" width="0"
+										height="0" title="Date To" />
+
+									<!-- Drop Combined Dropdown -->
+									<div class="datetime-dropdown card" *ngIf="showEndDateTimeDropdown"
+										(click)="$event.stopPropagation()">
+										<div class="view-toggle-buttons d-flex justify-content-center mb-2 gap-2">
+											<button class="black-button size16 redhat-bold text-capitalize px-2 py-1"
+												[class.active]="activeEndView === 'calendar'" (click)="showCalendarView('end')"
+												data-text="Calendar">
+												<span>Calendar</span>
+											</button>
+											<button class="black-button size16 redhat-bold text-capitalize px-2 py-1"
+												[class.active]="activeEndView === 'time'" (click)="showTimeView('end')" data-text="Time">
+												<span>Time</span>
+											</button>
+										</div>
+										<div class="datetime-inner d-flex">
+											<!-- Drop Date -->
+											<div class="calendar-section" [class.slide-in]="activeEndView === 'calendar'"
+												[class.slide-out]="activeEndView !== 'calendar'">
+												<div class="d-flex justify-content-between align-items-center mb-2">
+													<button type="button" class="btn-nav" (click)="prevEndMonth()"
+														[disabled]="!canGoPrevEndMonth()">
+														‹
+													</button>
+
+													<strong class="size14">{{
+														endMonth | date : "MMMM yyyy"
+														}}</strong>
+													<button type="button" class="btn-nav" (click)="nextEndMonth()">
+														›
+													</button>
+												</div>
+												<div class="calendar-grid">
+													<div class="day-name" *ngFor="let day of dayNames">
+														{{ day }}
+													</div>
+													<div class="day-cell" *ngFor="let date of endCalendarDates" [class.today]="isToday(date)"
+														[class.selected]="isSelectedEndDate(date)" [class.disabled]="
+															!isCurrentEndMonth(date) ||
+															isBeforePickupDate(date)
+														" (click)="
+															!isBeforePickupDate(date) &&
+																isCurrentEndMonth(date) &&
+																selectEndDate(date)
+														">
+														{{ date.getDate() }}
+													</div>
+												</div>
+											</div>
+
+											<!-- Drop Time -->
+											<div class="time-picker-section" [class.slide-in]="activeEndView === 'time'"
+												[class.slide-out]="activeEndView !== 'time'">
+												<div class="d-flex">
+													<div class="time-section">
+														<div class="time-section-label my-1 redhat-regular size12">Hours</div>
+														<div class="time-options">
+															<div *ngFor="let hour of displayHours" class="time-option"
+																[class.selected]="isSelectedEndHour(hour)" [class.disabled]="
+																	isPastEndTime(hour, selectedEndMinute || '00')
+																" (click)="
+																	!isPastEndTime(
+																		hour,
+																		selectedEndMinute || '00'
+																	) && selectEndHour(hour)
+																">
+																{{ hour }}
+															</div>
+														</div>
+													</div>
+
+													<div class="time-section">
+														<div class="time-section-label my-1 redhat-regular size12">Minutes</div>
+														<div class="time-options">
+															<div *ngFor="let minute of minutes" class="time-option"
+																[class.selected]="selectedEndMinute === minute" [class.disabled]="
+																	isPastEndTime(selectedEndHour || '00', minute)
+																" (click)="
+																	!isPastEndTime(
+																		selectedEndHour || '00',
+																		minute
+																	) && selectEndMinute(minute)
+																">
+																{{ minute }}
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="time-actions mx-auto">
+											<button type="button" class="black-button size18 redhat-bold text-capitalize px-2 py-1"
+												aria-label="Reset End Date Time"
+												(click)="resetEndDateTimeSelection()" data-text="Reset">
+												<span>Reset</span>
+											</button>
+											<!-- <button
+												type="button"
+												class="black-button size18 redhat-bold text-capitalize px-2 py-1"
+												[disabled]="isDropTimeBeforePickup()"
+												(click)="confirmEndDateTime()"
+												data-text="Confirm"
+											>
+												<span>Confirm</span>
+											</button> -->
+											<button type="button" class="black-button size18 redhat-bold text-capitalize px-2 py-1"
+												aria-label="Confirm End Date Time"
+												(click)="confirmEndDateTime()" data-text="Confirm">
+												<span>Confirm</span>
+											</button>
+										</div>
+									</div>
+								</div>
+
+								<!-- Price Range -->
+								<div class="price-wrapper" *ngIf="vehicleType">
+									<div class="row g-2 mb-4">
+										<div class="col-6">
+											<label for="minPrice" class="form-label size14 redhat-semibold mb-1 gray-light-color">Min</label>
+											<div class="position-relative">
+												<input type="number" id="minPrice" [(ngModel)]="minPrice" (click)="onPriceInputChange('min')"
+													min="0" [max]="maxPrice - 500"
+													class="form-controls size16 redhat-semibold bg-white gray-color w-100" />
+												<span class="position-absolute size14 redhat-semibold color-card-p" style="
+														right: 10px;
+														top: 50%;
+														transform: translateY(-50%);
+													">AED</span>
+											</div>
+										</div>
+										<div class="col-6">
+											<label for="maxPrice" class="form-label size14 redhat-semibold mb-1 gray-light-color">Max</label>
+											<div class="position-relative">
+												<input type="number" id="maxPrice" [(ngModel)]="maxPrice" (click)="onPriceInputChange('max')"
+													[min]="minPrice + 500" max="150000"
+													class="form-controls size16 redhat-semibold bg-white gray-color w-100" />
+												<span class="position-absolute size14 redhat-semibold color-card-p" style="
+														right: 10px;
+														top: 50%;
+														transform: translateY(-50%);
+													">AED</span>
+											</div>
+										</div>
+									</div>
+									<div *ngIf="sliderVisible" class="my-2">
+										<ngx-slider class="ngxslider" *ngIf="sliderVisible" [(value)]="minPrice" [(highValue)]="maxPrice"
+											[options]="options"></ngx-slider>
+									</div>
+								</div>
+								<!-- Price Range -->
+
+								<!-- Search Button -->
+								<button class="black-button w-100 size16 redhat-semibold mt-md-4 mt-0 text-capitalize"
+									(click)="SearchItems()" data-text="Search" aria-label="Search">
+									<span>Search</span>
+								</button>
+							</ng-container>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- results section -->
+			<div class="results-section col-xl-9 col-lg-9 col-md-12 col-12 position-relative" #resultsSection [ngClass]="{
+					'col-xl-12 col-lg-12 col-md-12 col-12': isFilterCollapsed,
+					'col-xl-9 col-lg-12 col-md-12 col-12': !isFilterCollapsed
+				}">
+
+				<!-- <div class="container-fluid"> -->
+				<div
+					class="d-flex justify-content-md-between justify-content-end align-items-center margin34 margin40 sort-section">
+					<h3 class="mb-0 redhat-bold d-md-block d-none color-card-p ms-1 size14"
+						*ngIf="vehicleData && vehicleData.length > 0">
+						Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to
+						{{ Math.min(currentPage * itemsPerPage, totalItems) }} of
+						{{ totalItems }} Vehicles
+					</h3>
+					<h3 class="mb-0 size22 redhat-bold color-card-p text-capitalize"
+						*ngIf="vehicleData && vehicleData.length == 0">
+						No Data Found
+					</h3>
+
+					<!-- <div
+						class="d-flex align-items-center position-relative sort cdrop"
+						style="cursor: pointer"
+						*ngIf="vehicleData && vehicleData.length > 0"
+					>
+						<select
+							class="border-0 outline-none redhat-semibold text-capitalize bg-transparent color-card-p cselect"
+							(change)="onChangeSort($event)"
+							style="font-size: 14px"
+						>
+							<option
+								selected
+								disabled
+								class="text-muted size14 redhat-semibold text-capitalize"
+							>
+								Sort by
+							</option>
+							<option
+								value="H-L"
+								class="size14 redhat-semibold text-capitalize color-card-p"
+							>
+								Price: High to Low
+							</option>
+							<option
+								value="L-H"
+								class="size14 redhat-semibold text-capitalize color-card-p"
+							>
+								Price: Low to High
+							</option>
+							<option
+								value="relevance"
+								class="size14 redhat-semibold text-capitalize color-card-p"
+							>
+								reset
+							</option>
+						</select>
+
+						<img
+							src="{{ imageURL }}/images/icons/down-arrow.svg"
+							class="img-fluid down-arrow"
+							alt=""
+						/>
+					</div> -->
+
+					<div class="d-flex align-items-center position-relative sort cdrop cursor-pointer"
+						*ngIf="vehicleData && vehicleData.length > 0">
+						<div class="dropdown-toggle custom-dropdown" (click)="toggleDropdown()">
+							<span class="selected-text size14 redhat-semibold text-capitalize bg-transparent color-card-p cselect">
+								{{ selectedSortLabel || "Sort by" }}
+							</span>
+							<img src="{{ imageURL }}/images/icons/down-arrow.svg" class="img-fluid down-arrow ms-2"
+								[ngClass]="{ rotate: dropdownOpen }" alt="arrow" width="0" height="0" loading="eager" title="Sort by" />
+						</div>
+
+						<!-- Dropdown menu -->
+						<ul
+							class="dropdown-menu-custom border border-2 position-absolute mt-2 p-0 top-100 list-style-none z-index-5 bg-white gray-color"
+							*ngIf="dropdownOpen">
+							<li *ngFor="let option of sortOptions" (click)="selectSort(option)"
+								class="dropdown-item-custom px-3 py-2 cursor-pointer size14 redhat-semibold text-capitalize color-card-p">
+								{{ option.label }}
+							</li>
+							<li (click)="resetFilter()"
+								class="dropdown-item-custom px-3 py-2 cursor-pointer size14 redhat-semibold text-capitalize color-card-p">
+								reset
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="products" *ngIf="vehicleData && vehicleData.length > 0">
+					<!-- <h6 class="mb-0 size28 redhat-bold gray-color text-capitalize text-center"
+            *ngIf="vehicleData && vehicleData.length == 0">
+            Coming soon...
+          </h6> -->
+					<div class="row">
+						<div class="col-xl-4 col-lg-4 col-md-6 col-12 mb-xl-5 mb-lg-4 mb-md-4 mb-sm-3 mb-4 cursor-pointer"
+							*ngFor="let car of vehicleData">
+							<a [routerLink]="['/product', car.url_key]" class="text-decoration-none cardblock" tabindex="0"
+								role="link">
+								<!-- 
+						full page reload so changed to routerLink
+							href="/product/{{ car.url_key }}" -->
+
+								<div class="car-card">
+									<div class="thumbnail-image-container">
+										<img [src]="backendURl + '/media/' + car.media_data[0].src" [alt]="car.media_data[0].alt"
+											class="img-fluid w-100 h-100 thumbnail-image" loading="eager" width="0" height="0"
+											[title]="car.media_data[0].name" />
+									</div>
+									<!-- <div class="position-relative special-number-wrapper">
+                  <lucide-icon name="crown" size="20"></lucide-icon>
+
+                  <span
+                    *ngIf="car && car.isvipNumberPlate"
+                    class="special-badge size12 redhat-bold text-capitalize border border-1 rounded-2 px-2 py-1"
+                  >
+                    special number plate
+                  </span>
+
+                  <img
+                    [src]="backendURl + '/media/' + car.media_data[0].src"
+                    [alt]="car.name"
+                    class="img-fluid w-100 thumbnail-image h-100"
+                  />
+                </div> -->
+
+									<!-- <div class="card-content h-100 d-flex flex-column justify-content-center"> -->
+									<div class="card-content">
+										<div class="car-info d-flex justify-content-between position-relative">
+											<div class="car-header margin15">
+												<h4 class="car-name mb-1 size22 redhat-semibold gray-color">
+													<!-- {{ car.name.substring(0, 18) }}... -->
+													{{ car.name }}
+												</h4>
+												<h5 class="transmission text-muted size18 redhat-semibold text-capitalize color-card-p"
+													*ngIf="car.vehicle_type == 'Car'">
+													{{ car.transmission }}
+												</h5>
+												<h5 class="transmission text-muted size18 redhat-semibold text-capitalize color-card-p"
+													*ngIf="car.vehicle_type == 'Yachts'">
+													{{ car.bodytype_data[0].name }}
+												</h5>
+											</div>
+											<span *ngIf="car && car.isvipNumberPlate"
+												class="size12 redhat-bold text-capitalize special-number px-2 py-1">special number plate</span>
+										</div>
+
+										<!-- Car Information -->
+										<div class="d-flex justify-content-between border-top border-bottom collection-padding"
+											*ngIf="car.vehicle_type == 'Car'">
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/fuel.svg" class="img-fluid collection_image"
+													loading="eager" width="0" height="0" alt="Fuel type indicator"
+													title="Vehicle Fuel Information" />
+												<h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+													{{ car.fuelType || "N/A" }}
+												</h6>
+											</div>
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/mileage.svg" class="img-fluid collection_image"
+													loading="eager" width="0" height="0" alt="Vehicle mileage information"
+													title="Car Mileage Details" />
+												<h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p text-lowercase">
+													{{ car.mileage || "N/A" }}
+												</h6>
+											</div>
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/seats.svg" class="img-fluid collection_image"
+													loading="eager" width="0" height="0" alt="Number of seats" title="Seating Capacity" />
+												<h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+													{{ car.seating_capacity || "N/A" }} Pax
+												</h6>
+											</div>
+										</div>
+
+										<!-- Yacht Information -->
+										<div class="d-flex justify-content-between border-top border-bottom collection-padding"
+											*ngIf="car.vehicle_type === 'Yachts'">
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/length.svg" class="img-fluid collection_image"
+													alt="Length" loading="eager" title="Length" width="0" height="0" />
+												<h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p text-lowercase">
+													{{ car.length || "N/A" }}
+												</h6>
+											</div>
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/year.svg" class="img-fluid collection_image" alt="Year"
+													loading="eager" title="Year" width="0" height="0" />
+												<h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+													{{ car.year || "N/A" }}
+												</h6>
+											</div>
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/guests.svg" class="img-fluid collection_image"
+													alt="Capacity" loading="eager" title="Capacity"  width="0" height="0"/>
+												<h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+													{{ car.guest_capacity || "N/A" }} Guests
+												</h6>
+											</div>
+										</div>
+
+										<div class="cash-container d-flex justify-content-between align-items-center pt-md-3 pt-2"
+											*ngIf="car.vehicle_type === 'Car'">
+											<div class="cash">
+												<h6 class="text-muted mb-0 size18 redhat-semibold color-card-p text-decoration-line-through">
+													AED {{ car.regularRateDaily }}
+												</h6>
+												<h5 class="mb-0 size26 redhat-semibold gray-color">
+													AED {{ car.dailyRate
+													}}<span class="size18 redhat-regular gray-color">/day</span>
+												</h5>
+											</div>
+											<button routerLink="/product/{{ car.url_key }}"
+												class="p-0 mt-auto text-decoration-none color-card-p size16 redhat-semibold text-capitalize viewbt"
+												aria-label="View Details">
+												View details
+											</button>
+										</div>
+										<div class="cash-container d-flex justify-content-between align-items-center pt-md-3 pt-2"
+											*ngIf="car.vehicle_type === 'Yachts'">
+											<div class="cash">
+												<h6 class="text-muted mb-0 size18 redhat-semibold color-card-p text-decoration-line-through">
+													AED {{ car.regularRateHourly }}
+												</h6>
+												<h5 class="mb-0 size26 redhat-semibold gray-color">
+													AED {{ car.hourlyRate
+													}}<span class="size18 redhat-regular gray-color">/hr</span>
+												</h5>
+											</div>
+											<button routerLink="/product/{{ car.url_key }}"
+												class="p-0 mt-auto text-decoration-none color-card-p size16 redhat-semibold text-capitalize viewbt"
+												aria-label="View Details">
+												View details
+											</button>
+										</div>
+										</div>
+									</div>
+							</a>
+						</div>
+					</div>
+					<nav aria-label="Page navigation" class="mt-4" *ngIf="totalPages > 1">
+						<ul class="pagination justify-content-center align-items-center gap-2">
+							<!-- Previous -->
+							<li [class.disabled]="currentPage === 1">
+								<button class="circle-btn filled" [disabled]="currentPage === 1"
+									(click)="onPageChange(currentPage - 1)" aria-label="Previous Page">
+									<lucide-icon name="arrow-left" />
+								</button>
+							</li>
+
+							<!-- Page Numbers -->
+							<li *ngFor="let page of getPages()">
+								<button class="number-btn" [class.active-page]="page === currentPage" (click)="onPageChange(page)"
+								[attr.aria-label]="'Page ' + page"
+								>
+									{{ page }}
+								</button>
+							</li>
+
+							<!-- Next -->
+							<li [class.disabled]="currentPage === totalPages">
+								<button class="circle-btn filled" [disabled]="currentPage === totalPages"
+									(click)="onPageChange(currentPage + 1)" aria-label="Next Page">
+									<lucide-icon name="arrow-right" />
+								</button>
+							</li>
+						</ul>
+					</nav>
+					<!-- </div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+<app-testimonials></app-testimonials>

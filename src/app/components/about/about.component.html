@@ -1,0 +1,400 @@
+<section class="about bannerPadding">
+	<div class="container-fluid position-relative p-0 h-100">
+		<!-- <div class="overlay" aria-hidden="true"></div> -->
+
+		<img *ngIf="bannerData &&	bannerData.media_data.length > 0 &&	bannerData.media_data[0].file_type == 'image'
+			"src="{{ backendURl }}/banner/{{ bannerData.media_data[0].src }}"
+			alt="{{ bannerData.media_data[0].alt }}"	class="w-100 h-100 bannerImage" title="{{ bannerData.media_data[0].name }}" loading="eager"	decoding="async" width="" height=""
+		/>
+		<video
+			*ngIf="
+				bannerData &&
+				bannerData.media_data.length > 0 &&
+				bannerData.media_data[0].file_type == 'video'
+			"
+			#myVideo
+			muted
+			autoplay
+			loop
+			playsinline
+			title="{{ bannerData.media_data[0].name }}"
+			class="banner-video"
+		>
+			<source
+				src="{{ backendURl }}/banner/{{ bannerData.media_data[0].src }}"
+				type="video/mp4"
+			/>
+			<source
+				src="{{ backendURl }}/banner/{{ bannerData.media_data[0].src }}"
+				type="video/ogg"
+			/>
+			Your browser does not support the video tag.
+		</video>
+		<div class="content zindex2">
+			<!-- <h1 class="size88 performa-thin white-color heading-width">
+				Driven By Luxury
+				<span class="d-block">Fueled By Experience</span>
+			</h1> -->
+			<!-- <h1 class="text-white size88 performa-thin heading-width">Driven By Luxury 
+				Fueled By Experience</h1> -->
+				<h1 class="text-white size88 performa-thin heading-width">Best in Luxury Car and Yacht Rentals Dubai</h1>
+			<p class="size20 redhat-regular beige-color">
+				Ghost Rentals delivers premium luxury cars, yachts, and chauffeur services in Dubai and across the UAE. As the best car rental company in Dubai, we're committed to providing unforgettable experiences that combine sophistication, reliability, and personalized service.
+			</p>
+			<!-- <button class="size18 redhat-bold white-border-button">book now</button> -->
+		</div>
+	</div>
+</section>
+
+<!-- <section class="about sectionPadding">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-10 col-xl-8 pad-left mb-xl-5 mb-lg-3 mb-2">
+        <div class="about-content1">
+          <h3
+            class="size22 redhat-semibold text-capitalize"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            about ghost rentals
+          </h3>
+          <h1
+            class="size80 performa-thin text-capitalize banner-content mb-0"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            Driven By Luxury Fueled By Experience
+          </h1>
+        </div>
+      </div>
+      <div class="col-12 col-lg-10 col-xl-4 mb-xl-5 mb-md-4 mb-2">
+        <div class="about-content2">
+          <p
+            class="size20 redhat-regular mt-auto mb-3 mb-0 marginLeft"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            Ghost Rentals delivers Luxury Car, Yacht, and Chauffeur Services in
+            Dubai and across the UAE.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row about-banner">
+      <div class="col-xl-8 col-lg-12 banner-left">
+        <img
+          src="{{ imageURL }}/about/about_cars.png"
+          alt="about-banner"
+          class="h-100 bannerImage"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        />
+      </div>
+      <div
+        class="col-xl-4 col-lg-12 banner-right banner-left d-xl-block d-none"
+      >
+        <img
+          src="{{ imageURL }}/about/company_picture.png"
+          alt="about-banner"
+          class="h-100 bannerImage"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        />
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<app-brands
+	h2="Book Your Premium Car from Top Car Rental Brands"
+	titleClass="text-center size22 redhat-bold mb-4 mb-md-5 gray-color"
+	buttonTitle="View All"
+></app-brands>
+
+<section class="story">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-5 col-lg-9 col-md-8">
+				<div
+					class="story-content d-flex flex-column justify-content-center h-100"
+				>
+					<h2
+						class="text-capitalize size18 redhat-semibold gray-color"
+						data-aos="fade-up"
+						data-aos-duration="1000"
+					>
+						Our Journey
+					</h2>
+					<h3
+						class="size60 performa-light text-capitalize gray-color"
+						data-aos="fade-up"
+						data-aos-duration="1000"
+					>
+						how we began
+					</h3>
+					<p
+						class="size18 redhat-regular my-md-4 my-2 line-height30 gray-color"
+						data-aos="fade-up"
+						data-aos-duration="1500"
+					>
+						A team of Luxury Enthusiasts and Hospitality experts founded Ghost
+						Rentals with the aim to provide the highest quality service with the
+						most premium vehicles in the market to our customers.
+					</p>
+					<p
+						class="size18 redhat-regular mt-2 line-height30 gray-color"
+						data-aos="fade-up"
+						data-aos-duration="1500"
+					>
+						We started as a Boutique Car Rental and soon grew into a trusted
+						provider of Premium Yacht Charters and Chauffeured experiences. Our
+						team has ensured that Ghost Rentals becomes synonymous with
+						reliability, discretion and obsession for customer satisfaction. As the best car rental service in Dubai and among the top yacht rental providers in the region, we create memorable experiences with a focus on luxury and personalization. 
+					</p>
+				</div>
+			</div>
+			<div
+				class="col-xxl-7 col-xl-7 col-lg-12 p-0 overflow-hidden d-lg-block d-none"
+				data-aos="fade-up"
+				data-aos-duration="1000"
+			>
+				<img src="{{ imageURL }}/about/luxury-car-hire-in-dubai-ghost-rentals.webp" title="Rent Mercedes-Benz S-Class in Dubai" alt="Mercedes-Benz S class" loading="eager" width="1072" height="575"/>
+			</div>
+			<div
+				class="col-xxl-7 col-xl-7 col-lg-12 p-0 overflow-hidden d-lg-none d-block mt-4"
+				data-aos="fade-up"
+				data-aos-duration="1000"
+			>
+				<img src="{{ imageURL }}/about/ghost-rentals-cars-on-rent-dubai.webp" title="Rent Mercedes-Benz S-Class in Dubai" alt="Mercedes-Benz S class" loading="eager" width="0" height="0"/>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="features">
+	<div class="container-fluid mt-0 mt-md-5">
+		<h2
+			class="text-center margin54 size60 performa-light gray-color line-height90"
+			data-aos="fade-up"
+			data-aos-duration="1000"
+		>
+			Why should you rent a car with us?
+		</h2>
+		<div class="row justify-content-around mt-xl-3 mt-2">
+			<div
+				class="col-xl-3 col-md-6 col-9 mb-md-4 mb-2"
+				*ngFor="let feature of features"
+				data-aos="fade-up"
+				data-aos-duration="1500"
+			>
+				<img
+					[src]="imageURL + '/' + feature.image"
+					[alt]="feature.alt"
+					[title]="feature.title"
+					loading="lazy"
+					class="feature-icon d-flex mx-auto margin54" width="0" height="0"
+				/>
+				<h3 class="size26 redhat-semibold gray-color text-center margin12">
+					{{ feature.title }}
+				</h3>
+				<p
+					class="size18 redhat-semibold gray-color text-center line-height30 about-pad"
+				>
+					{{ feature.description }}
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="signature">
+	<!-- <div class=" position-relative signature-image-container">
+  <div class="position-absolute top-0 start-0 h-100 w-100">
+    <img
+      src="{{ imageURL }}/about/about.png"
+      alt=""
+      class="h-100 rounded-4 signature-image"
+    /> -->
+	<!-- <span class="overlay"></span> -->
+	<!-- </div>
+  </div> -->
+
+	<div
+		class="container-fluid position-relative h-100"
+		[ngStyle]="backgroundImageStyle"
+	>
+		<div class="row h-100">
+			<div class="col-xl-8 col-lg-8 signature-border-right" >
+				<div class="row h-100">
+					<div class="col-xl-12">
+						<div class="row h-100">
+							<div
+								class="col-xl-6 col-lg-12 col-6 signature-padding"
+								data-aos="fade-up"
+								data-aos-duration="1000"
+							>
+								<h2
+									class="size60 performa-light text-capitalize white-color margin26"
+								>
+									Our Signature Services
+								</h2>
+								<p
+									class="size18 redhat-regular white-color line-height30 d-lg-none d-block para-width mb-2 m-md-0"
+									data-aos="fade-up"
+									data-aos-duration="1500"
+								>
+									Welcome to Ghost Rentals, where every journey becomes a
+									statement! We offer tailored Luxury Services for Supercar
+									Rentals, Yachts, & Chauffeur Services in UAE.
+								</p>
+							</div>
+							<div
+								class="col-xl-6 col-lg-9 col-6 d-lg-none d-block signature2-padding signature-border-left"
+							>
+								<div
+									class="table-para-width"
+									data-aos="fade-up"
+									data-aos-duration="1000"
+								>
+									<h3
+										class="size60 performa-light text-capitalize white-color heading-width margin10"
+									>
+										Luxury Chauffeur Services
+									</h3>
+									<p
+										class="size18 redhat-regular white-color para-width line-height30 margin41"
+									>
+										At Ghost Rentals, we excel at Luxury Travel. Our top-notch
+										Luxury Chauffeur Services in Dubai provide unparalleled
+										elegance for every trip.
+									</p>
+									<button
+										routerLink="/product/search"
+										class="white-button size18 redhat-bold text-decoration-none gray-color"
+										data-text="Hire a Chauffeur"
+									>
+										<span>Hire a Chauffeur</span>
+									</button>
+								</div>
+							</div>
+							<div
+								class="col-xl-6 col-lg-9 col-6 d-lg-block d-none signature-padding"
+							>
+								<p
+									class="size18 redhat-regular white-color line-height30 mb-2 m-md-0"
+									data-aos="fade-up"
+									data-aos-duration="1500"
+								>
+									Welcome to Ghost Rentals, where every journey becomes a
+									statement! We offer tailored Luxury Services for Supercar
+									Rentals, Yachts, & Chauffeur Services in UAE.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-12 signature-border-top" >
+						<div class="row h-100">
+							<div
+								class="col-xl-6 col-lg-6 col-6 signature3-padding d-flex signature-border-right"
+							>
+								<div
+									class="table-car-width d-flex justify-content-between align-items-start flex-column"
+									data-aos="fade-up"
+									data-aos-duration="1000"
+								>
+									<h3
+										class="size26 redhat-semibold white-color text-capitalize margin10"
+									>
+										Luxury Car Rental Services
+									</h3>
+									<p
+										class="size18 redhat-regular white-color line-height30 margin41"
+									>
+										Find the best Luxury Car Rentals in Dubai with Ghost
+										Rentals. Choose Rolls-Royce, Lamborghini & Range Rover with
+										free UAE delivery.
+									</p>
+									<button
+										[routerLink]="['/product/search']"
+										[queryParams]="{ type: 'Car' }"
+										class="white-button size18 redhat-bold "
+										data-text="Hire a Car"
+									>
+										<span>Hire a Car</span>
+									</button>
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-6 signature4-padding d-flex">
+								<div
+									class="table-yacht-width d-flex justify-content-between align-items-start flex-column"
+									data-aos="fade-up"
+									data-aos-duration="1000"
+								>
+									<h3
+										class="size26 redhat-semibold white-color text-capitalize margin10"
+									>
+										Luxury Yacht Rental Services
+									</h3>
+									<p
+										class="size18 redhat-regular white-color line-height30 margin41"
+									>
+										Sail Dubai's iconic skyline on the best yacht rental in Dubai. Fully crewed with catering and personalized service experience.
+									</p>
+									<button
+										[routerLink]="['/product/search']"
+										[queryParams]="{ type: 'Yachts' }"
+										class="white-button size18 redhat-bold "
+										data-text="Hire a Yacht"
+									>
+										<span>Hire a Yacht</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 signature5-padding d-lg-block d-none">
+				<div class="row h-100">
+					<div class="col-xl-12 col-lg-12">
+						<div class="table-para-width">
+							<h3
+								class="size32 performa-light text-capitalize white-color heading-width margin26"
+								data-aos="fade-up"
+								data-aos-duration="1000"
+							>
+								Luxury Chauffeur Services
+							</h3>
+							<p
+								class="size18 redhat-regular white-color para-width line-height30"
+								data-aos="fade-up"
+								data-aos-duration="1500"
+							>
+								At Ghost Rentals, we excel at Luxury Travel. Our top-notch
+								Luxury Chauffeur Services in Dubai provide unparalleled elegance
+								for every trip.
+							</p>
+						</div>
+					</div>
+					<div
+						class="col-xl-12 col-lg-12 mt-auto"
+						data-aos="fade-up"
+						data-aos-duration="1000"
+					>
+						<button
+							(click)="sendWhatsAppMsgs()"
+							class="white-button size18 redhat-bold text-decoration-none gray-color"
+							data-text="Hire a Chauffeur"
+						>
+							<span>Hire a Chauffeur</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<app-vip-number-plate></app-vip-number-plate>
+
+<app-testimonials></app-testimonials>

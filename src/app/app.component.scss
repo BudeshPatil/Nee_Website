@@ -1,0 +1,69 @@
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // color: #fff;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .5s ease, visibility .5s ease;
+}
+
+.loader-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+:host ::ng-deep .loader-overlay.ng-leave,
+:host ::ng-deep .loader-overlay.ng-hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #00000070;
+  z-index: 9998; // below loader, above app
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .5s ease, visibility .5s ease;
+  opacity: 1;
+  visibility: visible;
+
+  video, img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    
+  }
+
+  video {
+    z-index: 9997;
+  }
+
+  img {
+    z-index: 9998;
+  }
+}
+
+.intro-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+

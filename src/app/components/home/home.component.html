@@ -1,0 +1,2259 @@
+<section class="home bannerPadding">
+	<div class="container-fluid position-relative p-0 h-100">
+		<div class="overlay"></div>
+		<img
+			*ngIf="
+				bannerData &&
+				bannerData.media_data.length > 0 &&
+				bannerData.media_data[0].file_type == 'image'
+			"
+			src="{{ backendURl }}/banner/{{ bannerData.media_data[0].src }}"
+			alt="{{ bannerData.media_data[0].alt }}"
+			class="w-100 h-100 border20"
+			width="0"
+			height="0"
+			loading="eager"
+			fetchpriority="high"
+			decoding="async"
+			title="{{ bannerData.media_data[0].name }}"
+		/>
+		<video
+			*ngIf="
+				bannerData &&
+				bannerData.media_data.length > 0 &&
+				bannerData.media_data[0].file_type == 'video'
+			"
+			#myBannervideo
+			width="100%"
+			muted
+			autoplay
+			loop
+			playsinline
+			title="{{ bannerData.media_data[0].name }}"
+			class="w-100 h-100 border20 object-fit-cover csvideo"
+		>
+			<source
+				src="{{ backendURl }}/banner/{{ bannerData.media_data[0].src }}"
+				type="video/mp4"
+			/>
+			<source
+				src="{{ backendURl }}/banner/{{ bannerData.media_data[0].src }}"
+				type="video/ogg"
+			/>
+			Your browser does not support the video tag.
+		</video>
+		<!-- start-50 translate-middle form-top -->
+		<div class="position-absolute w-100 form-top zindex2 h-100">
+			<div class="container-fluid h-100">
+				<div class="row h-100">
+					<div class="col-xl-6 col-lg-7 col-md-10 col-sm-12 col-12 pad-left">
+						<div class="d-flex h-100 justify-content-center">
+							<div class="content" *ngIf="bannerData">
+								<h1
+									class="size88 performa-thin white-color text-capitalize"
+									[innerHtml]="bannerData.short_desc"
+								></h1>
+								<p class="size20 redhat-regular hero-para beige-color line-height26"
+									[innerHtml]="bannerData.description"
+								></p>
+								<button
+									routerLink="/contact"
+									class="white-button size18 redhat-bold text-capitalize"
+									data-text="Book Now">
+									<span>Book Now</span>
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div
+						class="col-xl-5 col-lg-5 col-md-7 col-sm-12 col-11 mx-auto pad-right"
+					>
+						<div class="d-flex h-100 align-items-center form-container">
+							<form
+								class="form-glass gap-0 ms-md-auto mx-auto"
+								#myForm="ngForm"
+							>
+								<h2 class="text-center size28 redhat-bold black-light-color">
+									Book Your Car or Yacht Instantly
+								</h2>
+								<div
+									class="d-flex justify-content-center align-items-center gap-2 toggle"
+								>
+									<span
+										class="redhat-bold text-capitalize m-0 csttransit"
+										[ngClass]="{
+											'black-light-color': !isVehicleYacht,
+											'opacity-50': isVehicleYacht
+										}"
+										>Rent Cars</span
+									>
+									<div
+										class="toggle-switch"
+										id="vehicleToggle"
+										(click)="toggleVehicle()"
+										[class.active]="isVehicleYacht"
+										tabindex="0"
+										role="switch"
+										[attr.aria-checked]="isVehicleYacht"
+										[attr.aria-label]="
+											isVehicleYacht ? 'Switch to cars' : 'Switch to yachts'
+										"
+										aria-labelledby="toggleLabel"
+										(keydown.enter)="toggleVehicle()"
+										(keydown.space)="toggleVehicle()"
+									>
+										<span class="visually-hidden"
+											>{{ isVehicleYacht ? "Yachts" : "Cars" }} selected</span
+										>
+									</div>
+									<span
+										class="redhat-bold text-capitalize m-0 csttransit"
+										[ngClass]="{
+											'black-light-color': isVehicleYacht,
+											'opacity-50': !isVehicleYacht
+										}"
+										>Rent Yachts</span
+									>
+								</div>
+								<div class="row type-margin">
+									<div class="col-6 position-relative" *ngIf="!isVehicleYacht">
+										<div
+											class="dropdown-toggle custom-dropdown form-select size14 redhat-medium"
+											[ngClass]="{
+												'is-invalid':
+													brandControl.invalid && brandControl.touched,
+												'is-valid': brandControl.valid
+											}"
+											(click)="toggleDropdown('brand')"
+											tabindex="0"
+										>
+											<span
+												class="selected-text size14 redhat-semibold text-capitalize bg-transparent cselect"
+												[ngClass]="{
+													'placeholder-color': !selectedbrand,
+													'gray-color': selectedbrand
+												}"
+											>
+												{{ selectedbrand || "Car Brand*" }}
+											</span>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												class="img-fluid down-arrow ms-2"
+												[ngClass]="{ rotate: selectBrandOpen }"
+												alt="dropdown arrow"
+												title="dropdown arrow"
+												width="0"
+												height="0"
+												loading="eager"
+											/>
+										</div>
+										<ul
+											class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+											*ngIf="selectBrandOpen"
+										>
+											<li
+												*ngFor="let brand of filteredBrands"
+												(click)="selectBrand(brand)"
+												class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color"
+											>
+												{{ brand.name }}
+											</li>
+										</ul>
+									</div>
+									<div class="col-6 position-relative" *ngIf="!isVehicleYacht">
+										<div
+											class="dropdown-toggle custom-dropdown form-select size14 redhat-medium"
+											[ngClass]="{
+												'is-invalid':
+													brandControl.invalid && brandControl.touched,
+												'is-valid': brandControl.valid
+											}"
+											(click)="toggleDropdown('bodytype')"
+											tabindex="0"
+										>
+											<span
+												class="selected-text size14 redhat-semibold bg-transparent cselect"
+												[ngClass]="{
+													'placeholder-color': !selectedbodytype,
+													'gray-color': selectedbodytype
+												}"
+											>
+												{{ selectedbodytype || "Type of Car*" }}
+											</span>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												class="img-fluid down-arrow ms-2"
+												[ngClass]="{ rotate: selectBodyTypeOpen }"
+												alt="dropdown arrow"
+												width="0"
+												height="0"
+												title="dropdown arrow"
+												loading="eager"
+											/>
+										</div>
+
+										<!-- Dropdown menu -->
+										<ul
+											class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+											*ngIf="selectBodyTypeOpen"
+										>
+											<li
+												*ngFor="let bodytype of filteredBodytype"
+												(click)="selectBodytype(bodytype)"
+												class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color"
+											>
+												{{ bodytype.name }}
+											</li>
+										</ul>
+									</div>
+									<div
+										class="col-6 label-margin position-relative"
+										*ngIf="isVehicleYacht"
+									>
+										<div
+											class="dropdown-toggle custom-dropdown form-select size14 redhat-medium"
+											[ngClass]="{
+												'is-invalid':
+													bodyTypeControl.invalid && bodyTypeControl.touched,
+												'is-valid': bodyTypeControl.valid
+											}"
+											(click)="toggleDropdown('bodytype')"
+											tabindex="0"
+										>
+											<span
+												class="selected-text size14 redhat-semibold bg-transparent cselect"
+												[ngClass]="{
+													'placeholder-color': !selectedbodytype,
+													'gray-color': selectedbodytype
+												}"
+											>
+												{{ selectedbodytype || "Type of Yacht*" }}
+											</span>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												class="img-fluid down-arrow ms-2"
+												[ngClass]="{ rotate: selectBodyTypeOpen }"
+												alt="dropdown arrow"
+												title="dropdown arrow"
+												width="0"
+												height="0"
+												loading="eager"
+											/>
+										</div>
+
+										<!-- Dropdown menu -->
+										<ul
+											class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+											*ngIf="selectBodyTypeOpen"
+										>
+											<li
+												*ngFor="let bodytype of filteredBodytype"
+												(click)="selectBodytype(bodytype)"
+												class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color"
+											>
+												{{ bodytype.name }}
+											</li>
+										</ul>
+									</div>
+									<div
+										class="col-6 label-margin position-relative"
+										*ngIf="isVehicleYacht"
+									>
+										<!-- <div class="position-relative">
+											<select
+												class="form-select size14 redhat-medium"
+												(change)="selectData('size', $event)"
+												required
+											>
+												<option
+													value=""
+													disabled
+													selected
+													class="size14 redhat-medium black-light-color"
+												>
+													Yacht Sizes*
+												</option>
+												<option
+													class="size14 redhat-medium black-light-color"
+													value="{{ size }}"
+													*ngFor="let size of YachtSizes"
+												>
+													{{ size }}
+												</option>
+											</select>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												alt="dropdown arrow"
+												class="down-arrow"
+												loading="lazy"
+												title="dropdown arrow"
+											/>
+										</div> -->
+
+										<div
+											class="dropdown-toggle custom-dropdown form-select size14 redhat-medium"
+											[ngClass]="{
+												'is-invalid':
+													yachtSizeControl.invalid && yachtSizeControl.touched,
+												'is-valid': yachtSizeControl.valid
+											}"
+											(click)="toggleDropdown('size')"
+											tabindex="0"
+										>
+											<span
+												class="selected-text size14 redhat-semibold text-capitalize bg-transparent cselect"
+												[ngClass]="{
+													'placeholder-color': !selectedYachtSize,
+													'gray-color': selectedYachtSize
+												}"
+											>
+												{{ selectedYachtSize || "Yacht Length*" }}
+											</span>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												class="img-fluid down-arrow ms-2"
+												[ngClass]="{ rotate: selectYachtSizeOpen }"
+												alt="dropdown arrow"
+												title="dropdown arrow"
+												width="0"
+												height="0"
+												loading="eager"
+											/>
+										</div>
+
+										<!-- Dropdown menu -->
+										<ul
+											class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+											*ngIf="selectYachtSizeOpen"
+										>
+											<li
+												*ngFor="let size of YachtSizes"
+												(click)="selectYachtSize(size)"
+												class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color"
+											>
+												{{ size }}
+											</li>
+										</ul>
+									</div>
+									<div class="col-6 position-relative" *ngIf="isVehicleYacht">
+										<!-- <div class="position-relative">
+											<select
+												class="form-select size14 redhat-medium"
+												(change)="selectData('seats', $event)"
+												required
+											>
+												<option
+													value=""
+													disabled
+													selected
+													class="size14 redhat-medium black-light-color"
+												>
+													Pax*
+												</option>
+												<option
+													class="size14 redhat-medium black-light-color"
+													value="{{ seat }}"
+													*ngFor="let seat of YachtSeats"
+												>
+													{{ seat }}
+												</option>
+											</select>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												alt="dropdown arrow"
+												class="down-arrow"
+												loading="lazy"
+												title="dropdown arrow"
+											/>
+										</div> -->
+
+										<div
+											class="dropdown-toggle custom-dropdown form-select size14 redhat-medium"
+											[ngClass]="{
+												'is-invalid':
+													yachtSeatsControl.invalid &&
+													yachtSeatsControl.touched,
+												'is-valid': yachtSeatsControl.valid
+											}"
+											(click)="toggleDropdown('seats')"
+											tabindex="0"
+										>
+											<span
+												class="selected-text size14 redhat-semibold text-capitalize bg-transparent cselect"
+												[ngClass]="{
+													'placeholder-color': !selectedYachtSeats,
+													'gray-color': selectedYachtSeats
+												}"
+											>
+												{{ selectedYachtSeats || "Guests*" }}
+											</span>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												class="img-fluid down-arrow ms-2"
+												[ngClass]="{ rotate: selectYachtSeatsOpen }"
+												alt="dropdown arrow"
+												title="dropdown arrow"
+												width="0"
+												height="0"
+												loading="eager"
+											/>
+										</div>
+
+										<!-- Dropdown menu -->
+										<ul
+											class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+											*ngIf="selectYachtSeatsOpen"
+										>
+											<li
+												*ngFor="let seat of YachtSeats"
+												(click)="selectYachtSeats(seat)"
+												class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color"
+											>
+												{{ seat }}
+											</li>
+										</ul>
+									</div>
+									<div class="col-6 position-relative" *ngIf="isVehicleYacht">
+										<!-- <div class="position-relative">
+											<select
+												class="form-select size14 redhat-medium"
+												(change)="selectData('hours', $event)"
+												required
+											>
+												<option
+													value=""
+													disabled
+													selected
+													class="size14 redhat-medium black-light-color"
+												>
+													Hours*
+												</option>
+												<option
+													class="size14 redhat-medium black-light-color"
+													value="{{ hours }}"
+													*ngFor="let hours of YachtHours"
+												>
+													{{ hours }}
+												</option>
+											</select>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												alt="dropdown arrow"
+												class="down-arrow"
+												loading="lazy"
+												title="dropdown arrow"
+											/>
+										</div> -->
+										<div
+											class="dropdown-toggle custom-dropdown form-select size14 redhat-medium"
+											[ngClass]="{
+												'is-invalid':
+													yachtHoursControl.invalid &&
+													yachtHoursControl.touched,
+												'is-valid': yachtHoursControl.valid
+											}"
+											(click)="toggleDropdown('hours')"
+											tabindex="0"
+										>
+											<span
+												class="selected-text size14 redhat-semibold text-capitalize bg-transparent cselect"
+												[ngClass]="{
+													'placeholder-color': !selectedYachtHours,
+													'gray-color': selectedYachtHours
+												}"
+											>
+												{{ selectedYachtHours || "Hours*" }}
+											</span>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												class="img-fluid down-arrow ms-2"
+												[ngClass]="{ rotate: selectYachtHoursOpen }"
+												alt="dropdown arrow"
+												width="0"
+												height="0"
+												title="dropdown arrow"
+												loading="eager"
+											/>
+										</div>
+
+										<!-- Dropdown menu -->
+										<ul
+											class="dropdown-menu-custom position-absolute mt-1 p-0 top-100 list-style-none bg-white"
+											*ngIf="selectYachtHoursOpen"
+										>
+											<li
+												*ngFor="let hours of YachtHours"
+												(click)="selectYachtHours(hours)"
+												class="dropdown-item-custom px-3 py-2 size14 redhat-medium black-light-color"
+											>
+												{{ hours }}
+											</li>
+										</ul>
+									</div>
+								</div>
+								<h3
+									class="section-title size18 redhat-bold label-margin black-light-color"
+								>
+									Pick-up
+								</h3>
+								<div class="row">
+									<div class="col-6">
+										<div
+											class="date-selector pickup-date-selector position-relative"
+											(click)="$event.stopPropagation()"
+										>
+											<input
+												type="text"
+												[value]="
+													selectedStartDate
+														? (selectedStartDate | date : 'dd MMM yyyy')
+														: ''
+												"
+												readonly
+												name="selectedStartDate"
+												placeholder="Select Date*"
+												class="form-control custom-date-input size14 redhat-medium input-margin black-light-color"
+												(click)="toggleCalendar($event)"
+											/>
+											<div
+												class="calendar-dropdown card shadow"
+												*ngIf="showCalendar"
+												[ngClass]="{ show: showCalendar }"
+												(click)="$event.stopPropagation()"
+											>
+												<div
+													class="d-flex justify-content-between align-items-center mb-2"
+												>
+													<button
+														type="button"
+														class="btn btn-sm btn-light"
+														(click)="prevMonth()"
+													>
+														‹
+													</button>
+													<strong
+														class="size14 redhat-medium black-light-color"
+														>{{ currentMonth | date : "MMMM yyyy" }}</strong
+													>
+													<button
+														type="button"
+														class="btn btn-sm btn-light"
+														(click)="nextMonth()"
+													>
+														›
+													</button>
+												</div>
+												<div class="calendar-grid">
+													<div
+														class="day-name size14 redhat-medium"
+														*ngFor="let day of dayNames"
+													>
+														{{ day }}
+													</div>
+													<div
+														class="day-cell size14 redhat-medium"
+														*ngFor="let date of calendarDates"
+														[class.today]="isToday(date)"
+														[class.selected]="isSelectedStartDate(date)"
+														[class.disabled]="
+															!isCurrentMonth(date) || isBeforeToday(date)
+														"
+														(click)="
+															!isBeforeToday(date) &&
+																isCurrentMonth(date) &&
+																selectDate(date)
+														"
+													>
+														{{ date.getDate() }}
+													</div>
+												</div>
+											</div>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												alt="dropdown arrow"
+												[ngClass]="{ rotate: showCalendar }"
+												class="down-arrow"
+												loading="eager"
+												width="0"
+												height="0"
+												title="dropdown arrow"
+											/>
+										</div>
+									</div>
+
+									<div class="col-6">
+										<div
+											class="time-selector pickup-time-selector position-relative"
+											(click)="$event.stopPropagation()"
+										>
+											<input
+												type="text"
+												[value]="
+													selectedStartTime ? selectedStartTime : 'Select Time*'
+												"
+												readonly
+												placeholder="Select time*"
+												class="form-control custom-time-input size14 redhat-medium input-margin"
+												[ngClass]="{ 'placeholder-color': !selectedStartTime }"
+												(click)="toggleStartTimePicker($event)"
+											/>
+
+											<div
+												class="time-picker-dropdown card shadow position-absolute z-3"
+												*ngIf="showStartTimePicker"
+												[ngClass]="{ show: showStartTimePicker }"
+												(click)="$event.stopPropagation()"
+											>
+												<!-- <div class="time-picker-header">
+                          <div class="time-format-tabs">
+                            <button
+                              type="button"
+                              class="format-tab size14 redhat-medium gray-color"
+                              [class.active]="!isPM"
+                              (click)="setAM()"
+                            >
+                              AM
+                            </button>
+                            <button
+                              type="button"
+                              class="format-tab size14 redhat-medium gray-color"
+                              [class.active]="isPM"
+                              (click)="setPM()"
+                            >
+                              PM
+                            </button>
+                          </div>
+                        </div> -->
+
+												<div class="time-picker-container d-flex">
+													<div class="time-section hours-section">
+														<div
+															class="time-section-label my-1 size12 redhat-regular"
+														>
+															Hours
+														</div>
+														<div class="time-options hours" #hoursContainer>
+															<div
+																*ngFor="let hour of displayHours"
+																class="time-option size14 redhat-medium text-center mb-1 rounded"
+																[class.selected]="isSelectedHour(hour)"
+																[class.disabled]="
+																	isPastTime(hour, selectedMinute || '00')
+																"
+																(click)="
+																	!isPastTime(hour, selectedMinute || '00') &&
+																		selectHour(hour)
+																"
+															>
+																{{ hour }}
+															</div>
+														</div>
+													</div>
+
+													<div class="time-section minutes-section">
+														<div
+															class="time-section-label my-1 size12 redhat-regular"
+														>
+															Minutes
+														</div>
+														<div class="time-options minutes" #minutesContainer>
+															<div
+																*ngFor="let minute of minutes"
+																class="time-option size14 redhat-medium text-center mb-1 rounded"
+																[class.selected]="selectedMinute === minute"
+																[class.disabled]="
+																	isPastTime(selectedHour || '00', minute)
+																"
+																(click)="
+																	!isPastTime(selectedHour || '00', minute) &&
+																		selectMinute(minute)
+																"
+															>
+																{{ minute }}
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="time-picker-actions mt-1">
+													<button
+														type="button"
+														class="format-tab size14 redhat-medium gray-color text-capitalize"
+														(click)="resetTimeSelection()"
+													>
+														reset
+													</button>
+													<button
+														type="button"
+														class="format-tab size14 redhat-medium gray-color text-capitalize"
+														[disabled]="!selectedHour || !selectedMinute"
+														(click)="confirmTime()"
+													>
+														confirm
+													</button>
+												</div>
+											</div>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												alt="dropdown arrow"
+												class="down-arrow"
+												[ngClass]="{ rotate: showStartTimePicker }"
+												loading="eager"
+												width="0"
+												height="0"
+												title="dropdown arrow"
+											/>
+										</div>
+									</div>
+									<div class="col-12 label-margin">
+										<ng-container *ngIf="!isVehicleYacht">
+											<div class="position-relative">
+												<input
+													type="text"
+													[(ngModel)]="selectedpickaddress"
+													name="selectedpickaddress"
+													id="pickup"
+													class="form-control size14 redhat-medium black-light-color"
+													placeholder="Enter Pick-up location*"
+													required
+												/>
+											</div>
+										</ng-container>
+									</div>
+								</div>
+
+								<h3
+									class="section-title size18 redhat-bold label-margin black-light-color"
+									*ngIf="!isVehicleYacht"
+								>
+									Drop-off
+								</h3>
+								<div class="row" *ngIf="!isVehicleYacht">
+									<div class="col-6">
+										<!-- DROP DATE PICKER -->
+										<div
+											class="date-selector drop-date-selector position-relative"
+											(click)="$event.stopPropagation()"
+										>
+											<input
+												type="text"
+												[value]="
+													selectedEndDate
+														? (selectedEndDate | date : 'dd MMM yyyy')
+														: ''
+												"
+												readonly
+												name="selectedEndDate"
+												placeholder="Select Date*"
+												class="form-control custom-date-input size14 redhat-medium input-margin black-light-color"
+												(click)="toggleEndCalendar($event)"
+											/>
+
+											<div
+												class="calendar-dropdown card p-3 shadow"
+												*ngIf="showEndCalendar"
+												[ngClass]="{ show: showEndCalendar }"
+												(click)="$event.stopPropagation()"
+											>
+												<div
+													class="d-flex justify-content-between align-items-center mb-2"
+												>
+													<button
+														type="button"
+														class="btn btn-sm btn-light"
+														(click)="prevEndMonth()"
+													>
+														‹
+													</button>
+													<strong
+														class="size14 redhat-medium black-light-color"
+														>{{ endMonth | date : "MMMM yyyy" }}</strong
+													>
+													<button
+														type="button"
+														class="btn btn-sm btn-light"
+														(click)="nextEndMonth()"
+													>
+														›
+													</button>
+												</div>
+												<div class="calendar-grid">
+													<div
+														class="day-name size14 redhat-medium"
+														*ngFor="let day of dayNames"
+													>
+														{{ day }}
+													</div>
+													<div
+														class="day-cell size14 redhat-medium"
+														*ngFor="let date of endCalendarDates"
+														[class.today]="isToday(date)"
+														[class.selected]="isSelectedEndDate(date)"
+														[class.disabled]="
+															!isCurrentEndMonth(date) ||
+															isBeforePickupDate(date)
+														"
+														(click)="
+															isCurrentEndMonth(date) &&
+																!isBeforePickupDate(date) &&
+																selectEndDate(date)
+														"
+													>
+														{{ date.getDate() }}
+													</div>
+
+													<!-- <div *ngFor="let date of endCalendarDates" [class.disabled]="isBeforePickupDate(date)"
+                            [class.selected]="isSelectedEndDate(date)"
+                            (click)="!isBeforePickupDate(date) && selectEndDate(date)">
+                            {{ date.getDate() }}
+                          </div> -->
+												</div>
+											</div>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												alt="dropdown arrow"
+												[ngClass]="{ rotate: showEndCalendar }"
+
+												class="down-arrow"
+												loading="eager"
+												width="0"
+												height="0"
+												title="dropdown arrow"
+											/>
+										</div>
+									</div>
+									<div class="col-6">
+										<div
+											class="time-selector drop-time-selector position-relative"
+											(click)="$event.stopPropagation()"
+										>
+											<input
+												type="text"
+												[value]="
+													selectedEndTime ? selectedEndTime : 'Select Time*'
+												"
+												readonly
+												placeholder="Select Time*"
+												class="form-control custom-time-input size14 redhat-medium input-margin black-light-color"
+												(click)="toggleEndTimePicker($event)"
+												[ngClass]="{ 'placeholder-color': !selectedEndTime }"
+											/>
+
+											<div
+												class="time-picker-dropdown card shadow position-absolute z-3"
+												*ngIf="showEndTimePicker"
+												(click)="$event.stopPropagation()"
+												[ngClass]="{ show: showEndTimePicker }"
+											>
+												<div class="time-picker-container d-flex">
+													<div class="time-section hours-section">
+														<div
+															class="time-section-label my-1 size12 redhat-regular"
+														>
+															Hours
+														</div>
+														<div class="time-options hours" #endHoursContainer>
+															<div
+																*ngFor="let hour of displayHours"
+																class="time-option size14 redhat-medium text-center mb-1 rounded"
+																[class.selected]="isSelectedEndHour(hour)"
+																[class.disabled]="
+																	isPastEndTime(hour, selectedEndMinute || '00')
+																"
+																(click)="
+																	!isPastEndTime(
+																		hour,
+																		selectedEndMinute || '00'
+																	) && selectEndHour(hour)
+																"
+															>
+																{{ hour }}
+															</div>
+														</div>
+													</div>
+
+													<div class="time-section minutes-section">
+														<div
+															class="time-section-label my-1 size12 redhat-regular"
+														>
+															Minutes
+														</div>
+														<div
+															class="time-options minutes"
+															#endMinutesContainer
+														>
+															<div
+																*ngFor="let minute of minutes"
+																class="time-option size14 redhat-medium text-center mb-1 rounded"
+																[class.selected]="selectedEndMinute === minute"
+																[class.disabled]="
+																	isPastEndTime(selectedEndHour || '00', minute)
+																"
+																(click)="
+																	!isPastEndTime(
+																		selectedEndHour || '00',
+																		minute
+																	) && selectEndMinute(minute)
+																"
+															>
+																{{ minute }}
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="time-picker-actions mt-1">
+													<button
+														type="button"
+														class="format-tab size14 redhat-medium gray-color text-capitalize"
+														(click)="resetEndTimeSelection()"
+													>
+														reset
+													</button>
+													<button
+														type="button"
+														class="format-tab size14 redhat-medium gray-color text-capitalize"
+														[disabled]="!selectedEndHour || !selectedEndMinute"
+														(click)="confirmEndTime()"
+													>
+														confirm
+													</button>
+												</div>
+											</div>
+											<img
+												src="{{ imageURL }}/images/icons/down-arrow.svg"
+												alt="dropdown arrow"
+												class="down-arrow"
+												[ngClass]="{ rotate: showEndTimePicker }"
+												loading="eager"
+												width="0"
+												height="0"
+												title="dropdown arrow"
+											/>
+										</div>
+									</div>
+
+									<div class="col-12 type-margin">
+										<ng-container *ngIf="!isVehicleYacht">
+											<div class="position-relative">
+												<input
+													type="text"
+													[(ngModel)]="selecteddropaddress"
+													name="selecteddropaddress"
+													id="drop"
+													class="form-control size14 redhat-medium black-light-color"
+													placeholder="Enter Drop-off location*"
+													required
+												/>
+											</div>
+										</ng-container>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<h3
+											class="section-title size18 redhat-bold label-margin black-light-color"
+										>
+											Add-ons
+										</h3>
+										<div class="position-relative">
+											<div
+												class="form-select d-flex align-items-center size14 redhat-medium"
+												(click)="toggleAddonsDropdown($event)"
+											>
+												<!-- <span class="selected-items black-light-color">
+                          {{ getSelectedAddonsLabel() }}
+                        </span> -->
+												<span
+													class="selected-items black-light-color"
+													[ngClass]="{
+														'default-label': selectedAddons.length === 0
+													}"
+												>
+													{{ getSelectedAddonsLabel() }}
+												</span>
+
+												<img
+													src="{{ imageURL }}/images/icons/down-arrow.svg"
+													alt="addons dropdown"
+													title="addons dropdown"
+													[ngClass]="{ rotate: isDropdownOpen }"
+													class="down-arrow ms-auto"
+													width="0"
+													height="0"
+													loading="eager"
+												/>
+											</div>
+
+											<div
+												class="dropdown-menu size14 redhat-medium black-light-color"
+												[class.show]="isDropdownOpen"
+											>
+												<div
+													*ngFor="let addon of filteredFeatures"
+													class="mb-2 size14 redhat-medium d-flex align-items-center black-light-color cst-g5"
+													(click)="$event.stopPropagation()"
+													(change)="toggleSelection(addon, $event)"
+												>
+													<input
+														type="checkbox"
+														class="form-check-box"
+														[id]="'addon-' + addon.url_key"
+														[checked]="isSelected(addon)"
+													/>
+													<label
+														class="form-check-label size14 redhat-medium black-light-color"
+														[for]="'addon-' + addon.url_key"
+													>
+														{{ addon.name }}
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span
+									*ngIf="!isReservationFilled"
+									class="alert-danger position-relative redhat-regular size14 mt-2 text-center"
+									>Please ensure all required details are selected before
+									proceeding.</span
+								>
+								<!-- <button type="submit"  class="white-button d-flex mx-auto size18 redhat-bold btn-margin align-items-center"
+                (click)="openPopup()" data-text="Book Now">
+                <img src="{{ imageURL }}/images/icons/whatsapp.svg" alt="whatsapp" class="whatsapp-icon img-fluid" />
+                <span>Book Now</span>
+              </button> -->
+
+								<!-- <button type="submit" (click)="openPopup()" data-text="Book Now"
+                class="black-button d-flex mx-auto size18 redhat-bold btn-margin">
+                <img src="{{ imageURL }}/images/icons/whatsapp-white.svg" alt="whatsapp" class="whatsappicon" />
+                <span>book now</span>
+              </button> -->
+								<button
+									type="submit"
+									(click)="openPopup()"
+									(mouseenter)="setIsHovered(true)"
+									(mouseleave)="setIsHovered(false)"
+									(touchstart)="setIsHovered(true)"
+									(touchend)="setIsHovered(false)"
+									data-text="Book on WhatsApp"
+									class="form-black-button d-flex mx-auto size18 redhat-semibold btn-margin"
+								>
+									<span>
+										<img
+											src="{{ imageURL }}/images/icons/whatsapp-white.svg"
+											alt="whatsapp"
+											loading="eager"
+											width="0"
+											height="0"
+											title="whatsapp"
+											className="whatsappicon"
+										/>
+										Book on WhatsApp
+									</span>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div class="popup-overlay" *ngIf="showPopup" (click)="closePopup($event)">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+      <div class="w-100 d-flex justify-content-end mb-md-3">
+        <button
+          class="close-hamburger position-relative"
+          type="button"
+          (click)="closePopup($event)"
+          aria-label="Toggle navigation"
+          [class.active]="isPopupOpen"
+        >
+          <span class="close-top"></span>
+          <span class="close-bottom"></span>
+        </button>
+      </div>
+      <div class="form-container">
+        <form
+          [formGroup]="addcontactForm"
+          (ngSubmit)="onSubmit()"
+          method="post"
+          novalidate
+        >
+          <div class="row">
+            <div class="col-lg-6 col-12 mb-xl-4 mb-lg-3 mb-md-3 mb-2">
+              <div
+                class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize"
+              >
+                <label
+                  for="firstName"
+                  class="form-label gray-light-color m-0 size16 redhat-medium"
+                  >first Name</label
+                >
+                <input
+                  id="firstName"
+                  type="text"
+                  class="border-0 outline-0 gray-color size18 redhat-semibold"
+                  placeholder="first Name*"
+                  formControlName="name"
+                  name="name"
+                />
+              </div>
+              <span
+                *ngIf="submitted && hasError('name', 'required')"
+                class="alert-danger ms-md-3 ms-2 size16 redhat-semibold"
+                >Name is required</span
+              >
+            </div>
+            <div class="col-lg-6 col-12 mb-xl-4 mb-lg-3 mb-md-3 mb-2">
+              <div
+                class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize"
+              >
+                <label
+                  for="lastName"
+                  class="form-label gray-light-color m-0 size16 redhat-medium"
+                  >last name</label
+                >
+                <input
+                  id="lastName"
+                  type="text"
+                  class="border-0 outline-0 gray-color size18 redhat-semibold"
+                  placeholder="last name"
+                  formControlName="lastname"
+                  name="lastname"
+                />
+              </div>
+              <span
+                *ngIf="submitted && hasError('lastname', 'required')"
+                class="alert-danger ms-md-3 ms-2 size16 redhat-semibold"
+                >Last is required</span
+              >
+            </div>
+            <div class="col-lg-6 col-12 mb-xl-4 mb-lg-3 mb-md-3 mb-2">
+              <div
+                class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize"
+              >
+                <label
+                  for="email"
+                  class="form-label gray-light-color m-0 size16 redhat-medium"
+                  >email</label
+                >
+                <input
+                  id="email"
+                  type="email"
+                  class="border-0 outline-0 gray-color size18 redhat-semibold"
+                  placeholder="email"
+                  formControlName="email"
+                  name="email"
+                />
+              </div>
+              <span
+                *ngIf="submitted && hasEmailError('email', 'required')"
+                class="alert-danger ms-md-3 ms-2 size16 redhat-semibold"
+                >{{ hasEmailError("email", "required") }}</span
+              >
+            </div>
+            <div class="col-lg-6 col-12 mb-xl-4 mb-lg-3 mb-md-3 mb-2">
+              <div
+                class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize"
+              >
+                <label
+                  for="phone"
+                  class="form-label gray-light-color m-0 size16 redhat-medium"
+                  >Phone</label
+                >
+                <ngx-intl-tel-input
+                  id="floatingInput"
+                  class="interphone size18 redhat-semibold"
+                  id="floatingInput"
+                  [cssClass]="'custom-intl-tel-input'"
+                  [enableAutoCountrySelect]="true"
+                  [enablePlaceholder]="false"
+                  [searchCountryFlag]="true"
+                  [preferredCountries]="preferredCountries"
+                  [searchCountryField]="[
+                    SearchCountryField.Iso2,
+                    SearchCountryField.Name
+                  ]"
+                  [selectFirstCountry]="false"
+                  [selectedCountryISO]="CountryISO.UnitedArabEmirates"
+                  [phoneValidation]="true"
+                  [separateDialCode]="true"
+                  name="phone"
+                  formControlName="phone"
+                >
+                </ngx-intl-tel-input>
+              </div>
+
+              <span
+                *ngIf="submitted && hasPhoneNumberError('phone', 'required')"
+                class="alert-danger ms-md-3 ms-2 size16 redhat-semibold"
+                >{{ hasPhoneNumberError("email", "required") }}</span
+              >
+            </div>
+            <div class="col-12">
+              <div
+                class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize"
+              >
+                <label
+                  for="message"
+                  class="form-label gray-light-color m-0 size16 redhat-medium"
+                  >Message</label
+                >
+                <textarea
+                  style="resize: none"
+                  id="message"
+                  class="border-0 outline-0 gray-color size18 redhat-semibold"
+                  placeholder="Message"
+                  formControlName="message"
+                  name="message"
+                ></textarea>
+              </div>
+            </div>
+            <div class="col-12">
+              <div
+                class="alert alert-success alert-dismissable mt-4"
+                style="text-align: center"
+                *ngIf="msg_success"
+              >
+                {{ throw_msg }}
+              </div>
+              <button
+                class="black-button size18 redhat-bold mt-xl-3 mt-lg-3 mt-3 text-capitalize"
+                data-text="Send Message"
+              >
+                <span>Send Message</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div> -->
+</section>
+
+<section class="car-types-section d-xl-block d-none">
+	<h3
+		class="text-center mb-md-5 mb-3 size22 redhat-bold gray-color"
+		data-aos="fade-up"
+		data-aos-duration="1000"
+	>
+	Explore Our Luxury Car Rentals in Dubai - Choose Your Car Type
+	</h3>
+	<div class="container-fluid">
+		<div class="d-flex align-items-center gap">
+			<div
+				*ngFor="let car of cartypeData"
+				class="position-relative d-flex flex-column align-items-center justify-content-center cpointer"
+				data-aos="fade-up"
+				data-aos-duration="1500"
+			>
+				<a
+					[routerLink]="['/product/list', car.url_key]"
+					[title]="car.title"
+					routerLinkActive="router-link-active"
+					class="color-card-p p-0 mt-auto text-decoration-none size16 redhat-semibold text-capitalize hover-a"
+				>
+					<span class="size24 redhat-bold hover-span"> {{ car.name }}</span>
+					<img
+						src="{{ backendURl }}/cartype/{{ car.image[0].src }}"
+						[alt]="car.image[0].alt"
+						[title]="car.image[0].name"
+						class="category-image"
+						[routerLink]="['/product/list', car.url_key]"
+						routerLinkActive="router-link-active"
+						loading="eager"
+						width="0"
+						height="0"
+					/>
+					<p
+						class="redhat-semibold text-center type-margin text-capitalize black-light-color"
+						[routerLink]="['/product/list', car.url_key]"
+						routerLinkActive="router-link-active"
+					>
+						{{ car.name }}
+					</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="car-types-section d-xl-none d-block">
+	<h3
+		class="text-center mb-3 size22 redhat-bold gray-color"
+		data-aos="fade-up"
+		data-aos-duration="1000"
+	>
+		Explore Our Luxury Car Rentals in Dubai - Choose Your Car Type
+	</h3>
+	<div class="container-fluid">
+		<div class="grid-category">
+			<div
+				*ngFor="let car of cartypeData"
+				class="position-relative d-flex flex-column align-items-center justify-content-center csmb-25 cpointer"
+				data-aos="fade-up"
+				data-aos-duration="1500"
+			>
+				<a
+					href="/product/list/{{ car.url_key }}"
+					class="color-card-p p-0 text-decoration-none size16 redhat-semibold text-capitalize hover-a"
+				>
+					<span class="size24 redhat-bold hover-span"> {{ car.name }}</span>
+					<img
+						src="{{ backendURl }}/cartype/{{ car.image[0].src }}"
+						[alt]="car.image[0].alt"
+						[title]="car.image[0].name"
+						class="category-image"
+						[routerLink]="['/product/list', car.url_key]"
+						routerLinkActive="router-link-active"
+						loading="eager"
+						width="0"
+						height="0"
+					/>
+					<p
+						class="redhat-semibold text-center type-margin text-capitalize black-light-color"
+						[routerLink]="['/product/list', car.url_key]"
+						routerLinkActive="router-link-active"
+					>
+						{{ car.name }}
+					</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="services position-relative">
+	<div class="container-fluid">
+		<div class="position-relative img-height">
+			<img
+				src="{{ imageURL }}/home/services/luxury-car-rental-services-dubai.webp"
+				alt="Premium Car Rental, Yacht Rental, and Chauffeur Services in Dubai by Ghost Rentals"
+				title="VIP Car, Yacht rental and Chauffeur Services in Dubai"
+				class="w-100 h-100 border20"
+				loading="lazy"
+				width="0"
+				height="0"
+			/>
+
+			<div
+				class="position-absolute top-0 start-0 w-100 h-100 border20 bgcolor0007"
+			></div>
+
+			<div
+				class="position-absolute topspace text-center d-flex flex-column justify-content-md-center align-items-center h-100 w-100"
+			>
+				<div class="col-xl-9 col-lg-10 col-11">
+					<h3
+						class="size22 redhat-bold text-capitalize beige-color"
+						data-aos="fade-up"
+						data-aos-duration="1000"
+					>
+					Our Rental Services
+					</h3>
+					<h2
+						class="size60 performa-light text-capitalize beige-color"
+						data-aos="fade-up"
+						data-aos-duration="1500"
+					>
+						That Redefines Luxury Travel
+					</h2>
+					<p
+						class="size20 redhat-regular white-color service-para-width mx-auto"
+						data-aos="fade-up"
+						data-aos-duration="2000"
+					>
+						We specialize in Luxury Car hire & Yacht rental across the UAE,
+						creating complete Luxury experiences with personalized attention
+						beyond simple rentals.
+					</p>
+					<button
+						class="white-button size18 redhat-bold text-capitalize d-flex mx-auto text-capitalize"
+						routerLink="/services"
+						data-aos="fade-up"
+						data-aos-duration="2500"
+						data-text="View All"
+					>
+						<span>View All</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row topMargin justify-content-evenly">
+			<div class="col-xl-4 col-lg-4 col-md-10 padding-x margin-x">
+				<a
+					class="card h-100 position-relative cpointer"
+					data-aos="fade-up"
+					data-aos-duration="1000"
+					href="/services#car-service"
+				>
+					<img
+						src="{{
+							imageURL
+						}}/home/services/rent-luxury-cars-in-dubai-from-ghost-rentals.webp"
+						alt="Luxury Car Rental Services Dubai - Ghost Rentals"
+						title="Premium Car Hire Dubai - Exotic & Sports Cars"
+						class="services-images z-1"
+						loading="lazy"
+						width="0"
+						height="0"
+					/>
+					<div class="card-content h-100 d-flex flex-column">
+						<h3
+							class="size26 redhat-semibold text-capitalize gray-color mb-2 mb-md-3"
+						>
+							Luxury Car Rental Services
+						</h3>
+						<p
+							class="size18 redhat-medium color-card-p mb-xl-4 mb-md-3 mb-2 ltrspance"
+						>
+							Find the best Luxury Car Rentals in Dubai with Ghost Rentals.
+							Choose Rolls-Royce, Lamborghini & Range Rover with free UAE
+							delivery.
+						</p>
+						<span
+							class="link size16 redhat-semibold text-capitalize text-decoration-none color-card-p mt-auto"
+						>
+							know more
+						</span>
+					</div>
+				</a>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-10 padding-x margin-x">
+				<a
+					class="card rounded-4 h-100 position-relative cpointer"
+					data-aos="fade-up"
+					data-aos-duration="1500"
+					href="/services#yacht-service"
+				>
+					<img
+						src="{{
+							imageURL
+						}}/home/services/yacht-rentals-in-dubai-from-ghost-rentals.webp"
+						alt="Premium Yacht Charter Dubai- Private Yacht Charters"
+						title="Luxury Boat Rental Dubai"
+						class="services-images z-1"
+						loading="lazy"
+						width="0"
+						height="0"
+					/>
+					<div class="card-content h-100 d-flex flex-column">
+						<h3
+							class="size26 redhat-semibold text-capitalize gray-color mb-2 mb-md-3"
+						>
+							Luxury Yacht Rental Services
+						</h3>
+						<p
+							class="size18 redhat-medium color-card-p mb-xl-4 mb-md-3 mb-2 ltrspace"
+						>
+							Sail by Dubai’s famous landmarks with our crewed and catered Luxury Yacht charter services for any occasion, with a Professional crew.
+						</p>
+						<span
+							class="link size16 redhat-semibold text-capitalize text-decoration-none color-card-p mt-auto"
+						>
+							know more
+						</span>
+					</div>
+				</a>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-10 margin-x padding-x">
+				<a
+					class="card rounded-4 h-100 position-relative cpointer"
+					data-aos="fade-up"
+					data-aos-duration="2000"
+					href="/services#chauffeur-service"
+				>
+					<img
+						src="{{
+							imageURL
+						}}/home/services/chauffeur-services-in-dubai-from-ghost-rentals.webp"
+						alt="Professional Chauffeur Service Dubai - Executive Transportation"
+						title="VIP Driver Service in Dubai"
+						class="services-images z-1"
+						loading="lazy"
+						width="0"
+						height="0"
+					/>
+					<div class="card-content h-100 d-flex flex-column">
+						<h3
+							class="size26 redhat-semibold text-capitalize gray-color mb-2 mb-md-3"
+						>
+							Luxury Chauffeur Services
+						</h3>
+						<p
+							class="size18 redhat-medium color-card-p mb-xl-4 mb-md-3 mb-2 ltrspace"
+						>
+							At Ghost Rentals, we excel at Luxury travel. Our top-notch Luxury
+							Chauffeur services in Dubai provide unparalleled elegance for
+							every trip.
+						</p>
+						<span
+							class="link size16 redhat-semibold text-capitalize text-decoration-none color-card-p mt-auto"
+						>
+							know more
+						</span>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<app-vip-number-plate></app-vip-number-plate>
+
+<section
+	class="collection"
+	*ngIf="ourCarCollections && ourCarCollections.length > 0"
+>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 pb-md-5 pb-2 pe-md-0">
+				<div
+					class="d-flex justify-content-between align-items-center margin-bottom60 margin-right"
+				>
+					<h3
+						class="size60 performa-light mb-0 gray-color"
+						data-aos="fade-up"
+						data-aos-duration="1000"
+					>
+						Our Luxury Cars for Rent
+					</h3>
+					<button
+						(click)="goToVehiclePage('Car')"
+						class="black-button size18 redhat-bold d-none d-lg-block text-capitalize"
+						data-aos="fade-up"
+						data-aos-duration="1000"
+						data-text="View All"
+					>
+						<span>View All</span>
+					</button>
+				</div>
+
+				<div
+					class="position-relative"
+					data-aos="fade-up"
+					data-aos-duration="1500"
+				>
+					<div class="swiper car-collection-swiper" #carSwiper>
+						<div class="swiper-wrapper">
+							<div class="swiper-slide" *ngFor="let car of ourCarCollections">
+								<a
+									class="car-card"
+									[routerLink]="['/product', car.url_key]"
+									routerLinkActive="router-link-active"
+								>
+									<div class="thumbnail-image-container">
+										<img
+											*ngIf="car.media_data && car.media_data.length > 0"
+											src="{{ backendURl }}/media/{{ car.media_data[0].src }}"
+											[alt]="car.media_data[0].alt"
+											[title]="car.media_data[0].name"
+											width="0"
+											height="0"
+											class="img-fluid thumbnail-image w-100 h-100"
+											loading="lazy"
+										/>
+									</div>
+									<div class="card-body">
+										<div class="card-content">
+											<div
+												class="car-info d-flex justify-content-between position-relative"
+											>
+												<div class="car-header margin15">
+													<h4
+														class="car-name mb-1 size22 redhat-semibold gray-color"
+													>
+														<!-- {{ car.name.substring(0, 18) }}... -->
+														{{ car.name }}
+													</h4>
+													<h5
+														class="transmission size18 redhat-semibold text-capitalize m-0 color-card-p"
+													>
+														{{ car.transmission || "NA" }}
+													</h5>
+												</div>
+												<span
+													*ngIf="car && car.isvipNumberPlate"
+													class="size12 redhat-bold text-capitalize special-number px-2 py-1 color-card-p"
+													>special number plate</span
+												>
+											</div>
+
+											<div
+												class="d-flex justify-content-between border-top border-bottom collection-padding"
+											>
+												<div class="text-center">
+													<img
+														src="{{ imageURL }}/images/icons/fuel.svg "
+														class="img-fluid collection_image"
+														alt="Fuel type indicator"
+														title="Vehicle Fuel Information"
+														loading="eager"
+														width="0"
+														height="0"
+													/>
+													<h6
+														class="mb-0 mt-xl-2 mt-1 size16 redhat-semibold text-capitalize color-card-p"
+													>
+														{{ car.fuelType }}
+													</h6>
+												</div>
+												<div class="text-center">
+													<img
+														src="{{ imageURL }}/images/icons/mileage.svg"
+														alt="Vehicle mileage information"
+														title="Car Mileage Details"
+														loading="eager"
+														width="0"
+														height="0"
+														class="img-fluid collection_image"
+													/>
+													<h6
+														class="mb-0 mt-xl-2 mt-1 size16 redhat-semibold text-lowercase color-card-p"
+													>
+														{{ car.mileage }}
+													</h6>
+												</div>
+												<div class="text-center">
+													<img
+														src="{{ imageURL }}/images/icons/seats.svg"
+														alt="Number of seats"
+														title="Seating Capacity"
+														loading="eager"
+														width="0"
+														height="0"
+														class="img-fluid collection_image"
+													/>
+													<h6
+														class="mb-0 mt-xl-2 mt-1 size16 redhat-semibold text-capitalize color-card-p"
+													>
+														{{ car.seating_capacity }} Pax
+													</h6>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="card-footer">
+										<div
+											class="cash-container d-flex justify-content-between align-items-center pt-xl-3 pt-2"
+										>
+											<div class="cash">
+												<h6
+													class="text-muted mb-0 size18 redhat-semibold text-decoration-line-through color-card-p"
+												>
+													AED {{ car.regularRateDaily }}
+												</h6>
+												<!-- <h6
+												class="mb-0 size26 redhat-semibold gray-color d-flex align-items-center"
+											>
+												AED {{ car.dailyRate
+												}}<span class="size18 redhat-regular gray-color"
+													>/day</span
+												>
+											</h6> -->
+												<div class="d-flex align-items-center">
+													<h6 class="mb-0 size26 redhat-semibold gray-color">
+														AED {{ car.dailyRate }}
+													</h6>
+													<span class="size18 redhat-regular gray-color"
+														>/day</span
+													>
+												</div>
+											</div>
+											<button
+												[routerLink]="['/product', car.url_key]"
+												routerLinkActive="router-link-active"
+												class="color-card-p p-0 mt-auto text-decoration-none size16 redhat-semibold text-capitalize viewbt"
+											>
+												view details
+											</button>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div
+						class="d-flex justify-content-between align-items-center margin-top40"
+					>
+						<div class="text-start gap-2 d-flex">
+							<div class="button car-swiper-button-prev">
+								<lucide-icon name="arrow-left" class="swiper-button-icon" />
+							</div>
+							<div class="button car-swiper-button-next">
+								<lucide-icon name="arrow-right" class="swiper-button-icon" />
+							</div>
+						</div>
+						<button
+							(click)="goToVehiclePage('Car')"
+							class="black-button size18 redhat-bold d-block d-lg-none mx-2 mx-sm-3 mx-md-4 mx-lg-0 text-capitalize"
+							data-text="View All"
+						>
+							<span>View All</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section
+	class="collection yacht-padding"
+	*ngIf="ourYachtsCollections && ourYachtsCollections.length > 0"
+>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 pb-md-5 pb-2 pe-md-0">
+				<div
+					class="d-flex justify-content-between align-items-center margin-bottom60 margin-right"
+				>
+					<h3
+						class="size60 performa-light mb-0 gray-color"
+						data-aos="fade-up"
+						data-aos-duration="1000"
+					>
+						Our Luxury Yacht Charter
+					</h3>
+					<button
+						(click)="goToVehiclePage('Yachts')"
+						class="black-button size18 redhat-bold d-none d-lg-block text-capitalize"
+						data-aos="fade-up"
+						data-aos-duration="1000"
+						data-text="View All"
+					>
+						<span>View All</span>
+					</button>
+				</div>
+
+				<div
+					class="position-relative"
+					data-aos="fade-up"
+					data-aos-duration="1500"
+				>
+					<div class="swiper yacht-collection-swiper" #yachtSwiper>
+						<div class="swiper-wrapper">
+							<div
+								class="swiper-slide"
+								*ngFor="let yacht of ourYachtsCollections"
+							>
+								<a
+									class="car-card"
+									[routerLink]="['/product', yacht.url_key]"
+									routerLinkActive="router-link-active"
+								>
+									<div class="thumbnail-image-container">
+										<img
+											*ngIf="yacht.media_data && yacht.media_data.length > 0"
+											src="{{ backendURl }}/media/{{ yacht.media_data[0].src }}"
+											[alt]="yacht.media_data[0].alt"
+											[title]="yacht.media_data[0].name"
+											width="0"
+											height="0"
+											class="img-fluid thumbnail-image w-100 h-100"
+											loading="lazy"
+										/>
+									</div>
+									<!-- <div class="card-content h-100 d-flex flex-column justify-content-center h-100"> -->
+									<div class="card-body">
+										<div class="card-content">
+											<div
+												class="car-info d-flex justify-content-between position-relative"
+											>
+												<div class="car-header margin15">
+													<h4
+														class="car-name mb-1 size22 redhat-semibold gray-color"
+													>
+														{{ yacht.name }}
+													</h4>
+													<h5
+														class="transmission size18 redhat-semibold text-capitalize m-0 color-card-p"
+													>
+														{{ yacht.bodytype_data[0].name }}
+													</h5>
+												</div>
+												<span
+													*ngIf="yacht && yacht.isvipNumberPlate"
+													class="size12 redhat-bold text-capitalize special-number px-2 py-1 color-card-p"
+													>special number plate</span
+												>
+											</div>
+
+											<div
+												class="d-flex justify-content-between border-top border-bottom collection-padding"
+											>
+												<div class="text-center">
+													<img
+														src="{{ imageURL }}/images/icons/year.svg "
+														class="img-fluid collection_image"
+														alt="year icon"
+														title="year"
+														width="0"
+														height="0"
+														loading="lazy"
+													/>
+													<h6
+														class="mb-0 mt-xl-2 mt-1 size16 redhat-semibold text-capitalize color-card-p"
+													>
+														{{ yacht.year }}
+													</h6>
+												</div>
+												<div class="text-center">
+													<img
+														src="{{ imageURL }}/images/icons/length.svg"
+														class="img-fluid collection_image"
+														alt="length icon"
+														title="length"
+														width="0"
+														height="0"
+														loading="lazy"
+													/>
+													<h6
+														class="mb-0 mt-xl-2 mt-1 size16 redhat-semibold text-lowercase color-card-p"
+													>
+														{{ yacht.length }}
+													</h6>
+												</div>
+												<div class="text-center">
+													<img
+														src="{{ imageURL }}/images/icons/guests.svg"
+														class="img-fluid collection_image"
+														alt="guests icon"
+														title="guests"
+														width="0"
+														height="0"
+														loading="lazy"
+													/>
+													<h6
+														class="mb-0 mt-xl-2 mt-1 size16 redhat-semibold text-capitalize color-card-p"
+													>
+														{{ yacht.guest_capacity }} guests
+													</h6>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer">
+										<div
+											class="cash-container d-flex justify-content-between align-items-center pt-xl-3 pt-2"
+										>
+											<div class="cash">
+												<h6
+													class="text-muted mb-0 size18 redhat-semibold text-decoration-line-through color-card-p"
+												>
+													AED {{ yacht.regularRateHourly }}
+												</h6>
+												<!-- <h5
+													class="mb-0 size26 redhat-semibold gray-color d-flex align-items-center"
+												>
+													AED {{ yacht.hourlyRate }}
+													<span class="size18 redhat-regular gray-color"
+														>/hr</span
+													>
+												</h5> -->
+												<div class="d-flex align-items-center">
+													<h6 class="mb-0 size26 redhat-semibold gray-color">
+														AED {{ yacht.hourlyRate }}
+													</h6>
+													<span class="size18 redhat-regular gray-color"
+														>/hr</span
+													>
+												</div>
+											</div>
+											<button
+												[routerLink]="['/product', yacht.url_key]"
+												routerLinkActive="router-link-active"
+												class="color-card-p p-0 mt-auto text-decoration-none size16 redhat-semibold text-capitalize viewbt"
+											>
+												view details
+											</button>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div
+						class="d-flex justify-content-between align-items-center margin-top40"
+					>
+						<div class="text-start gap-2 d-flex">
+							<div class="button yacht-swiper-button-prev">
+								<lucide-icon name="arrow-left" class="swiper-button-icon" />
+							</div>
+							<div class="button yacht-swiper-button-next">
+								<lucide-icon name="arrow-right" class="swiper-button-icon" />
+							</div>
+						</div>
+						<button
+							(click)="goToVehiclePage('Yachts')"
+							class="black-button size18 redhat-bold d-block d-lg-none mx-2 mx-sm-3 mx-md-4 mx-lg-0 text-capitalize"
+						>
+							<span>View All</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<app-brands
+	h2="Rent Your Favorite Luxury Brand"
+	titleClass="text-center size60 performa-light text-capitalize margin-bottom60 gray-color"
+></app-brands>
+
+<section class="about-us w-100 position-relative overflow-hidden">
+	<div class="d-flex flex-column w-100">
+		<div class="position-relative w-100 div-height">
+			<div
+				class="w-100 h-100 top-0 start-0 position-absolute z-2 rounded-4 bgcolor0003 border20"
+			></div>
+			<img
+				src="{{ imageURL }}/home/about-us-ghost-rentals-dubai.webp"
+				alt="Luxury car and yacht rental"
+				title="Luxury car and yacht rental"
+				class="rounded-4 position-absolute top-0 start-0 w-100 h-100 object-fit-cover z-1 d-none d-lg-block"
+				loading="lazy"
+				width="0"
+				height="0"
+			/>
+			<img
+				src="{{ imageURL }}/home/about-us-ghost-rentals-dubai-2.webp"
+				alt="Luxury car and yacht rental"
+				title="Luxury car and yacht rental"
+				class="rounded-4 position-absolute top-0 start-0 w-100 h-100 object-fit-cover z-1 d-block d-lg-none"
+				loading="eager"
+				width="0"
+				height="0"
+			/>
+			<div class="about-content z-3">
+				<h3
+					class="size22 redhat-bold text-capitalize beige-color margin22"
+					data-aos="fade-up"
+					data-aos-duration="1000"
+				>
+					About Ghost Rentals
+				</h3>
+				<!-- <h1 class="size60 performa-light text-capitalize white-color line-height90 heading-width margin24">
+          Driven By Luxury. Defined By Experience.
+        </h1> -->
+				<h2
+					class="size60 performa-light text-capitalize beige-color line-height90 heading-width margin24"
+					data-aos="fade-up"
+					data-aos-duration="1500"
+				>
+					Pure Luxury. Pure Perfection.
+				</h2>
+				<p
+					class="size20 redhat-regular text-center white-color line-height26 margin17 ltrspace09"
+					data-aos="fade-up"
+					data-aos-duration="2000"
+				>
+					<!-- At Ghost Rentals, we turn Luxury Car hire and Yacht Rentals into
+					customized experiences that we design with family-level love. We
+					provide UAE's safest, fastest Luxury services through real attention
+					to detail that creates stunning relationships with every customer. -->
+					At Ghost Rentals, we turn Luxury Car hire and Yacht Rentals into customized experiences that we design with family-level love. We provide the UAE's safest and fastest rental services through real attention to detail, creating stunning relationships with every customer.
+				</p>
+				<a
+					href="/about"
+					class="white-button size18 redhat-bold text-capitalize"
+					data-aos="fade-up"
+					data-aos-duration="2500"
+					data-text="Know More"
+				>
+					<span>Know More</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="black-bg"></div>
+		<div class="container-fluid margin-top80 padding-x">
+			<h3
+				class="text-center size60 performa-light beige-color"
+				data-aos="fade-up"
+				data-aos-duration="1000"
+			>
+				Why should you rent a car with us?
+			</h3>
+
+			<div class="row justify-content-around mt-xl-3 mt-2">
+				<div
+					class="col-xl-3 col-md-6 col-9 mb-md-4 mb-2"
+					*ngFor="let feature of features"
+					data-aos="fade-up"
+					data-aos-duration="1500"
+					data-aos-delay="100"
+				>
+					<img
+						[src]="imageURL + '/' + feature.image"
+						[alt]="feature.alt"
+						[title]="feature.title"
+						class="feature-icon d-flex mx-auto margin54"
+						loading="lazy"
+						width="0"
+						height="0"
+					/>
+					<h4
+						class="size26 redhat-semibold white-color text-center mb-xl-3 mb-md-2 mb-1"
+					>
+						{{ feature.title }}
+					</h4>
+					<p
+						class="size18 redhat-semibold gray-light-color text-center line-height30 about-pad"
+					>
+						{{ feature.description }}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section
+	class="trending_cars sectionPadding w-100 position-relative overflow-hidden black-bg1"
+>
+	<!-- desktop -->
+	<div class="container-fluid swiper-desktop d-lg-block d-none">
+		<div class="row">
+			<div class="col-md-10 col-sm-11 col-11 mx-auto">
+				<h3
+					class="text-center size60 performa-light beige-color text-capitalize mb-4"
+					data-aos="fade-up"
+					data-aos-duration="1000"
+				>
+					Trending Rental Cars in Dubai
+				</h3>
+				<h4
+					class="text-center size18 redhat-semibold text-capitalize gray-light-color sectionmb"
+					data-aos="fade-up"
+					data-aos-duration="1500"
+				>
+					rent our popular cars
+				</h4>
+				<div class="w-100 mx-auto my-0">
+					<div class="row">
+						<div
+							*ngFor="let car of trendingRentalCars"
+							class="col-xxl-4 col-xl-4 col-lg-6"
+							data-aos="fade-up"
+							data-aos-duration="2000"
+						>
+							<a
+								class="trending-car-card sectionmb"
+								[routerLink]="['/product', car.url_key]"
+								routerLinkActive="router-link-active"
+							>
+								<img
+									src="{{ backendURl }}/media/{{ car.media_data[0].src }}"
+									[alt]="car.media_data[0].alt"
+									[title]="car.media_data[0].name"
+									class="img-fluid trending-main-image"
+									loading="lazy"
+									width="0"
+									height="0"
+								/>
+								<!-- <div class="card-content h-100 d-flex flex-column justify-content-center h-100"> -->
+								<div class="card-content">
+									<div
+										class="car-info d-flex justify-content-between position-relative"
+									>
+										<div class="car-header margin27">
+											<h4
+												class="car-name mb-1 size30 redhat-semibold beige-color"
+											>
+												<!-- {{ car.name.substring(0, 18) }}... -->
+												{{ car.name }}
+											</h4>
+											<h5
+												class="car-spec size24 text-capitalize redhat-semibold gray-light-color m-0"
+											>
+												{{ car.transmission }}
+											</h5>
+										</div>
+										<span
+											*ngIf="car && car.isvipNumberPlate"
+											class="size12 white-color redhat-bold text-capitalize special-number px-2 py-1"
+											>special number plate</span
+										>
+									</div>
+
+									<div
+										class="car-pricing pt-xl-0 pt-0 d-flex justify-content-between align-items-end"
+									>
+										<div class="d-flex flex-column">
+											<span
+												class="original-price size24 redhat-semibold gray-light-color text-decoration-line-through"
+												>AED {{ car.regularRateDaily }}</span
+											>
+											<span
+												class="discounted-price size35 redhat-semibold beige-color d-flex align-items-center"
+												>AED {{ car.dailyRate
+												}}<span class="size18 redhat-regular gray-color"
+													>/day</span
+												>
+											</span>
+										</div>
+										<button
+											[routerLink]="['/product', car.url_key]"
+											routerLinkActive="router-link-active"
+											class="p-0 mt-auto text-decoration-none gray-light-color size16 redhat-semibold text-capitalize viewbt"
+										>
+											View details
+										</button>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<button
+					(click)="goToVehiclePage('Car')"
+					data-aos="fade-up"
+					data-aos-duration="2000"
+					class="white-button d-flex mx-auto size18 redhat-bold text-capitalize mt-5"
+					data-text="View All"
+				>
+					<span>View All</span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- mobile -->
+	<div class="container-fluid swiper-mobile d-lg-none d-block">
+		<div class="row">
+			<div class="col-12 pb-4">
+				<div
+					class="d-flex flex-column justify-content-between align-items-center mb-4"
+				>
+					<h3
+						class="text-center size60 performa-light beige-color text-capitalize mb-4"
+						data-aos="fade-up"
+						data-aos-duration="1000"
+					>
+						Trending Rental Cars in Dubai
+					</h3>
+					<h4
+						class="text-center size18 redhat-semibold text-capitalize gray-light-color"
+						data-aos="fade-up"
+						data-aos-duration="1500"
+					>
+						rent our popular cars
+					</h4>
+				</div>
+
+				<div
+					class="position-relative"
+					data-aos="fade-up"
+					data-aos-duration="2000"
+				>
+					<div class="swiper trending-cars-swiper" #trendingSwiper>
+						<div class="swiper-wrapper">
+							<div
+								class="swiper-slide"
+								*ngFor="let car of trendingRentalCars"
+								[routerLink]="['/product', car.url_key]"
+								routerLinkActive="router-link-active"
+							>
+								<div class="trending-car-card">
+									<div class="thumbnail-image-container">
+										<img
+											*ngIf="car.media_data && car.media_data.length > 0"
+											src="{{ backendURl }}/media/{{ car.media_data[0].src }}"
+											[alt]="car.media_data[0].alt"
+											[title]="car.media_data[0].name"
+											class="img-fluid thumbnail-image w-100 h-100"
+											loading="eager"
+											width="0"
+											height="0"
+										/>
+									</div>
+
+									<!-- <div class="card-content h-100 d-flex flex-column justify-content-center h-100"> -->
+									<div class="card-content">
+										<div
+											class="car-info d-flex justify-content-between position-relative"
+										>
+											<div class="car-header margin15">
+												<h4
+													class="car-name mb-1 size30 redhat-semibold beige-color"
+												>
+													{{ car.name }}
+												</h4>
+												<h5
+													class="car-spec size24 text-capitalize redhat-semibold gray-light-color m-0"
+												>
+													{{ car.transmission }}
+												</h5>
+											</div>
+											<span
+												*ngIf="car && car.isvipNumberPlate"
+												class="size12 white-color redhat-bold text-capitalize special-number px-2 py-1"
+												>special number plate</span
+											>
+										</div>
+										<div
+											class="car-pricing pt-xl-3 pt-2 d-flex justify-content-between align-items-end"
+										>
+											<div class="d-flex flex-column">
+												<span
+													class="original-price size24 redhat-semibold gray-light-color text-decoration-line-through"
+													>AED {{ car.regularRateDaily }}</span
+												>
+												<span
+													class="discounted-price size35 redhat-semibold beige-color d-flex align-items-center"
+													>AED {{ car.dailyRate
+													}}<span class="size18 redhat-regular gray-color"
+														>/day</span
+													>
+												</span>
+											</div>
+											<a
+												[routerLink]="['/product', car.url_key]"
+												routerLinkActive="router-link-active"
+												class="p-0 mt-auto text-decoration-none gray-light-color size16 redhat-semibold text-capitalize"
+												>View details</a
+											>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="text-start gap-2 d-flex mt-5">
+            <div class="button car-swiper-button-prev">
+              <lucide-icon
+                name="arrow-left"
+                class="swiper-button-icon"
+              ></lucide-icon>
+            </div>
+            <div class="button car-swiper-button-next">
+              <lucide-icon
+                name="arrow-right"
+                class="swiper-button-icon"
+              ></lucide-icon>
+            </div>
+          </div> -->
+				</div>
+			</div>
+		</div>
+		<button
+			(click)="goToVehiclePage('Car')"
+			data-aos="fade-up"
+			data-aos-duration="1500"
+			class="white-button d-flex mx-auto size18 redhat-bold text-capitalize my-xl-5 my-lg-4 my-1"
+			data-text="View All"
+		>
+			<span>View All</span>
+		</button>
+	</div>
+</section>
+
+<app-testimonials></app-testimonials>

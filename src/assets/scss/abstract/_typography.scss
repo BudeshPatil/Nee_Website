@@ -1,0 +1,34 @@
+@import '../abstract/fonts';
+
+// Font family Crake 
+$font-crake-light:'crake-light';
+$font-crake-regular:'crake-regular';
+$font-crake-medium:'crake-medium';
+$font-crake-semibold:'crake-semibold';
+$font-crake-bold:'crake-bold';
+
+// Font family Lufga 
+$font-lufga-thin:'Lufga-thin';
+$font-lufga-light:'Lufga-light';
+$font-lufga-regular:'Lufga-regular';
+$font-lufga-semibold:'Lufga-semibold';
+$font-lufga-medium:'Lufga-medium';
+$font-lufga-bold:'Lufga-bold';
+
+
+
+
+
+
+
+
+// Font size
+@mixin responsive-font($min, $max, $min-vw: 320, $max-vw: 1920) {
+  $diff: $max - $min;
+  $range: $max-vw - $min-vw;
+  font-size: clamp(
+    #{$min}px,
+    calc(#{$min}px + #{$diff} * ((100vw - #{$min-vw}px) / #{$range})),
+    #{$max}px
+  );
+}

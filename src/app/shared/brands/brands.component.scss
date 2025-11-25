@@ -1,0 +1,119 @@
+.brands {
+  padding: 120px 200px 200px;
+  @media screen and (max-width: 2048px) {
+    padding: 120px 150px 200px;
+  }
+  @media screen and (max-width: 1920px) {
+    padding: 150px 100px 200px;
+  }
+  @media screen and (max-width: 1536px) {
+    padding: 100px 150px;
+  }
+  @media screen and (max-width: 1440px) {
+    padding: 100px 120px;
+  }
+  @media screen and (max-width: 1280px) {
+    padding: 100px 80px;
+  }
+  @media screen and (max-width: 1024px) {
+    padding: 100px 50px;
+  }
+  @media screen and (max-width: 768px) {
+    padding: 3rem 60px;
+  }
+  @media screen and (max-width: 430px) {
+    padding: 4rem 2rem 2rem;
+  }
+
+  .brands-gap {
+    gap: 20px; 
+    @media screen and (max-width: 1600px) {
+      gap: 37px;
+    } 
+    // @media screen and (max-width: 1440px) {
+    //   gap: 16px;
+    // }
+    @media screen and (max-width: 1366px) { 
+      gap: 24px; 
+    } 
+     @media screen and (max-width: 991px) { 
+      gap: 20px; 
+    } 
+    @media screen and (max-width: 430px) { 
+      gap: 16px; 
+    } 
+  } 
+
+  .brand-logo { 
+    width: 107px; 
+    height: 52px; 
+    object-fit: contain; 
+    margin-bottom: 5px; 
+    @media screen and (max-width: 1366px) {  
+      height: 40px;  
+      margin-bottom: 4px;   
+    }
+  } 
+
+  .brand-item { 
+      // padding: 33px 40px;
+    border-radius: 10px; 
+    border: 1px solid #d1d1d1; 
+    text-align: center; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 1rem; 
+    width: 145px; 
+    height: 145px; 
+    @media screen and (max-width: 1920px) {
+      width: 145px;
+      height: 145px;
+    }
+    @media(max-width:600px){
+      width: 130px;
+      height:130px;
+    }
+    @media(max-width:340px){
+      width: 120px;
+      height:120px;
+    }
+    // @media screen and (max-width: 1536px) {
+    //   width: 130px;
+    //   min-height: 130px;
+    //   padding: 20px 15px;
+    // }
+    // @media screen and (max-width: 1440px) {
+    //   width: 130px;
+    //   min-height: 130px;
+    // }
+
+    // @media screen and (max-width: 1024px) {
+    //   width: 100px;
+    //   min-height: 100px;      
+    //   padding: 20px 10px;
+    // }
+    // @media screen and (max-width: 768px) {
+    //   width: 96px;
+    //   min-height: 96px;
+    //   padding: 15px 10px;
+    // }
+    // @media screen and (max-width: 430px) {
+    // padding: 22px 12px;
+    // }
+  }
+}
+
+.brand-name {
+  font-size: 18px;
+  @media (max-width: 1024px) {
+    font-size: 14px;
+  }
+  // @media (max-width: 768px) {
+  //   font-size: 11px;
+  // }
+}
+.mxw{
+  width: max-content;
+}

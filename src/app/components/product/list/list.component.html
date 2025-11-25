@@ -1,0 +1,326 @@
+<section *ngIf="bannerData" class="product bannerPadding">
+	<div class="container-fluid position-relative p-0 h-100">
+		<div class="overlay"></div>
+
+		<img *ngIf="bannerData && bannerData.media_data.length > 0"
+			src="{{ backendURl }}/banner/{{ bannerData.media_data[0].src }}" alt="{{bannerData.media_data[0].alt}}"
+			title="{{bannerData.media_data[0].name}}" class="w-100 h-100 bannerImage" loading="eager" decoding="async"
+			width="0" height="0" />
+		<img *ngIf="!bannerData" src="{{ imageURL }}/products/product1.png" alt="{{bannerData.media_data[0].alt}}"
+			title="{{bannerData.media_data[0].name}}" class="w-100 h-100 bannerImage" loading="eager" width="0" height="0"
+			decoding="async" />
+
+		<!-- <div class="content" *ngIf="!bannerData">
+      <h1 class="size88 performa-thin white-color text-capitalize">Smart Stylish City-Ready</h1>
+      <p class="size20 redhat-regular beige-color">
+        Effortless driving for urban explorers—Luxury hatchbacks that combine
+        performance and practicality in one compact package.
+      </p>
+    </div> -->
+		<div class="content zindex2" *ngIf="bannerData">
+			<h1 class="size88 performa-thin white-color text-capitalize margin14" [innerHTML]="bannerData.short_desc"></h1>
+			<p class="size20 redhat-regular hero-para beige-color mb-0" [innerHTML]="bannerData.description"></p>
+		</div>
+	</div>
+</section>
+
+<section class="sectionPadding" [ngClass]="{'mt-5': !bannerData}">
+	<div class="container-fluid">
+		<h2 *ngIf="cartypeData" class="size60 performa-light text-capitalize margin24 gray-color">
+			Explore our {{ cartypeData.name }} car collection
+		</h2>
+		<h2 *ngIf="!cartypeData" class="size60 performa-light text-capitalize margin24 gray-color">
+			Explore our all car collection
+		</h2>
+		<div class="row">
+			<div class="results-section col-xl-12 col-lg-12 col-md-12 col-12" #resultsSection>
+				<div class="d-flex justify-content-sm-between justify-content-end align-items-center margin42">
+					<h3 class="mb-0 size22 redhat-bold d-md-block d-none color-card-p"
+						*ngIf="vehicleData && vehicleData.length > 0">
+						Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to
+						{{ Math.min(currentPage * itemsPerPage, totalItems) }} of
+						{{ totalItems }} Vehicles
+					</h3>
+					<!-- <h5 class="mb-0 size22 redhat-bold d-md-block d-none color-card-p text-capitalize"
+            *ngIf="vehicleData && vehicleData.length == 0">
+            No Data Found
+          </h5> -->
+
+					<!-- <div
+						class="d-flex align-items-center gap-2 position-relative sort"
+						style="cursor: pointer"
+						*ngIf="vehicleData && vehicleData.length > 0"
+					>
+						<select
+							class="border-0 outline-none redhat-semibold text-capitalize bg-white color-card-p"
+							(change)="onChangeSort($event)"
+							style="font-size: 14px; cursor: pointer"
+						>
+							<option
+								selected
+								disabled
+								class="text-muted size14 redhat-semibold text-capitalize bg-white color-card-p"
+							>
+								Sort by
+							</option>
+							<option
+								value="H-L"
+								class="size14 redhat-semibold text-capitalize bg-transparent"
+							>
+								Price: High to Low
+							</option>
+							<option
+								value="L-H"
+								class="size14 redhat-semibold text-capitalize"
+							>
+								Price: Low to High
+							</option>
+							<option
+								value="relevance"
+								class="size14 redhat-semibold text-capitalize"
+							>
+								reset
+							</option>
+						</select>
+
+						<img
+							src="{{ imageURL }}/images/icons/down-arrow.svg"
+							class="img-fluid down-arrow"
+							alt=""
+						/>
+					</div> -->
+
+					<div class="d-flex align-items-center position-relative sort cdrop cursor-pointer"
+						*ngIf="vehicleData && vehicleData.length > 0">
+						<div class="dropdown-toggle custom-dropdown" (click)="toggleDropdown()">
+							<span class="selected-text size14 redhat-semibold text-capitalize bg-transparent color-card-p cselect">
+								{{ selectedSortLabel || "Sort by" }}
+							</span>
+							<img src="{{ imageURL }}/images/icons/down-arrow.svg" class="img-fluid down-arrow ms-2"
+								[ngClass]="{ rotate: dropdownOpen }" title="arrow" width="0" height="0" alt="arrow" loading="eager" />
+						</div>
+
+						<!-- Dropdown menu -->
+						<ul
+							class="dropdown-menu-custom border border-2 position-absolute mt-2 p-0 top-100 list-style-none z-index-5 bg-white gray-color"
+							*ngIf="dropdownOpen">
+							<li *ngFor="let option of sortOptions" (click)="selectSort(option)"
+								class="dropdown-item-custom px-3 py-2 cursor-pointer size14 redhat-semibold text-capitalize color-card-p">
+								{{ option.label }}
+							</li>
+						</ul>
+					</div>
+				</div>
+				<h3 class="mb-0 size28 redhat-bold gray-color text-capitalize text-center"
+					*ngIf="vehicleData && vehicleData.length == 0">
+					Coming soon...
+				</h3>
+				<div class="products">
+					<div class="row">
+						<div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-xl-5 mb-4" *ngFor="let car of vehicleData">
+							<a class="car-card" [routerLink]="['/product', car.url_key]">
+								<div class="thumbnail-image-container">
+									<img src="{{ backendURl }}/media/{{ car.media_data[0].src }}" [alt]="car.media_data[0].alt"
+										title="{{car.media_data[0].name}}" width="0" height="0" class="img-fluid thumbnail-image w-100"
+										loading="lazy" />
+								</div>
+								<div class="card-body">
+									<div class="card-content h-100 d-flex flex-column justify-content-center h-100">
+										<div class="car-info d-flex justify-content-between align-items-center position-relative">
+											<div class="car-header margin15">
+												<h4 class="car-name mb-1 size22 redhat-semibold gray-color">
+													{{ car.name }}
+												</h4>
+
+												<h5 class="transmission text-muted size18 redhat-semibold text-capitalize color-card-p">
+													{{ car.transmission }}
+												</h5>
+											</div>
+											<span *ngIf="car && car.isvipNumberPlate"
+												class="size12 redhat-bold text-capitalize special-number px-2 py-1">special number plate</span>
+										</div>
+
+										<!-- <div class="d-flex justify-content-between border-top border-bottom collection-padding">
+                      <div class="text-center">
+                        <img src="{{ imageURL }}/images/icons/fuel.svg" class="img-fluid collection_image" alt="" />
+                        <h5 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+                          {{ car.fuelType }}
+                        </h5>
+                      </div>
+                      <div class="text-center">
+                        <img src="{{ imageURL }}/images/icons/speed.svg" class="img-fluid collection_image" alt="" />
+                        <h5 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+                          {{ car.mileage }}
+                        </h5>
+                      </div>
+                      <div class="text-center">
+                        <img src="{{ imageURL }}/images/icons/seats.svg" class="img-fluid collection_image" alt="" />
+                        <h5 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+                          {{ car.seating_capacity }} Seats
+                        </h5>
+                      </div>
+                    </div> -->
+										<div class="d-flex justify-content-between border-top border-bottom collection-padding"
+											*ngIf="car.vehicle_type == 'Car'">
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/fuel.svg" class="img-fluid collection_image"
+													alt="Fuel type indicator" title="Vehicle Fuel Information" width="0" height="0"
+													loading="lazy" />
+												<h5 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+													{{ car.fuelType || "N/A" }}
+												</h5>
+											</div>
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/mileage.svg" class="img-fluid collection_image"
+													alt="Vehicle mileage information" title="Car Mileage Details" loading="lazy" width="0"
+													height="0" />
+												<h5 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p text-lowercase">
+													{{ car.mileage || "N/A" }}
+												</h5>
+											</div>
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/seats.svg" class="img-fluid collection_image" width="0"
+													height="0" loading="lazy" alt="Number of seats" title="Seating Capacity" />
+												<h5 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+													{{ car.seating_capacity || "N/A" }} Pax
+												</h5>
+											</div>
+										</div>
+
+										<!-- Yacht Information -->
+										<div class="d-flex justify-content-between border-top border-bottom collection-padding"
+											*ngIf="car.vehicle_type === 'Yachts'">
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/length.svg" class="img-fluid collection_image"
+													alt="Length" width="0" height="0" title="Length" loading="lazy" />
+												<h5 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p text-lowercase">
+													{{ car.length || "N/A" }}
+												</h5>
+											</div>
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/year.svg" class="img-fluid collection_image" alt="Year"
+													width="0" height="0" title="Year" loading="lazy" />
+												<h5 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+													{{ car.year || "N/A" }}
+												</h5>
+											</div>
+											<div class="text-center">
+												<img src="{{ imageURL }}/images/icons/guests.svg" class="img-fluid collection_image"
+													alt="Capacity" width="0" height="0" title="Capacity" loading="lazy" />
+												<h5 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+													{{ car.guest_capacity || "N/A" }} Guests
+												</h5>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card-footer">
+									<div class="cash-container d-flex justify-content-between align-items-center pt-md-3 pt-2">
+										<div class="cash">
+											<h5 class="text-muted mb-0 size18 redhat-semibold color-card-p text-decoration-line-through">
+												AED {{ car.regularRateDaily }}
+											</h5>
+											<!-- <h5
+												class="mb-0 size26 redhat-semibold gray-color d-flex align-items-center"
+											>
+												AED {{ car.dailyRate
+												}}<span class="size18 redhat-regular gray-color"
+													>/day</span
+												>
+											</h5> -->
+											<div class="d-flex align-items-center">
+												<h6 class="mb-0 size26 redhat-semibold gray-color">
+													AED {{ car.dailyRate }}
+												</h6>
+												<span class="size18 redhat-regular gray-color">/day</span>
+											</div>
+										</div>
+										<button [routerLink]="['/product', car.url_key]" routerLinkActive="router-link-active"
+											class="p-0 mt-auto text-decoration-none color-card-p size16 redhat-semibold text-capitalize viewbt">View
+											details</button>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<nav aria-label="Page navigation" class="mt-4" *ngIf="totalPages && totalPages > 1">
+				<ul class="pagination justify-content-center align-items-center gap-4">
+					<!-- Previous -->
+					<li [class.disabled]="currentPage === 1">
+						<button class="circle-btn filled" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+							<lucide-icon name="arrow-left" />
+						</button>
+					</li>
+
+					<!-- Page Numbers -->
+					<li *ngFor="let page of getPages()">
+						<button class="number-btn" [class.active-page]="page === currentPage" (click)="onPageChange(page)">
+							{{ page }}
+						</button>
+					</li>
+
+					<!-- Next -->
+					<li [class.disabled]="currentPage === totalPages">
+						<button class="circle-btn filled" [disabled]="currentPage === totalPages"
+							(click)="onPageChange(currentPage + 1)">
+							<lucide-icon name="arrow-right" />
+						</button>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</section>
+
+<section class="car-types-section d-xl-block d-none">
+	<h3 class="text-center mb-3 size22 redhat-bold gray-color" data-aos="fade-up" data-aos-duration="1000">
+		Browse by Car Type
+	</h3>
+	<div class="container-fluid">
+		<div class="d-flex align-items-center gap" data-aos="fade-up" data-aos-duration="1500">
+			<div *ngFor="let car of cartypeDataList" [class.activeCategory]="car._id === activeCategoryId"
+				class="position-relative d-flex flex-column align-items-center justify-content-center category-card cursor-pointer "
+				(click)="activeCategory(car._id)">
+				<a href="/product/list/{{ car.url_key }}"
+					class="color-card-p p-0 mt-auto text-decoration-none size16 redhat-semibold text-capitalize hover-a">
+					<span class="size32 redhat-bold hover-span"> {{ car.name }}</span>
+
+					<img src="{{ backendURl }}/cartype/{{ car.image[0].src }}" [alt]="car.image[0].alt"
+						[title]="car.image[0].name" width="0" height="0" class="category-image" loading="lazy" />
+
+					<p class="redhat-semibold text-center type-margin text-capitalize black-light-color">
+						{{ car.name }}
+					</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="car-types-section d-xl-none d-block">
+	<h3 class="text-center mb-3 size22 redhat-bold gray-color" data-aos="fade-up" data-aos-duration="1000">
+		Browse by Car Type
+	</h3>
+	<div class="container-fluid">
+		<div class="grid-category" data-aos="fade-up" data-aos-duration="1500">
+			<div *ngFor="let car of cartypeDataList" [class.activeCategory]="car._id === activeCategoryId"
+				class="position-relative d-flex flex-column align-items-center justify-content-center category-card cursor-pointer csmb-25"
+				(click)="activeCategory(car._id)">
+				<a href="/product/list/{{ car.url_key }}"
+					class="color-card-p p-0 text-decoration-none size16 redhat-semibold text-capitalize hover-a">
+					<span class="size32 redhat-bold hover-span"> {{ car.name }}</span>
+
+					<img src="{{ backendURl }}/cartype/{{ car.image[0].src }}" [alt]="car.image[0].alt"
+						[title]="car.image[0].name" class="category-image" width="0" height="0" loading="eager" />
+					<p class="redhat-semibold text-center type-margin text-capitalize black-light-color">
+						{{ car.name }}
+					</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<app-testimonials></app-testimonials>

@@ -1,0 +1,241 @@
+<section class="product bannerPadding">
+  <div class="container-fluid position-relative p-0 h-100">
+		<div class="overlay"></div>
+
+    <img *ngIf="bannerData && bannerData.media_data.length > 0"
+      src="{{ backendURl }}/banner/{{ bannerData.media_data[0].src }}" [alt]="bannerData.media_data[0].alt"
+      class="w-100 h-100 bannerImage" width="0" height="0" loading="eager" decoding="async" [title]="bannerData.media_data[0].name" />
+    <img *ngIf="!bannerData" src="{{ imageURL }}/products/product1.png" [alt]="bannerData.media_data[0].alt"
+      class="w-100 h-100 bannerImage" width="0" height="0" loading="eager" decoding="async" [title]="bannerData.media_data[0].name" />
+
+    <div class="content" *ngIf="!bannerData">
+      <h1 class="size88 performa-thin white-color line-height90 text-capitalize">Smart Stylish City-Ready</h1>
+      <p class="size20 redhat-regular beige-color line-height26">
+        Effortless driving for urban explorers—Luxury hatchbacks that combine
+        performance and practicality in one compact package.
+      </p>
+    </div>
+    <div class="content zindex2" *ngIf="bannerData">
+      <h1 class="size88 performa-thin white-color text-capitalize" [innerHTML]="bannerData.short_desc"></h1>
+      <p class="size20 redhat-regular hero-para beige-color" [innerHTML]="bannerData.description"></p>
+    </div>
+  </div>
+</section>
+
+<section class="min-vh-100 sectionPadding">
+  <div class="container-fluid">
+    <h2 *ngIf="cartypeData" class="size60 performa-light text-capitalize">
+      Explore our {{ cartypeData.name }} {{vehicle_type}} collection
+    </h2>
+    <h2 *ngIf="!cartypeData" class="size60 performa-light text-capitalize">
+      Explore our all {{vehicle_type}} collection
+    </h2>
+    <div class="row">
+      <div class="results-section col-xl-12 col-lg-12 col-md-12 col-12" #resultsSection>
+        <div class="d-flex justify-content-md-between justify-content-end align-items-center margin34 sort-section">
+          <h3 class="mb-0 redhat-bold d-md-block d-none color-card-p ms-1 size14"
+						*ngIf="vehicleData && vehicleData.length > 0">
+						Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to
+						{{ Math.min(currentPage * itemsPerPage, totalItems) }} of
+						{{ totalItems }} Vehicles
+					</h3>
+					<h3 class="mb-0 size22 redhat-bold color-card-p text-capitalize"
+						*ngIf="vehicleData && vehicleData.length == 0">
+						No Data Found
+					</h3>
+
+          <div class="d-flex align-items-center position-relative sort cdrop cursor-pointer"
+						*ngIf="vehicleData && vehicleData.length > 0">
+						<div class="dropdown-toggle custom-dropdown" (click)="toggleDropdown()">
+							<span class="selected-text size14 redhat-semibold text-capitalize bg-transparent color-card-p cselect">
+								{{ selectedSortLabel || "Sort by" }}
+							</span>
+							<img src="{{ imageURL }}/images/icons/down-arrow.svg" class="img-fluid sort-down-arrow ms-2"
+								[ngClass]="{ rotate: dropdownOpen }" alt="arrow" width="0" height="0" loading="eager" title="Sort by" />
+						</div>
+
+						<!-- Dropdown menu -->
+						<ul
+							class="dropdown-menu-custom border border-2 position-absolute mt-2 p-0 top-100 list-style-none z-index-5 bg-white gray-color"
+							*ngIf="dropdownOpen">
+							<li *ngFor="let option of sortOptions" (click)="selectSort(option)"
+								class="dropdown-item-custom px-3 py-2 cursor-pointer size14 redhat-semibold text-capitalize color-card-p">
+								{{ option.label }}
+							</li>
+							<li (click)="resetFilter()"
+								class="dropdown-item-custom px-3 py-2 cursor-pointer size14 redhat-semibold text-capitalize color-card-p">
+								reset
+							</li>
+						</ul>
+					</div>
+        </div>
+        <div class="products">
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-xl-5 mb-4" *ngFor="let car of vehicleData">
+              <a [routerLink]="['/product', car.url_key]" class="text-decoration-none cardblock" tabindex="0"
+              role="link">
+              <!-- 
+          full page reload so changed to routerLink
+            href="/product/{{ car.url_key }}" -->
+
+              <div class="car-card">
+                <div class="thumbnail-image-container">
+                  <img [src]="backendURl + '/media/' + car.media_data[0].src" [alt]="car.name"
+                    class="img-fluid w-100 h-100 thumbnail-image" loading="eager" width="0" height="0"
+                    [title]="car.name" />
+                </div>
+                <!-- <div class="position-relative special-number-wrapper">
+                <lucide-icon name="crown" size="20"></lucide-icon>
+
+                <span
+                  *ngIf="car && car.isvipNumberPlate"
+                  class="special-badge size12 redhat-bold text-capitalize border border-1 rounded-2 px-2 py-1"
+                >
+                  special number plate
+                </span>
+
+                <img
+                  [src]="backendURl + '/media/' + car.media_data[0].src"
+                  [alt]="car.name"
+                  class="img-fluid w-100 thumbnail-image h-100"
+                />
+              </div> -->
+
+                <!-- <div class="card-content h-100 d-flex flex-column justify-content-center"> -->
+                <div class="card-content">
+                  <div class="car-info d-flex justify-content-between position-relative">
+                    <div class="car-header margin15">
+                      <h4 class="car-name mb-1 size22 redhat-semibold gray-color">
+                        {{ car.name }}
+                      </h4>
+                      <h5 class="transmission text-muted size18 redhat-semibold text-capitalize color-card-p"
+                        *ngIf="car.vehicle_type == 'Car'">
+                        {{ car.transmission }}
+                      </h5>
+                      <h5 class="transmission text-muted size18 redhat-semibold text-capitalize color-card-p"
+                        *ngIf="car.vehicle_type == 'Yachts'">
+                        {{ car.bodytype_data[0].name }}
+                      </h5>
+                    </div>
+                    <span *ngIf="car && car.isvipNumberPlate"
+                      class="size12 redhat-bold text-capitalize special-number px-2 py-1">special number plate</span>
+                  </div>
+
+                  <!-- Car Information -->
+                  <div class="d-flex justify-content-between border-top border-bottom collection-padding"
+                    *ngIf="car.vehicle_type == 'Car'">
+                    <div class="text-center">
+                      <img src="{{ imageURL }}/images/icons/fuel.svg" class="img-fluid collection_image"
+                        loading="eager" width="0" height="0" alt="Fuel type indicator"
+                        title="Vehicle Fuel Information" />
+                      <h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+                        {{ car.fuelType || "N/A" }}
+                      </h6>
+                    </div>
+                    <div class="text-center">
+                      <img src="{{ imageURL }}/images/icons/mileage.svg" class="img-fluid collection_image"
+                        loading="eager" width="0" height="0" alt="Vehicle mileage information"
+                        title="Car Mileage Details" />
+                      <h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p text-lowercase">
+                        {{ car.mileage || "N/A" }}
+                      </h6>
+                    </div>
+                    <div class="text-center">
+                      <img src="{{ imageURL }}/images/icons/seats.svg" class="img-fluid collection_image"
+                        loading="eager" width="0" height="0" alt="Number of seats" title="Seating Capacity" />
+                      <h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+                        {{ car.seating_capacity || "N/A" }} Pax
+                      </h6>
+                    </div>
+                  </div>
+
+                  <!-- Yacht Information -->
+                  <div class="d-flex justify-content-between border-top border-bottom collection-padding"
+                    *ngIf="car.vehicle_type === 'Yachts'">
+                    <div class="text-center">
+                      <img src="{{ imageURL }}/images/icons/length.svg" class="img-fluid collection_image"
+                        alt="Length" loading="eager" title="Length" width="0" height="0" />
+                      <h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p text-lowercase">
+                        {{ car.length || "N/A" }}
+                      </h6>
+                    </div>
+                    <div class="text-center">
+                      <img src="{{ imageURL }}/images/icons/year.svg" class="img-fluid collection_image" alt="Year"
+                        loading="eager" title="Year" width="0" height="0" />
+                      <h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+                        {{ car.year || "N/A" }}
+                      </h6>
+                    </div>
+                    <div class="text-center">
+                      <img src="{{ imageURL }}/images/icons/guests.svg" class="img-fluid collection_image"
+                        alt="Capacity" loading="eager" title="Capacity"  width="0" height="0"/>
+                      <h6 class="mb-0 mt-md-2 size16 redhat-semibold color-card-p">
+                        {{ car.guest_capacity || "N/A" }} Guests
+                      </h6>
+                    </div>
+                  </div>
+
+                  <div class="cash-container d-flex justify-content-between align-items-center pt-md-3 pt-2"
+                    *ngIf="car.vehicle_type === 'Car'">
+                    <div class="cash">
+                      <h6 class="text-muted mb-0 size18 redhat-semibold color-card-p text-decoration-line-through">
+                        AED {{ car.regularRateDaily }}
+                      </h6>
+                      <h5 class="mb-0 size26 redhat-semibold gray-color">
+                        AED {{ car.dailyRate
+                        }}<span class="size18 redhat-regular gray-color">/day</span>
+                      </h5>
+                    </div>
+                    <button routerLink="/product/{{ car.url_key }}"
+                      class="p-0 mt-auto text-decoration-none color-card-p size16 redhat-semibold text-capitalize viewbt">
+                      View details
+                    </button>
+                  </div>
+                  <div class="cash-container d-flex justify-content-between align-items-center pt-md-3 pt-2"
+                    *ngIf="car.vehicle_type === 'Yachts'">
+                    <div class="cash">
+                      <h6 class="text-muted mb-0 size18 redhat-semibold color-card-p text-decoration-line-through">
+                        AED {{ car.regularRateHourly }}
+                      </h6>
+                      <h5 class="mb-0 size26 redhat-semibold gray-color">
+                        AED {{ car.hourlyRate
+                        }}<span class="size18 redhat-regular gray-color">/hr</span>
+                      </h5>
+                    </div>
+                    <button routerLink="/product/{{ car.url_key }}"
+                      class="p-0 mt-auto text-decoration-none color-card-p size16 redhat-semibold text-capitalize viewbt">
+                      View details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </a>
+            </div>
+          </div>
+        </div>
+        <nav aria-label="Page navigation" class="mt-4" *ngIf="totalPages > 1">
+          <ul class="pagination justify-content-center align-items-center gap-2">
+            <li [class.disabled]="currentPage === 1">
+              <button class="circle-btn filled" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+                <lucide-icon name="arrow-left" />
+              </button>
+            </li>
+
+            <li *ngFor="let page of getPages()">
+              <button class="number-btn" [class.active-page]="page === currentPage" (click)="onPageChange(page)">
+                {{ page }}
+              </button>
+            </li>
+
+            <li [class.disabled]="currentPage === totalPages">
+              <button class="circle-btn filled" [disabled]="currentPage === totalPages"
+                (click)="onPageChange(currentPage + 1)">
+                <lucide-icon name="arrow-right" />
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>

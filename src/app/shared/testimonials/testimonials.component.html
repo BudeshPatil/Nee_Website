@@ -1,0 +1,223 @@
+<section class="testimonial">
+	<div class="container">
+		<h3
+			class="text-center size60 performa-light gray-color"
+			data-aos="fade-up"
+			data-aos-duration="1000"
+		>
+			What our Family of Clients Say
+		</h3>
+		<!-- <div class="swiper py-md-4" #swiper>
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" *ngFor="let testimonial of testimonialsData">
+          <div class="row">
+            <div
+              class="col-12 col-sm-9 col-md-9 col-lg-5 text-center mb-3 mb-md-2 img-container"
+              data-aos="fade-up"
+              data-aos-duration="1500"
+            >
+              <img
+                src="{{ backendURL }}/{{ testimonial.image }}"
+                alt="Customer Testimonial"
+                class="rounded-4 img-fluid testimonial-img"
+              />
+            </div>
+            <div
+              class="col-12 col-sm-9 col-md-7 d-flex flex-column align-items-center align-items-lg-start"
+              data-aos="fade-up"
+              data-aos-duration="1500"
+            >
+              <div
+                class="margin28 d-flex gap-2 justify-content-center justify-content-lg-start align-items-center"
+              >
+                <ng-container
+                  *ngFor="let star of getStars(testimonial.ratings)"
+                >
+                  <img
+                    src="{{ imageURL }}/images/icons/star-icon.svg"
+                    alt=""
+                    class="star-icon"
+                  />
+ 
+                </ng-container>
+              </div>
+              <h5
+                class="size30 redhat-regular margin22 black-color text-center text-lg-start title-width gray-color"
+              >
+                "{{ testimonial.title }}"
+              </h5>
+              <p
+                class="size22 redhat-regular mb-4 color-card-p text-center text-lg-start text-width color-card-p"
+              >
+                {{ testimonial.text }}
+              </p>
+              <h6
+                class="size18 redhat-regular gray-color text-center text-lg-start"
+              >
+                {{ testimonial.name }}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="text-start gap-2 d-flex justify-content-lg-start justify-content-center margin-left" id="faq"
+      data-aos="fade-up"
+      data-aos-duration="1500"
+    >
+      <div #prevButton class="button swiper-button-prev">
+        <lucide-icon name="arrow-left" class="swiper-button-icon" />
+      </div>
+      <div #nextButton class="button swiper-button-next">
+        <lucide-icon name="arrow-right" class="swiper-button-icon" />
+      </div>
+    </div> -->
+
+		<div class="swiper" #swiper>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" *ngFor="let testimonial of testimonialsData">
+					<div class="row mx-auto">
+						<div class="col-lg-5 col-12">
+							<div
+								class="d-flex h-100 justify-content-center flex-column align-items-center align-items-lg-start"
+								data-aos="fade-up"
+								data-aos-duration="1500"
+							>
+								<img
+									[src]="backendURL + '/' + testimonial.image"
+									alt="Customer Testimonial"
+									[title]="testimonial.name"
+									class="img-fluid testimonial-image"
+									loading="lazy" width="0" height="0"
+								/>
+							</div>
+						</div>
+						<div class="col-lg-7 col-12 mt-2 mt-md-3 mt-lg-0">
+							<div
+								class="d-flex h-100 justify-content-center flex-column align-items-center align-items-lg-start col-width"
+								data-aos="fade-up"
+								data-aos-duration="1500"
+							>
+								<div class="rating d-flex gap-3 margin28">
+									<ng-container
+										*ngFor="let star of getStars(testimonial.ratings)"
+									>
+										<img
+											src="{{ imageURL }}/images/icons/star-icon.svg"
+											alt="5-star customer review rating"
+											title="Excellent Customer Review Rating - 5 Stars from Verified Customers"
+											class="star-icon"
+											loading="lazy" width="0" height="0"
+										/>
+									</ng-container>
+								</div>
+								<!-- <h3 class="margin22 size30 redhat-regular black-color">{{ testimonial.title }}</h3>
+                          <p class=" mb-4 size22 redhat-regular gray-color">{{ testimonial.text }}</p>
+                          <h6 class="size18 redhat-regular gray-color"> {{ testimonial.name }}</h6> -->
+								<h4
+									class="size30 redhat-regular margin22 black-color text-center text-lg-start title-width gray-color text-capitalize"
+								>
+									"{{ testimonial.title }}"
+								</h4>
+								<p
+									class="size22 redhat-regular mb-4 color-card-p text-center text-lg-start text-width color-card-p"
+								>
+									{{ testimonial.text }}
+								</p>
+								<h5
+									class="size18 redhat-regular gray-color text-center text-lg-start"
+								>
+									{{ testimonial.name }}
+								</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="swiper-slide" *ngIf="testimonialsData.length === 0">
+              <p>Loading testimonials...</p>
+            </div> -->
+			</div>
+
+			<!-- Navigation -->
+			<div
+				class="d-flex gap-3 margin-top40 justify-content-center justify-content-lg-start ps-2"
+			>
+				<div class="button swiper-button-prev" #swiperButtonPrev>
+					<lucide-icon name="arrow-left" class="swiper-button-icon" />
+				</div>
+				<div class="button swiper-button-next" #swiperButtonNext>
+					<lucide-icon name="arrow-right" class="swiper-button-icon" />
+				</div>
+			</div>
+
+			<!-- Pagination -->
+			<div class="swiper-pagination"></div>
+		</div>
+	</div>
+</section>
+
+<section class="faq">
+	<h3
+		class="text-center text-capitalize size60 performa-light gray-color"
+		data-aos="fade-up"
+		data-aos-duration="1000"
+	>
+		Frequently Asked Questions
+	</h3>
+	<p
+		class="text-center size18 redhat-regular gray-color margin28 gray-color"
+		data-aos="fade-up"
+		data-aos-duration="1500"
+	>
+		Got questions? We’ve got answers to help you navigate your rental
+		experience!
+	</p>
+	<div class="text-center margin-bottom60 " >
+		<button
+			routerLink="/contact"
+			class="black-button size18 redhat-bold d-flex mx-auto text-capitalize"
+			data-aos="fade-up"
+			data-aos-duration="2000"
+			data-text="Help Center"
+		>
+			<span>Help Center</span>
+		</button>
+	</div>
+
+	<div class="container-fluid" data-aos="fade-up" data-aos-duration="2000">
+		<div class="row justify-content-center">
+			<div class="col-lg-12 d-grid">
+				<div
+					class="faq-item margin18"
+					*ngFor="let faq of faqs; let i = index"
+					[class.expanded]="expandedIndex === i"
+				>
+					<div class="faq-question m-0" (click)="toggleAccordion(i)">
+						<h4 class="size26 redhat-medium m-0 gray-color">
+							{{ faq.question }}
+						</h4>
+						<!-- <span class="icon">{{ expandedIndex === i ? "−" : "+" }}</span> -->
+						<span>
+							<lucide-icon
+								[name]="expandedIndex === i ? 'minus' : 'plus'"
+								[class]="expandedIndex === i ? 'white' : 'black'"
+								size="24"
+							>
+							</lucide-icon>
+						</span>
+					</div>
+					<div
+						class="faq-answer me-lg-4 me-2"
+						[style.maxHeight]="expandedIndex === i ? '300px' : '0'"
+					>
+						<p class="size18 redhat-regular m-0 gray-light-color">
+							{{ faq.answer }}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

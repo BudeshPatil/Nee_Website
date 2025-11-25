@@ -1,0 +1,173 @@
+<section class="contact sectionPadding">
+  <div class="container-fluid">
+    <!-- heading -->
+    <h1 class="size60 performa-light text-capitalize text-center mb-xxl-4 mb-lg-3 mb-md-3 mb-2 gray-color" 
+      >
+      get in touch with us
+    </h1>
+    <p class="size18 redhat-semibold text-center margin-bottom gray-color"  >
+      <!-- Experience Luxury On The Move – Book Your Journey With Us Today. -->
+      Book Your Luxury Moves For Epic Stories – Your Journey Starts Here
+    </p>
+
+    <div class="row">
+      <!-- form -->
+      <div class="col-xl-6 col-lg-6 col-md-12 col-12 pad-right"  >
+        <form [formGroup]="addcontactForm" (ngSubmit)="sendWhatsppMsg()" method="post" novalidate>
+          <div class="row">
+            <div class="col-6 mb-xl-4 mb-lg-3 mb-md-3 mb-2">
+              <div class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize ">
+                <label for="firstName" class="form-label gray-light-color m-0 size16 redhat-medium">first Name</label>
+                <input id="firstName" type="text" class="border-0 outline-0 gray-color size18 redhat-semibold"
+                  placeholder="first Name" formControlName="name" name="name" />
+
+              </div>
+              <span *ngIf="submitted && hasError('name', 'required')"
+                class="alert-danger ms-md-3 ms-2 size16 redhat-semibold">Name is required</span>
+
+
+            </div>
+            <div class="col-6 mb-xl-4 mb-lg-3 mb-md-3 mb-2">
+              <div class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize">
+                <label for="lastName" class="form-label gray-light-color m-0 size16 redhat-medium">last name</label>
+                <input id="lastName" type="text" class="border-0 outline-0 gray-color size18 redhat-semibold"
+                  placeholder="last name" formControlName="lastname" name="lastname" />
+              </div>
+              <span *ngIf="submitted && hasError('lastname', 'required')"
+                class="alert-danger ms-md-3 ms-2 size16 redhat-semibold">Last Name is required</span>
+            </div>
+            <div class="col-6 mb-xl-4 mb-lg-3 mb-md-3 mb-2">
+              <div class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize">
+                <label for="email" class="form-label gray-light-color m-0 size16 redhat-medium">email</label>
+                <input id="email" type="email" class="border-0 outline-0 gray-color size18 redhat-semibold"
+                  placeholder="email" formControlName="email" name="email" />
+              </div>
+              <span *ngIf="submitted && hasEmailError('email', 'required')"
+                class="alert-danger ms-md-3 ms-2 size16 redhat-semibold">{{ hasEmailError("email", "required") }}</span>
+
+            </div>
+            <!-- <div class="col-6">
+              <div
+                class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize mb-xl-4 mb-lg-3 mb-md-3 mb-2">
+                <label for="phone" class="form-label gray-light-color m-0">Phone</label>
+                <input id="phone" type="number" min="0" class="border-0 outline-0 gray-color size18 redhat-semibold"
+                  placeholder="Phone" formControlName="phone" name="phone" />
+              </div>
+              <span *ngIf="submitted && hasError('phone', 'required')" class="alert-danger mb-2">Phone is
+                required</span>
+            </div> -->
+            <div class="col-6 mb-xl-4 mb-lg-3 mb-md-3 mb-2">
+              <div class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize">
+                <label for="phone" class="form-label gray-light-color m-0 size16 redhat-medium">Phone</label>
+                <ngx-intl-tel-input id="floatingInput" class="interphone size18 redhat-semibold" id="floatingInput"
+                  [cssClass]="'custom-intl-tel-input'" [enableAutoCountrySelect]="true" [enablePlaceholder]="false"
+                  [searchCountryFlag]="true" [preferredCountries]="preferredCountries" [searchCountryField]="[
+                    SearchCountryField.Iso2,
+                    SearchCountryField.Name
+                  ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.UnitedArabEmirates"
+                  [phoneValidation]="true" [separateDialCode]="true" name="phone" formControlName="phone">
+                </ngx-intl-tel-input>
+              </div>
+
+              <span *ngIf="submitted && hasPhoneNumberError('phone', 'required')"
+                class="alert-danger ms-md-3 ms-2 size16 redhat-semibold">{{ hasPhoneNumberError("email", "required")
+                }}</span>
+            </div>
+            <div class="col-12">
+              <div class="form-box-padding d-flex flex-column border border-1 rounded-3 text-capitalize">
+                <label for="message" class="form-label gray-light-color m-0 size16 redhat-medium">Message</label>
+                <textarea style="resize: none" id="message" class="no-resize border-0 outline-0 gray-color size18 redhat-semibold"
+                  placeholder="Message" formControlName="message" name="message"></textarea>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="alert alert-success alert-dismissable mt-4 text-center" *ngIf="msg_success">
+                {{ throw_msg }}
+              </div>
+              <button class="black-button size18 redhat-bold text-capitalize mt-4" type="submit" 
+              data-text="Send Message"  id="maps" 
+              >
+                <span>Send Message</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- details -->
+      <div class="col-xl-6 col-lg-6 col-md-12 col-12 pad-left"  >
+        <div class="border border-1 rounded-3 inner-padding">
+          <h2 class="size24 redhat-bold text-capitalize margin12 gray-color">
+            contact details
+          </h2>
+          <p class="size18 redhat-semibold margin32 line-height30 gray-color">
+            Experience Luxury On The Move – Book Your Journey With Us Today.
+          </p>
+          <div class="d-flex gap-3 margin35">
+            <img src="{{ imageURL }}/images/icons/location_pin.svg" alt="ghost rentals dubai location" class="social-icons flex-shrink-0"  title="dubai location" loading="eager" width="0" height="0"/>
+            <div class="w-100">
+              <h3 class="size18 redhat-semibold text-capitalize m-0 gray-color">
+                address
+              </h3>
+              <!-- <p class="size16 redhat-semibold mb-0 para-width gray-color">
+                GHOST RENTALS, No.40 3rd, MK Ghanim Warehouses, Al Quoz 3 Rd, Dubai,
+                U.A.E
+              </p> -->
+              <p class="size16 redhat-semibold mb-0 para-width gray-color">
+                GHOST RENTALS, MK Ghanim, Warehouse - No. 40 - 3rd, Al Quoz Industrial Area 3 - Dubai - UAE
+              </p>
+            </div>
+          </div>
+          <div class="d-flex gap-3 margin35">
+            <img src="{{ imageURL }}/images/icons/email.png" alt="ghost rentals email" class="social-icons flex-shrink-0" title="email us" loading="eager" width="0" height="0"/>
+            <div class="">
+              <h3 class="size18 redhat-semibold text-capitalize m-0 gray-color">email</h3>
+              <p class="size16 redhat-semibold m-0 gray-color">
+                <a class="size16 redhat-semibold m-0 gray-color" href="mailto:info@ghostrentals.com">info&#64;ghostrentals.com</a>
+              </p>
+            </div>
+          </div>
+          <div class="d-flex gap-3 margin35">
+            <img src="{{ imageURL }}/images/icons/phone.png" alt="ghost rentals phone" class="social-icons" title="contact us" loading="eager" width="0" height="0"/>
+            <div class="">
+              <h3 class="size18 redhat-semibold text-capitalize m-0 gray-color">phone</h3>
+              <p class="size16 redhat-semibold m-0 gray-color"><a class="size16 redhat-semibold m-0 gray-color" href="tel:+97180044678">+971 800 44678</a></p>
+            </div>
+          </div>
+
+          <div class="socials">
+            <h3 class="size18 redhat-semibold text-capitalize margin20">
+              follow us
+            </h3>
+            <div class="icons d-flex gap-3">
+              <a href="https://www.instagram.com/ghost.rentals/?hl=en">
+                <img src="{{ imageURL }}/images/icons/instagram.svg" class="social-icons" alt="Ghost Rental Instagram Account"
+                title="Follow Ghost Rentals on Instagram" loading="eager"  width="0" height="0"/>
+              </a>
+              <a href="https://www.facebook.com/Ghostrentalsdubai">
+                <img src="{{ imageURL }}/images/icons/facebook.svg" alt="Ghost Rental Facebook Account" class="social-icons" title="Follow Ghost Rentals on Facebook" loading="eager" width="0" height="0" />
+              </a>
+              <a href="https://www.tiktok.com/@ghostrentals">
+                <img src="{{ imageURL }}/images/icons/tiktok.svg" alt="Ghost Rental TikTok Account" class="social-icons" title="Follow Ghost Rentals on TikTok" loading="eager" width="0" height="0" />
+              </a>
+              <a href="https://www.youtube.com/@GhostRentalsDXB?app=desktop">
+                <img src="{{ imageURL }}/images/icons/youtube.svg" alt="Ghost Rental YouTube Account" class="social-icons" title="Follow Ghost Rentals on YouTube" loading="eager" width="0" height="0" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sectionPadding mapsTop pt-0" >
+  <div class="maps">
+    <iframe
+      title="Google Maps location of Ghost Rentals office in Dubai"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.400098298194!2d55.223214776052565!3d25.122160834734654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6bb7c49961e7%3A0x4b3661e383f4d582!2sGhost%20Rentals!5e0!3m2!1sen!2sin!4v1748495097567!5m2!1sen!2sin"
+      width="100%" height="450" class="border-0" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
