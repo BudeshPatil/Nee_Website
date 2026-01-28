@@ -1,0 +1,441 @@
+<section class="homebanner position-relative hero" *ngIf="bannerData && bannerData.length > 0">
+	<div class="herobanner">
+		<div class="overlay"></div>
+		<img *ngIf="bannerData && bannerData[0].media_data[0]?.file_type === 'image'"
+			src="{{ imagePath }}banner/{{ bannerData[0].media_data[0].src }}" alt="banner" title="banner"
+			class="bnr-img img-fluid" width="" height="" loading="lazy" />
+		<video *ngIf="bannerData && bannerData[0].media_data[0]?.file_type === 'video'"
+			[attr.src]="imagePath + 'banner/' + bannerData[0].media_data[0].src" autoplay muted loop playsinline
+			webkit-playsinline preload="auto" class="bnr-video w-100 h-100 object-cover"></video>
+	</div>
+</section>
+<div class="sectionpb bgcl-primary"></div>
+
+<section class="about sectionp bgcl-primary" *ngIf="aboutData && aboutData.length > 0">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row" *ngFor="let about of aboutData">
+					<div class="col-xl-5 col-md-6 order-md-1 order-2">
+						<div class="content-block w-100" data-aos="fade-up" data-aos-duration="1000">
+							<p class="size16 sora-regular mb-0 raisin-black ">
+								{{ about.desc_short }}
+							</p>
+							<h1 class="nelphim-regular size62 raisin-black csmb30 headwidth text-capitalize">
+								{{ about.title_sign }}
+							</h1>
+							<div class="sora-regular size18 raisin-black pwidth home-founder-br csmb40" [innerHTML]="about.desc_long">
+							</div>
+							<a class="btn-primary raisin-black mt-0 " href="/about">Know More</a>
+						</div>
+					</div>
+					<div class="col-xl-7 col-md-6 order-md-2 order-1 mb-lg-0 mb-md-4 mb-sm-4 mb-4">
+						<div class="row">
+							<div class="col-5 d-none d-xl-block" data-aos="fade-up" data-aos-duration="1000">
+								<div class="h-100 d-flex align-items-end justify-content-end">
+									<img src="{{ imagePath }}about/{{ about.image_desc }}" width="0" height="0" loading="lazy"
+										class="img-fluid scroll-animate chwidth" alt="ph-founder" title="" />
+								</div>
+							</div>
+							<div class="col-xl-7 image-zoom-effect1" data-aos="fade-up" data-aos-duration="1500">
+								<div class="image-holder">
+									<img src="{{ imagePath }}about/{{ about.image_banner }}" width="0" height="0" loading="lazy"
+										class="img-fluid w-100 scroll-animate" alt="ph-founder" title="PH-founder" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--Services-->
+<section class="services sectionpt sectionpb150 bgcl-primary" *ngIf="servicesData && servicesData.length > 0">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-lg-9 col-md-8 mb-md-0 mb-sm-4 mb-2">
+						<div class="content-block w-100">
+							<p class="size16 raisin-black sora-regular mb-0 text-uppercase">Our Services</p>
+							<h2 class="nelphim-regular size62 raisin-black text-capitalize mb-0">
+								Interior Design<span class="d-block"> Thoughtfully Delivered</span>
+							</h2>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4">
+						<div class="h-100 d-flex align-items-md-end justify-content-md-end align-items-start justify-content-start">
+							<a class="btn-primary raisin-black text-p csmt30 " href="/services">Explore</a>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-4" *ngFor="let service of servicesData">
+						<div class="card image-zoom-effect" data-aos="fade-up" data-aos-duration="1000">
+							<a class="" [routerLink]="['/services']" [fragment]="service.url_key">
+								<div class="image-holder">
+									<img class="img-fluid scroll-animate" src="{{ imagePath }}category/{{
+											service.media_data[0]?.src
+										}}" [alt]="service.name.split(' ')[0]" [title]="service.name.split(' ')[0]" width="466" height="601"
+										loading="lazy" />
+								</div>
+								<p class="raisin-black sora-regular size22 csmt20 mb-0 ">
+									{{ service.name.split(" ")[0] }}
+								</p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="client sectionpt120 sectionp bgcl-secondary" *ngIf="clientsData && clientsData.length > 0">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="d-flex align-items-md-center flex-md-row flex-column gap-2 gap-md-0" data-aos="fade-up"
+					data-aos-duration="1000">
+					<div class="cwidth pe-0 pe-md-4">
+						<h3 class="raisin-black size62 nelphim-regular" style="width: max-content">
+							Our Clients
+						</h3>
+					</div>
+					<div class="content-block w-100 ps-md-4 ps-0" style="overflow: hidden">
+						<div class="marquee-container">
+							<div class="marquee-track">
+								<div class="marquee-item" *ngFor="let client of clientsData">
+									<img src="{{ imagePath }}tvshow/{{ client.image }}" class="img-fluid"
+										[alt]="client.name || 'Client logo'" [title]="client.name || 'Client logo'" loading="lazy" width="0"
+										height="0" />
+								</div>
+								<div class="marquee-item" *ngFor="let client of clientsData">
+									<img src="{{ imagePath }}tvshow/{{ client.image }}" class="img-fluid"
+										[alt]="client.name || 'Client logo'" [title]="client.name || 'Client logo'" loading="lazy" width="0"
+										height="0" />
+								</div>
+								<div class="marquee-item" *ngFor="let client of clientsData">
+									<img src="{{ imagePath }}tvshow/{{ client.image }}" class="img-fluid"
+										[alt]="client.name || 'Client logo'" [title]="client.name || 'Client logo'" loading="lazy" width="0"
+										height="0" />
+								</div>
+								<div class="marquee-item" *ngFor="let client of clientsData">
+									<img src="{{ imagePath }}tvshow/{{ client.image }}" class="img-fluid"
+										[alt]="client.name || 'Client logo'" [title]="client.name || 'Client logo'" loading="lazy" width="0"
+										height="0" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="line line-color csmt20"></div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--our clients-->
+
+<!-- Residant section-->
+<section class="client sectionp bgcl-secondary">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-lg-8 col-md-8 mb-md-0 mb-sm-4 mb-2">
+						<div class="content w-100">
+							<h2 class="nelphim-regular size62 raisin-black csmb30">
+								Elevating Everyday Living
+							</h2>
+							<p class="raisin-black size18 mb-0 sora-regular"> Our work goes beyond beautiful interiors, it’s about
+								<span class="d-sm-block d-inline">delivering results our clients can see and feel.</span>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4">
+						<div class="h-100 d-flex align-items-md-end justify-content-md-end align-items-start justify-content-start">
+							<a class="btn-primary raisin-black csmt30 text-capitalize" href="/contact">
+								Contact us
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="line line-color csmt60 csmb30"></div>
+				<div class="row" *ngIf="counterData">
+					<div class="col-xl-3 col-6 mb-xl-0 mb-4">
+						<div class="stats-container">
+							<div class="stat">
+								<div class="number">
+									<h2 data-purecounter-start="0" [attr.data-purecounter-end]="counterData.total_home"
+										data-purecounter-duration="1"
+										class="purecounter mb-0 size54 sora-regular d-inline-block raisin-black">
+										{{ counterData.total_home }}
+									</h2>
+									<span class="size54 sora-regular raisin-black">+</span>
+								</div>
+								<div class="label size18 sora-semibold">
+									<p class="label-p size18 sora-semibold  raisin-black">
+										Residential projects and design solutions
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-6 mb-xl-0 mb-4">
+						<div class="stats-container">
+							<div class="stat">
+								<div class="number size54 sora-regular">
+									<h2 data-purecounter-start="0" [attr.data-purecounter-end]="counterData.total_commercial"
+										data-purecounter-duration="1"
+										class="purecounter mb-0 size54 sora-regular d-inline-block raisin-black">
+										{{ counterData.total_commercial }}
+									</h2>
+									<span class="size54 sora-regular raisin-black">+</span>
+								</div>
+								<div class="label size18 sora-semibold">
+									<p class="label-p size18 sora-semibold  raisin-black">
+										Projects for hospitality, education and commercial
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-6 mb-xl-0 mb-4">
+						<div class="stats-container">
+							<div class="stat">
+								<div class="number size54 sora-regular">
+									<h2 data-purecounter-start="0" [attr.data-purecounter-end]="counterData.total_client"
+										data-purecounter-duration="1"
+										class="purecounter mb-0 size54 sora-regular d-inline-block raisin-black">
+										{{ counterData.total_client }}
+									</h2>
+									<span class="size54 sora-regular raisin-black">%</span>
+								</div>
+								<div class="label size18 sora-semibold">
+									<p class="label-p size18 sora-semibold  raisin-black">
+										Client satisfaction rate and project success
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-6 mb-xl-0 mb-4">
+						<div class="stats-container">
+							<div class="stat">
+								<div class="number size54 sora-regular">
+									<h2 data-purecounter-start="0" [attr.data-purecounter-end]="counterData.total_year"
+										data-purecounter-duration="1"
+										class="purecounter mb-0 size54 sora-regular d-inline-block raisin-black">
+										{{ counterData.total_year }}
+									</h2>
+									<span class="size54 sora-regular raisin-black"></span>
+								</div>
+								<div class="label size18 sora-semibold">
+									<p class="label-p size18 sora-semibold  raisin-black">
+										Years of outstanding professional design work
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="design csmt30">
+					<div class="content text-center sectionp">
+						<h3 class="nelphim-regular size62 cloud-white">
+								Design is Personal.<span class="d-block">So is Neelgund.</span>
+						</h3>
+						<p class="cloud-white sora-regular size18 csmb30">
+								Let Neelgund create something meaningful for you
+						</p>
+						<a class="btn-secondary mx-auto no-transform" href="/contact">Book a Consultation</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="collabrative sectionp bgcl-secondary">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-lg-9">
+						<div class="content w-100">
+							<p class="size16 raisin-black sora-regular mb-0 text-uppercase">OUR APPROACH</p>
+							<h2 class="nelphim-regular size62 raisin-black mb-0">
+								Clear Steps. Thoughtful Rhythm.<span class="d-block">Collaborative Flow.</span>
+							</h2>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-5">
+						<div class="faq">
+							<div class="faq-items-container">
+								<div class="faq-item csmb18" *ngFor="let faq of faqData; let i = index"
+									[class.expanded]="expandedIndex === i">
+									<div class="faq-question m-0 f{{ i }}" (click)="toggleAccordion(i)">
+										<h3 class="size18 m-0 sora-regular" [ngClass]="
+												expandedIndex === i ? 'sora-semibold' : 'sora-regular'
+											">
+											{{ faq.question }}
+										</h3>
+										<span>
+											<lucide-icon class="plusMinus" [name]="expandedIndex === i ? 'minus' : 'plus'"
+												[class]="expandedIndex === i ? 'white' : 'black'" size="24" style="width: 24px; height: 24px">
+											</lucide-icon>
+										</span>
+									</div>
+									<div class="faq-answer" [style.maxHeight]="expandedIndex === i ? '300px' : '0'">
+										<p class="size16 sora-regular m-0">
+											{{ faq.answer }}
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-5 offset-lg-2">
+						<div class="h-100 d-flex align-items-start justify-content-start processimg">
+							<img class="img-fluid w-100 process-animate" src="{{ baseUrl }}/{{ currentImage }}" alt="design banner"
+								title="design banner" width="0" height="0" loading="lazy" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="portfolio sectionp bgcl-secondary" *ngIf="projects && projects.length > 0">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-lg-8 col-md-8 mb-md-0 mb-sm-4 mb-2">
+						<div class="content-block w-100">
+							<p class="size16 raisin-black sora-regular mb-0 text-uppercase">
+								Our Portfolio
+							</p>
+							<h2 class="nelphim-regular size62 raisin-black mb-0">
+								A Considered Collection of Completed Work
+							</h2>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4">
+						<div class="h-100 d-flex align-items-md-end justify-content-md-end align-items-start justify-content-start">
+							<a class="btn-primary raisin-black text-p csmt30" href="/portfolio">Explore</a>
+						</div>
+					</div>
+					<div class="col-12 csmt60">
+						<div class="swiper portfolio-swiper">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide" *ngFor="let project of projects">
+									<a href="{{ baseUrl }}/project/project-details/{{
+											project.url_key
+										}}">
+										<div class="imgblk">
+											<img [src]="imagePath + 'project/' + project.image" class="img-fluid rounded-0 listimg"
+												alt="{{ project.name }}" title="{{ project.name }}" loading="lazy" width="0" height="0" />
+										</div>
+										<div class="card-body cspostion">
+											<p class="card-title size16 sora-regular cloud-white mb-0">
+												{{ project.category_name }} / {{ project.year }}
+											</p>
+											<h3 class="nelphim-regular size38 cloud-white m-0 text-capitalize">
+												{{ project.name }}
+											</h3>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="swiper-pagination portfolio-pagination"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Review section-->
+<section class="review sectionp bgcl-secondary" *ngIf="testimonialData && testimonialData.length > 0">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-lg-8 col-md-8 mb-md-0 mb-sm-4 mb-4">
+						<div class="content-block w-100">
+							<p class="size16 raisin-black sora-regular mb-0 text-uppercase">Reviews</p>
+							<h2 class="nelphim-regular size62 raisin-black mb-0">
+								Personal Spaces.
+								<span class="d-block">Shared Experiences.</span>
+							</h2>
+						</div>
+					</div>
+					<div class="col-md-10 mx-auto csmt80">
+						<div class="swiper review-swiper">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide" *ngFor="let testimonial of testimonialData; let i = index">
+									<div class="testimonials">
+										<div class="row">
+											<div class="col-lg-6">
+												<img src="{{ imagePath }}testimonial/{{
+														testimonial.image
+													}}" [alt]="testimonial.alt" [title]="testimonial.name" class="img-fluid h-100 w-100 object-fit-cover"
+													loading="lazy" width="0" height="0" />
+											</div>
+											<div class="col-lg-6">
+												<div class="content bgcl-primary w-100">
+													<h2 class="sora-regular size22 raisin-black text-uppercase csmb20">
+														{{ testimonial.name }}
+													</h2>
+													<div class="">
+														<img src="{{
+																baseUrl
+															}}/assets/images/home/star_icon.svg" alt="rating stars" title="rating stars"
+															class="img-fluid test-star csmb20 me-2" loading="lazy"
+															*ngFor="let rate of counter(testimonial.ratings)" width="0" height="0" />
+													</div>
+
+													<p class="sora-regular mb-0 raisin-black">
+														"{{ testimonial.text }}"
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-pagination review-pagination"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="together bgcl-primary">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
+						<div class="content-block w-100">
+							<p class="size16 cloud-white sora-regular csmb20">
+								A unique vision with unlimited possibilities
+							</p>
+							<h2 class="nelphim-regular size62 cloud-white csmb20">
+								Let’s Work Together
+							</h2>
+							<a class="btn-secondary" style="text-transform: none" href="/contact">Book a Consultation</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

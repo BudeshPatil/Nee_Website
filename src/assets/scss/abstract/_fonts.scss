@@ -1,68 +1,79 @@
+/* Nelphim Font Family */
 @font-face {
-  font-family: "Performa Thin";
-  src: url("../../fonts/perfoma/performa-ex-thin.woff") format("woff");
-  font-display: swap;
-}
-@font-face {
-  font-family: "Performa Light";
-  src: url("../../fonts/perfoma/performa-ex-light.woff") format("woff");
-  font-display: swap;
-}
-@font-face {
-  font-family: "Performa Regular";
-  src: url("../../fonts/perfoma/performa-regular.woff") format("woff");
-  font-display: swap;
-}
-@font-face {
-  font-family: "Performa Medium";
-  src: url("../../fonts/perfoma/performa-medium.woff") format("woff");
-  font-display: swap;
-}
-@font-face {
-  font-family: "Performa SemiBold";
-  src: url("../../fonts/perfoma/performa-semibold.woff") format("woff");
-  font-display: swap;
-}
-@font-face {
-  font-family: "Performa Bold";
-  src: url("../../fonts/perfoma/performa-bold.woff") format("woff");
+  font-family: 'Nelphim Regular';
+  src: url('../../../assets/fonts/Nelphim_Font_Family_(Fontmirror)/Nelphim-Regular 400.otf') format('opentype');
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "RedHat Regular";
-  src: url("../../fonts/red-hat/RedHatDisplay-Regular.woff")
-    format("woff");
+  font-family: 'Nelphim Italic';
+  src: url('../../../assets/fonts/Nelphim_Font_Family_(Fontmirror)/NelphimItalic-Italic 400.otf') format('opentype');
   font-display: swap;
 }
+
+/* Sora Font Family */
 @font-face {
-  font-family: "RedHat Bold";
-  src: url("../../fonts/red-hat/RedHatDisplay-Bold.woff") format("woff");
+  font-family: 'Sora Thin';
+  src: url('../../../assets/fonts/Sora/static/Sora-Thin.ttf') format('truetype');
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "RedHat Light";
-  src: url("../../fonts/red-hat/RedHatDisplay-Light.woff") format("woff");
+  font-family: 'Sora ExtraLight';
+  src: url('../../../assets/fonts/Sora/static/Sora-ExtraLight.ttf') format('truetype');
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "RedHat Medium";
-  src: url("../../fonts/red-hat/RedHatDisplay-Medium.woff") format("woff");
+  font-family: 'Sora Light';
+  src: url('../../../assets/fonts/Sora/static/Sora-Light.ttf') format('truetype');
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "RedHat SemiBold";
-  src: url("../../fonts/red-hat/RedHatDisplay-SemiBold.woff")
-    format("woff");
+  font-family: 'Sora Regular';
+  src: url('../../../assets/fonts/Sora/static/Sora-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora Medium';
+  src: url('../../../assets/fonts/Sora/static/Sora-Medium.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora SemiBold';
+  src: url('../../../assets/fonts/Sora/static/Sora-SemiBold.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora Bold';
+  src: url('../../../assets/fonts/Sora/static/Sora-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora ExtraBold';
+  src: url('../../../assets/fonts/Sora/static/Sora-ExtraBold.ttf') format('truetype');
+  font-style: normal;
   font-display: swap;
 }
 
 
 @font-face {
   font-family: "Montserrat Bold";
-  src: url("../../fonts/montserrat-bold.ttf") format("truetype");
+  src: url("../../../assets/fonts/montserrat-bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
   font-display: swap;
 }

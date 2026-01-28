@@ -1,204 +1,133 @@
-import { Component, HostListener, OnInit, Renderer2, Inject, ChangeDetectorRef, PLATFORM_ID } from '@angular/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Component, HostListener, PLATFORM_ID, OnDestroy, OnInit, Inject, Renderer2 } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+	selector: 'app-header',
+	templateUrl: './header.component.html',
+	styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit {
-  imageURL: string = `${environment.url}/assets`;
-  isScrolled = false;
-  isMenuOpen = false;
-  isDarkText = false;
-  hasLargePadding = false;
-  
-  // Routes that should have dark text by default
-  private darkTextRoutes = [
-    '/privacy',
-    '/testimonials',
-    '/product/search',
-    '/terms',
-    '/contact',
-    '/product',
-    '/services'
-    
-  ];
 
-  // Routes that should have white text by default
-  private whiteTextRoutes = [
-    '/',
-    '/about',
-    '/product/list',
-    '/services',
-    // '/booking/cars',
-    // '/booking/yachts',
+export class HeaderComponent implements OnInit, OnDestroy {
+	baseUrl = environment.url;
+	isScrolled = false;
+	menuOpen = false;
+	menuText = 'MENU';
+	invertRoutes = ['/services','/contact', '/journal', '/journal-detail'];
+	hideHeader = false;
+	lastScrollTop = 0;
+	menuItems = [
+		{ label: 'home', path: '/', menuText: 'HOME' },
+		{ label: 'about us', path: '/about', menuText: 'ABOUT' },
+		{ label: 'services', path: '/services', menuText: 'SERVICES' },
+		{ label: 'portfolio', path: '/portfolio', menuText: 'PORTFOLIO' },
+		// { label: 'journal', path: '/journal', menuText: 'JOURNAL' },
+		{ label: 'contact us', path: '/contact', menuText: 'CONTACT' }
+	];
 
-  ];
+	private routerSubscription: any;
 
-  // Routes that should have large padding
-  private largePaddingRoutes = [
-    '/',
-    '/about',
-    '/services',
-    // '/booking/cars',
-    // '/booking/yachts',
-    '/product/list',
-    // '/demo'
-    
-  ];
+	constructor(
+		private router: Router,
+		private renderer: Renderer2,
+		@Inject(DOCUMENT) private document: Document,
+		@Inject(PLATFORM_ID) private platformId: Object
+	) {}
 
-  private currentRoute = '';
-  private isBrowser: boolean;
+	@HostListener('window:scroll', [])
+	onScroll(): void {
+		const currentScroll = window.scrollY;
 
-  constructor(
-    public router: Router,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document,
-    private changeDetector: ChangeDetectorRef,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-    this.setupRouterEvents();
-  }
+		this.isScrolled = currentScroll > 50;
 
-  ngOnInit(): void {
-    this.updateRouteState(this.router.url);
-  }
+		if (currentScroll > this.lastScrollTop && currentScroll > 200) {
+			this.hideHeader = true;
+		} else {
+			this.hideHeader = false;
+		}
 
-  private setupRouterEvents(): void {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      const path = event.url.split('?')[0];
-      this.updateRouteState(path);
-      
-      if (this.isBrowser) {
-        window.scrollTo(0, 0);
-      }
-      
-      this.updateTextColor();
-      this.changeDetector.detectChanges();
-    });
-  }
+		this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+	}
 
-  private updateRouteState(path: string): void {
-    this.currentRoute = path;
-    this.isDarkText = this.darkTextRoutes.some(route => 
-      path === route || path.startsWith(route + '/')
-    ) && !this.whiteTextRoutes.some(route => 
-      path === route || path.startsWith(route + '/')
-    );
+	ngOnInit() {
+		if (isPlatformBrowser(this.platformId)) {
+			this.currentRoute = window.location.pathname;
+			this.setMenuTextFromRoute(this.currentRoute);
+			
+		}
+		
+		this.routerSubscription = this.router.events.pipe(
+			filter(event => event instanceof NavigationEnd)
+		).subscribe((event: any) => {
+			this.currentRoute = event.url.split('?')[0];
+			this.setMenuTextFromRoute(this.currentRoute);
+		});
+		
+	}
 
-    this.hasLargePadding = this.largePaddingRoutes.some(route => 
-      path === route || path.startsWith(route + '/')
-    );
-  }
+	ngOnDestroy() {
+		if (this.routerSubscription) {
+			this.routerSubscription.unsubscribe();
+		}
+	}
 
-  @HostListener('window:scroll', [])
-  onWindowScroll(): void {
-    if (!this.isBrowser) return;
-    
-    this.isScrolled = window.scrollY > 50;
-    this.renderer[this.isScrolled ? 'addClass' : 'removeClass'](this.document.body, 'header-scrolled');
-    this.updateTextColor();
-    this.changeDetector.detectChanges();
-  }
+	currentRoute: string = '';
 
-  private updateTextColor(): void {
-    const navElement = this.document.querySelector('nav');
-    if (!navElement) return;
+	shouldInvertLogo(): boolean {
+		const shouldInvert = this.invertRoutes.some(route => this.currentRoute.startsWith(route));
+		return shouldInvert;
+	}
 
-    if (this.isScrolled || this.isMenuOpen) {
-      this.renderer.addClass(navElement, 'scrolled');
-      this.renderer.removeClass(navElement, 'dark-text');
-    } else {
-      if (this.isDarkText) {
-        this.renderer.addClass(navElement, 'dark-text');
-        this.renderer.removeClass(navElement, 'scrolled');
-      } else {
-        this.renderer.removeClass(navElement, 'dark-text');
-        this.renderer.removeClass(navElement, 'scrolled');
-      }
-    }
-  }
+	private setMenuTextFromRoute(url: string) {
+		this.currentRoute = url.split('?')[0]; 
+		const currentItem = this.menuItems.find(item => item.path === this.currentRoute || (this.currentRoute.startsWith(item.path) && item.path !== '/'));
+		if (currentItem) {
+			this.menuText = currentItem.menuText;
+		} else if (url === '/') {
+			this.menuText = 'HOME';
+		} else {
+			this.menuText = 'MENU';
+		}
+	}
 
-  toggleMenu(event?: Event): void {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+	toggleMenu() {
+		this.menuOpen = !this.menuOpen;
+		if (isPlatformBrowser(this.platformId)) {
+			if (this.menuOpen) {
+				this.renderer.addClass(this.document.body, 'no-scroll');
+			} else {
+				this.renderer.removeClass(this.document.body, 'no-scroll');
+			}
+		}
+	}
 
-    this.isMenuOpen = !this.isMenuOpen;
+	toggleMenuClose() {
+		this.menuOpen = false;
+		if (isPlatformBrowser(this.platformId)) {
+			this.renderer.removeClass(this.document.body, 'no-scroll');
+		}
+	}
 
-    if (this.isMenuOpen) {
-      this.openMenu();
-    } else {
-      this.closeMenu();
-    }
+	@HostListener('window:resize', ['$event'])
+	onResize() {
+		if (window.innerWidth > 992) {
+			this.menuOpen = false;
+			document.body.style.overflow = '';
+		}
+	}
 
-    this.changeDetector.detectChanges();
-  }
+	onMenuItemHover(menuItem: any) {
+		this.menuText = menuItem.menuText;
+	}
 
-  private openMenu(): void {
-    this.renderer.addClass(this.document.body, 'menu-open');
-    this.renderer.addClass(this.document.documentElement, 'menu-open');
-    this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
-    this.renderer.setStyle(this.document.documentElement, 'overflow', 'hidden');
-    this.animateMenuItems();
-  }
-
-  closeMenu(): void {
-    this.isMenuOpen = false;
-    this.renderer.removeClass(this.document.body, 'menu-open');
-    this.renderer.removeClass(this.document.documentElement, 'menu-open');
-    this.renderer.removeStyle(this.document.body, 'overflow');
-    this.renderer.removeStyle(this.document.documentElement, 'overflow');
-    this.resetMenuItems();
-  }
-
-  private animateMenuItems(): void {
-    if (!this.isBrowser) return;
-    
-    setTimeout(() => {
-      const menuItems = this.document.querySelectorAll<HTMLElement>('.mobile-menu .nav li');
-      menuItems.forEach((item) => {
-        item.style.opacity = '1';
-        item.style.transform = 'translateX(0)';
-      });
-    }, 50);
-  }
-
-  private resetMenuItems(): void {
-    if (!this.isBrowser) return;
-    
-    const menuItems = this.document.querySelectorAll<HTMLElement>('.mobile-menu .nav li');
-    menuItems.forEach((item) => {
-      item.style.opacity = '0';
-      item.style.transform = 'translateX(20px)';
-    });
-  }
-
-  @HostListener('document:click', ['$event'])
-  onClick(event: Event): void {
-    const target = event.target as HTMLElement;
-    const menuButton = this.document.querySelector('.navbar-toggler');
-    const menu = this.document.querySelector('.mobile-menu');
-
-    if (this.isMenuOpen &&
-      !target.closest('.mobile-menu') &&
-      !target.closest('.navbar-toggler')) {
-      this.toggleMenu();
-    }
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(): void {
-    if (this.isBrowser && window.innerWidth >= 1200) {
-      this.closeMenu();
-    }
-  }
+	onMenuLeave() {
+		const currentRoute = window.location.pathname;
+		const currentItem = this.menuItems.find(item => item.path === currentRoute || (currentRoute.startsWith(item.path) && item.path !== '/'));
+		
+		if (!currentItem) {
+			this.menuText = 'MENU';
+		}
+	}
 }

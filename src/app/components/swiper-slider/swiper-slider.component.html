@@ -1,0 +1,29 @@
+<div class="swiper mySwiper" #mySwiper >
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" *ngFor="let slide of portfolio">
+      <div class="imgblk">
+        <img [src]="slide.img_url" class="img-fluid rounded-0 listimg" alt="{{slide.name}}" />
+      </div>
+      <div class="card-body cspostion">
+        <p class="card-title  sora-regular cloud-white">{{slide.type}}/{{slide.year}}</p>
+        <h5 class=" text-h3 nelphim-regular size32 cloud-white m-0">{{slide.name}}</h5>
+        <!-- <p class="lufga-regular text-p text-center csmb30">{{ slide.short_description }}</p> -->
+        <!-- <a href="/" class="btn-primary mx-auto">
+          <span class="text d-flex justify-content-center align-items-center "> Buy Now
+            <img alt="" class="img imgtop " src="{{baseUrl}}/assets/images/icons/right-arrow-colored.png" width="22"
+              height="11" loading="lazy">
+          </span>
+        </a> -->
+      </div>
+    </div>
+  </div>
+  <div class="swiper-pagination"></div>
+  <!-- <div class="swiper-button-prev mySwiper-prev">
+    <img src="{{baseUrl}}/assets/images/home/left-icon.svg" class="img-fluid rounded-0" alt="Full Chair" width="62"
+      height="62" loading="lazy" />
+  </div>
+  <div class="swiper-button-next mySwiper-next">
+    <img src="{{baseUrl}}/assets/images/home/right-icon.svg" class="img-fluid rounded-0" alt="Full Chair" width="62"
+      height="62" loading="lazy" />
+  </div> -->
+</div>

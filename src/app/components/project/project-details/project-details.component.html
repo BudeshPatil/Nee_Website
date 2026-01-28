@@ -1,0 +1,438 @@
+<section class="hero bgcl-primary position-relative" *ngIf="projectData">
+	<div
+		class="content"
+		[ngStyle]="{
+			'background-image':
+				'url(' + imagePath + 'project/' + projectData.image + ')'
+		}"
+	>
+		<div class="overlay"></div>
+
+		<div class="text-block text-center">
+			<p class="cloud-white size16 mb-0 sora-regular text-uppercase">
+				{{ projectData.category_name }} | {{ projectData.year }}
+			</p>
+			<h1 class="size62 cloud-white nelphim-regular animate text-capitalize">
+				{{ projectData.name }}
+			</h1>
+		</div>
+	</div>
+</section>
+<section class="list sectionp120 bgcl-primary" *ngIf="projectData">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row">
+					<div class="col-xl-5">
+						<div class="row">
+							<div class="col-sm-3 col-5 csmb20">
+								<p class="sora-semibold raisain-black size18 mb-0">Client</p>
+							</div>
+							<div class="col-sm-9 col-7 csmb20">
+								<p class="sora-medium raisain-black size18 mb-0">
+									{{ projectData.owner }}
+								</p>
+							</div>
+							<div class="col-sm-3 col-5 csmb20">
+								<p class="sora-semibold raisain-black size18 mb-0">Location</p>
+							</div>
+							<div class="col-sm-9 col-7 csmb20">
+								<p class="sora-medium raisain-black size18 mb-0">
+									{{ projectData.location }}
+								</p>
+							</div>
+							<div class="col-sm-3 col-5 csmb20">
+								<p class="sora-semibold raisain-black size18 mb-0">Category</p>
+							</div>
+							<div class="col-sm-9 col-7 csmb20">
+								<p class="sora-medium raisain-black size18 mb-0">
+									{{ projectData.category_name }}
+								</p>
+							</div>
+							<div class="col-sm-3 col-5 csmb20">
+								<p class="sora-semibold raisain-black size18 mb-0">
+									Completion
+								</p>
+							</div>
+							<div class="col-sm-9 col-7 csmb20">
+								<p class="sora-medium raisain-black size18 mb-0">
+									{{ projectData.year }}
+								</p>
+							</div>
+							<div class="col-sm-3 col-5">
+								<p class="sora-semibold raisain-black size18 mb-0">Scope</p>
+							</div>
+							<div class="col-sm-9 col-7">
+								<p class="sora-medium raisain-black size18 mb-0">
+									{{ projectData.scope }}
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-6 mx-auto mt-xl-0 mt-4">
+						<div class="content">
+							<p
+								class="sora-regular raisain-black size18 text-start mb-0"
+								[innerHTML]="projectData.desc"
+							></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="bgcl-primary" *ngIf="projectData">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row">
+					<!-- <div
+						class="col-xxl-3 col-xl-4 col-lg-4 col-md-4 col-8 mb-md-0 mb-4 stickySection"
+					>
+						<img
+							class="img-fluid w-100 scroll-animate"
+							src="{{ imagePath }}project/{{ projectData.design_image_1 }}"
+							alt="{{ projectData.category_name }}"
+							title="{{ projectData.category_name }}"
+							width="450"
+							height="520"
+							loading="lazy"
+						/>
+					</div>
+					<div class="col-xxl-9 col-xl-8 col-lg-8 col-md-8">
+						<img
+							class="img-fluid w-100 ch660 scroll-animate"
+							src="{{ imagePath }}project/{{ projectData.design_image_2 }}"
+							alt="{{ projectData.category_name }}"
+							title="{{ projectData.category_name }}"
+							width="1080"
+							height="600"
+							loading="lazy"
+						/>
+					</div> -->
+					<div class="col-12 " data-aos="fade-up" data-aos-duration="1500">
+						<img
+						(load)="onImageLoad()"
+							class="img-fluid w-100  scroll-animate"
+							src="{{ imagePath }}project/{{ projectData.design_image_1 }}"
+							alt="{{ projectData.category_name }}"
+							title="{{ projectData.category_name }}"
+							width="780"
+							height="700"
+							loading="lazy"
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="sectionp120 bgcl-primary" *ngIf="projectData">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row">
+					<div class="col-md-5 d-md-block d-sm-none d-none" data-aos="fade-up" data-aos-duration="1500">
+						<p
+							class="size18 sora-regular raisain-black cwidth "
+							[innerHTML]="projectData.desc_1"
+						></p>
+					</div>
+					<div
+						class="col-md-6 mx-auto"
+						data-aos="fade-up"
+						data-aos-duration="1500"
+					>
+						<!-- <div class="content">
+              <p class="size18 sora-regular raisain-black">THE BRIEF </p>
+              <p class="size20 sora-regular gray">Our Approach To This Villa Began With A Deep Understanding Of The
+                Client's Desire For A
+                Space That Felt Modern Yet Soulful. By Incorporating Custom-Built Elements, Warm Natural Textures, And A
+                Flowing Spatial Layout, We Transformed The Villa Into A Peaceful Retreat That Balances Elegance With
+                Comfort. </p>
+
+
+              <p class="size18 sora-regular raisain-black">SCOPE OF WORK </p>
+              <p class="size20 sora-regular gray">Complete Design Concept, Mood Boards, Floor Plans, And Joinery
+                Drawings. Furniture And Fixture Sourcing. Renovation Completed By Son & Son In Collaboration With Our
+                Trusted Trades And Partners. </p>
+
+              <p class="size18 sora-regular raisain-black">KEY FEATURES</p>
+              <ul class="key" type="squar" style="list-style-type:square;">
+                <li class="size20 sora-regular gray">Floor-To-Ceiling Windows For Natural Light</li>
+                <li class="size20 sora-regular gray">Bespoke Walnut Wood Cabinetry</li>
+                <li class="size20 sora-regular gray">Curated Italian Marble Flooring</li>
+                <li class="size20 sora-regular gray">Smart Home Integration</li>
+                <li class="size20 sora-regular gray">Zen-Inspired Outdoor Patio</li>
+              </ul>
+            </div> -->
+
+						<!-- new -->
+						<!-- <div
+							class="content brief"
+							[innerHTML]="projectData.desc_2"
+							class="sora-regular size18 raisain-black"
+						></div> -->
+
+						<!-- new content -->
+						<div
+							class="content brief"
+							class="sora-regular size18 raisain-black"
+						>
+							<div class="csmb36" *ngIf="projectData.the_brief">
+								<h2 class="sora-semibold raisain-black size18 mb-md-4 mb-2">
+									The Brief
+								</h2>
+								<p
+									class="sora-regular raisain-black size18"
+									[innerHTML]="projectData.the_brief"
+								></p>
+							</div>
+							<div class="" *ngIf="projectData.scope_of_work">
+								<h2 class="sora-semibold raisain-black size18 mb-md-4 mb-2">
+									Scope of Work
+								</h2>
+								<p
+									class="sora-regular raisain-black size18 mb-0"
+									[innerHTML]="projectData.scope_of_work"
+								></p>
+							</div>
+							<!-- <div class="csmb36" *ngIf="projectData.key_features">
+								<h2 class="sora-semibold raisain-black size18 mb-md-4 mb-2">
+									Key Features
+								</h2>
+								<p
+									class="sora-regular raisain-black size20 opacity-72"
+									[innerHTML]="projectData.key_features"
+								></p>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="bgcl-primary fifth" *ngIf="projectData">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row">
+					<!-- <div class="col-xl-8 col-lg-8 col-md-8 mb-md-0 mb-4">
+						<img
+							class="img-fluid w-100 ch661 scroll-animate"
+							src="{{ imagePath }}project/{{ projectData.design_image_3 }}"
+							alt="{{ projectData.category_name }}"
+							title="{{ projectData.category_name }}"
+							width="1080"
+							height="700"
+							loading="lazy"
+						/>
+					</div>
+					<div
+						class="col-xl-4 col-lg-4 col-md-4 col-8 stickySection"
+						data-aos="fade-up"
+						data-aos-duration="1500"
+					>
+						<img
+							class="img-fluid w-100 cpl scroll-animate"
+							src="{{ imagePath }}project/{{ projectData.design_image_4 }}"
+							alt="{{ projectData.category_name }}"
+							title="{{ projectData.category_name }}"
+							width="450"
+							height="520"
+							loading="lazy"
+						/>
+					</div> -->
+					<div class="col-12" data-aos="fade-up" data-aos-duration="1500">
+						<img
+						(load)="onImageLoad()"
+							class="img-fluid w-100 scroll-animate"
+							src="{{ imagePath }}project/{{ projectData.design_image_2 }}"
+							alt="{{ projectData.category_name }}"
+							title="{{ projectData.category_name }}"
+							width="780"
+							height="700"
+							loading="lazy"
+						/>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="sectionp120 bgcl-primary sixth" *ngIf="projectData">
+	<div class="container-fluid h-100">
+		<div class="row h-100">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto h-100">
+				<div class="row h-100">
+					<div
+						class="col-xl-5 col-md-5 mb-md-0 mb-4"
+					>
+						<div class="content">
+							<p
+								class="size18 sora-regular raisain-black stickyp"
+								[innerHTML]="projectData.desc_3"
+							>
+								<!-- Natural Textures, Such As Wood, Stone, And Woven Materials,
+                Combined With Rich, Deep Blue Tones, Create A Harmonious Flow That Seamlessly Connects The Various
+                Spaces Throughout The Home. This Thoughtful Combination Not Only Enhances Visual Continuity But Also
+                Evokes A Sense Of Calm And Cohesion, Making Each Room Feel Like An Intentional Extension Of The Next. -->
+							</p>
+						</div>
+					</div>
+					<div
+						class="col-xl-6 offset-xl-1 col-md-7"
+						data-aos="fade-up"
+						data-aos-duration="1500"
+					>
+						<div class="img-block">
+							<img
+							(load)="onImageLoad()"
+								class="img-fluid w-100 csmb60 scroll-animate"
+								src="{{ imagePath }}project/{{ imgData }}"
+								alt="{{ projectData.category_name }}"
+								title="{{ projectData.category_name }}"
+								width="780"
+								height="700"
+								loading="lazy"
+								*ngFor="let imgData of projectData.project_design_images"
+							/>
+
+							<!-- <img class="img-fluid w-100 csmb60" src="{{baseUrl}}/assets/images/project-details/ph-detail-5.png" alt=""
+                width="450" height="" loading="lazy">
+              <img class="img-fluid w-100 csmb60" src="{{baseUrl}}/assets/images/project-details/ph-detail-2.png" alt=""
+                width="450" height="" loading="lazy">
+              <img class="img-fluid w-100 csmb60" src="{{baseUrl}}/assets/images/project-details/ph-detail-7.png" alt=""
+                width="450" height="" loading="lazy"> -->
+						</div>
+					</div>
+					<div class="col-12" data-aos="fade-up" data-aos-duration="1500" *ngIf="projectData.design_image_5">
+						<img
+						(load)="onImageLoad()"
+							class="img-fluid w-100 sectionpt120 scroll-animate"
+							src="{{ imagePath }}project/{{ projectData.design_image_5 }}"
+							alt="{{ projectData.category_name }}"
+							title="{{ projectData.category_name }}"
+							width="780"
+							height="700"
+							loading="lazy"
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section
+	class="sectionpb150 bgcl-primary seventh"
+	*ngIf="recentProjects?.length > 0"
+>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="nelphim-regular size62 raisin-black csmb60">
+							Featured Projects
+						</h2>
+					</div>
+					<!-- <div
+						class="col-lg-4 col-md-4 col-sm-6 mb-4"
+						*ngFor="let project of recentProjects; let i = index"
+					>
+						<a
+							class=""
+							href="/project/project-details/{{ project.url_key }}"
+							*ngIf="project.url_key != '#'"
+						>
+							<div
+								class="card image-zoom-effect"
+								data-aos="fade-up"
+								data-aos-duration="1000"
+							>
+								<div class="image-holder">
+									<img
+										class="img-fluid scroll-animate"
+										src="{{ imagePath }}project/{{ project.image_thumnail }}"
+										alt="{{ project.name }}"
+										title="{{ project.name }}"
+										width="466"
+										height="601"
+										loading="lazy"
+									/>
+								</div>
+								<h3
+									class="raisin-black sora-regular size16 mt-3 text-start w-100"
+								>
+									{{ project.name }}
+								</h3>
+							</div>
+						</a>
+					</div> -->
+
+					<!-- ✅ Desktop view: Only 3 projects  -->
+					<div class="col-12 d-sm-block d-none"  >
+						<div class="row g-lg-5 g-3">
+							<ng-container
+								*ngFor="let project of recentProjects; let i = index"
+							>
+								<div class="col-lg-4 col-md-4 col-sm-6">
+									<div class="card image-zoom-effect">
+										<a
+											href="/project/project-details/{{ project.url_key }}"
+											class="w-100 h-100"
+										>
+											<div class="image-holder">
+												<img
+												(load)="onImageLoad()"
+													class="img-fluid w-100 h-100 object-fit-cover scroll-animate"
+													src="{{ imagePath }}project/{{
+														project.image_thumnail
+													}}"
+													alt="{{ project.name }}"
+													title="{{ project.name }}"
+													loading="lazy"
+													width="510"
+													height="720"
+												/>
+											</div>
+											<h3 class="raisin-black sora-regular size18 mt-3 mb-0">
+												{{ project.name }}
+											</h3>
+										</a>
+									</div>
+								</div>
+							</ng-container>
+						</div>
+					</div>
+
+					
+						<div class="swiper mySwiper d-sm-none " #mySwiper ngSkipHydration>
+						<div class="swiper-wrapper">
+							<ng-container *ngFor="let project of recentProjects; let i = index">
+								<div class="swiper-slide image-zoom-effect">
+									<a href="/project/project-details/{{ project.url_key }}">
+										<div class="image-holder">
+											<img (load)="onImageLoad()" class="img-fluid w-100 h-100 object-fit-cover scroll-animate"
+												src="{{ imagePath }}project/{{ project.image_thumnail }}" alt="{{ project.name }}"
+												title="{{ project.name }}" loading="eager" width="0" height="0" />
+										</div>
+										<div class="card-body cspostion">
+											<h5 class="sora-regular size18 raisin-black mt-3 mb-0">
+												{{ project.name }}
+											</h5>
+										</div>
+									</a>
+								</div>
+							</ng-container>
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

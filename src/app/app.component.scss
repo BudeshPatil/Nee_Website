@@ -1,69 +1,105 @@
-.loader-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  // color: #fff;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity .5s ease, visibility .5s ease;
+// .main{
+//   margin-top: 130px;
+// @media(max-width:991px){
+//   // margin-top: 70px ;
+//   margin-top: 60px ;
+// }
+// }
+html,
+body {
+	height: 100%;
 }
 
-.loader-overlay.fade-out {
-  opacity: 0;
-  visibility: hidden;
+/* keep native scrollbar, we will match body height via JS */
+body {
+	overflow-y: auto;
 }
 
-
-:host ::ng-deep .loader-overlay.ng-leave,
-:host ::ng-deep .loader-overlay.ng-hide {
-  opacity: 0;
-  visibility: hidden;
+/* the moving container — fixed so we can translate it */
+.smooth-scroll-content {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	will-change: transform;
+	/* ensure 3d to trigger GPU */
+	transform: translate3d(0, 0, 0);
+}
+.main-content {
+	z-index: 99;
+	margin-bottom: 508px;
+	@media (max-width: 1600px) {
+		margin-bottom: 449px;
+	}
+	@media (max-width: 1322px) {
+		margin-bottom: 449px;
+	}
+	@media (max-width: 1199px) {
+		margin-bottom: 426px;
+	}
+	@media (max-width: 991px) {
+		margin-bottom: 715px;
+	}
+	@media (max-width: 575px) {
+		margin-bottom: 594px;
+	}
+	// @media (max-width: 364px) {
+	// 	margin-bottom: 656px;
+	// }
+	// @media (max-width: 340px) {
+	// 	margin-bottom: 678px;
+	// }
 }
 
-.intro-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #00000070;
-  z-index: 9998; // below loader, above app
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity .5s ease, visibility .5s ease;
-  opacity: 1;
-  visibility: visible;
+// app-footer {
+//   position: fixed;
+//   bottom: 0;
+//   right: 0;
+//   left: 0;
+//   height: 542px;
+//   z-index: -99;
+//   @media (max-width: 2048px) {
+//     height: 542px;
+//   }
+//   @media (max-width: 1920px) {
+//     height: 542px;
+//   }
+//   @media (max-width: 1536px) {
+//     height: 530px;
+//   }
 
-  video, img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    
-  }
+//   @media (max-width: 1024px) {
+//     height: 490px;
+//   }
+//   @media (max-width: 991px) {
+//     height: 800px;
+//   }
+//   @media (max-width: 480px) {
+//     height: 601px;
+//   }
+//   @media (max-width: 380px) {
+//     height: 601px;
+//   }
+// }
 
-  video {
-    z-index: 9997;
-  }
+app-footer {
+	position: relative; // default
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	// height: 542px;
+	height: auto;
+	opacity: 0;
 
-  img {
-    z-index: 9998;
-  }
+	&.fixed-footer {
+		position: fixed;
+		opacity: 1;
+	}
+
+	// your media queries for height
+	// @media (max-width: 1536px) { height: 530px; }
+	// @media (max-width: 1024px) { height: 490px; }
+	// @media (max-width: 991px) { height: auto; }
+	// @media (max-width: 480px) { height: auto; }
 }
-
-.intro-overlay.fade-out {
-  opacity: 0;
-  visibility: hidden;
-}
-

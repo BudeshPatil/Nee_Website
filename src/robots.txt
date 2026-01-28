@@ -1,8 +1,4 @@
 User-agent: *
 Allow: /
-Allow: /favicon.ico
-Allow: /assets/
-Allow: /assets/images/logo/
-Allow: /assets/images/favicon/
-Disallow: /admin_dashboard/
-Sitemap: https://www.ghostrentals.com/sitemap.xml
+
+Sitemap: https://www.neelgund.com/sitemap.xml

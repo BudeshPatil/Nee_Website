@@ -1,308 +1,140 @@
-<section class="services bannerPadding">
-	<div class="container-fluid position-relative p-0 h-100">
-		<div class="overlay"></div>
-
-		<img
-			src="{{ imageURL }}/services/car-rental-services-in-dubai-banner.webp"
-			alt="Corvette on road - Ghost Rental luxury transportation"
-			title="VIP Car Rental Services in Dubai"
-			class="w-100 h-100 bannerImage"
-			loading="eager" width="0" height="0"
-			decoding="async"
-			fetchpriority="high"
-		/>
-
-		<div class="content zindex2">
-			<h1 class="size88 performa-thin white-color heading-width">
-				Car Rental, Yacht Rental, and Chauffeur Services
-			</h1>
-			<p class="size20 redhat-regular beige-color">
-				Rent VIP number plate Cars, Yachts and Chauffeur services that are crafted for your Sophistication
-			</p>
-			<!-- <button class="size18 redhat-bold white-border-button">book now</button> -->
+<section class="service hero-bannerservice bgcl-primary">
+	<div class="content d-lg-flex d-none">
+		<div class="box-left">
+			<div class="content-block">
+				<p class="size16 raisin-black sora-regular mb-0 text-uppercase">
+					{{ servicesBannerData.name }}
+				</p>
+				<h1 class="nelphim-regular size90 raisin-black mb-0">
+					{{ servicesBannerData.short_desc }}
+				</h1>
+				<p class="size18 raisin-black sora-regular csmt30 mb-0">
+					{{ servicesBannerData.desc }}
+				</p>
+			</div>
 		</div>
+		<div class="box-right">
+		</div>
+	</div>
+	<div class="container-fluid d-lg-none d-md-block">
+		<div class="col-md-10 col-sm-11 col-11 mx-auto">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="d-flex justify-content-start align-items-end customheight">
+						<div class="content-block">
+							<p class="size16 raisin-black sora-regular mb-0 text-uppercase">
+								{{ servicesBannerData.name }}
+							</p>
+							<h2 class="nelphim-regular size90 raisin-black mb-0">
+								{{ servicesBannerData.short_desc }}
+							</h2>
+							<p class="size18 raisin-black sora-regular csmt30 mb-0">
+								{{ servicesBannerData.desc }}
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="image-attached relative d-lg-none d-md-block">
+		<img src="{{
+				baseUrl
+			}}/assets/images/services/commercial-design1.webp" alt="services banner" title="services banner" loading="eager"
+			width="0" height="0" />
 	</div>
 </section>
 
-<section class="sectionPadding">
+<section class="services sectionpt150 bgcl-primary servicelist"
+	*ngFor="let service of servicesData; let i = index">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-12">
-				<h2
-					class="size42 performa-thin para-width gray-color"
-					data-aos="fade-up"
-					data-aos-duration="1000"
-				>
-					Live your Dubai dream in style with Ghost Rentals—cruise in a luxury
-					car or set sail on a private yacht. Our team handles every detail, so
-					you can relax and enjoy the city with our chauffeur services in Dubai.
-				</h2>
-			</div>
-		</div>
-	</div>
-</section>
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto"  id="{{ service.url_key }}">
+				<div class="row">
+					<div class="col-lg-7 col-md-6 csmb80" data-aos="fade-up" data-aos-duration="1500">
+						<div class="content">
+							<h2 class="nelphim-regular size62 raisin-black csmb30 service-title">
+								<span class="d-block">{{ service.name.split(' ')[0] }} Interior</span>
+								<span class="d-block">Design Services</span>
+							</h2>
+							<a [routerLink]="['/portfolio', service.url_key]" class="btn-primary d-md-block d-none">Explore</a>
+						</div>
+					</div>
+					<div class="col-lg-5 col-md-6" data-aos="fade-up" data-aos-duration="1500">
+						<div class="para">
+							<p class="sora-regular size18 raisin-black">
+								{{ service.short_desc }}
+							</p>
+						</div>
+						<a [routerLink]="['/portfolio', service.name]" class="btn-primary d-md-none d-block mb-4">Explore</a>
+					</div>
+					<div class="col-md-12 ">
+						<div class="mainimg " data-aos="fade-up" data-aos-duration="1000">
+							<!-- "csmb40" this class is removed due to project card removed or projects 3 items removed -->
+							<img class="img-fluid w-100  scroll-animate"
+								src="{{ imagePath }}category/{{ service.galleyimagedata[0].src }}" alt="{{ service.name }}"
+								title="{{ service.name }}" loading="lazy" width="0" height="0" />
+							<!-- <p class="sora-regular raisin-black size16 csmb40 mt-0 text-capitalize"
+								*ngIf="(projects | filterByCategory: service._id).length > 0">
+								{{ service.name.split(' ')[0] }} Interior Design projects
+							</p> -->
+						</div>
+					</div>
 
-<section class="service black-bg d-flex align-items-center" id="car-service">
-	<div class="container-fluid servicePadding">
-		<div class="row">
-			<div
-				class="col-xl-6 col-lg-6 col-md-12 col-12 mb-xl-0 order-lg-1 order-md-2 order-sm-2 order-2"
-			>
-				<div
-					class="service1-width d-flex justify-content-center h-100 flex-column align-items-start"
-				>
-					<h3
-						class="size18 redhat-semibold text-capitalize mb-2 white-color"
-						data-aos="fade-up"
-						data-aos-duration="1000"
-					>
-						Rent Your Dream Car
-					</h3>
-					<h4
-						class="size46 margin24 performa-light text-capitalize white-color"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>
-						Luxury Car Rental Services in Dubai
-					</h4>
-					<h5
-						class="size22 performa-light margin24 white-color line-height30"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>
-						Travel in style-drive our extraordinary collection of Luxury and
-						Exotic vehicles today!
-					</h5>
-					<p
-						class="size18 redhat-regular margin24 white-color line-height30 para-width"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>
-						Command Rolls-Royce Luxury, unleash Lamborghini power, or cruise in
-						Range Rover elegance. Our handpicked fleet transforms moments into
-						memories. Day rentals to long-term solutions—every pristine vehicle
-						arrives at your door because your time & impression matter.
-					</p>
-					<p class="size18 redhat-semibold margin24 white-color para-width"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>Our car rental services include:</p>
-					<ul
-						class="size18 redhat-semibold list-unstyled margin48 white-color line-height30"
-						data-aos="fade-up"
-						data-aos-duration="2000"
-					>
-						<li>- Convenient: Self-Drive and Chauffeur Service</li>
-						<li>- Fast Car Rentals: Short and Long-Term Options</li>
-						<li>- Flexibility: Hourly, Daily, Weekly and Monthly</li>
-						<li>- 24/7 Support and Instant Online Booking</li>
-					</ul>
-					<button
-						routerLink="/product/search"
-						class="size18 redhat-bold white-button "
-						data-aos="fade-up"
-						data-aos-duration="2000"
-						data-text="Rent a Car"
-						(click)="goToVehiclePage('Car')"
-					>
-						<span>Rent a Car</span>
-					</button>
+					<!-- ✅ Desktop view: Only 3 projects per category -->
+					<!-- <div class="col-12 mb-4 d-sm-block d-none" *ngIf="(projects | filterByCategory: service._id).length > 0">
+						<div class="row g-lg-5 g-3">
+							<ng-container *ngFor="
+                  let project of (projects | filterByCategory: service._id | slice: 0:3);
+                  let j = index
+                ">
+								<div class="col-lg-4 col-md-4 col-sm-6">
+									<div class="card image-zoom-effect">
+										<a href="/project/project-details/{{ project.url_key }}">
+											<div class="image-holder">
+												<img class="img-fluid w-100 h-100 object-fit-cover scroll-animate"
+													src="{{ imagePath }}project/{{ project.image_thumnail }}" alt="{{ project.name }}"
+													title="{{ project.name }}" loading="lazy" width="0" height="0" />
+											</div>
+											<h3 class="raisin-black sora-regular size18 mt-3 mb-0">
+												{{ project.name }}
+											</h3>
+										</a>
+									</div>
+								</div>
+							</ng-container>
+						</div>
+					</div> -->
+					<!-- ✅ Mobile view (Swiper): Only 3 projects per category -->
+					<!-- <div class="swiper mySwiper d-sm-none d-inline" #mySwiper ngSkipHydration
+						*ngIf="(projects | filterByCategory: service._id).length > 0">
+						<div class="swiper-wrapper">
+							<ng-container *ngFor="
+                  let project of (projects | filterByCategory: service._id | slice: 0:3);
+                  let j = index
+                ">
+								<div class="swiper-slide image-zoom-effect">
+									<a href="/project/project-details/{{ project.url_key }}">
+										<div class="image-holder">
+											<img class="img-fluid w-100 h-100 object-fit-cover scroll-animate"
+												src="{{ imagePath }}project/{{ project.image_thumnail }}" alt="{{ project.name }}"
+												title="{{ project.name }}" loading="eager" width="0" height="0" />
+										</div>
+										<div class="card-body cspostion">
+											<h5 class="sora-regular size18 raisin-black mt-3 mb-0">
+												{{ project.name }}
+											</h5>
+										</div>
+									</a>
+								</div>
+							</ng-container>
+						</div>
+						<div class="swiper-pagination"></div>
+					</div> -->
 				</div>
 			</div>
-			<div
-				class="col-xl-6 col-lg-6 col-md-12 col-12 d-flex align-items-xl-center align-items-start order-lg-2 order-md-1 order-sm-1 order-1 mb-lg-0 mb-4"
-				data-aos="fade-up"
-				data-aos-duration="1500"
-			>
-				<img
-					src="{{ imageURL }}/services/luxury-car-rental-services-in-dubai.webp"
-					alt="Luxury car rental services in Dubai by Ghost Rentals"
-					title="Premium Car Rental Services in Dubai"
-					class="service_image"
-					loading="lazy" width="0" height="0"
-					decoding="async"
-				/>
-			</div>
 		</div>
 	</div>
 </section>
-
-<section class="service d-flex align-items-center" id="yacht-service">
-	<div class="container-fluid servicePadding">
-		<div class="row justify-content-around">
-			<div
-				class="col-xl-6 col-lg-6 col-md-12 col-12 order-md-2 order-2 ps-lg-5"
-			>
-				<div
-					class="service2-width d-flex justify-content-center h-100 flex-column align-items-start"
-				>
-					<h3
-						class="size18 redhat-semibold text-capitalize mb-2 gray-color"
-						data-aos="fade-up"
-						data-aos-duration="1000"
-					>
-						Cruise Dubai in Luxury!
-					</h3>
-					<h4
-						class="size46 margin24 performa-light text-capitalize gray-color"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>
-						Yacht Rental Services in Dubai
-					</h4>
-					<h5
-						class="size22 performa-light margin24 gray-color"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>
-						Luxury yacht rental services with Ghost Rentals. Fine dining, views, and crew. Book your escape today!
-					</h5>
-					<p
-						class="size18 redhat-regular margin24 gray-color line-height30 para-width"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>
-						Aboard our Luxury Yacht Rental in Dubai and experience floating
-						palaces with expert crew, gourmet catering, and iconic routes past
-						Marine's skyline and Atlantis. Every wave carries you to
-						unforgettable celebrations.
-					</p>
-					<p
-						class="size18 redhat-semibold margin24 gray-color line-height30 para-width"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>
-						Our yacht rental services feature:
-					</p>
-					<ul
-						class="size18 redhat-semibold list-unstyled margin48 gray-color line-height30"
-						data-aos="fade-up"
-						data-aos-duration="2000"
-					>
-						<li>- Bespoke Luxury Charters for your exclusive sanctuary</li>
-						<li>- Custom Yacht Charters with VIP hospitality</li>
-						<li>- Easy booking with transparent pricing</li>
-						<li>- Yacht parties & intimate Dubai tours</li>
-					</ul>
-					<button
-						routerLink="/product/search"
-						class="size18 redhat-bold black-button"
-						data-aos="fade-up"
-						data-aos-duration="2000"
-						data-text="Rent a Yacht"
-						(click)="goToVehiclePage('Yachts')"
-					>
-						<span>Rent a Yacht</span>
-					</button>
-				</div>
-			</div>
-			<div
-				class="col-xl-6 col-lg-6 col-md-12 col-12 d-flex align-items-xl-center align-items-start mb-4 mb-lg-0 order-lg-1 order-1"
-				data-aos="fade-up"
-				data-aos-duration="1500"
-			>
-				<img
-					src="{{ imageURL }}/services/yacht-rental-services-in-dubai.webp"
-					alt="Luxury Yacht Rentals in Dubai by Ghost Rentals"
-					title="Exclusive Yacht Rental Dubai"
-					class="service_image h-100" width="0" height="0"
-					loading="lazy"
-					decoding="async"
-				/>
-			</div>
-		</div>
-	</div>
-</section>
-
-<section
-	class="service d-flex align-items-center black-bg"
-	id="chauffeur-service"
->
-	<div class="container-fluid servicePadding">
-		<div class="row">
-			<div
-				class="col-xl-6 col-lg-6 col-md-12 col-12 order-lg-1 order-md-2 order-sm-2 order-2"
-			>
-				<div
-					class="service3-width d-flex justify-content-center h-100 flex-column align-items-start"
-				>
-					<h3
-						class="size18 redhat-semibold text-capitalize mb-2 white-color"
-						data-aos="fade-up"
-						data-aos-duration="1000"
-					>
-						Rent a Car with Driver
-					</h3>
-					<h4
-						class="size46 margin24 performa-light text-capitalize white-color"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>
-					Chauffeur Services in Dubai
-					</h4>
-					<h5
-						class="size22 performa-light margin24 white-color"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>
-						Ride in style and elegance with our luxury chauffeur services,
-						perfect for every occasion in Dubai.
-					</h5>
-					<p
-						class="size18 redhat-regular margin24 white-color para-width line-height30"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>
-						Glide through Dubai in absolute sophistication with our Chauffeur
-						Services. We merge professional excellence with Luxury, ensuring
-						every journey is stylish and punctual. Perfect for VIPs, Weddings,
-						and Airports.
-					</p>
-					<p class="size18 redhat-semibold margin24 white-color line-height30 para-width"
-						data-aos="fade-up"
-						data-aos-duration="1500"
-					>Our chauffeur services include:</p>
-					<ul
-						class="size18 redhat-semibold list-unstyled margin48 white-color line-height30"
-						data-aos="fade-up"
-						data-aos-duration="2000"
-					>
-						<li>
-							- Cars at our Chauffeur Services: Rolls-Royce, S-Class, BMW 7
-							Series
-						</li>
-						<li>- Real-time GPS Tracking & 24/7 Dispatch Support</li>
-						<li>- Hourly & Event-Based Packages</li>
-						<li>- Multilingual Drivers Available</li>
-						<li>- Trained, Uniformed Drivers</li>
-					</ul>
-					<button
-						(click)="sendWhatsAppMsgs()"
-						class="size18 redhat-bold white-button"
-						data-aos="fade-up"
-						data-aos-duration="2000"
-						data-text="Hire a Chauffeur"
-					>
-						<span>Hire a Chauffeur</span>
-					</button>
-				</div>
-			</div>
-			<div
-				class="col-xl-6 col-lg-6 col-md-12 col-12 d-flex align-items-xl-center align-items-start order-lg-2 order-md-1 order-sm-1 order-1 mb-lg-0 mb-4"
-				data-aos="fade-up"
-				data-aos-duration="1500"
-			>
-				<img
-					src="{{ imageURL }}/services/chauffeur-services-in-dubai-ghost-rentals.webp"
-					alt="Premium chauffeur services across Dubai"
-					title="Chauffeur-Driven Cars in Dubai"
-					class="service_image h-100" width="0" height="0"
-					loading="lazy"
-					decoding="async"
-				/>
-			</div>
-		</div>
-	</div>
-</section>
-<app-vip-number-plate></app-vip-number-plate>
-<app-testimonials></app-testimonials>
+<div class="sectionpb150 bgcl-primary"></div>

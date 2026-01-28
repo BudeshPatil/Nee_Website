@@ -1,0 +1,53 @@
+.journal {
+	padding-top: 220px;
+	@media (max-width: 1536px) {
+		padding-top: 180px;
+	}
+	@media (max-width: 1366px) {
+		padding-top: 150px;
+	}
+}
+
+.content{
+  img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    // @media (max-width: 1536px) {
+    //   height: 580px;
+    // }
+    // @media (max-width: 1440px) {
+    //   height: 480px;
+    // }
+    // @media (max-width: 1366px) {
+    //   height: 450px;
+    // }
+    // @media (max-width: 430px) {
+    //   height: 100%;
+    // }
+  }
+  .para-width{
+    width: 50%;
+    @media (max-width: 1536px) {
+      width: 57%;
+    }
+    @media (max-width: 1440px) {
+      width: 61%;
+    }
+    @media (max-width: 1366px) {
+      width: 65%;
+    }
+    @media (max-width: 1280px) {
+      width: 69%;
+    }
+    @media (max-width: 1199px) {
+      width: 60%;
+    }
+    @media (max-width:575px) {
+      width: 100%;
+    }
+  }
+  @media(max-width:575px){
+    margin-bottom: 30px;
+  }
+}

@@ -7,11 +7,21 @@ export const environment = {
 	isBrowser: true, // Add a flag
 	recaptcha_key: '6LdVAeAqAAAAANRiCTIwsrPp7DwcP3jSOpzVk0wi',
 
-	// local
-	// baseUrl: 'http://localhost:5014',
-	// url: 'http://localhost:4214',
-	baseUrl: 'https://www.ghostrentals.com:5014',
-  url: 'https://www.ghostrentals.com',
+	// live
+	// baseUrl: 'https://www.neelgund.com:5015',
+	// url: 'https://www.neelgund.com',
+
+	frontendUrl: 'https://neelgund.pixtar.ae',
+
+	// Staging
+	// baseUrl: 'https://neelgund.pixtar.ae:5015',
+	// url: 'https://neelgund.pixtar.ae',
+
+	// Local
+	baseUrl: 'http://localhost:5015',
+	url: 'http://localhost:4215',
+
+
 
 };
 

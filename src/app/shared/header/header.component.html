@@ -1,253 +1,117 @@
-<nav
-	class="position-fixed top-0 start-0 w-100 z-5"
-	[ngClass]="{ 'large-padding': hasLargePadding }"
->
-	<div
-		class="container-fluid d-flex justify-content-between align-items-center"
-	>
-		<a href="/" class="d-flex align-items-center">
-			<img
-				src="{{ imageURL }}/images/logo/ghostrentals-logo.png"
-				class="nav-logo"
-				title="Luxury Car and Yacht Rental Company Logo"
-				alt="Ghost Rentals Dubai - Premium Car Rental and Yacht Charter Services"
-				loading="eager" fetchpriority="high" width="0" height="0"
-			/>
-		</a>
+<header class="container-fluid navbar-wrapper">
+  <div class="col-lg-10 offset-lg-1">
+    <nav class="navbar navbar-dark navbar-expand-lg py-0">
 
-		<!-- Mobile menu button -->
-		<button
-			class="hamburger d-xl-none position-relative"
-			type="button"
-			(click)="toggleMenu($event)"
-			aria-label="Toggle navigation"
-			[class.active]="isMenuOpen"
-			[class.dark]="isScrolled && !isMenuOpen"
-			[class.white-hamburger]="!isDarkText || isScrolled || isMenuOpen"
-		>
-			<span class="hamburger-box">
-				<span class="hamburger-inner"></span>
-			</span>
-		</button>
+      <!-- Logo -->
+      <a routerLink="/" class="navbar-brand text-secondary">
+        <img
+          src="assets/logo/neelgund.png"
+          width="160"
+          height="50"
+          title="Neelgund Developers"
+          class="nav-logo"
+          alt="Neelgund Logo"
+        />
+      </a>
 
-		<!-- Desktop Navigation -->
-		<ul class="nav d-none d-xl-flex align-items-center">
-			<li>
-				<a
-					href="/"
-					[class.active]="router.isActive('/', true)"
-					class="size16 redhat-regular white text-decoration-none"
-					[class.dark]="isScrolled"
-					>Home</a
-				>
-			</li>
-			<li>
-				<a
-					href="/about"
-					[class.active]="router.isActive('/about', true)"
-					class="size16 redhat-regular white text-decoration-none"
-					[class.dark]="isScrolled"
-					>About Us</a
-				>
-			</li>
-			<li>
-				<a
-					href="/services"
-					[class.active]="router.isActive('/services', true)"
-					class="size16 redhat-regular white text-decoration-none"
-					[class.dark]="isScrolled"
-					>Our Services</a
-				>
-			</li>
-			<li>
-				<a
-					href="/product/search"
-					[class.active]="
-						router.isActive('/product/search', {
-							paths: 'subset',
-							queryParams: 'subset',
-							fragment: 'ignored',
-							matrixParams: 'ignored'
-						})
-					"
-					class="size16 redhat-regular white text-decoration-none"
-					[class.dark]="isScrolled"
-					>Our Fleet</a
-				>
-			</li>
-			<li>
-				<a
-					href="/contact"
-					[class.active]="router.isActive('/contact', true)"
-					class="d-block size18 redhat-bold contact-button white-button text-capitalize"
-					[class.dark]="isDarkText && !isScrolled"
-					(click)="closeMenu()"
-					data-text="Contact Us"
-				>
-					<span>Contact Us</span>
-				</a>
-			</li>
-		</ul>
+      <!-- Mobile Toggle -->
+      <button
+        type="button"
+        class="navbar-toggler me-0 bg-primary"
+        (click)="toggleNavbar()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-		<!-- Mobile Navigation -->
-		<div class="mobile-menu" [class.active]="isMenuOpen" (click)="closeMenu()">
-			<div class="menu-overlay" (click)="$event.stopPropagation()">
-				<nav class="menu-container w-100 h-100">
-					<div
-						class="menu-header d-flex justify-content-between align-items-center"
-					>
-						<a href="/" class="logo-link">
-							<img
-								src="{{ imageURL }}/images/logo/ghostrentals-logo.png"
-								title="Luxury Car and Yacht Rental Company Logo"
-								alt="Ghost Rentals Dubai - Premium Car Rental and Yacht Charter Services"
-								class="menu-logo"
-								style="filter: brightness(0)"
-								loading="eager" fetchpriority="high" width="0" height="0"
-							/>
-						</a>
-						<!-- Mobile menu button -->
-						<button
-							class="close d-xl-none position-relative"
-							type="button"
-							(click)="toggleMenu($event)"
-							aria-label="Toggle navigation"
-							[class.active]="isMenuOpen"
-							[class.dark]="isScrolled && !isMenuOpen"
-							[class.white-hamburger]="!isDarkText || isScrolled || isMenuOpen"
-						>
-							<span class="close-box">
-								<span class="close-inner"></span>
-							</span>
-						</button>
-					</div>
+      <!-- Menu -->
+      <div
+        class="collapse navbar-collapse"
+        [class.show]="isMenuOpen"
+        id="navbarCollapse"
+      >
+        <div class="navbar-nav ms-auto mx-xl-auto p-0">
 
-					<ul class="nav-menu">
-						<li class="nav-item" (click)="closeMenu()">
-							<a
-								href="/"
-								[class.active]="router.isActive('/', true)"
-								class="size16 redhat-medium text-decoration-none gray-color"
-							>
-								Home
-							</a>
-						</li>
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-item nav-link text-secondary"
+            (click)="closeNavbar()"
+          >
+            Home
+          </a>
 
-						<li class="nav-item" (click)="closeMenu()">
-							<a
-								href="/about"
-								[class.active]="router.isActive('/about', true)"
-								class="size16 redhat-medium text-decoration-none gray-color"
-							>
-								About Us
-							</a>
-						</li>
+          <a
+            routerLink="/about"
+            routerLinkActive="active"
+            class="nav-item nav-link"
+            (click)="closeNavbar()"
+          >
+            About
+          </a>
 
-						<li class="nav-item" (click)="closeMenu()">
-							<a
-								href="/services"
-								[class.active]="router.isActive('/services', true)"
-								class="size16 redhat-medium text-decoration-none gray-color"
-							>
-								Our Services
-							</a>
-						</li>
+          <a
+            routerLink="/services"
+            routerLinkActive="active"
+            class="nav-item nav-link"
+            (click)="closeNavbar()"
+          >
+            Services
+          </a>
 
-						<li class="nav-item" (click)="closeMenu()">
-							<a
-								href="/product/search"
-								[class.active]="
-									router.isActive('/product/search', {
-										paths: 'subset',
-										queryParams: 'subset',
-										fragment: 'ignored',
-										matrixParams: 'ignored'
-									})
-								"
-								class="size16 redhat-medium text-decoration-none gray-color"
-							>
-								Our Fleet
-							</a>
-						</li>
+          <a
+            routerLink="/projects"
+            routerLinkActive="active"
+            class="nav-item nav-link"
+            (click)="closeNavbar()"
+          >
+            Projects
+          </a>
 
-						<!-- <li class="nav-item" (click)="closeMenu()">
-							<a
-								href="/contact"
-								[class.active]="router.isActive('/contact', true)"
-								class="size16 redhat-medium text-decoration-none gray-color"
-							>
-								Contact Us
-							</a>
-						</li> -->
+          <a
+            routerLink="/contact"
+            routerLinkActive="active"
+            class="nav-item nav-link"
+            (click)="closeNavbar()"
+          >
+            Contact
+          </a>
 
-						<li class="nav-item" (click)="closeMenu()">
-							<a
-								href="/contact"
-								class="nav-button d-block black-button w-100 size18 redhat-bold text-center text-capitalize"
-								(click)="closeMenu()"
-								data-text="Contact Us"
-							>
-								<span>Contact Us</span>
-							</a>
-						</li>
-					</ul>
-					<div class="menu-footer">
-						<div class="social-links">
-							<!-- <a href="#" class="social-link"
-                ><lucide-icon name="facebook"></lucide-icon
-              ></a>
-              <a href="#" class="social-link"
-                ><lucide-icon name="instagram"></lucide-icon
-              ></a>
-              <a href="#" class="social-link"
-                ><lucide-icon name="twitter"></lucide-icon
-              ></a> -->
-							<!-- <ul class=" nav d-flex flex-column justify-content-center">
-                <li class="nav-item ">
-                  <a href="https://www.instagram.com/ghost.rentals/?hl=en"
-                    class="text-decoration-none white-color size16 redhat-regular text-capitalize d-flex align-items-center">
-                    <div class="social-icon-div me-2">
-                      <img src="{{ imageURL }}/social/instagram.svg" alt="Instagram" class="footer-social-icon ">
-                    </div>
-                    <h4 class="size16 redhat-regular text-capitalize mb-0">Instagram</h4>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a href="https://www.facebook.com/Ghostrentalsdubai"
-                    class="text-decoration-none white-color d-flex align-items-center size16 redhat-regular text-capitalize">
-                    <div class="social-icon-div me-2">
-                      <img src="{{ imageURL }}/social/facebook.svg" alt="Facebook" class="footer-social-icon ">
-                    </div>
-                    <h4 class="size16 redhat-regular text-capitalize mb-0">Facebook</h4>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a href="https://www.tiktok.com/@ghostrentals"
-                    class="text-decoration-none white-color d-flex align-items-center size16 redhat-regular text-capitalize">
-                    <div class="social-icon-div me-2">
-                        <img src="{{ imageURL }}/social/tik_tok.svg" alt="Youtube" class="footer-social-icon ">
-                    </div>
-                    <h4 class="size16 redhat-regular text-capitalize mb-0">TikTok</h4>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a href="https://www.youtube.com/@GhostRentalsDXB?app=desktop"
-                    class="text-decoration-none white-color d-flex align-items-center size16 redhat-regular text-capitalize">
-                    <div class="social-icon-div me-2">
-                        <img src="{{ imageURL }}/social/youtube.svg" alt="Youtube" class="footer-social-icon ">
-                    </div>
-                    <h4 class="size16 redhat-regular text-capitalize mb-0">Youtube</h4>
-                  </a>
-                </li>
-                 
-              </ul> -->
-						</div>
-						<p class="copyright text-center redhat-medium size16">
-							2025, All Rights Reserved Ghost Rentals
-						</p>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
-</nav>
+        </div>
+      </div>
+
+      <!-- Right Side (Desktop Only) -->
+      <div class="d-none d-xl-flex flex-shirink-0">
+
+        <!-- Phone Animation -->
+        <div class="d-flex align-items-center justify-content-center me-4">
+          <a
+            href="tel:+918050238777"
+            class="position-relative animated tada infinite"
+          >
+            <i class="fa fa-phone-alt text-secondary fa-2x"></i>
+            <div class="position-absolute" style="top:-7px; left:20px;">
+              <span>
+                <i class="fa fa-comment-dots text-secondary"></i>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Call Info -->
+        <div class="d-flex flex-column pe-4 border-end">
+          <span class="text-secondary-50">Have any questions?</span>
+          <span class="text-secondary">Call: +91 80502 38777</span>
+        </div>
+
+        <!-- Search -->
+        <div class="d-flex align-items-center justify-content-center ms-4">
+          <a routerLink="/search">
+            <i class="bi bi-search text-secondary fa-2x"></i>
+          </a>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+</header>

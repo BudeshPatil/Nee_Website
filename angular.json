@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"ghost-rental": {
+		"ph-design-me": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
@@ -24,14 +24,13 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:application",
 					"options": {
-						"outputPath": "dist/ghost-rental",
+						"outputPath": "dist/ph-design-me",
 						"index": "src/index.html",
 						"browser": "src/main.ts",
 						"polyfills": ["zone.js"],
 						"tsConfig": "tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"src/assets/images/favicon/favicon.ico",
 							"src/favicon.ico",
 							"src/assets",
 							"src/.htaccess",
@@ -39,16 +38,18 @@
 							"src/robots.txt"
 						],
 						"styles": [
-							"src/styles.scss",
 							"node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"node_modules/intl-tel-input/build/css/intlTelInput.css",
-							"node_modules/aos/dist/aos.css"
+							"src/styles.scss",
+							"node_modules/aos/dist/aos.css",
+							"node_modules/swiper/swiper-bundle.min.css",
+							"node_modules/intl-tel-input/build/css/intlTelInput.css"
 						],
 						"scripts": [
-							"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+							"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+							"node_modules/swiper/swiper-bundle.min.js"
 						],
 						"server": "src/main.server.ts",
-						"prerender": false,
+						"prerender": true,
 						"ssr": {
 							"entry": "server.ts"
 						}
@@ -61,7 +62,6 @@
 									"with": "src/environments/environment.prod.ts"
 								}
 							],
-							"sourceMap": true,
 							"budgets": [
 								{
 									"type": "initial",
@@ -88,19 +88,21 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "ghost-rental:build:production"
+							"buildTarget": "ph-design-me:build:production"
 						},
 						"development": {
-							"buildTarget": "ghost-rental:build:development",
-							"port": 4214
+							"buildTarget": "ph-design-me:build:development"
 						}
 					},
-					"defaultConfiguration": "development"
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4215
+					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"buildTarget": "ghost-rental:build"
+						"buildTarget": "ph-design-me:build"
 					}
 				},
 				"test": {
@@ -110,7 +112,6 @@
 						"tsConfig": "tsconfig.spec.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"src/assets/images/favicon/favicon.ico",
 							"src/favicon.ico",
 							"src/assets",
 							"src/.htaccess",
@@ -120,20 +121,19 @@
 						"styles": [
 							"src/styles.scss",
 							"node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"https://cdn.jsdelivr.net/npm/lucide/dist/css/lucide.css",
+							"node_modules/aos/dist/aos.css",
 							"node_modules/swiper/swiper-bundle.min.css"
 						],
 						"scripts": [
 							"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-							"node_modules/swiper/swiper-bundle.min.js",
-							"https://cdn.jsdelivr.net/npm/lucide/dist/js/lucide.min.js"
+							"node_modules/swiper/swiper-bundle.min.js"
 						]
 					}
 				},
 				"server": {
 					"builder": "@angular-devkit/build-angular:server",
 					"options": {
-						"outputPath": "dist/ghost-rental/server",
+						"outputPath": "dist/ph-design-me/server",
 						"main": "src/main.server.ts",
 						"tsConfig": "tsconfig.server.json"
 					}
@@ -141,20 +141,20 @@
 				"build-ssr": {
 					"builder": "@angular-devkit/build-angular:ssr-dev-server",
 					"options": {
-						"browserTarget": "ghost-rental:build:production",
-						"serverTarget": "ghost-rental:server:production"
+						"browserTarget": "ph-design-me:build:production",
+						"serverTarget": "ph-design-me:server:production"
 					}
 				},
 				"serve-ssr": {
 					"builder": "@angular-devkit/build-angular:ssr-dev-server",
 					"options": {
-						"browserTarget": "ghost-rental:build",
-						"serverTarget": "ghost-rental:server"
+						"browserTarget": "ph-design-me:build",
+						"serverTarget": "ph-design-me:server"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "ghost-rental:build:production",
-							"serverTarget": "ghost-rental:server:production"
+							"browserTarget": "ph-design-me:build:production",
+							"serverTarget": "ph-design-me:server:production"
 						}
 					}
 				}

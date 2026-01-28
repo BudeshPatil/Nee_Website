@@ -1,339 +1,287 @@
-<section class="footer" style="background-color: #1d1d1d">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-4">
-        <div
-          class="d-flex align-items-center justify-content-lg-start justify-content-center mb-lg-0 mb-4"
-        >
-          <a href="/" class="text-decoration-none">
-            <img
-              src="{{ imageURL }}/images/logo/footer_logo.svg"
-              alt="Ghost Rentals- Premium Vehicle Rentals Dubai"
-              title="Ghost Rentals- Rent luxury car in Dubai"
-              class="footer-logo"
-              loading="lazy" width="0" height="0"
-            />
-          </a>
-        </div>
-      </div>
+<footer class="cspt60  bgcl-black">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-10 col-sm-11 col-9 mx-auto cspb30">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="contact sectionp">
+							<a href="mailto:hello@neelgund.com" class="sora-light size18 cloud-white csmb30">
+								hello&#64;neelgund&#46;com
+							</a>
+							<a
+								href="tel:+97143831555"
+								class="sora-light size18 cloud-white csmb30"
+							>
+								+971 4 383 1555
+							</a>
+							<h3 class="sora-light size18 cloud-white d-none d-sm-block">
+								Office #1615, 16Th Floor, 48 Burj Gate,
+								<span class="d-xl-block d-lg-inline d-md-block d-block"
+									>Down Town, Sheikh Zayed Road, Dubai, UAE.</span
+								>
+							</h3>
+							<h3 class="sora-light size18 cloud-white d-sm-none mb-0">
+								Office #1615, 16Th Floor, 48 Burj Gate,
+								Down Town, Sheikh Zayed Road, Dubai, UAE.
+							</h3>
+						</div>
+					</div>
+					<div class="col-lg-4 footer-border">
+						<div
+							class="footer-content d-flex justify-content-center align-items-center flex-column sectionp h-100"
+						>
+							<div class="footer-logo">
+								<a href="/">
+									<img
+										[src]="baseUrl + '/assets/images/home/ph-logo.svg'"
+										alt="Neelgund Logo"
+										class="img-fluid logo" loading="lazy" width="0" height="0" title="Neelgund Logo"
+									/>
+								</a>
+							</div>
+							<!-- <div class="socials d-flex align-items-center">
+								<a href="">
+									<img
+										src="{{ baseUrl }}/assets/images/socials/instagram.svg"
+										alt=""
+									/>
+								</a>
+								<a href="">
+									<img
+										src="{{ baseUrl }}/assets/images/socials/facebook.svg"
+										alt=""
+									/>
+								</a>
+								<a href="">
+									<img
+										src="{{ baseUrl }}/assets/images/socials/youtube.svg"
+										alt=""
+									/>
+								</a>
+								<a href="">
+									<img
+										src="{{ baseUrl }}/assets/images/socials/linkedin.svg"
+										alt=""
+									/>
+								</a>
+							</div> -->
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="d-flex footer-links pad-links">
+							<ul class="mb-0">
+								<li class="csmb30">
+									<a
+										[routerLink]="['/']"
+										routerLinkActive="sora-bold"
+										[routerLinkActiveOptions]="{ exact: true }"
+										class="sora-light size18 cloud-white text-capitalize"
+									>
+										Home
+									</a>
+								</li>
+								<li class="csmb30">
+									<a
+										[routerLink]="['/about']"
+										routerLinkActive="sora-bold"
+										class="sora-light size18 cloud-white text-capitalize"
+									>
+										about us
+									</a>
+								</li>
+								<li class="csmb30">
+									<a
+										[routerLink]="['/services']"
+										routerLinkActive="sora-bold"
+										class="sora-light size18 cloud-white text-capitalize"
+									>
+										services
+									</a>
+								</li>
+								<li class="csmb30">
+									<a
+										[routerLink]="['/portfolio']"
+										routerLinkActive="sora-bold"
+										class="sora-light size18 cloud-white text-capitalize"
+									>
+										portfolio
+									</a>
+								</li>
+								<!-- <li class="csmb30">
+									<a
+										[routerLink]="['/journal']"
+										routerLinkActive="sora-bold"
+										class="sora-light size18 cloud-white text-capitalize"
+									>
+										journal
+									</a>
+								</li> -->
+								<li class="csmb30">
+									<a
+										[routerLink]="['/contact']"
+										routerLinkActive="sora-bold"
+										[routerLinkActiveOptions]="{ exact: true }"
+										class="sora-light size18 cloud-white text-capitalize"
+									>
+										contact us
+									</a>
+								</li>
+							</ul>
+							<div
+								class="footer-socials d-flex flex-column justify-content-start align-items-start"
+							>
+							<a
+									href="https://www.linkedin.com/company/ph-design-me/"
+									class="d-flex flex-row justify-content-center align-items-center"
+									target="_blank"
+								>
+									<img
+										src="{{ baseUrl }}/assets/images/socials/linkedin.svg"
+										alt="Linkedin"
+										title="Linkedin"
+										loading="lazy"
+										class="img-fluid social-icon" width="20" height="20"
 
-      <div class="col-lg-8">
-        <div
-          class="footer-gap d-flex justify-content-lg-end justify-content-around text-start"
-        >
-          <div class="">
-            <h3 class="redhat-bold size22 white-color text-capitalize margin10">
-              company
-            </h3>
-            <ul class="nav d-flex flex-column footer-menu">
-              <li class="nav-item">
-                <a
-                  href=" "
-                  (click)="setActivemenu(' ')"
-                  [ngClass]="{ active: activeLink === '' }"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize bold"
-                  >Home</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="/about"
-                  (click)="setActivemenu('about')"
-                  [ngClass]="{ active: activeLink === 'about' }"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize bold"
-                  >about us</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="/services"
-                  (click)="setActivemenu('services')"
-                  [ngClass]="{ active: activeLink === 'services' }"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize bold"
-                  >services</a
-                >
-              </li>
-              <!-- <li class="nav-item ">
-                <a href="/product/search?type=Car" (click)="setActivemenu('search')" [ngClass]="{ 'active': activeLink === 'search' }"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize">Our cars</a>
-              </li>
-              <li class="nav-item ">
-                <a href="/product/search?type=Yachts" (click)="setActivemenu('search')" [ngClass]="{ 'active': activeLink === 'search' }"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize">our yachts</a>
-              </li> -->
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/product/search']"
-                  [queryParams]="{ type: 'Car' }"
-                  routerLinkActive="active"
-                  (click)="setActivemenu('cars')"
-                  [ngClass]="{ active: activeLink === 'cars' }"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize bold"
-                  >Our cars</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/product/search']"
-                  [queryParams]="{ type: 'Yachts' }"
-                  routerLinkActive="active"
-                  (click)="setActivemenu('yachts')"
-                  [ngClass]="{ active: activeLink === 'yachts' }"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize bold"
-                  >our yachts</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="">
-            <h3 class="redhat-bold size22 white-color text-capitalize margin10">
-              Support
-            </h3>
-            <ul class="nav d-flex flex-column footer-menu supportlinks">
-              <!-- <li class="nav-item">
-                <a href="/#faq" fragment="faq"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize"
-                  >FAQ</a>
-              </li> -->
-              <li class="nav-item faq-link">
-                <a
-                  href="/privacy"
-                  (click)="setActivemenu('privacy')"
-                  [ngClass]="{ active: activeLink === 'privacy' }"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize bold"
-                  >privacy policy</a
-                >
-              </li>
+									/>
+									<span class="ms-2 cloud-white size18 sora-light"> Linkedin</span>
+								</a>
+								<a
+									href="https://www.instagram.com/neelgund/"
+									class="d-flex flex-row justify-content-center align-items-center"
+									target="_blank"
+								>
+									<img
+										src="{{ baseUrl }}/assets/images/socials/instagram.svg"
+										alt="Instagram"
+										title="Instagram"
+										loading="lazy"
+										class="img-fluid social-icon" width="20" height="20"
+									/>
+									<span class="ms-2 cloud-white size18 sora-light"> Instagram</span>
+								</a>
+								<a
+									href="https://www.facebook.com/neelgund/"
+									class="d-flex flex-row justify-content-center align-items-center"
+									target="_blank"
+								>
+									<img
+										src="{{ baseUrl }}/assets/images/socials/facebook.svg"
+										alt="Facebook"
+										title="Facebook"
+										loading="lazy"
+										class="img-fluid social-icon" width="20" height="20"
 
-              <li class="nav-item">
-                <a
-                  href="/terms"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize bold"  
-                  (click)="setActivemenu('terms')"
-                  [ngClass]="{ active: activeLink === 'terms' }"
-                  >terms & conditions</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="/contact"
-                  (click)="setActivemenu('contact')"
-                  [ngClass]="{ active: activeLink === 'contact' }"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize bold"
-                  >contact us</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div
-            class="social-section d-flex flex-column align-items-center d-none d-lg-block"
-          >
-            <h3 class="redhat-bold size22 white-color text-capitalize margin10">
-              Connect With Us
-            </h3>
-            <ul class="nav d-flex flex-md-column justify-content-center">
-              <li class="nav-item">
-                <a
-                  href="https://www.instagram.com/ghost.rentals/?hl=en"
-                  class="text-decoration-none white-color size16 redhat-regular text-capitalize d-flex align-items-center"
-                >
-                  <div class="social-icon-div me-2">
-                    <img
-                      src="{{ imageURL }}/images/icons/instagram.svg"
-                      alt="Ghost Rental Instagram Account"
-                      title="Follow Ghost Rentals on Instagram"
-                      class="footer-social-icon"
-                      loading="eager" width="0" height="0"
-                    />
-                  </div>
-                  <h3 class="size16 redhat-regular text-capitalize mb-0 bold">
-                    Instagram
-                  </h3>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://www.facebook.com/Ghostrentalsdubai"
-                  class="text-decoration-none white-color d-flex align-items-center size16 redhat-regular text-capitalize"
-                >
-                  <div class="social-icon-div me-2">
-                    <img
-                      src="{{ imageURL }}/images/icons/facebook.svg"
-                      alt="Ghost Rental Facebook Account"
-                      title="Follow Ghost Rentals on Facebook"
-                      class="footer-social-icon"
-                      loading="eager" width="0" height="0"
-                    />
-                  </div>
-                  <h3 class="size16 redhat-regular text-capitalize mb-0 bold">
-                    Facebook
-                  </h3>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://www.tiktok.com/@ghostrentals"
-                  class="text-decoration-none white-color d-flex align-items-center size16 redhat-regular text-capitalize"
-                >
-                  <div class="social-icon-div me-2">
-                    <img
-                      src="{{ imageURL }}/images/icons/tiktok.svg"
-                      alt="Ghost Rental TikTok Account"
-                      title="Follow Ghost Rentals on TikTok"
-                      class="footer-social-icon tiktok"
-                      loading="eager" width="0" height="0"
-                    />
-                  </div>
-                  <h3 class="size16 redhat-regular text-capitalize mb-0 bold">
-                    TikTok
-                  </h3>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://www.youtube.com/@GhostRentalsDXB"
-                  class="text-decoration-none white-color d-flex align-items-center size16 redhat-regular text-capitalize"
-                >
-                  <div class="social-icon-div me-2">
-                    <img
-                      src="{{ imageURL }}/images/icons/youtube.svg"
-                      alt="Ghost Rental YouTube Account"
-                      title="Subscribe to Ghost Rentals YouTube Channel"
-                      class="footer-social-icon youtube"
-                      loading="eager" width="0" height="0"
-                    />
-                  </div>
-                  <h3 class="size16 redhat-regular text-capitalize mb-0 bold">
-                    Youtube
-                  </h3>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+									/>
+									<span class="ms-2 cloud-white size18 sora-light"> Facebook</span>
+								</a>
+								<!-- <a
+								href="https://www.youtube.com/"
+								class="d-flex flex-row justify-content-center align-items-center"
+								target="_blank"
+							>
+								<img
+									src="{{ baseUrl }}/assets/images/socials/youtube.svg"
+									alt="Youtube"
+									title="Youtube"
+									loading="lazy"
+									class="img-fluid social-icon"
 
-        <div
-          class="social-section d-flex flex-column align-items-center mt-2 d-block d-lg-none"
-        >
-          <h3 class="redhat-bold size22 white-color text-capitalize margin10">
-            Connect With Us
-          </h3>
-          <ul class="nav d-flex justify-content-center align-items-center">
-            <li class="nav-item">
-              <a
-                href="https://www.instagram.com/ghost.rentals/?hl=en"
-                class="text-decoration-none white-color size16 redhat-regular text-capitalize d-flex align-items-center"
-              >
-                <div class="social-icon-div me-2">
-                  <img
-                    src="{{ imageURL }}/images/icons/instagram.svg"
-                    alt="Ghost Rental Instagram Account"
-                    title="Follow Ghost Rentals on Instagram"
-                    class="footer-social-icon"
-                    loading="eager" width="0" height="0"
-                  />
-                </div>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                href="https://www.facebook.com/Ghostrentalsdubai"
-                class="text-decoration-none white-color d-flex align-items-center size16 redhat-regular text-capitalize"
-              >
-                <div class="social-icon-div me-2">
-                  <img
-                    src="{{ imageURL }}/images/icons/facebook.svg"
-                    alt="Ghost Rental Facebook Account"
-                    title="Follow Ghost Rentals on Facebook"
-                    class="footer-social-icon"
-                    loading="eager" width="0" height="0"
-                  />
-                </div>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                href="https://www.tiktok.com/@ghostrentals"
-                class="text-decoration-none white-color d-flex align-items-center size16 redhat-regular text-capitalize"
-              >
-                <div class="social-icon-div me-2">
-                  <img
-                    src="{{ imageURL }}/images/icons/tiktok.svg"
-                    alt="Ghost Rental TikTok Account"
-                    title="Follow Ghost Rentals on TikTok"
-                    class="footer-social-icon tiktok"
-                    loading="eager" width="0" height="0"
-                  />
-                </div>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                href="https://www.youtube.com/@GhostRentalsDXB"
-                class="text-decoration-none white-color d-flex align-items-center size16 redhat-regular text-capitalize"
-              >
-                <div class="social-icon-div me-2">
-                  <img
-                    src="{{ imageURL }}/images/icons/youtube.svg"
-                    alt="Ghost Rental YouTube Account"
-                      title="Subscribe to Ghost Rentals YouTube Channel"
-                    class="footer-social-icon youtube"
-                    loading="eager" width="0" height="0"
-                  />
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+								/>
+								<span class="ms-2 cloud-white size18"> Youtube</span>
+							</a> -->
+								
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-  <div class="container-fluid marginTop128">
-    <div class="row">
-      <div class="col-lg-4">
-        <p
-          class="copyright text-center redhat-regular size16 white-color text-lg-start text-center mb-lg-0 mb-3"
-        >
-          © 2025, All Rights Reserved Ghost Rentals
-        </p>
-      </div>
-      <div class="col-lg-8">
-        <p
-          class="copyright text-center redhat-regular size16 white-color text-lg-end text-center mb-0 d-flex justify-content-lg-end justify-content-center align-items-center gap-1"
-        >
-          Design and Developed With
-          <img
-            #heartIcon
-            alt="with love from pixtar"
-            title="with love from pixtar"
-            class="heart"
-            width="18"
-            height="16"
-            loading="lazy"
-            [src]="getImagePath()"
-            (mouseenter)="setActive(true)"
-            (mouseleave)="setActive(false)"
-            style="width: 18px"
-          />
-          By
-          <strong>
-            <a
-              href="https://www.pixtar.ae"
-              class="customlink mb-0"
-              target="_blank"
-              class="text-decoration-none white-color size16 montserrat-bold"
-              style="font-weight: normal"
-              >Pixtar</a
-            ></strong
-          >
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Scroller car image on scroll 100px from top -->
+			<!-- <div class="col-md-10 col-sm-11 col-11 mx-auto cspb30">
+				<div class="container-fluid marginTop128">
+					<div class="row">
+						<div class="col-lg-4">
+							<p
+								class="copyright text-center sora-light size16 cloud-white text-lg-start text-center mb-lg-0 mb-3"
+							>
+								© 2025, All Rights Reserved Neelgund
+							</p>
+						</div>
+						<div class="col-lg-8">
+							<p
+								class="copyright text-center sora-light size16 cloud-white text-lg-end text-center mb-0 d-flex justify-content-lg-end justify-content-center align-items-center gap-1"
+							>
+								Design and Developed With
+								<img
+									#heartIcon
+									alt="with love from pixtar"
+									title="with love from pixtar"
+									class="heart"
+									width="18"
+									height="16"
+									loading="lazy"
+									[src]="getImagePath()"
+									(mouseenter)="setActive(true)"
+									(mouseleave)="setActive(false)"
+									style="width: 18px"
+								/>
+								By
+								<strong>
+									<a
+										href="https://www.pixtar.ae"
+										class="customlink mb-0"
+										target="_blank"
+										class="text-decoration-none cloud-white size16 montserrat-bold"
+										style="font-weight: normal"
+										>Pixtar</a
+									></strong
+								>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div> -->
 
-<!-- <a href="javascript:void(0)" (click)="scrollToTop()" class="back-to-top d-flex align-items-center justify-content-center active" [class.active]="isImageVisible">
-  <img class="" src="{{ imageURL }}/home/movetop.png">
-</a> -->
+			<div class="col-md-10 col-sm-11 col-11 mx-auto cspb30">
+				<div class="marginTop128">
+					<div class="d-flex flex-column flex-lg-row justify-content-between">
+						<p
+								class="copyright text-center sora-light size16 cloud-white text-lg-start text-center mb-lg-0 mb-0"
+							>
+								© {{currentYear}} All Rights Reserved, Neelgund
+							</p>
+							<p
+								class="copyright text-center sora-light size16 cloud-white text-lg-end text-center mb-0 d-flex justify-content-lg-end justify-content-center align-items-center gap-1"
+							>
+								Design & Developed with
+								<img
+									#heartIcon
+									alt="with love from pixtar"
+									title="with love from pixtar"
+									class="heart"
+									width="18"
+									height="16"
+									loading="lazy"
+									[src]="getImagePath()"
+									(mouseenter)="setActive(true)"
+									(mouseleave)="setActive(false)"
+									style="width: 18px"
+								/>
+								by
+								<strong>
+									<a
+										href="https://www.pixtar.ae"
+										class="customlink mb-0"
+										target="_blank"
+										class="text-decoration-none cloud-white size16 montserrat-bold"
+										style="font-weight: normal"
+										>Pixtar</a
+									></strong
+								>
+							</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>

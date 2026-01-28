@@ -1,0 +1,77 @@
+<div class="portfolio-container">
+	<nav
+		aria-label="Portfolio categories"
+		class="portfolio-navigation bgcl-grayish-orange"
+	>
+		<ul class="mb-0" role="tablist">
+			<li *ngFor="let category of servicesData" role="presentation">
+				<button
+					role="tab"
+					[attr.aria-selected]="isActive(category._id)"
+					[attr.aria-controls]="'tabpanel-' + category._id"
+					[id]="'tab-' + category._id"
+					(click)="selectCategory(category._id)"
+					class="sora-regular size16 text-uppercase cloud-white bg-transparent category-button p-0 mb-1"
+					[class.active]="isActive(category._id)"
+				>
+					{{ category.name.split(" ")[0] }}
+				</button>
+			</li>
+		</ul>
+	</nav>
+
+	<div class="swiper-container bgcl-primary">
+		<swiper-container #swiperContainer init="false" class="mySwiper">
+			<ng-container *ngIf="projects.length > 0;">
+				<swiper-slide
+					*ngFor="let project of projects; let i = index"
+					class="portfolio-slide"
+					lazy="true"
+					[attr.data-index]="i"
+				>
+					<div class="portfolio-item">
+						<div class="portfolio-img position-relative">
+							<div class="overlay"></div>
+							<img
+								[src]="imagePath + 'project/' + project.image"
+								[alt]="project.name"
+								[title]="project.name"
+								class="img-fluid h-100 w-100 object-fit-cover"
+								loading="lazy"
+								(click)="selectProject(project.url_key)" width="0" height="0"
+							/>
+						</div>
+						<div class="portfolio-content csmb80">
+							<div class="row">
+								<div class="col-md-10 col-sm-11 col-11 mx-auto">
+									<h3
+										class="sora-regular size16 text-uppercase cloud-white mb-0"
+									>
+										{{ project.category_data }} | {{ project.year }}
+									</h3>
+									<p
+										class="nelphim-regular size62 text-capitalize cloud-white csmb26"
+									>
+										{{ project.name }}
+									</p>
+									<a
+										href="project/project-details/{{ project.url_key }}"
+										class="btn-secondary"
+									>
+										Know More
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</swiper-slide>
+			</ng-container>
+
+			<ng-template #noItems *ngIf="projects.length == 0;">
+				<swiper-slide>
+					<div class="no-items">No items found in this category</div>
+				</swiper-slide>
+			</ng-template>
+		</swiper-container>
+	</div>
+</div>

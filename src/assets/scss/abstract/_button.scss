@@ -13,15 +13,274 @@
   height: $height;
   background-color: $bg-color;
   color: $text-color;
-  box-shadow: $shadow;
+  transition: all 0.5s ease;
   border: none;
-  border-radius: 4px;
+  border-radius: 0px;
+  @media (max-width: 1199px) {
+    height: 48px;
+    width: 180px;
+  }
+  &:hover {
+    box-shadow: $shadow;
+    color: $text-color;
+  }
   cursor: pointer;
   &:hover .text {
     transform: translateX(12px);
+    @media (max-width: 1199px) {
+      transform: translateX(5px);
+    }
+  }
+  &:hover .img {
+    transform: translateX(5px);
+    margin-left: 15px;
+    @media (max-width: 1199px) {
+      transform: translateX(5px);
+      margin-left: 8px;
+    }
+  }
+  .text,
+  .img {
+    transition: all 0.5s ease;
+  }
+  .img {
+    margin-left: 8px;
+    position: relative;
+    top: 0px;
+  }
+}
+@mixin custom-button2(
+  $width: 225px,
+  $height: 63px,
+  $bg-color: #000000,
+  $text-color: #faf2e8,
+  $shadow: 0px 22px 29px #00000047
+) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $width;
+  height: $height;
+  background-color: $text-color;
+  color: $bg-color;
+  transition: all 0.5s ease;
+  border: none;
+  border-radius: 0px;
+  @media (max-width: 1199px) {
+    height: 48px;
+    width: 180px;
+  }
+  &:hover {
+    color: $bg-color;
+  }
+  cursor: pointer;
+  &:hover .text {
+    transform: translateX(12px);
+    @media (max-width: 1199px) {
+      transform: translateX(5px);
+    }
+  }
+  &:hover .img {
+    transform: translateX(5px);
+    margin-left: 15px;
+    @media (max-width: 1199px) {
+      transform: translateX(5px);
+      margin-left: 8px;
+    }
+  }
+  .text,
+  .img {
+    transition: all 0.5s ease;
+  }
+  .img {
+    margin-left: 8px;
+    position: relative;
+    top: 0px;
+  }
+}
+@mixin custom-button3(
+  $width: 375px,
+  $height: 63px,
+  $bg-color: #000000,
+  $text-color: #faf2e8,
+  $shadow: 0px 22px 29px #00000047
+) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $width;
+  height: $height;
+  background-color: $text-color;
+  color: $bg-color;
+  transition: all 0.5s ease;
+  border: none;
+  border-radius: 0px;
+  @media (max-width: 1199px) {
+    width: 250px;
+    height: 48px;
+  }
+  &:hover {
+    color: $bg-color;
+  }
+  cursor: pointer;
+  &:hover .text {
+    transform: translateX(8px);
+  }
+  &:hover .img {
+    transform: translateX(12px);
+    margin-left: 15px;
+    @media (max-width: 1199px) {
+      transform: translateX(8px);
+      margin-left: 15px;
+    }
+  }
+  .text,
+  .img {
+    transition: all 0.5s ease;
+  }
+  .img {
+    margin-left: 8px;
+    position: relative;
+    top: -2px;
+  }
+}
+@mixin form-button1($height: 45px, $bg-color: #000000) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $height;
+  background-color: transparent;
+  color: $bg-color;
+  box-shadow: none;
+  border: 1px solid $bg-color;
+  border-radius: 0px;
+  cursor: pointer;
+  @media (max-width: 1199px) {
+    height: 38px;
+  }
+  &:hover {
+    color: $bg-color;
+  }
+  &:hover .text {
+    transform: translateX(12px);
+    @media (max-width: 1199px) {
+      transform: translateX(5px);
+    }
+  }
+  &:hover .img {
+    transform: translateX(5px);
+    margin-left: 15px;
+    @media (max-width: 1199px) {
+      transform: translateX(5px);
+      margin-left: 8px;
+    }
+  }
+  .text,
+  .img {
+    transition: all 0.5s ease;
+  }
+  .img {
+    margin-left: 8px;
+    position: relative;
+    top: 0px;
+  }
+}
+@mixin form-button2($height: 45px, $bg-color: #000000, $text-color: #faf2e8) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $height;
+  background-color: $bg-color;
+  color: $text-color;
+  box-shadow: none;
+  border: 1px solid $bg-color;
+  border-radius: 0px;
+  cursor: pointer;
+  @media (max-width: 1199px) {
+    height: 38px;
+  }
+  &:hover {
+    background-color: $bg-color;
+    color: $text-color;
+  }
+  &:hover .text {
+    transform: translateX(12px);
+    @media (max-width: 1199px) {
+      transform: translateX(5px);
+    }
   }
   &:hover .img {
     transform: translateX(25px);
+    margin-left: 15px;
+    @media (max-width: 1199px) {
+      transform: translateX(8px);
+      margin-left: 15px;
+    }
+  }
+  .text,
+  .img {
+    transition: all 0.5s ease;
+  }
+  .img {
+    margin-left: 8px;
+    position: relative;
+    top: -2px;
+  }
+}
+
+@mixin smallbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  height: auto;
+  background: transparent;
+  color: #808080;
+  margin: 0px 2px;
+  border: 1px solid #fcf8f3;
+  padding: 5px;
+  &:focus {
+    border: 1px solid #000;
+    color: #000;
+    border-radius: 0;
+  }
+  &.active {
+    border: 1px solid #000;
+    color: #000;
+    border-radius: 0;
+  }
+}
+@mixin smallprimarybtn(
+  $width: 186px,
+  $height: 52px,
+  $bg-color: #000000,
+  $text-color: #faf2e8,
+  $shadow: 0px 22px 29px #00000047
+) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $width;
+  height: $height;
+  background-color: $bg-color;
+  color: $text-color;
+  transition: all 0.5s ease;
+  border: none;
+  border-radius: 0px;
+  @media (max-width: 1199px) {
+    height: 48px;
+    width: 280px;
+  }
+  &:hover {
+    box-shadow: $shadow;
+    color: $text-color;
+  }
+  cursor: pointer;
+  &:hover .text {
+    transform: translateX(10px);
+  }
+  &:hover .img {
+    transform: translateX(18px);
     margin-left: 15px;
   }
   .text,
@@ -30,5 +289,7 @@
   }
   .img {
     margin-left: 8px;
+    position: relative;
+    top: -2px;
   }
 }

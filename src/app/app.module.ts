@@ -1,70 +1,77 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
+import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { Error404Component } from './error404/error404.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrandsComponent } from './shared/brands/brands.component';
-import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
-import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
-import { ServicesComponent } from './components/services/services.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { register } from 'swiper/element/bundle';
 
-import { LucideAngularModule, Fuel, CalendarDays, RockingChair, Gauge, Star, ArrowRight, ArrowLeft, Minus, Plus, ChevronLeft, ChevronRight, X, Home, Users, Settings, Car, Phone, Facebook, Instagram, Twitter, Clock    } from 'lucide-angular';
-import { BookingComponent } from './components/booking/booking.component';
-import { SharedModule } from './shared/shared.module';
+// Register Swiper components
+register();
+
+import { TestimonialsComponent } from './components/testimonials/testimonials.component';
+import { ServicesComponent } from './components/services/services.component';
+// ✅ Correct Lucide import
+import { LucideAngularModule, Pencil, Search, Home, Minus, Plus, X } from 'lucide-angular';
+import { AboutComponent } from './components/about/about.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxPayPalModule } from 'ngx-paypal';
+import {SwiperSliderComponent} from './components/swiper-slider/swiper-slider.component';
+import { PortfolioComponent } from './components/portfolio/portfolio.component';
+import { JournalComponent } from './components/journal/journal.component';
+import { JournalDetailComponent } from './components/journal-detail/journal-detail.component';
+import { CommonModule } from '@angular/common';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { FilterByCategoryPipe } from './pipe/filter-by-category.pipe';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { LocationComponent } from './location/location.component';
-import { LoadingComponent } from './components/loading/loading.component';
-import { ContactComponent } from './components/contact/contact.component';
-// import { SchemaService } from './providers/schema/schema.service';
-// import { DemoComponent } from './components/demo/demo.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent,
     HeaderComponent,
     FooterComponent,
     Error404Component,
-    BrandsComponent,
-    PrivacyPolicyComponent,
-    TermsAndConditionsComponent,
+    TestimonialsComponent,
     ServicesComponent,
-    LocationComponent,
-    LoadingComponent,
-    // DemoComponent,
-    BookingComponent,
-		ContactComponent
+    AboutComponent,
+    SwiperSliderComponent,
+    PortfolioComponent,
+    JournalComponent,
+    JournalDetailComponent,
+		FilterByCategoryPipe
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
+    NgxSpinnerModule,
+    NgxPayPalModule,
     ReactiveFormsModule,
-    SharedModule,
+    CommonModule,
     NgxIntlTelInputModule,
-    BrowserAnimationsModule,
-    NgxSliderModule,
-    // OwlDateTimeModule,
-    // OwlNativeDateTimeModule,
-    LucideAngularModule.pick({ Fuel, CalendarDays, RockingChair, Gauge, Star, ArrowRight, ArrowLeft, Plus, Minus, ChevronLeft, ChevronRight, X, Home, Users, Settings, Car, Phone, Facebook, Instagram, Twitter, Clock }),
+    LucideAngularModule.pick({
+      Pencil,
+      Search,
+      Home,
+      Minus,
+      Plus,
+      X,
+    })
   ],
   providers: [
     provideClientHydration(),
     provideHttpClient(withFetch()),
-    provideAnimations(),
-		// SchemaService
+    provideAnimations()
   ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
