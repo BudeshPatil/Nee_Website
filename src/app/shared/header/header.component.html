@@ -1,117 +1,123 @@
-<header class="container-fluid navbar-wrapper">
-  <div class="col-lg-10 offset-lg-1">
-    <nav class="navbar navbar-dark navbar-expand-lg py-0">
+<header
+	[class.sticky]="isScrolled"
+	[class.hide]="hideHeader"
+	[class.invert-logo]="shouldInvertLogo()"
+>
+	<nav class="container-fluid">
+		<div class="row">
+			<div class="col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="d-flex align-items-center justify-content-between">
+					<a
+						href="/"
+						class="text-decoration-none cursor-pointer overflow-hidden"
+						[class.visible]="menuOpen"
+					>
+						<img
+							[src]="baseUrl + '/assets/images/home/ph-logo.svg'"
+							alt="PH Design Logo"
+							title="PH Design Logo"
+							loading="eager"
+							fetchpriority="high"
+							class="img-fluid logo ph-logo"
+							[class.invert-logo]="shouldInvertLogo()"
+							[class.sticky-logo]="isScrolled"
+							width="83"
+							height="60"
+						/>
+					</a>
+					<div
+						class="d-flex align-items-center justify-content-center gap-md-3 gap-2 menu-toggle"
+						(click)="toggleMenu()"
+						[class.visible]="menuOpen"
+					>
+						<p
+							class="text-capitalize size30 mb-0 nelphim-regular cloud-white menu-span"
+							[class.invert-logo]="shouldInvertLogo()"
+							[class.sticky-text]="isScrolled"
+						>
+							menu
+						</p>
+						<div class="menuIcon" [class.open]="menuOpen">
+							<span 
+							[class.invert-bg]="shouldInvertLogo()"
+							[class.sticky-bar]="isScrolled"
+							></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-      <!-- Logo -->
-      <a routerLink="/" class="navbar-brand text-secondary">
-        <img
-          src="assets/logo/neelgund.png"
-          width="160"
-          height="50"
-          title="Neelgund Developers"
-          class="nav-logo"
-          alt="Neelgund Logo"
-        />
-      </a>
+		<div
+			class="menuOverlay bgcl-grayish-orange"
+			[class.active]="menuOpen"
+			(click)="toggleMenuClose()"
+		>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+						<div class="d-flex align-items-center justify-content-between">
+							<a
+								href="/"
+								class="text-decoration-none cursor-pointer overflow-hidden"
+							>
+								<img
+									[src]="baseUrl + '/assets/images/home/ph-logo.svg'"
+									alt="PH Design Logo"
+									title="PH Design Logo"
+									loading="eager"
+									fetchpriority="high"
+									class="img-fluid menu-logo ph-logo"
+									width="83"
+									height="60"
+								/>
+							</a>
+							<div
+								class="d-flex align-items-center justify-content-center gap-md-3 gap-2 menu-toggle menu-close-toggle"
+								(click)="toggleMenuClose()"
+							>
+								<h2
+									class="text-capitalize size30 mb-0 nelphim-regular cloud-white"
+								>
+									menu
+								</h2>
+								<lucide-icon name="x" class="size20 cloud-white close" />
+								<!-- <div class="closeIcon" [class.open]="menuOpen">
+									<span></span>
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-      <!-- Mobile Toggle -->
-      <button
-        type="button"
-        class="navbar-toggler me-0 bg-primary"
-        (click)="toggleNavbar()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- Menu -->
-      <div
-        class="collapse navbar-collapse"
-        [class.show]="isMenuOpen"
-        id="navbarCollapse"
-      >
-        <div class="navbar-nav ms-auto mx-xl-auto p-0">
-
-          <a
-            routerLink="/"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="nav-item nav-link text-secondary"
-            (click)="closeNavbar()"
-          >
-            Home
-          </a>
-
-          <a
-            routerLink="/about"
-            routerLinkActive="active"
-            class="nav-item nav-link"
-            (click)="closeNavbar()"
-          >
-            About
-          </a>
-
-          <a
-            routerLink="/services"
-            routerLinkActive="active"
-            class="nav-item nav-link"
-            (click)="closeNavbar()"
-          >
-            Services
-          </a>
-
-          <a
-            routerLink="/projects"
-            routerLinkActive="active"
-            class="nav-item nav-link"
-            (click)="closeNavbar()"
-          >
-            Projects
-          </a>
-
-          <a
-            routerLink="/contact"
-            routerLinkActive="active"
-            class="nav-item nav-link"
-            (click)="closeNavbar()"
-          >
-            Contact
-          </a>
-
-        </div>
-      </div>
-
-      <!-- Right Side (Desktop Only) -->
-      <div class="d-none d-xl-flex flex-shirink-0">
-
-        <!-- Phone Animation -->
-        <div class="d-flex align-items-center justify-content-center me-4">
-          <a
-            href="tel:+918050238777"
-            class="position-relative animated tada infinite"
-          >
-            <i class="fa fa-phone-alt text-secondary fa-2x"></i>
-            <div class="position-absolute" style="top:-7px; left:20px;">
-              <span>
-                <i class="fa fa-comment-dots text-secondary"></i>
-              </span>
-            </div>
-          </a>
-        </div>
-
-        <!-- Call Info -->
-        <div class="d-flex flex-column pe-4 border-end">
-          <span class="text-secondary-50">Have any questions?</span>
-          <span class="text-secondary">Call: +91 80502 38777</span>
-        </div>
-
-        <!-- Search -->
-        <div class="d-flex align-items-center justify-content-center ms-4">
-          <a routerLink="/search">
-            <i class="bi bi-search text-secondary fa-2x"></i>
-          </a>
-        </div>
-
-      </div>
-    </nav>
-  </div>
+			<div class="menuContent">
+				<div class="menuSpan overflow-hidden">
+					<span
+						class="size300 nelphim-regular cloud-white text-uppercase menu-text"
+						[innerHTML]="menuText"
+					></span>
+				</div>
+				<ul class="menuList">
+					<li class="menuItem" *ngFor="let item of menuItems">
+						<a
+							[routerLink]="item.path"
+							(click)="toggleMenu(); $event.stopPropagation()"
+							[style.transform]="
+								menuOpen ? 'translateY(0)' : 'translateY(100%)'
+							"
+							[style.transition]="
+								menuOpen ? 'transform 0.8s ease .8s' : 'transform 0.8s ease .2s'
+							"
+							class="menuLinks text-capitalize size38 nelphim-regular"
+							[routerLinkActive]="'active'"
+							[routerLinkActiveOptions]="{ exact: item.path === '/' }"
+						>
+							{{ item.label }}
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 </header>

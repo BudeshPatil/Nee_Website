@@ -7,8 +7,8 @@ import { CategoryService } from '../providers/category/category.service';
 import { response } from 'express';
 // declare var Swiper: any;
 import { Swiper } from 'swiper';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-Swiper.use([Navigation, Pagination, Autoplay]);
+import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
+Swiper.use([Navigation, Pagination, Autoplay, EffectFade]);
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
@@ -293,9 +293,11 @@ export class HomeComponent {
         const PureCounter = require('@srexi/purecounterjs'); // ✅ require only in browser
         new PureCounter(); // Initialize the counter
       }, 0);
+      this.initBannerSwiper();
       this.initTestimonialsSwiper();
       this.getAllClients();
       this.initPortfolioSwiper();
+      this.initRecentProjectsSwiper();
       // this.initScrollTrigger();
     }
   }
@@ -321,6 +323,39 @@ export class HomeComponent {
   // }
   counter(i: number) {
     return new Array(i);
+  }
+
+  initBannerSwiper() {
+    setTimeout(() => {
+      const swiperElement = document.querySelector('.banner-swiper');
+      const slides = document.querySelectorAll('.banner-swiper .swiper-slide');
+      
+      if (swiperElement && slides.length > 1) {
+        this.bannerSwiper = new Swiper(".banner-swiper", {
+          loop: true,
+          slidesPerView: 1,
+          speed: 1000,
+          effect: 'fade',
+          fadeEffect: {
+            crossFade: true,
+          },
+          autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          },
+          navigation: {
+            nextEl: '.banner-button-next',
+            prevEl: '.banner-button-prev',
+          },
+          on: {
+            slideChangeTransitionStart: function () {
+              // Animation on slide change
+            },
+          },
+        });
+      }
+    }, 500);
   }
 
   initTestimonialsSwiper() {
@@ -378,6 +413,34 @@ export class HomeComponent {
       });
     }
   }
+
+  public initRecentProjectsSwiper() {
+    if (this.isBrowser) {
+      new Swiper('.recent-projects-swiper', {
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 30,
+        grabCursor: true,
+        autoplay: { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true },
+        pagination: {
+          el: ".recent-projects-pagination",
+          clickable: true,
+          renderBullet: function (index, className) {
+            return `<span class="${className}"></span>`;
+          },
+        },
+        on: {
+          init: function () {
+            // Optional: Add any initialization code here
+          },
+          slideChange: function () {
+            // Optional: Handle slide change
+          },
+        },
+      });
+    }
+  }
+
   ngOnDestroy() {
     if (this.bannerSwiper) {
       this.bannerSwiper?.destroy(true, true);
@@ -390,10 +453,7 @@ export class HomeComponent {
     this.dataService.getAllBanner(obj).subscribe((response: any) => {
       if (response.code == 200) {
         if (response.result != null && response.result.length > 0) {
-          let tempcat = response.result.filter((cat) => cat.name == 'home');
-          if (tempcat && tempcat.length > 0) {
-            this.bannerData = tempcat;
-          }
+          this.bannerData = response.result;
         } else {
         }
       }
@@ -446,7 +506,7 @@ export class HomeComponent {
   }
   getAllprojects() {
     let obj = {};
-    this.dataService.getAllHomeProjects(obj).subscribe((response: any) => {
+    this.dataService.getAllProjects(obj).subscribe((response: any) => {
       if (response.code == 200) {
         if (response.result != null && response.result != '') {
           this.projects = response.result;

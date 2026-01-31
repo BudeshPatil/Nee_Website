@@ -1,15 +1,127 @@
 <section class="homebanner position-relative hero" *ngIf="bannerData && bannerData.length > 0">
-	<div class="herobanner">
-		<div class="overlay"></div>
-		<img *ngIf="bannerData && bannerData[0].media_data[0]?.file_type === 'image'"
-			src="{{ imagePath }}banner/{{ bannerData[0].media_data[0].src }}" alt="banner" title="banner"
-			class="bnr-img img-fluid" width="" height="" loading="lazy" />
-		<video *ngIf="bannerData && bannerData[0].media_data[0]?.file_type === 'video'"
-			[attr.src]="imagePath + 'banner/' + bannerData[0].media_data[0].src" autoplay muted loop playsinline
-			webkit-playsinline preload="auto" class="bnr-video w-100 h-100 object-cover"></video>
+	<div class="swiper banner-swiper">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide" *ngFor="let banner of bannerData">
+				<div class="hero-banner">
+					<div class="hero-overlay"></div>
+
+					<img *ngIf="banner.media_data && banner.media_data[0]?.file_type === 'image'"
+						class="banner-img img-fluid"
+						src="{{ imagePath }}banner/{{ banner.media_data[0].src }}"
+						alt="banner"
+						loading="lazy" />
+
+					<video *ngIf="banner.media_data && banner.media_data[0]?.file_type === 'video'"
+						class="banner-video"
+						[attr.src]="imagePath + 'banner/' + banner.media_data[0].src"
+						autoplay muted loop playsinline>
+					</video>
+
+					<div class="banner-content">
+						<div class="container-fluid h-100">
+							<div class="row h-100 align-items-end">
+								<div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto">
+									<div class="banner-text">
+										<h1 class="banner-title">{{ banner.name }}</h1>
+										<p class="banner-sub">{{ banner.short_desc }}</p>
+										<p class="banner-location">{{ banner.description }}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<div class="swiper-button-prev banner-button-prev"></div>
+		<div class="swiper-button-next banner-button-next"></div>
+		<div class="swiper-pagination banner-pagination"></div>
 	</div>
 </section>
-<div class="sectionpb bgcl-primary"></div>
+
+<section class="stats-section sectionp bgcl-secondary">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+
+				<!-- TITLE -->
+				<div class="row csmb60">
+					<div class="col-12 text-center">
+						<h2 class="nelphim-regular size62 raisin-black">
+							Building Dreams, Earning Trust —
+							<span class="d-block primary">Since 1984</span>
+						</h2>
+					</div>
+				</div>
+
+				<!-- STATS CARDS -->
+				<div class="row g-4">
+
+					<div class="col-lg-3 col-md-6">
+						<div class="stats-card">
+							<div class="stats-icon">
+								<i class="fas fa-vector-square"></i>
+							</div>
+							<h3>5000<span>+</span></h3>
+							<h5>Plots</h5>
+							<p>
+								Successfully delivered over five thousand plots with unwavering
+								commitment to quality and precision.
+							</p>
+						</div>
+					</div>
+
+					<div class="col-lg-3 col-md-6">
+						<div class="stats-card">
+							<div class="stats-icon">
+								<i class="fas fa-smile"></i>
+							</div>
+							<h3>3500<span>+</span></h3>
+							<h5>Happy Clients</h5>
+							<p>
+								Trusted by more than 3,500 satisfied customers with relationships
+								built to last.
+							</p>
+						</div>
+					</div>
+
+					<div class="col-lg-3 col-md-6">
+						<div class="stats-card">
+							<div class="stats-icon">
+								<i class="fas fa-award"></i>
+							</div>
+							<h3>40<span>+</span></h3>
+							<h5>Years Experience</h5>
+							<p>
+								Over four decades of excellence driven by resilience, dedication,
+								and expertise.
+							</p>
+						</div>
+					</div>
+
+					<div class="col-lg-3 col-md-6">
+						<div class="stats-card">
+							<div class="stats-icon">
+								<i class="fas fa-building"></i>
+							</div>
+							<h3>60<span>+</span></h3>
+							<h5>Projects</h5>
+							<p>
+								More than sixty successful development projects reflecting our
+								industry leadership.
+							</p>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+
 
 <section class="about sectionp bgcl-primary" *ngIf="aboutData && aboutData.length > 0">
 	<div class="container-fluid">
@@ -85,6 +197,95 @@
 									{{ service.name.split(" ")[0] }}
 								</p>
 							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Recent Projects Section -->
+<section class="recent-projects sectionp bgcl-primary" *ngIf="projects && projects.length > 0">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-lg-8 col-md-8 mb-md-0 mb-sm-4 mb-2">
+						<div class="content-block w-100">
+							<p class="size16 raisin-black sora-regular mb-0 text-uppercase">Recent Projects</p>
+							<h2 class="nelphim-regular size62 raisin-black mb-0">Our Latest Work</h2>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4">
+						<div class="h-100 d-flex align-items-md-end justify-content-md-end align-items-start justify-content-start">
+							<a class="btn-primary raisin-black text-p csmt30" href="/portfolio">View All</a>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="swiper recent-projects-swiper">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide" *ngFor="let project of projects">
+									<article class="blog-card">
+										<div class="blog-item side-by-side bg-light rounded d-flex flex-column flex-lg-row">
+											<!-- IMAGE -->
+											<div class="blog-image-wrapper">
+												<img [src]="imagePath + 'project/' + project.image" class="img-fluid rounded-top rounded-lg-start" alt="{{ project.name }}" />
+											</div>
+											<!-- CONTENT -->
+											<div class="blog-content p-3 p-lg-4">
+												<h3><a [href]="'/project/project-details/' + project.url_key">{{ project.name }}</a></h3>
+												<div class="project-details mt-3">
+													<div class="row g-3">
+														<div class="col-12 col-md-6 d-flex align-items-start">
+															<i class="fas fa-map-marker-alt detail-icon"></i>
+															<div>
+																<strong>LOCATION</strong>
+																<p>{{ project.location || 'Location not specified' }}</p>
+															</div>
+														</div>
+														<div class="col-12 col-md-6 d-flex align-items-start">
+															<i class="fas fa-vector-square detail-icon"></i>
+															<div>
+																<strong>AREA OF THE PROJECT</strong>
+																<p>{{ project.area || 'Area not specified' }}</p>
+															</div>
+														</div>
+														<div class="col-12 col-md-6 d-flex align-items-start">
+															<i class="fas fa-th detail-icon"></i>
+															<div>
+																<strong>NO OF PLOTS</strong>
+																<p>{{ project.noofplots }}</p>
+															</div>
+														</div>
+														<div class="col-12 col-md-6 d-flex align-items-start">
+															<i class="fas fa-calendar detail-icon"></i>
+															<div>
+																<strong>YEAR</strong>
+																<p>{{ project.year }}</p>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- FOOTER -->
+												<div class="blog-footer mt-4 d-flex flex-column flex-sm-row gap-3 justify-content-between align-items-center">
+													<div class="contact-icons">
+														<a href="#" class="icon-btn"><i class="bi bi-whatsapp"></i></a>
+														<a href="#" class="icon-btn"><i class="bi bi-phone"></i></a>
+													</div>
+													<a [href]="'/project/project-details/' + project.url_key" class="btn-read-more">
+														<span>View Details</span>
+														<i class="bi bi-arrow-right"></i>
+													</a>
+												</div>
+											</div>
+										</div>
+									</article>
+								</div>
+							</div>
+							<div class="swiper-pagination recent-projects-pagination"></div>
 						</div>
 					</div>
 				</div>

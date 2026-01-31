@@ -13,7 +13,7 @@ header {
 		transition: transform 0.3s ease;
 	}
 	&.sticky {
-		background: #E0DBD0;
+		background: #ABBFC7;
 		// background: rgba(0, 0, 0, 0.5); // semi-transparent
 		// backdrop-filter: blur(10px);          // actual blur effect
 		// -webkit-backdrop-filter: blur(10px);  // Safari support
@@ -29,7 +29,7 @@ header {
 .invert-logo {
 	color: black;
 	&.sticky {
-		background: #E0DBD0;
+		background: #ABBFC7;
 		// background: rgba(255, 255, 255, 0.5); // semi-transparent
 		// backdrop-filter: blur(10px);          // actual blur effect
 		// -webkit-backdrop-filter: blur(10px);  // Safari support
