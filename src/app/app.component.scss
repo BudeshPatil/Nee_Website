@@ -22,27 +22,40 @@ body {
 	left: 0;
 	width: 100%;
 	will-change: transform;
-	/* ensure 3d to trigger GPU */
 	transform: translate3d(0, 0, 0);
 }
+
 .main-content {
 	z-index: 99;
 	margin-bottom: 508px;
+
 	@media (max-width: 1600px) {
 		margin-bottom: 449px;
 	}
+
 	@media (max-width: 1322px) {
 		margin-bottom: 449px;
 	}
+
 	@media (max-width: 1199px) {
 		margin-bottom: 426px;
 	}
+
 	@media (max-width: 991px) {
 		margin-bottom: 715px;
 	}
+
 	@media (max-width: 575px) {
 		margin-bottom: 594px;
 	}
+
+	@media (max-width: 991px) {
+		.smooth-scroll-content {
+			position: relative !important;
+			transform: none !important;
+		}
+	}
+
 	// @media (max-width: 364px) {
 	// 	margin-bottom: 656px;
 	// }

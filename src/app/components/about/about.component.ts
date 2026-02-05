@@ -15,7 +15,7 @@ interface TeamMember {
 }
 
 @Component({
-  selector: 'app-about',  
+  selector: 'app-about',
 
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
@@ -23,12 +23,70 @@ interface TeamMember {
 export class AboutComponent {
   baseUrl: string = environment.url;
   imagePath: any;
-bannerData:any;
+  bannerData: any;
+  companyHistory = {
+    shortIntro: 'Founded in 1984, Neelgund Developers has shaped the future of land development in North Karnataka.',
+    fullDescription: `
+    <p>What started as a small vision has grown into a legacy of trust, quality, and commitment.</p>
+    <p>Over the decades, we have delivered landmark residential layouts, focusing on transparency,
+    legal clarity, and long-term value for our customers.</p>
+    <p>Today, Neelgund Developers stands as a symbol of reliability and sustainable growth.</p>
+  `,
+    image: 'history.jpg'
+  };
+
+  founder = {
+    name: 'Mr. Neelgund',
+    image: 'founder.jpg',
+    quote: 'Quality and trust are not built overnight, they are earned over decades.',
+    message: 'As the founder of Neelgund Developers, my vision has always been to create legally sound and thoughtfully planned developments that generations can rely on.'
+  };
+
+  ceo = {
+    name: 'Current CEO Name',
+    image: 'ceo.jpg',
+    quote: 'Innovation with responsibility is the future of real estate.',
+    message: 'As CEO, my focus is on modern planning, transparency, and customer-first development while preserving the legacy built over the last four decades.'
+  };
+
+  whoWeAre = {
+    description: 'We are a leading real estate developer with over 40 years of experience delivering plotted, residential, and commercial developments.',
+    experience: '40+ Years',
+    regions: ['Hubli', 'Dharwad', 'North Karnataka']
+  };
+
+  sustainability = [
+    'Rainwater harvesting',
+    'Solar-ready layouts',
+    'Eco-friendly materials',
+    'Green landscaping'
+  ];
+  visionMissionValues = {
+    vision: 'To be the most trusted real estate developer shaping sustainable communities.',
+    mission: 'Deliver high-quality, legally transparent developments that create long-term value.',
+    values: ['Transparency', 'Quality', 'Customer-first', 'Sustainability']
+  };
+  whyChooseUs = [
+    'On-time delivery',
+    'Legal transparency',
+    'Quality materials',
+    'Customer-first approach',
+    'Dedicated after-sales support'
+  ];
+  portfolioCategories = [
+    { title: 'Residential Projects', count: 30, icon: 'fa-home' },
+    { title: 'Commercial Spaces', count: 15, icon: 'fa-building' },
+    { title: 'Villas & Plots', count: 20, icon: 'fa-map' },
+    { title: 'Mixed-use Developments', count: 8, icon: 'fa-city' }
+  ];
+
+  certifications = ['RERA Approved', 'ISO Certified', 'Government Approved Layouts'];
+
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     public dataService: DataService,
     public categoryService: CategoryService, private el: ElementRef
-  ) { 
+  ) {
     this.imagePath = environment.baseUrl + '/public/';
     this.getAboutdata();
     this.getBannerdata();
@@ -78,7 +136,7 @@ bannerData:any;
       name: 'Claris Hofman ',
       position: 'Interior Designer'
     },
-     {
+    {
       id: 7,
       image: '/assets/images/aboutus/team-photos/team-07.webp',
       name: 'Claris Hofman ',
@@ -114,7 +172,7 @@ bannerData:any;
       name: 'Claris Hofman ',
       position: 'Interior Designer'
     },
-     {
+    {
       id: 13,
       image: '/assets/images/aboutus/team-photos/team-13.webp',
       name: 'Claris Hofman ',
@@ -140,36 +198,36 @@ bannerData:any;
   }
   initScrollTrigger(): void {
     const tl = gsap.timeline({
-      defaults:{
+      defaults: {
         ease: 'power3.out',
       }
     });
     tl.from('.sub-heading', {
-      yPercent:-500,
-    },.5)
-    
-    .from('.heading', {
-      yPercent:-200,
-      duration:2,
-    },.5)
-    .from('.description', {
-      yPercent:-200,
-      duration:2,
-    },.8)
-    .from('.button', {
-      opacity:1,
-      duration:2,
-    },1)
-    .from('.content-animate', {
-      clipPath: 'inset(0 0 100% 0)',
-    },.5);
+      yPercent: -500,
+    }, .5)
+
+      .from('.heading', {
+        yPercent: -200,
+        duration: 2,
+      }, .5)
+      .from('.description', {
+        yPercent: -200,
+        duration: 2,
+      }, .8)
+      .from('.button', {
+        opacity: 1,
+        duration: 2,
+      }, 1)
+      .from('.content-animate', {
+        clipPath: 'inset(0 0 100% 0)',
+      }, .5);
 
 
     const scrollElems = gsap.utils.toArray('.scroll-animate') as HTMLElement[];
 
     scrollElems.forEach((el) => {
       gsap.from(el, {
-        clipPath: 'inset(0 0 100% 0)', 
+        clipPath: 'inset(0 0 100% 0)',
         ease: 'power3.inOut',
         duration: 1.5,
         scrollTrigger: {
@@ -179,7 +237,7 @@ bannerData:any;
         }
       });
     });
-    
+
   }
   getAboutdata() {
     let obj = {};
@@ -194,7 +252,7 @@ bannerData:any;
       }
     });
   }
-    getBannerdata() {
+  getBannerdata() {
     let obj = {};
     this.dataService.getAllBanner(obj).subscribe((response: any) => {
       if (response.code == 200) {

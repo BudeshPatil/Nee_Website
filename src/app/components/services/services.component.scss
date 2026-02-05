@@ -1,13 +1,17 @@
 .hero-bannerservice {
 	min-height: 100vh;
+
 	@media (max-width: 480px) {
 		min-height: auto;
 	}
+
 	.content {
 		display: flex;
+
 		@media (max-width: 991px) {
 			display: block;
 		}
+
 		.box-right {
 			min-height: 120vh;
 			overflow: hidden;
@@ -17,15 +21,16 @@
 			background-attachment: fixed;
 			background-repeat: no-repeat;
 			// background-size: contain;
-			background-size: 50% 100% ;
-			background-position: center right ;
+			background-size: 50% 100%;
+			background-position: center right;
 
 			@media (max-width: 1199px) {
 				background-attachment: scroll;
-		background-position: center;
-		 background-size: cover;  
+				background-position: center;
+				background-size: cover;
 
 			}
+
 			@media (max-width: 991px) {
 				width: 100%;
 			}
@@ -52,21 +57,26 @@
 				background-attachment: scroll;
 			}
 		}
+
 		.box-left {
 			width: 50%;
 			position: relative;
+
 			@media (max-width: 991px) {
 				height: 50vh;
 				width: 100%;
 			}
+
 			.content-block {
 				position: absolute;
 				top: 30%;
 				width: 80%;
 				transform: translate(22%, 0%);
+
 				@media (max-width: 991px) {
 					transform: translate(12%, 0%);
 				}
+
 				// width: 63%;
 				// h1{
 				// 	width: 259px;
@@ -78,26 +88,32 @@
 		}
 	}
 }
+
 #residential-design3 {
 	padding-bottom: 80px;
+
 	@media (max-width: 991px) {
 		padding-bottom: 50px;
 	}
+
 	@media (max-width: 575px) {
 		padding-bottom: 30px;
 	}
 }
+
 .servicelist {
 	.content {
 		@media (max-width: 767px) {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+
 			h2.csmb30 {
 				margin-bottom: 0;
 			}
 		}
 	}
+
 	.card {
 		a {
 			width: 100%;
@@ -105,6 +121,7 @@
 		}
 	}
 }
+
 .image-attached {
 	img {
 		width: 100%;
@@ -112,33 +129,40 @@
 		object-fit: cover;
 	}
 }
+
 .customheight {
 	min-height: 350px;
 	padding-bottom: 50px;
 	padding-top: 100px;
+
 	@media (max-width: 480px) {
 		// min-height: 300px;
 		padding-top: 50px;
 		padding-bottom: 30px;
 	}
 }
+
 /************ slider buttons *******************/
 .swiper-pagination {
 	position: relative;
 	bottom: 0;
 	margin-top: 20px;
 	text-align: center;
+
 	@media (max-width: 1199px) {
 		margin-top: 0px;
 	}
+
 	@media (max-width: 767px) {
 		text-align: left;
 		margin-top: 0;
 	}
+
 	@media (max-width: 575px) {
 		text-align: left;
 		margin-top: 0;
 	}
+
 	::ng-deep {
 		.swiper-pagination-bullet {
 			flex: 1 1 auto;
@@ -151,6 +175,7 @@
 			transition: background-color 0.3s ease;
 			opacity: 1;
 			margin-right: 6px;
+
 			@media (max-width: 575px) {
 				height: 2px;
 				width: 42px;
@@ -164,7 +189,7 @@
 			left: 0;
 			height: 100%;
 			width: 0;
-			background-color: #ac9e89;
+			background-color: #0d6efd;
 			transition: width 0.5s ease;
 		}
 
@@ -173,11 +198,13 @@
 			width: 100%;
 			transition: width 5s linear; // match Swiper autoplay delay (5000ms = 5s)
 		}
+
 		.swiper-pagination-bullet-active::before {
 			width: 100%;
 		}
 	}
 }
+
 .mySwiper {
 	@media (max-width: 575px) {
 		padding-bottom: 50px;
@@ -185,6 +212,7 @@
 		padding-right: 10px;
 	}
 }
+
 /************ slider buttons *******************/
 .para {
 	display: flex;
@@ -192,27 +220,34 @@
 	justify-content: flex-end;
 	width: 100%;
 	margin-top: 5px;
-	@media(max-width:1440px){
+
+	@media(max-width:1440px) {
 		margin-top: 4px;
 	}
-	@media(max-width:1199px){
+
+	@media(max-width:1199px) {
 		margin-top: 3px;
 	}
-	@media(max-width:767px){
+
+	@media(max-width:767px) {
 		margin-top: 0px;
 	}
+
 	p {
 		width: 75%;
+
 		@media (max-width: 2048px) {
 			width: 94%;
 		}
+
 		@media (max-width: 1920px) {
 			width: 100%;
 		}
 	}
 }
-.csmb80{
-	@media(max-width:575px){
+
+.csmb80 {
+	@media(max-width:575px) {
 		margin-bottom: 20px;
 	}
 }
@@ -226,55 +261,68 @@
 // 		margin-bottom: 20px;
 // 	}
 // }
-.size62{
-  font-size: 62px;
-  @media (max-width: 1600px) {
-    font-size: 52px;
-  }
-  @media (max-width: 1540px) {
-    font-size: 48px;
-  }
-  @media (max-width: 1440px) {
-    font-size: 46px;
-  }
-  @media (max-width: 1366px) {
-    font-size: 38px;
-  }
-  @media (max-width: 1024px) {
-    font-size: 36px;
-  }
-  @media (max-width: 991px) {
-    font-size: 32px;
-  }
-  @media (max-width: 768px) {
-    font-size: 28px;
-  }
+.size62 {
+	font-size: 62px;
+
+	@media (max-width: 1600px) {
+		font-size: 52px;
+	}
+
+	@media (max-width: 1540px) {
+		font-size: 48px;
+	}
+
+	@media (max-width: 1440px) {
+		font-size: 46px;
+	}
+
+	@media (max-width: 1366px) {
+		font-size: 38px;
+	}
+
+	@media (max-width: 1024px) {
+		font-size: 36px;
+	}
+
+	@media (max-width: 991px) {
+		font-size: 32px;
+	}
+
+	@media (max-width: 768px) {
+		font-size: 28px;
+	}
 
 }
 
-.size90{
-  font-size: 90px;
-  @media (max-width: 2048px) {
-    font-size: 80px;
-  }
-  @media (max-width: 1920px) {
-    font-size: 68px;
-  }
-  @media (max-width: 1600px) {
-    font-size: 58px;
-  }
-  @media (max-width: 1440px) {
-    font-size: 54px;
-  }
-  @media (max-width: 1366px) {
-    font-size: 48px;
-  }
+.size90 {
+	font-size: 90px;
 
-  @media (max-width: 1024px) {
-    font-size: 32px;
-  }
-  @media (max-width: 768px) {
-    font-size: 28px;
-  }
+	@media (max-width: 2048px) {
+		font-size: 80px;
+	}
+
+	@media (max-width: 1920px) {
+		font-size: 68px;
+	}
+
+	@media (max-width: 1600px) {
+		font-size: 58px;
+	}
+
+	@media (max-width: 1440px) {
+		font-size: 54px;
+	}
+
+	@media (max-width: 1366px) {
+		font-size: 48px;
+	}
+
+	@media (max-width: 1024px) {
+		font-size: 32px;
+	}
+
+	@media (max-width: 768px) {
+		font-size: 28px;
+	}
 
 }

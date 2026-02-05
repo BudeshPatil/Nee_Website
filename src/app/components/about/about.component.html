@@ -5,329 +5,347 @@
 		}">
 		<div class="position-absolute w-100 h-100">
 			<div class="overlay"></div>
-			<!-- <img
-			src="{{ imagePath }}/banner/{{ bannerData[0].media_data[0].src }}"
-			alt=""
-			class="img-fluid w-100 h-100 object-fit-cover"
-			/> -->
 		</div>
 		<div class="box-left">
 			<div class="content-block">
 				<p class="size16 cloud-white sora-regular mb-0 text-uppercase">
-					<!-- Our Interior Design Services -->
-					<!-- {{ servicesBannerData.name }} -->
-				About Neelgund
+					About Neelgund
 				</p>
-				<!-- <p class="size16 raisin-black sora-regular mb-0">OUR SERVICES</p> -->
 				<h1 class="nelphim-regular size90 cloud-white mb-0 short-desc-width">
-					<!-- Leading Interior Design Company in Dubai -->
 					{{ bannerData[0]?.short_desc }}
 				</h1>
 				<p class="size18 cloud-white sora-regular csmt30 mb-0 desc-width">
-					<!-- Neelgund Creates Luxurious, Functional Spaces That Inspire And
-					Elevate Lifestyles. As A Leading Interior Design Company In Dubai, We
-					Offer Interior Design Services For Residential, Commercial,
-					Educational, And Hospitality Projects With Precision, Creativity, And
-					Attention To Detail. -->
 					{{ bannerData[0]?.description }}
 				</p>
 			</div>
 		</div>
 	</div>
 </section>
-
-<section class="about bgcl-orange">
-	<div class="container-fluid h-100">
-		<div class="row h-100">
-			<div class="col-md-10 col-sm-11 col-11 mx-auto h-100">
-				<div class="row h-100">
-					<div class="col-lg-6 mb-5 mb-lg-0">
-						<div class="content" *ngIf="aboutData && aboutData.length > 0">
-							<div class="overflow-hidden">
-								<h2 class="size16 sora-regular raisin-black mb-0 text-uppercase">
-									<!-- MEET THE FOUNDER -->
-									{{ aboutData[0].desc_short }}
-								</h2>
-							</div>
-
-							<!-- <h1 class="size100 nelphim-regular raisin-black csmb36 w-50 ms-4 position-relative" style="line-height: normal;">
-									<span class="size100 nelphim-regular raisin-black position-absolute top-0 " style="left: -10%; line-height: normal;">"</span>
-									{{ aboutData[0].title_name }}
-									<span class="size100 nelphim-regular raisin-black position-absolute bottom-0" style="right: -5%; line-height: normal;">"</span>
-								</h1> -->
-
-							<div class="overflow-y-hidden d-flex csmb36 position-relative about-title">
-								<!-- <span class="nelphim-regular size100" style="line-height: 1"
-									>"</span
-								> -->
-								<h2 class=" size62 nelphim-regular raisin-black">
-									{{ aboutData[0].title_sign }}
-								</h2>
-							</div>
-
-							<div class="overflow-hidden mb-2 sora-regular raisin-black size16" [innerHTML]="aboutData[0].desc_long">
-								<!--<p class="sora-regular raisin-black para-width  size16">
-									{{ aboutData[0].desc_long }}
-									Pinar founded Neelgund in 2014, after a successful career
-									with international architectural consultants in Dubai as head
-									of the Interior Design Department.
-									<br />
-									<br />
-									Pinar is an architect who has developed her skills in interior
-									design, with her creative sense of space and design allowing
-									her to cultivate a deep understanding of meaningful interiors.
-									<br />
-									<br />
-									Pinar leads a team of creative designers from her studio in
-									Dubai, offering a full range of services spanning residential,
-									hospitality, commercial, and educational interior designs. 
-								</p> -->
-								<!-- <p class="sora-regular raisin-black para-width  size16"> 
-									Neelgund was founded in 2014 following years of experience leading the Interior Design Department at international architectural consultants in Dubai. With a background in architecture and a passion for interior design, spaces have always been understood as transformative, capable of shaping lives and creating meaningful experiences.
-								</p>
-								<p class="sora-regular raisin-black para-width  size16">
-								From our Dubai studio, a talented team of creative designers is led by a shared passion for excellence. Distinctive interiors are crafted across residential, hospitality, commercial and educational projects throughout the region.
-								</p>
-								<p class="sora-regular raisin-black para-width  size16">
-								Whether a home that reflects personality or a space that inspires, stories are welcomed, and something extraordinary can be created together.
-								</p> -->
-							</div>
-
-							<a class="btn-primary sora-regular size16 raisin-black mt-4" href="/contact">
-								Know More
-							</a>
-						</div>
-					</div>
-					<div class="col-lg-6 col-xl-5 ms-auto p-0 about-image-height" *ngIf="aboutData && aboutData.length > 0">
-						<div class="position-relative h-100">
-							<img src="{{ imagePath }}/about/{{ aboutData[0]?.image_banner }}" alt="{{ aboutData[0].title_name }}"
-								title="{{ aboutData[0].title_name }}" loading="lazy"
-								class="img-fluid w-100 mt-lg-0 mt-4 h-100 object-fit-cover content-animate" width="0" height="0" />
-							<div class="position-absolute bgcl-black w-100 founder-card">
-								<h3 class="nelphim-regular size38 csmb18 cloud-white text-capitalize">
-									{{ aboutData[0].title_name }}
-								</h3>
-								<p class="sora-regular size20 csmb26 cloud-white para-width gray-white">
-									Founder and Design Director of Neelgund, bringing over 15 years of distinguished experience in
-									interior architecture, crafting thoughtfully designed spaces that seamlessly blend functionality with
-									aesthetic excellence.
-								</p>
-								<div class="socials d-flex align-items-center">
-									<a href="https://www.instagram.com/neelgund/" target="_blank" rel="noopener noreferrer">
-										<img src="{{ baseUrl }}/assets/images/socials/instagram.svg" alt="Instagram" title="Instagram"
-											loading="lazy" class="img-fluid social-icon" width="24" height="24" />
-									</a>
-									<a href="https://www.facebook.com/neelgund/" target="_blank" rel="noopener noreferrer">
-										<img src="{{ baseUrl }}/assets/images/socials/facebook.svg" alt="Facebook" title="Facebook"
-											loading="lazy" class="img-fluid social-icon" width="24" height="24" />
-									</a>
-									<a href="https://www.linkedin.com/company/ph-design-me/" target="_blank" rel="noopener noreferrer">
-										<img src="{{ baseUrl }}/assets/images/socials/linkedin.svg" alt="Linkedin" title="Linkedin"
-											loading="lazy" class="img-fluid social-icon" width="24" height="24" />
-									</a>
-									<!-- <a href="">
-										<img
-											src="{{ baseUrl }}/assets/images/socials/youtube.svg"
-											alt="Youtube"
-											title="Youtube"
-											loading="lazy"
-											class="img-fluid social-icon"
-										/>
-									</a> -->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-<section class="ourDesign bgcl-secondary">
-	<img src="{{ baseUrl }}/assets/images/aboutus/ph-meet-the-founder-1.webp" alt="Meet the founder"
-		title="Meet the founder" class="img-fluid w-100 design-img" loading="lazy" width="0" height="0" />
-	<div class="container-fluid sectionpt sectionpb">
-		<div class="row">
-			<div class="col-md-10 col-sm-11 col-11 mx-auto">
-				<h3 class="sora-regular size16 raisin-black text-uppercase csmb12" data-aos="fade-up" data-aos-duration="1000">
-					Our design philosophy
-				</h3>
-				<p class="nelphim-regular size38 raisin-black para-width" data-aos="fade-up" data-aos-duration="1500">
-					Neelgund blends contemporary aesthetics with timeless elegance. We approach each project with precision,
-					artistry and a deep understanding of unique requirements of our clients. From conceptualisation to final
-					styling, our mission is to craft refined, functional and enduring spaces with practical design solutions.
-				</p>
-			</div>
-		</div>
-	</div>
-</section>
-
-<section class="ourValues sectionp bgcl-secondary">
+<section class="stats-section sectionp bgcl-secondary">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-10 col-sm-11 col-11 mx-auto">
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-12">
-						<div
-							class="d-flex align-items-lg-end align-items-start justify-content-between flex-lg-row flex-column csmb80">
-							<div class="head">
-								<h3 class="sora-regular size16 raisin-black text-uppercase mb-0" data-aos="fade-up"
-									data-aos-duration="1000">
-									Our Process
-								</h3>
-								<h4 class="nelphim-regular size62 raisin-black mb-0" data-aos="fade-up" data-aos-duration="1500">
-									Driven by Purpose, <span class="d-block"> Designed with Precision</span>
-								</h4>
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+
+				<!-- TITLE -->
+				<div class="row csmb60">
+					<div class="col-12 text-center">
+						<h2 class="nelphim-regular size62 raisin-black">
+							Building Dreams, Earning Trust —
+							<span class="d-block primary">Since 1984</span>
+						</h2>
+					</div>
+				</div>
+
+				<!-- STATS CARDS -->
+				<div class="row g-4">
+
+					<div class="col-lg-3 col-md-6">
+						<div class="stats-card">
+							<div class="stats-icon">
+								<i class="fas fa-vector-square"></i>
 							</div>
-							<!-- <a
-								href="/contact"
-								class="btn-primary sora-regular size16 raisin-black"
-								data-aos="fade-up"
-								data-aos-duration="1500"
-							>
-								Contact Us
-							</a> -->
+							<h3>5000<span>+</span></h3>
+							<h5>Plots</h5>
+							<p>
+								Successfully delivered over five thousand plots with unwavering
+								commitment to quality and precision.
+							</p>
 						</div>
 					</div>
-					<div class="col-md-12">
-						<div class="row">
-							<div class="col-lg-6 mb-lg-0 mb-4">
-								<img src="{{ baseUrl }}/assets/images/aboutus/ph-our-values-1.webp" alt="Our values" title="Our values"
-									class="img-fluid values-img scroll-animate sticky-image" loading="lazy" width="659" height="822" />
+
+					<div class="col-lg-3 col-md-6">
+						<div class="stats-card">
+							<div class="stats-icon">
+								<i class="fas fa-smile"></i>
 							</div>
-							<div class="col-xl-5 offset-xl-1 col-lg-6 mx-auto" data-aos="fade-up" data-aos-duration="2000">
-								<div class="content d-flex flex-column justify-content-center h-100">
-									<h4 class="sora-regular size38 raisin-black">
-										Integrity in Every Detail.
-									</h4>
-									<div class="">
-										<div class="border-bottom border-primary csmt80">
-											<h4 class="sora-regular size22 raisin-black csmb18">
-												PROJECT INITIATION
-											</h4>
-											<p class="sora-regular size16 gray csmb26">
-												Every project begins with a comprehensive discussion with the operator and owner to understand
-												their vision, identity, DNA and preferences.
-											</p>
-										</div>
-										<div class="border-bottom border-primary csmt80">
-											<h4 class="sora-regular size22 raisin-black csmb18">
-												RESEARCH AND IDEATION
-											</h4>
-											<p class="sora-regular size16 gray csmb26">
-												We create a distinct sense of place by understanding the culture, history and character of its
-												surroundings and inhabitants.
-											</p>
-										</div>
-										<div class="border-bottom border-primary csmt80">
-											<h4 class="sora-regular size22 raisin-black csmb18">
-												CREATIVE SPACE PLANNING
-											</h4>
-											<p class="sora-regular size16 gray csmb26">
-												Different zones and their relationships are developed through the creative process, considering
-												structure, size and orientation to maximise comfort and interaction.
-											</p>
-										</div>
+							<h3>3500<span>+</span></h3>
+							<h5>Happy Clients</h5>
+							<p>
+								Trusted by more than 3,500 satisfied customers with relationships
+								built to last.
+							</p>
+						</div>
+					</div>
 
+					<div class="col-lg-3 col-md-6">
+						<div class="stats-card">
+							<div class="stats-icon">
+								<i class="fas fa-award"></i>
+							</div>
+							<h3>40<span>+</span></h3>
+							<h5>Years Experience</h5>
+							<p>
+								Over four decades of excellence driven by resilience, dedication,
+								and expertise.
+							</p>
+						</div>
+					</div>
 
+					<div class="col-lg-3 col-md-6">
+						<div class="stats-card">
+							<div class="stats-icon">
+								<i class="fas fa-building"></i>
+							</div>
+							<h3>60<span>+</span></h3>
+							<h5>Projects</h5>
+							<p>
+								More than sixty successful development projects reflecting our
+								industry leadership.
+							</p>
+						</div>
+					</div>
 
-										<div class="border-bottom border-primary csmt80">
-											<h4 class="sora-regular size22 raisin-black csmb18">
-												DEVELOPING A FEEL AND MOOD
-											</h4>
-											<p class="sora-regular size16 gray csmb26">
-												The building and its surroundings shape our interior design approach. Architecture plays a major
-												part in determining our design, particularly the volume of space.
-											</p>
-										</div>
-										<div class="border-bottom border-primary csmt80">
-											<h4 class="sora-regular size22 raisin-black csmb18">
-												SKETCHING
-											</h4>
-											<p class="sora-regular size16 gray csmb26">
-												Pen to paper enables us to visualise and crystallise desired outcomes. We proceed with multiple
-												refinements until no detail is overlooked.
-											</p>
-										</div>
-										<div class="border-bottom border-primary csmt80">
-											<h4 class="sora-regular size22 raisin-black csmb18">
-												3D RENDERINGS
-											</h4>
-											<p class="sora-regular size16 gray csmb26">
-												Visual interpretations help clients understand the design clearly. Collectively, the exchange of
-												feedback smoothens the design phases and flow.
-											</p>
-										</div>
-									</div>
-								</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="sectionp bgcl-light">
+	<div class="container-fluid">
+		<div class="col-lg-10 mx-auto">
+			<div class="row align-items-center g-5">
+
+				<!-- TEXT -->
+				<div class="col-lg-6">
+					<h2 class="nelphim-regular size62 raisin-black csmb24">
+						Who We Are
+					</h2>
+
+					<p class="sora-regular size18 gray-text csmb36">
+						{{ whoWeAre.description }}
+					</p>
+
+					<div class="row g-4">
+						<div class="col-6">
+							<h4 class="size38 nelphim-regular primary">{{ whoWeAre.experience }}</h4>
+							<p>Experience</p>
+						</div>
+						<div class="col-6">
+							<h4 class="size38 nelphim-regular primary">{{ whoWeAre.regions.length }}+</h4>
+							<p>Cities</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- IMAGE -->
+				<div class="col-lg-6">
+					<img [src]="imagePath + '/about/who-we-are.jpg'" alt="Who We Are"
+						class="img-fluid rounded-4 shadow-lg w-100" />
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="sectionp bgcl-secondary">
+	<div class="container-fluid">
+		<div class="col-lg-10 mx-auto">
+
+			<div class="row align-items-center g-5">
+
+				<!-- IMAGE -->
+				<div class="col-lg-5">
+					<img [src]="imagePath + '/about/what-we-build.jpg'" alt="What We Build"
+						class="img-fluid rounded-4 w-100" />
+				</div>
+
+				<!-- CONTENT -->
+				<div class="col-lg-7">
+					<h2 class="nelphim-regular size62 csmb36">
+						What We Build
+					</h2>
+
+					<div class="row g-4">
+						<div class="col-md-6" *ngFor="let item of portfolioCategories">
+							<div class="stats-card">
+								<i class="fas {{ item.icon }} size38 primary csmb12"></i>
+								<h4>{{ item.title }}</h4>
+								<p>{{ item.count }}+ Projects</p>
 							</div>
 						</div>
 					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<section class="sectionp bgcl-light">
+	<div class="container-fluid">
+		<div class="col-lg-10 mx-auto">
+			<div class="row align-items-center g-5">
+				<!-- TEXT -->
+				<div class="col-lg-6">
+					<h2 class="nelphim-regular size62 csmb36">
+						Why Choose Us
+					</h2>
+					<div class="row g-3">
+						<div class="col-12" *ngFor="let reason of whyChooseUs">
+							<div class="d-flex align-items-start">
+								<i class="fa fa-check-circle primary me-3 mt-1"></i>
+								<p class="sora-regular size16 mb-0">{{ reason }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- IMAGE -->
+				<div class="col-lg-6">
+					<img [src]="imagePath + '/about/why-choose-us.jpg'" alt="Why Choose Us"
+						class="img-fluid rounded-4 shadow w-100" />
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<section class="ourTeam sectionp bgcl-secondary">
+<section class="sectionp bgcl-secondary">
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-10 col-sm-11 col-11 mx-auto">
-				<div class="row">
-					<div class="col-xl-5 col-lg-6 mb-lg-0 mb-4 team-content">
-						<h3 class="sora-regular size16 raisin-black mb-0 text-uppercase" data-aos="fade-up"
-							data-aos-duration="1000">
-							MEET THE TEAM
-						</h3>
-						<h4 class="nelphim-regular size62 raisin-black text-capitalize csmb36" data-aos="fade-up"
-							data-aos-duration="1500">
-							Crafting Exceptional
-							<br />Interiors Together
-						</h4>
-						<p class="sora-regular size18 raisin-black para-width" data-aos="fade-up" data-aos-duration="2000">
-							The Neelgund team combines creativity, technical expertise and meticulous attention to detail. Our
-							designers bring varied backgrounds across architecture and interior design, contributing specialised
-							knowledge to every project. We work as a unified studio, delivering exceptional results through close
-							collaboration.
-						</p>
-					</div>
-					<div class="col-xl-6 offset-xl-1 col-lg-6">
-						<div class="teamMembers">
-							<div class="row g-lg-5 g-3">
-								<div class="col-md-6 col-sm-6 col-6" *ngFor="let team of teamMembers">
-									<div class="team-image-container">
-										<img [src]="baseUrl + team.image" [alt]="team.name" [title]=""
-											class="img-fluid teamImg w-100 scroll-animate shadow-none" loading="lazy" width="0" height="0" />
-									</div>
-									<!-- <div class="team-content mt-2">
-										<h4
-											class="sora-regular size18 raisin-black mb-0 text-capitalize"
-										>
-											{{ team.name }} / {{ team.position }}
-										</h4>
-									</div> -->
-								</div>
-								<!-- <div class="col-md-12">
-									<div class="team-image-container">
-										<img
-											[src]="
-												baseUrl + '/assets/images/aboutus/ph-design-team.jpg'
-											"
-											alt="ph-design-team"
-											title="ph-design-team-image"
-											class="img-fluid teamImg w-100 scroll-animate shadow-none"
-											loading="lazy"
-											width="0"
-											height="0"
-										/>
-									</div>
-								</div> -->
-							</div>
-						</div>
-					</div>
+		<div class="col-lg-10 mx-auto text-center">
+
+			<h2 class="nelphim-regular size62 csmb48">
+				Vision, Mission & Values
+			</h2>
+
+			<div class="row g-4">
+				<div class="col-md-4">
+					<img src="{{ imagePath }}/about/vision.png" class="mb-3" width="60" />
+					<h4>Vision</h4>
+					<p>{{ visionMissionValues.vision }}</p>
+				</div>
+
+				<div class="col-md-4">
+					<img src="{{ imagePath }}/about/mission.png" class="mb-3" width="60" />
+					<h4>Mission</h4>
+					<p>{{ visionMissionValues.mission }}</p>
+				</div>
+
+				<div class="col-md-4">
+					<img src="{{ imagePath }}/about/values.png" class="mb-3" width="60" />
+					<h4>Values</h4>
+					<ul class="list-unstyled">
+						<li *ngFor="let val of visionMissionValues.values">{{ val }}</li>
+					</ul>
 				</div>
 			</div>
+
+		</div>
+	</div>
+</section>
+
+<section class="about-history sectionp bgcl-light" *ngIf="companyHistory">
+	<div class="container-fluid">
+		<div class="col-lg-10 col-md-11 mx-auto">
+
+			<div class="row mb-5">
+				<div class="col-lg-8">
+					<h2 class="nelphim-regular size62 raisin-black">
+						Our Story
+					</h2>
+					<p class="sora-regular size18 mt-3 gray-text">
+						{{ companyHistory.shortIntro }}
+					</p>
+				</div>
+			</div>
+
+			<div class="row g-5 align-items-center">
+				<div class="col-lg-6">
+					<div class="history-content sora-regular size16" [innerHTML]="companyHistory.fullDescription">
+					</div>
+				</div>
+
+				<div class="col-lg-6">
+					<img [src]="imagePath + '/about/' + companyHistory.image" alt="Company History"
+						class="img-fluid rounded-4 shadow-lg w-100" />
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+<section class="leader-section sectionp bgcl-orange" *ngIf="founder">
+	<div class="container-fluid">
+		<div class="col-lg-10 col-md-11 mx-auto">
+
+			<div class="row align-items-center g-5">
+				<div class="col-lg-5">
+					<img [src]="imagePath + '/about/' + founder.image" [alt]="founder.name"
+						class="img-fluid rounded-4 w-100" />
+				</div>
+
+				<div class="col-lg-7">
+					<span class="text-uppercase sora-regular size14 primary">
+						Message from the Founder
+					</span>
+
+					<h3 class="nelphim-regular size48 mt-3">
+						{{ founder.name }}
+					</h3>
+
+					<p class="sora-regular size18 fst-italic mt-4">
+						“{{ founder.quote }}”
+					</p>
+
+					<p class="sora-regular size16 mt-3 gray-text">
+						{{ founder.message }}
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<section class="leader-section sectionp bgcl-light" *ngIf="ceo">
+	<div class="container-fluid">
+		<div class="col-lg-10 col-md-11 mx-auto">
+
+			<div class="row align-items-center g-5 flex-lg-row-reverse">
+				<div class="col-lg-5">
+					<img [src]="imagePath + '/about/' + ceo.image" [alt]="ceo.name" class="img-fluid rounded-4 w-100" />
+				</div>
+
+				<div class="col-lg-7">
+					<span class="text-uppercase sora-regular size14 primary">
+						Message from the CEO
+					</span>
+
+					<h3 class="nelphim-regular size48 mt-3">
+						{{ ceo.name }}
+					</h3>
+
+					<p class="sora-regular size18 fst-italic mt-4">
+						“{{ ceo.quote }}”
+					</p>
+
+					<p class="sora-regular size16 mt-3 gray-text">
+						{{ ceo.message }}
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+<section class="pre-footer-cta">
+	<div class="container-fluid">
+		<div class="col-md-10 col-sm-11 col-11 mx-auto text-center">
+
+			<h2 class="nelphim-regular size48 cloud-white csmb20">
+				Ready to build your future with us?
+			</h2>
+
+			<p class="sora-light size18 gray-white csmb36">
+				Let’s create spaces that reflect purpose, precision, and permanence.
+			</p>
+
+			<a routerLink="/contact" class="cta-footer-btn sora-regular size16">
+				Schedule a Site Visit
+			</a>
 		</div>
 	</div>
 </section>

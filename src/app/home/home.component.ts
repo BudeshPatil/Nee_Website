@@ -107,6 +107,39 @@ export class HomeComponent {
       price: 7299,
     },
   ];
+  projectHighlights = [
+    {
+      name: 'Neelgund Green Valley',
+      location: 'Hubli – Dharwad',
+      area: '25 Acres',
+      plots: 320,
+      year: 2022,
+      dimensions: '30x40, 40x60',
+      amenities: [
+        'Black Top Roads',
+        'Underground Drainage',
+        'Parks & Open Spaces',
+        'Street Lighting',
+        '24/7 Security'
+      ],
+      image: 'assets/images/home/explore/explore-product-slide1.png'
+    },
+    {
+      name: 'Neelgund Prime Enclave',
+      location: 'Vidyanagar, Hubli',
+      area: '18 Acres',
+      plots: 210,
+      year: 2020,
+      dimensions: '30x50',
+      amenities: [
+        'Gated Community',
+        'Water Supply',
+        'Children Play Area'
+      ],
+      image: 'assets/images/home/explore/explore-product-slide2.png'
+    }
+  ];
+
   bannerData: any = [];
   aboutData: any = [];
   servicesData: any = [];
@@ -232,6 +265,29 @@ export class HomeComponent {
       'year': 2014
     }
   ];
+  whyChooseUs = {
+    title: 'Why Choose Us',
+    subtitle: 'Building trust through quality, transparency, and commitment',
+    points: [
+      {
+        title: 'On-Time Delivery',
+        desc: 'Every project is planned and executed with strict adherence to timelines.'
+      },
+      {
+        title: 'RERA Approved Projects',
+        desc: 'All developments comply with legal and regulatory standards.'
+      },
+      {
+        title: 'Premium Construction Quality',
+        desc: 'We use superior materials and modern construction practices.'
+      },
+      {
+        title: 'Transparent & Ethical Process',
+        desc: 'Clear pricing, honest communication, and complete documentation.'
+      }
+    ]
+  };
+
   currentValues: number[] = [];
   categories = [];
 
@@ -294,6 +350,7 @@ export class HomeComponent {
         new PureCounter(); // Initialize the counter
       }, 0);
       this.initBannerSwiper();
+      this.initProjectHighlightsSwiper();
       this.initTestimonialsSwiper();
       this.getAllClients();
       this.initPortfolioSwiper();
@@ -329,7 +386,7 @@ export class HomeComponent {
     setTimeout(() => {
       const swiperElement = document.querySelector('.banner-swiper');
       const slides = document.querySelectorAll('.banner-swiper .swiper-slide');
-      
+
       if (swiperElement && slides.length > 1) {
         this.bannerSwiper = new Swiper(".banner-swiper", {
           loop: true,
@@ -358,24 +415,61 @@ export class HomeComponent {
     }, 500);
   }
 
-  initTestimonialsSwiper() {
-    const swiper = new Swiper(".review-swiper", {
-      loop: true,
-      autoplay: { delay: 5000, disableOnInteraction: false },
-      pagination: {
-        el: ".review-pagination",
-        clickable: true,
-        renderBullet: function (index, className) {
-          return `<span class="${className}"></span>`;
+  initProjectHighlightsSwiper() {
+    if (this.isBrowser) {
+      new Swiper('.project-highlights-swiper', {
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 30,
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
         },
+        pagination: {
+          el: '.project-pagination',
+          clickable: true,
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 1,
+          },
+          992: {
+            slidesPerView: 1,
+          }
+        }
+      });
+    }
+  }
+
+  initTestimonialsSwiper() {
+    new Swiper('.review-swiper', {
+      loop: true,
+      centeredSlides: true,
+      slidesPerView: 3,
+      spaceBetween: 30,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
       },
-      on: {
-        slideChangeTransitionStart: function () {
-          document.querySelectorAll(".swiper-pagination-bullet::after");
+      pagination: {
+        el: '.review-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1200: {
+          slidesPerView: 3,
         },
       },
     });
   }
+
+
 
   public initPortfolioSwiper() {
     if (this.isBrowser) {

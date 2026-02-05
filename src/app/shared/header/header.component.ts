@@ -13,9 +13,11 @@ import { filter } from 'rxjs/operators';
 export class HeaderComponent implements OnInit, OnDestroy {
 	baseUrl = environment.url;
 	isScrolled = false;
+	isFleetOpen = false;
+	isSearchOpen = false;
 	menuOpen = false;
 	menuText = 'MENU';
-	invertRoutes = ['/services','/contact', '/journal', '/journal-detail'];
+	invertRoutes = ['/journal', '/journal-detail'];
 	hideHeader = false;
 	lastScrollTop = 0;
 	menuItems = [
@@ -30,11 +32,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	private routerSubscription: any;
 
 	constructor(
-		private router: Router,
+		public router: Router,
 		private renderer: Renderer2,
 		@Inject(DOCUMENT) private document: Document,
 		@Inject(PLATFORM_ID) private platformId: Object
-	) {}
+	) { }
 
 	@HostListener('window:scroll', [])
 	onScroll(): void {
@@ -55,16 +57,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		if (isPlatformBrowser(this.platformId)) {
 			this.currentRoute = window.location.pathname;
 			this.setMenuTextFromRoute(this.currentRoute);
-			
 		}
-		
 		this.routerSubscription = this.router.events.pipe(
 			filter(event => event instanceof NavigationEnd)
 		).subscribe((event: any) => {
 			this.currentRoute = event.url.split('?')[0];
 			this.setMenuTextFromRoute(this.currentRoute);
 		});
-		
 	}
 
 	ngOnDestroy() {
@@ -81,7 +80,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	}
 
 	private setMenuTextFromRoute(url: string) {
-		this.currentRoute = url.split('?')[0]; 
+		this.currentRoute = url.split('?')[0];
 		const currentItem = this.menuItems.find(item => item.path === this.currentRoute || (this.currentRoute.startsWith(item.path) && item.path !== '/'));
 		if (currentItem) {
 			this.menuText = currentItem.menuText;
@@ -125,7 +124,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	onMenuLeave() {
 		const currentRoute = window.location.pathname;
 		const currentItem = this.menuItems.find(item => item.path === currentRoute || (currentRoute.startsWith(item.path) && item.path !== '/'));
-		
+
 		if (!currentItem) {
 			this.menuText = 'MENU';
 		}

@@ -1,123 +1,38 @@
-<header
-	[class.sticky]="isScrolled"
-	[class.hide]="hideHeader"
-	[class.invert-logo]="shouldInvertLogo()"
->
-	<nav class="container-fluid">
-		<div class="row">
-			<div class="col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
-				<div class="d-flex align-items-center justify-content-between">
-					<a
-						href="/"
-						class="text-decoration-none cursor-pointer overflow-hidden"
-						[class.visible]="menuOpen"
-					>
-						<img
-							[src]="baseUrl + '/assets/images/home/ph-logo.svg'"
-							alt="PH Design Logo"
-							title="PH Design Logo"
-							loading="eager"
-							fetchpriority="high"
-							class="img-fluid logo ph-logo"
-							[class.invert-logo]="shouldInvertLogo()"
-							[class.sticky-logo]="isScrolled"
-							width="83"
-							height="60"
-						/>
-					</a>
-					<div
-						class="d-flex align-items-center justify-content-center gap-md-3 gap-2 menu-toggle"
-						(click)="toggleMenu()"
-						[class.visible]="menuOpen"
-					>
-						<p
-							class="text-capitalize size30 mb-0 nelphim-regular cloud-white menu-span"
-							[class.invert-logo]="shouldInvertLogo()"
-							[class.sticky-text]="isScrolled"
-						>
-							menu
-						</p>
-						<div class="menuIcon" [class.open]="menuOpen">
-							<span 
-							[class.invert-bg]="shouldInvertLogo()"
-							[class.sticky-bar]="isScrolled"
-							></span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<header [class.sticky]="isScrolled" [class.hide]="hideHeader" [class.invert-logo]="shouldInvertLogo()">
+  <nav class="nav-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-10 col-md-11 col-sm-11 col-11 mx-auto">
+          <div class="d-flex align-items-center justify-content-between">
 
-		<div
-			class="menuOverlay bgcl-grayish-orange"
-			[class.active]="menuOpen"
-			(click)="toggleMenuClose()"
-		>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
-						<div class="d-flex align-items-center justify-content-between">
-							<a
-								href="/"
-								class="text-decoration-none cursor-pointer overflow-hidden"
-							>
-								<img
-									[src]="baseUrl + '/assets/images/home/ph-logo.svg'"
-									alt="PH Design Logo"
-									title="PH Design Logo"
-									loading="eager"
-									fetchpriority="high"
-									class="img-fluid menu-logo ph-logo"
-									width="83"
-									height="60"
-								/>
-							</a>
-							<div
-								class="d-flex align-items-center justify-content-center gap-md-3 gap-2 menu-toggle menu-close-toggle"
-								(click)="toggleMenuClose()"
-							>
-								<h2
-									class="text-capitalize size30 mb-0 nelphim-regular cloud-white"
-								>
-									menu
-								</h2>
-								<lucide-icon name="x" class="size20 cloud-white close" />
-								<!-- <div class="closeIcon" [class.open]="menuOpen">
-									<span></span>
-								</div> -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+            <!-- LOGO -->
+            <a routerLink="/" class="logo-wrapper">
+              <!-- <img [src]="baseUrl + '/assets/images/home/ph-logo.svg'" alt="PH Design Logo" class="logo ph-logo"
+                width="83" height="60" /> -->
+              <!-- <h1>Neelgund</h1> -->
+            </a>
 
-			<div class="menuContent">
-				<div class="menuSpan overflow-hidden">
-					<span
-						class="size300 nelphim-regular cloud-white text-uppercase menu-text"
-						[innerHTML]="menuText"
-					></span>
-				</div>
-				<ul class="menuList">
-					<li class="menuItem" *ngFor="let item of menuItems">
-						<a
-							[routerLink]="item.path"
-							(click)="toggleMenu(); $event.stopPropagation()"
-							[style.transform]="
-								menuOpen ? 'translateY(0)' : 'translateY(100%)'
-							"
-							[style.transition]="
-								menuOpen ? 'transform 0.8s ease .8s' : 'transform 0.8s ease .2s'
-							"
-							class="menuLinks text-capitalize size38 nelphim-regular"
-							[routerLinkActive]="'active'"
-							[routerLinkActiveOptions]="{ exact: item.path === '/' }"
-						>
-							{{ item.label }}
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+            <!-- DESKTOP NAV -->
+            <ul class="nav d-none d-lg-flex">
+              <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+              <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+              <li><a routerLink="/services" routerLinkActive="active">Services</a></li>
+              <li>
+                <a routerLink="/product/search" routerLinkActive="active">
+                  Projects
+                </a>
+              </li>
+              <li><a routerLink="/contact" routerLinkActive="active">Contacts</a></li>
+            </ul>
+
+            <!-- MOBILE ACTION -->
+            <div class="mobile-actions d-flex d-lg-none">
+              <a routerLink="/contact" class="mobile-link">Contact</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>
