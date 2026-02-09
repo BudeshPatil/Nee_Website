@@ -1,77 +1,163 @@
-<div class="portfolio-container">
-	<nav
-		aria-label="Portfolio categories"
-		class="portfolio-navigation bgcl-grayish-orange"
-	>
-		<ul class="mb-0" role="tablist">
-			<li *ngFor="let category of servicesData" role="presentation">
-				<button
-					role="tab"
-					[attr.aria-selected]="isActive(category._id)"
-					[attr.aria-controls]="'tabpanel-' + category._id"
-					[id]="'tab-' + category._id"
-					(click)="selectCategory(category._id)"
-					class="sora-regular size16 text-uppercase cloud-white bg-transparent category-button p-0 mb-1"
-					[class.active]="isActive(category._id)"
-				>
-					{{ category.name.split(" ")[0] }}
-				</button>
-			</li>
-		</ul>
-	</nav>
+<!-- Hero Banner Section -->
+<section class="portfolio-hero" *ngIf="bannerData && bannerData.length > 0">
+	<div class="hero-content" [ngStyle]="{
+		'background-image': 'url(' + imagePath + 'banner/' + bannerData[0].media_data[0].src + ')'
+	}">
+		<div class="hero-overlay"></div>
+		<div class="hero-text">
+			<p class="hero-label sora-regular">Our Portfolio</p>
+			<h1 class="nelphim-regular">{{ bannerData[0]?.short_desc }}</h1>
+			<p class="hero-description">{{ bannerData[0]?.description }}</p>
+		</div>
+	</div>
+</section>
+<!-- Projects Grid Section -->
+<section class="projects-grid-section">
+	<div class="container">
+		<div class="col-lg-10 col-md-11 mx-auto">
 
-	<div class="swiper-container bgcl-primary">
-		<swiper-container #swiperContainer init="false" class="mySwiper">
-			<ng-container *ngIf="projects.length > 0;">
-				<swiper-slide
-					*ngFor="let project of projects; let i = index"
-					class="portfolio-slide"
-					lazy="true"
-					[attr.data-index]="i"
-				>
-					<div class="portfolio-item">
-						<div class="portfolio-img position-relative">
-							<div class="overlay"></div>
-							<img
-								[src]="imagePath + 'project/' + project.image"
-								[alt]="project.name"
-								[title]="project.name"
-								class="img-fluid h-100 w-100 object-fit-cover"
-								loading="lazy"
-								(click)="selectProject(project.url_key)" width="0" height="0"
-							/>
+			<!-- Section Header -->
+			<div class="grid-header mb-5">
+				<div class="row align-items-center">
+					<div class="col-md-6">
+						<div>
+							<p class="section-label sora-regular mb-2">Discover Our Work</p>
+							<h2 class="nelphim-regular mb-0">All Projects</h2>
 						</div>
-						<div class="portfolio-content csmb80">
-							<div class="row">
-								<div class="col-md-10 col-sm-11 col-11 mx-auto">
-									<h3
-										class="sora-regular size16 text-uppercase cloud-white mb-0"
-									>
-										{{ project.category_data }} | {{ project.year }}
-									</h3>
-									<p
-										class="nelphim-regular size62 text-capitalize cloud-white csmb26"
-									>
-										{{ project.name }}
-									</p>
-									<a
-										href="project/project-details/{{ project.url_key }}"
-										class="btn-secondary"
-									>
-										Know More
-									</a>
+					</div>
+					<div class="col-md-6 text-md-end mt-3 mt-md-0">
+						<p class="text-muted sora-regular">Showing <strong>{{ allProjects.length }}</strong> of
+							<strong>{{ allProjects.length }}</strong> projects
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Filters & Sort -->
+			<div class="controls-bar mb-4">
+				<div class="row g-3 align-items-end">
+					<!-- Category Filter -->
+					<div class="col-lg-4">
+						<label class="form-label sora-regular mb-2">Category</label>
+						<div class="category-filter-wrapper">
+							<button *ngFor="let cat of servicesData" class="filter-pill"
+								[class.active]="isActive(cat._id)" (click)="selectCategory(cat._id)">
+								{{ cat.name }}
+							</button>
+						</div>
+					</div>
+
+					<!-- Sort Dropdown -->
+					<div class="col-lg-4">
+						<label class="form-label sora-regular mb-2">Sort By</label>
+						<select class="form-select" [value]="sortOption" (change)="setSort($any($event.target).value)">
+							<option value="latest">Latest Projects</option>
+							<option value="oldest">Oldest First</option>
+							<option value="name">Name A-Z</option>
+						</select>
+					</div>
+
+					<!-- Results Count -->
+					<div class="col-lg-4 text-end">
+						<div class="results-count">
+							<span class="sora-regular">{{ totalPages }} page<span
+									*ngIf="totalPages !== 1">s</span></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Project Cards Grid -->
+			<div class="projects-cards-grid">
+				<div class="row g-4">
+					<div class="col-lg-4 col-md-6" *ngFor="let project of allProjects">
+						<div class="project-card">
+							<div class="card-image-wrapper">
+								<img [src]="imagePath + 'project/' + project.image" [alt]="project.name"
+									class="card-image" loading="lazy" (click)="selectProject(project.url_key)" />
+
+								<!-- status badge top-left -->
+								<div class="card-badge" *ngIf="project.status || project.is_featured">
+									{{ project.year }}
+								</div>
+
+								<!-- brand/logo top-right (optional) -->
+								<div class="card-brand" *ngIf="project.brand_image">
+									<img [src]="imagePath + 'brand/' + project.brand_image" alt="brand" />
+								</div>
+
+								<div class="card-overlay"></div>
+							</div>
+
+							<div class="card-body">
+								<!-- <div class="card-price-row d-flex justify-content-between align-items-start">
+									<div class="price-label sora-regular">{{ project.price_text || 'Price on Request' }}</div>
+									<div class="chip category-chip">{{ project.category_data }}</div>
+								</div> -->
+
+								<div class="card-header">
+									<h3 class="sora-regular mb-1" (click)="selectProject(project.url_key)">{{ project.name }}</h3>
+									<p class="category-label sora-regular"><i class="fas fa-map-marker-alt me-2"></i>{{ project.location }}</p>
+								</div>
+
+								<!-- details row -->
+								<div class="project-details-row d-flex gap-3">
+									<div class="detail compact" *ngIf="project.area">
+										<i class="fas fa-ruler"></i>
+										<span>{{ project.area }}</span>
+									</div>
+									<div class="detail compact" *ngIf="project.noofplots || project.plots">
+										<i class="fas fa-th"></i>
+										<span>{{ project.noofplots || project.plots }} Plots</span>
+									</div>
+									<div class="detail compact" *ngIf="project.amenties || project.amenities">
+										<i class="fas fa-leaf"></i>
+										<span>{{ project.amenties || project.amenities }}</span>
+									</div>
+								</div>
+
+								<div class="card-footer d-flex justify-content-between align-items-center mt-3 gap-2">
+									<button class="price-btn sora-regular">{{ project.price_text || 'Price on Request' }}</button>
+									<div class="d-flex gap-2">
+										<a [href]="'https://wa.me/' + (project.contact_number || '918050238777')" target="_blank" class="call-btn whatsapp-btn" title="Contact on WhatsApp">
+											<i class="fab fa-whatsapp"></i>
+										</a>
+										<a [href]="'tel:' + (project.contact_number || '+918050238777')" class="call-btn">
+											<i class="fas fa-phone"></i>
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</swiper-slide>
-			</ng-container>
+				</div>
 
-			<ng-template #noItems *ngIf="projects.length == 0;">
-				<swiper-slide>
-					<div class="no-items">No items found in this category</div>
-				</swiper-slide>
-			</ng-template>
-		</swiper-container>
+				<!-- No Projects Message -->
+				<div class="no-projects" *ngIf="allProjects.length === 0">
+					<p class="sora-regular">No projects found in this category.</p>
+				</div>
+			</div>
+
+			<!-- Pagination -->
+			<nav class="pagination-nav mt-5" *ngIf="totalPages > 1">
+				<div class="pagination-wrapper">
+					<button class="btn-prev" [disabled]="currentPage === 1" (click)="changePage(-1)">
+						<i class="fas fa-chevron-left"></i> Previous
+					</button>
+
+					<div class="page-numbers">
+						<button *ngFor="let page of pages" class="page-number" [class.active]="currentPage === page"
+							(click)="goToPage(page)">
+							{{ page }}
+						</button>
+					</div>
+
+					<button class="btn-next" [disabled]="currentPage === totalPages" (click)="changePage(1)">
+						Next <i class="fas fa-chevron-right ms-2"></i>
+					</button>
+				</div>
+			</nav>
+
+		</div>
 	</div>
-</div>
+</section>

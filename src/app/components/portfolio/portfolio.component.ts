@@ -33,11 +33,16 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   servicesData: any = [];
   selectedCategory: string = 'all';
 
-  allProjects: { [key: string]: any[] } = {};
+  allProjects: any = [];
   projects: any[] = [];
 
   activecategory: string = '';
-
+  bannerData: any = [];
+  totalPages: any;
+  currentPage: any;
+  pages: any;
+  displayedList: any = [];
+  sortOption: any;
   constructor(
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -49,6 +54,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   ) {
     this.getAllprojects();
     this.getAllServices();
+    this.getBannerdata();
     this.route.params.subscribe(params => {
       this.activecategory = params['category'] || '';
     });
@@ -77,6 +83,33 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
 
   selectProject(url_key: string): void {
     this.router.navigate(['/project/project-details', url_key]);
+  }
+
+  changePage(i) {
+
+  }
+
+  goToPage(p) {
+
+  }
+
+  setSort(s) {
+
+  }
+
+  getBannerdata() {
+    let obj = {};
+    this.dataService.getAllBanner(obj).subscribe((response: any) => {
+      if (response.code == 200) {
+        if (response.result != null && response.result.length > 0) {
+          let tempcat = response.result.filter((cat: any) => cat.name == 'about');
+          if (tempcat && tempcat.length > 0) {
+            this.bannerData = tempcat;
+          }
+        } else {
+        }
+      }
+    });
   }
 
   // private setupImageLoading(): void {
@@ -175,15 +208,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         if (response.code === 200 && response.result) {
-          this.allProjects = {};
-          response.result.forEach((project: any) => {
-            const catId = project.category || 'uncategorized';
-            if (!this.allProjects[catId]) {
-              this.allProjects[catId] = [];
-            }
-            this.allProjects[catId].push(project);
-          });
-
+          this.allProjects = response.result;
 
           this.updateDisplayedItems();
         }

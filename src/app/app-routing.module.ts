@@ -25,9 +25,9 @@ const routes: Routes = [
 		data: { pageName: 'services' }
 	},
 	{
-		path: 'portfolio',
+		path: 'projects',
 		component: PortfolioComponent,
-		data: { pageName: 'portfolio' }
+		data: { pageName: 'projects' }
 	},
 	{
 		path: 'portfolio/:category',
