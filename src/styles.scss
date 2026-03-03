@@ -504,7 +504,7 @@ body.no-scroll {
  
 // ================================= Background colors ========================
 .bgcl-primary {
-  background-color: $cloud-white;
+  background-color: #f8f9fb;
 }
 .bgcl-black {
   background-color:$raisin-black;
@@ -517,6 +517,9 @@ body.no-scroll {
 }
 .bgcl-grayish-orange {
   background-color:$grayish-orange;
+}
+.text-secondary {
+  color: #0665e3 !important;
 }
 // .bg-beige {
 //   background-color: $text-beige;

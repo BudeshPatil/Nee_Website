@@ -37,20 +37,15 @@
 	</div>
 </section>
 
-<section class="stats-section sectionp bgcl-secondary">
+<section class="stats-section sectionp bgcl-primary">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
 
-				<!-- TITLE -->
-				<div class="row csmb60">
-					<div class="col-12 text-center">
-						<h2 class="nelphim-regular size62 raisin-black">
-							Building Dreams, Earning Trust —
-							<span class="d-block primary">Since 1984</span>
-						</h2>
-					</div>
-				</div>
+				<div class="text-center mb-5">
+					<h2 class="stats-title">Building Dreams, Earning Trust — <span class="text-secondary"> Since 1982</span>
+					</h2>
+			</div>
 
 				<!-- STATS CARDS -->
 				<div class="row g-4">
@@ -58,7 +53,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="stats-card">
 							<div class="stats-icon">
-								<i class="fas fa-vector-square"></i>
+								<i class="fas fa-vector-square text-secondary"></i>
 							</div>
 							<h3>5000<span>+</span></h3>
 							<h5>Plots</h5>
@@ -72,7 +67,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="stats-card">
 							<div class="stats-icon">
-								<i class="fas fa-smile"></i>
+								<i class="fas fa-smile text-secondary"></i>
 							</div>
 							<h3>3500<span>+</span></h3>
 							<h5>Happy Clients</h5>
@@ -86,7 +81,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="stats-card">
 							<div class="stats-icon">
-								<i class="fas fa-award"></i>
+								<i class="fas fa-award text-secondary"></i>
 							</div>
 							<h3>40<span>+</span></h3>
 							<h5>Years Experience</h5>
@@ -100,7 +95,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="stats-card">
 							<div class="stats-icon">
-								<i class="fas fa-building"></i>
+								<i class="fas fa-building text-secondary"></i>
 							</div>
 							<h3>60<span>+</span></h3>
 							<h5>Projects</h5>
@@ -119,6 +114,16 @@
 </section>
 <section class="about sectionp bgcl-primary" *ngIf="aboutData && aboutData.length > 0">
 	<div class="container-fluid">
+		<!-- SECTION TITLE -->
+		  <!-- Section Title -->
+			<div class="container section-title text-center fw-bold" data-aos="fade-up">
+					<span class="description-title">Neelgund Developers</span>
+					<h2 class="text-primary">A Legacy Built on Trust</h2>
+					<p class="section-subtitle">
+							Four decades of commitment, integrity, and excellence in real estate
+					</p>
+			</div>
+			
 		<div class="col-xl-10 col-lg-10 col-md-11 col-sm-11 col-11 mx-auto">
 
 			<div class="row align-items-center" *ngFor="let about of aboutData">

@@ -1,174 +1,86 @@
-import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  AfterViewInit,
+  OnDestroy,
+  PLATFORM_ID,
+  ChangeDetectorRef
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../../environments/environment';
 import { ProjectService } from '../../../providers/project/project.service';
-import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Swiper } from 'swiper';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { SeoService } from '../../../providers/seo/seo.service';
+import Swiper from 'swiper';
+import { Autoplay, Pagination } from 'swiper/modules';
 import * as AOS from 'aos';
+
 @Component({
-	selector: 'app-project-details',
-	templateUrl: './project-details.component.html',
-	styleUrl: './project-details.component.scss'
+  selector: 'app-project-details',
+  templateUrl: './project-details.component.html',
+  styleUrl: './project-details.component.scss'
 })
-export class ProjectDetailsComponent implements OnInit {
-	baseUrl: any;
-	url_key: any;
-	projectData: any;
-	imagePath: any;
-	recentProjects: any[] = [];
-	isBrowser: boolean;
-	private mySwiper: Swiper | null = null;
+export class ProjectDetailsComponent
+  implements OnInit, AfterViewInit, OnDestroy {
 
+  projectData: any;
+  recentProjects: any[] = [];
+  imagePath = environment.baseUrl + '/public/';
+  private swiper: Swiper | null = null;
+  isBrowser = false;
 
-	constructor(public projectService: ProjectService,
-		@Inject(PLATFORM_ID) private _platformId: Object,
-		private http: HttpClient,
-		private router: Router,
-		private route: ActivatedRoute,
-		private seo: SeoService,
-		private cdr: ChangeDetectorRef
-	) {
-		this.isBrowser = isPlatformBrowser(this._platformId);
-		if (this.isBrowser) {
-			gsap.registerPlugin(ScrollTrigger);
-		}
-		this.baseUrl = environment.url;
-		this.url_key = this.route.snapshot.params['url_key'];
-		this.imagePath = environment.baseUrl + '/public/';
-		// this.url_key = this.route.snapshot.params['url_key'];
-		// this.backendURL = environment.baseUrl +'/public/';
-	}
-	togethers = [
-		{
-			'id': '01',
-			'name': 'Project Name',
-			'description': 'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Mattis Ligula Pellentesque Nisi Tristique Porta.',
-			'img_url': 'assets/images/home/journal1.png',
-			'url_key': 'services'
-		},
-		{
-			'id': '02',
-			'name': 'Project Name',
-			'description': 'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Mattis Ligula Pellentesque Nisi Tristique Porta.',
-			'img_url': 'assets/images/home/journal2.png',
-			'url_key': 'services'
-		},
-		{
-			'id': '03',
-			'name': 'Project Name',
-			'description': 'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Mattis Ligula Pellentesque Nisi Tristique Porta.',
-			'img_url': 'assets/images/home/journal3.png',
-			'url_key': 'services'
-		}
-	];
-onImageLoad() {
-  AOS.refresh();
-}
+  constructor(
+    private route: ActivatedRoute,
+    private projectService: ProjectService,
+    private seo: SeoService,
+    private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
-	ngOnInit(): void {
-		if (this.isBrowser) {
-			const urlKey = this.route.snapshot.paramMap.get('url_key')!;
-			const path = `/project/${urlKey}`;
-			this.seo.updateProjectMeta(urlKey, path);
+  ngOnInit(): void {
+    if (!this.isBrowser) return;
 
-			this.route.params.subscribe(() => {
-				this.loadData();
-				window.scrollTo(0, 0);
-			});
-		}
-	}
-	ngAfterViewInit(): void {
-		if (!this.isBrowser) return;
-		if (!isPlatformBrowser(this._platformId)) return;
-		setTimeout(() => {
-			this.initmySwiper();
-			// this.initScrollTrigger();
-		}, 500);
-	}
+    this.route.params.subscribe(() => {
+      this.loadProject();
+      window.scrollTo(0, 0);
+    });
+  }
 
-	public initmySwiper() {
-		if (this.isBrowser) {
-			Swiper.use([Autoplay, Pagination, Navigation]);
+  ngAfterViewInit(): void {
+    if (!this.isBrowser) return;
 
-			document.querySelectorAll('.mySwiper').forEach((el) => {
-				new Swiper(el as HTMLElement, {
-					slidesPerView: 1,
-					loop: true,
-					spaceBetween: 30,
-					// centeredSlides: true,
-					grabCursor: true,
-					autoplay: { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true },
-					pagination: {
-						el: '.swiper-pagination',
-						clickable: true,
-					},
-					navigation: {
-						nextEl: ".mySwiper-next",
-						prevEl: ".mySwiper-prev"
-					}
-				});
-			});
-		}
-	}
-	ngOnDestroy() {
-		if (this.mySwiper) {
-			this.mySwiper?.destroy(true, true);
-			this.mySwiper = null;
-		}
-	}
-	initAnimations(): void {
-		const scrollElems = gsap.utils.toArray('.scroll-animate') as HTMLElement[];
-		scrollElems.forEach((el) => {
-			gsap.from(el, {
-				clipPath: 'inset(0 0 100% 0)',
-				ease: 'power3.out',
-				duration: 1.5,
-				scrollTrigger: {
-					trigger: el,
-					start: 'top 80%',
-					end: 'top 20%',
-				}
-			});
-		});
-	}
-	loadData(): void {
-		this.projectService.getProjectsByURL({ url_key: this.route.snapshot.params['url_key'] })
-			.subscribe((response) => {
-				if (response.code === 200 && response.result) {
-					this.projectData = response.result;
-					this.recentProjects = this.projectData.related_prjects;
-					this.imagePath = this.imagePath;
+    setTimeout(() => {
+      Swiper.use([Autoplay, Pagination]);
+      this.swiper = new Swiper('.mySwiper', {
+        slidesPerView: 1,
+        loop: true,
+        autoplay: { delay: 5000 },
+        pagination: { el: '.swiper-pagination', clickable: true }
+      });
+    }, 500);
+  }
 
-					// Force Angular to render DOM first
-					this.cdr.detectChanges();
+  loadProject(): void {
+    const urlKey = this.route.snapshot.paramMap.get('url_key')!;
+    this.projectService.getProjectsByURL({ url_key: urlKey }).subscribe(res => {
+      if (res?.code === 200) {
+        this.projectData = res.result;
+        this.recentProjects = res.result.related_prjects || [];
+        this.seo.updateProjectMeta(urlKey, `/project/${urlKey}`);
+        this.cdr.detectChanges();
+      }
+    });
+  }
 
-					// Now safe to run animations
-					// setTimeout(() => this.initAnimations(), 100);
-				}
-			});
-	}
-	get_projectData() {
-		let obj = {
-			url_key: this.url_key
-		}
-		this.projectService.getProjectsByURL(obj).subscribe(
-			(response) => {
-				if (response.code == 200) {
-					if (response.result != null && response.result != '') {
-						this.projectData = response.result;
-						this.recentProjects = this.projectData.related_prjects;
+  onImageLoad(): void {
+    if (this.isBrowser) AOS.refresh();
+  }
 
-						// this.loadProject();
-					}
-					else {
-					}
-				}
-			},
-		);
-	}
+  ngOnDestroy(): void {
+    this.swiper?.destroy(true, true);
+    this.swiper = null;
+  }
 }

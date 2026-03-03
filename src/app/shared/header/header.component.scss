@@ -11,7 +11,7 @@ header {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: transparent;
+  background: #ffffff;
   transition: background 0.3s ease, transform 0.3s ease;
 
   &.sticky {
@@ -96,3 +96,68 @@ body {
     padding-top: 90px;
   }
 }
+
+/*** Topbar End ***/
+
+/* Sticky header */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  /* Higher than content */
+  background: #fff;
+}
+
+/* Optional shadow on scroll */
+.sticky-header {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/*** Navbar Start ***/
+.navbar .navbar-nav {
+  padding: 15px 0;
+}
+
+.navbar .navbar-nav .nav-link {
+  padding: 10px;
+  color: var(--bs-primary);
+  font-size: 18px;
+  outline: none;
+
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+  color: var(--bs-secondary) !important;
+}
+
+.navbar .dropdown-toggle::after {
+  border: none;
+  content: "\f107";
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+@media (min-width: 992px) {
+  .navbar .nav-item .dropdown-menu {
+    display: block;
+    visibility: hidden;
+    top: 100%;
+    transform: rotateX(-75deg);
+    transform-origin: 0% 0%;
+    transition: .5s;
+    opacity: 0;
+  }
+}
+
+.navbar .nav-item:hover .dropdown-menu {
+  transform: rotateX(0deg);
+  visibility: visible;
+  transition: .5s;
+  opacity: 1;
+}
+
+/*** Navbar End ***/
