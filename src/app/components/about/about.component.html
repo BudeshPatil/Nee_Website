@@ -1,4 +1,4 @@
-<section class="about-section hero-bannerservice bgcl-primary" *ngIf="bannerData && bannerData.length > 0">
+<!-- <section class="about-section hero-bannerservice bgcl-primary" *ngIf="bannerData && bannerData.length > 0">
 	<div class="content position-relative h-100" *ngIf="bannerData" [ngStyle]="{
 			'background-image':
 				'url(' + imagePath + 'banner/' + bannerData[0].media_data[0].src + ')'
@@ -20,21 +20,30 @@
 			</div>
 		</div>
 	</div>
-</section>
-<section class="stats-section sectionp bgcl-secondary">
+</section> -->
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5">
+	<div class="container text-center py-5">
+		<h1 class="display-2 text-white mb-4 animated slideInDown">About</h1>
+		<nav aria-label="breadcrumb animated slideInDown">
+			<ol class="breadcrumb justify-content-center mb-0">
+				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="#">Pages</a></li>
+				<li class="breadcrumb-item" aria-current="page">About</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+<!-- Page Header End -->
+<section class="stats-section bgcl-secondary">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
 
-				<!-- TITLE -->
-				<div class="row csmb60">
-					<div class="col-12 text-center">
-						<h2 class="nelphim-regular size62 raisin-black">
-							Building Dreams, Earning Trust —
-							<span class="d-block primary">Since 1984</span>
-						</h2>
-					</div>
-				</div>
+				<div class="text-center mb-5">
+					<h2 class="stats-title">Building Dreams, Earning Trust — <span class="text-secondary"> Since 1982</span>
+					</h2>
+			</div>
 
 				<!-- STATS CARDS -->
 				<div class="row g-4">
@@ -102,40 +111,53 @@
 	</div>
 </section>
 
-<section class="sectionp bgcl-light">
+<section class="about section bgcl-primary" *ngIf="aboutData && aboutData.length > 0">
 	<div class="container-fluid">
-		<div class="col-lg-10 mx-auto">
-			<div class="row align-items-center g-5">
-
-				<!-- TEXT -->
-				<div class="col-lg-6">
-					<h2 class="nelphim-regular size62 raisin-black csmb24">
-						Who We Are
-					</h2>
-
-					<p class="sora-regular size18 gray-text csmb36">
-						{{ whoWeAre.description }}
+		<!-- SECTION TITLE -->
+		  <!-- Section Title -->
+			<div class="container section-title text-center fw-bold" data-aos="fade-up">
+					<span class="description-title">Neelgund Developers</span>
+					<h2 class="text-primary">A Legacy Built on Trust</h2>
+					<p class="section-subtitle">
+							Four decades of commitment, integrity, and excellence in real estate
 					</p>
+			</div>
+			
+		<div class="col-xl-10 col-lg-10 col-md-11 col-sm-11 col-11 mx-auto">
 
-					<div class="row g-4">
-						<div class="col-6">
-							<h4 class="size38 nelphim-regular primary">{{ whoWeAre.experience }}</h4>
-							<p>Experience</p>
-						</div>
-						<div class="col-6">
-							<h4 class="size38 nelphim-regular primary">{{ whoWeAre.regions.length }}+</h4>
-							<p>Cities</p>
-						</div>
+			<div class="row align-items-center" *ngFor="let about of aboutData">
+
+				<!-- IMAGE (LEFT) -->
+				<div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+					<div class="about-image-wrapper">
+						<img [src]="imagePath + 'about/' + about.image_banner" [alt]="about.title_sign"
+							class="img-fluid about-main-image" loading="lazy" />
 					</div>
 				</div>
 
-				<!-- IMAGE -->
-				<div class="col-lg-6">
-					<img [src]="imagePath + '/about/who-we-are.jpg'" alt="Who We Are"
-						class="img-fluid rounded-4 shadow-lg w-100" />
+				<!-- CONTENT (RIGHT) -->
+				<div class="col-lg-6 col-md-12">
+					<div class="about-content">
+
+						<p class="size16 sora-regular raisin-black text-uppercase csmb12">
+							{{ about.desc_short }}
+						</p>
+
+						<h2 class="nelphim-regular size62 raisin-black csmb24">
+							{{ about.title_sign }}
+						</h2>
+
+						<div class="sora-regular size18 raisin-black csmb36" [innerHTML]="about.desc_long"></div>
+
+						<a routerLink="/about" class="btn-primary raisin-black">
+							Know More
+						</a>
+
+					</div>
 				</div>
 
 			</div>
+
 		</div>
 	</div>
 </section>
@@ -148,7 +170,7 @@
 
 				<!-- IMAGE -->
 				<div class="col-lg-5">
-					<img [src]="imagePath + '/about/what-we-build.jpg'" alt="What We Build"
+					<img src="../../assets/image/about.jpg" alt="What We Build"
 						class="img-fluid rounded-4 w-100" />
 				</div>
 
@@ -161,7 +183,7 @@
 					<div class="row g-4">
 						<div class="col-md-6" *ngFor="let item of portfolioCategories">
 							<div class="stats-card">
-								<i class="fas {{ item.icon }} size38 primary csmb12"></i>
+								<i class="fas {{ item.icon }} size38 text-secondary csmb12"></i>
 								<h4>{{ item.title }}</h4>
 								<p>{{ item.count }}+ Projects</p>
 							</div>
@@ -187,7 +209,7 @@
 					<div class="row g-3">
 						<div class="col-12" *ngFor="let reason of whyChooseUs">
 							<div class="d-flex align-items-start">
-								<i class="fa fa-check-circle primary me-3 mt-1"></i>
+								<i class="fa fa-check-circle text-secondary me-3 mt-1"></i>
 								<p class="sora-regular size16 mb-0">{{ reason }}</p>
 							</div>
 						</div>
@@ -195,7 +217,7 @@
 				</div>
 				<!-- IMAGE -->
 				<div class="col-lg-6">
-					<img [src]="imagePath + '/about/why-choose-us.jpg'" alt="Why Choose Us"
+					<img src="../../assets/image/about.jpg" alt="Why Choose Us"
 						class="img-fluid rounded-4 shadow w-100" />
 				</div>
 			</div>
@@ -213,19 +235,19 @@
 
 			<div class="row g-4">
 				<div class="col-md-4">
-					<img src="{{ imagePath }}/about/vision.png" class="mb-3" width="60" />
+					<i class="fas fa-building text-secondary"></i>
 					<h4>Vision</h4>
 					<p>{{ visionMissionValues.vision }}</p>
 				</div>
 
 				<div class="col-md-4">
-					<img src="{{ imagePath }}/about/mission.png" class="mb-3" width="60" />
+					<i class="fas fa-building text-secondary"></i>
 					<h4>Mission</h4>
 					<p>{{ visionMissionValues.mission }}</p>
 				</div>
 
 				<div class="col-md-4">
-					<img src="{{ imagePath }}/about/values.png" class="mb-3" width="60" />
+					<i class="fas fa-building text-secondary"></i>
 					<h4>Values</h4>
 					<ul class="list-unstyled">
 						<li *ngFor="let val of visionMissionValues.values">{{ val }}</li>
@@ -259,7 +281,7 @@
 				</div>
 
 				<div class="col-lg-6">
-					<img [src]="imagePath + '/about/' + companyHistory.image" alt="Company History"
+					<img src="../../assets/image/about.jpg" alt="Company History"
 						class="img-fluid rounded-4 shadow-lg w-100" />
 				</div>
 			</div>
@@ -273,7 +295,7 @@
 
 			<div class="row align-items-center g-5">
 				<div class="col-lg-5">
-					<img [src]="imagePath + '/about/' + founder.image" [alt]="founder.name"
+					<img src="../../assets/image/about_md.png" [alt]="founder.name"
 						class="img-fluid rounded-4 w-100" />
 				</div>
 
@@ -306,7 +328,7 @@
 
 			<div class="row align-items-center g-5 flex-lg-row-reverse">
 				<div class="col-lg-5">
-					<img [src]="imagePath + '/about/' + ceo.image" [alt]="ceo.name" class="img-fluid rounded-4 w-100" />
+					<img src="../../assets/image/md_2.jpeg" [alt]="ceo.name" class="img-fluid rounded-4 w-100" />
 				</div>
 
 				<div class="col-lg-7">
@@ -331,7 +353,7 @@
 		</div>
 	</div>
 </section>
-<section class="pre-footer-cta">
+<!-- <section class="pre-footer-cta">
 	<div class="container-fluid">
 		<div class="col-md-10 col-sm-11 col-11 mx-auto text-center">
 
@@ -346,6 +368,27 @@
 			<a routerLink="/contact" class="cta-footer-btn sora-regular size16">
 				Schedule a Site Visit
 			</a>
+		</div>
+	</div>
+</section> -->
+<section class="together bgcl-primary">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
+						<div class="content-block w-100">
+							<p class="size16 cloud-white sora-regular csmb20">
+								Where Ideas Become Reality
+							</p>
+							<h2 class="nelphim-regular size62 cloud-white csmb20">
+								Start Your Project With Us
+							</h2>
+							<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>

@@ -22,7 +22,7 @@ export class ContactComponent {
   throw_msg: any;
   SearchCountryField = SearchCountryField;
   CountryISO = CountryISO;
-  preferredCountries: CountryISO[] = [CountryISO.India, CountryISO.UnitedStates, CountryISO.UnitedKingdom, CountryISO.UnitedArabEmirates];
+  preferredCountries: CountryISO[] = [CountryISO.India];
   service: any;
   isvalidSubmit: boolean = true;
   baseUrl: any;

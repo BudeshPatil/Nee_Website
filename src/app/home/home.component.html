@@ -112,7 +112,7 @@
 		</div>
 	</div>
 </section>
-<section class="about sectionp bgcl-primary" *ngIf="aboutData && aboutData.length > 0">
+<section class="about section bgcl-primary" *ngIf="aboutData && aboutData.length > 0">
 	<div class="container-fluid">
 		<!-- SECTION TITLE -->
 		  <!-- Section Title -->
@@ -164,8 +164,13 @@
 </section>
 <section class="project-highlights sectionp bgcl-secondary">
 	<div class="container">
+		<!-- Section Title -->
+		<div class="container section-title" data-aos="fade-up">
+				<span class="description-title">Projects</span>
+				<h2 class="text-primary">Completed Projects</h2>
+		</div><!-- End Section Title -->
 
-		<h2 class="section-title text-center mb-5">Completed Projects</h2>
+		<!-- <h2 class="section-title text-center mb-5">Completed Projects</h2> -->
 
 		<div class="swiper project-highlights-swiper">
 			<div class="swiper-wrapper">
@@ -270,19 +275,19 @@
 	<div class="container">
 
 		<!-- Heading -->
-		<div class="row mb-5">
+		<div class="row mb-5" data-aos="fade-up">
 			<div class="col-lg-7 mx-auto text-center">
-				<h2 class="nelphim-regular size48 raisin-black mb-3">
+				<h2 class="size48 raisin-black mb-3">
 					{{ whyChooseUs.title }}
 				</h2>
-				<p class="sora-regular size18 raisin-black">
+				<p class="size18 raisin-black">
 					{{ whyChooseUs.subtitle }}
 				</p>
 			</div>
 		</div>
 
 		<!-- Content -->
-		<div class="row g-4">
+		<div class="row g-4" data-aos="fade-up" data-aos-duration="1000">
 			<div class="col-lg-3 col-md-6 col-12" *ngFor="let item of whyChooseUs.points">
 
 				<div class="why-card h-100">
@@ -302,16 +307,20 @@
 
 <section class="portfolio sectionp bgcl-secondary" *ngIf="projects && projects.length > 0">
 	<div class="container-fluid">
+		 <div class="container section-title" data-aos="fade-up">
+				<span class="description-title">Our Project</span>
+				<h2 class="text-primary">Completed Projects, Thoughtfully Delivered</h2>
+		</div>
 		<div class="row">
 			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
 				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
 					<div class="col-lg-8 col-md-8 mb-md-0 mb-sm-4 mb-2">
 						<div class="content-block w-100">
 							<p class="size16 raisin-black sora-regular mb-0 text-uppercase">
-								Our Projects
+								Our Work
 							</p>
-							<h2 class="nelphim-regular size62 raisin-black mb-0">
-								Completed Projects, Thoughtfully Delivered
+							<h2 class="size62 raisin-black mb-0">
+								Delivering Excellence with Every Project.
 							</h2>
 						</div>
 					</div>
@@ -418,13 +427,12 @@
 					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
 						<div class="content-block w-100">
 							<p class="size16 cloud-white sora-regular csmb20">
-								A unique vision with unlimited possibilities
+								Where Ideas Become Reality
 							</p>
 							<h2 class="nelphim-regular size62 cloud-white csmb20">
-								Let’s Work Together
+								Start Your Project With Us
 							</h2>
-							<a class="btn-secondary" style="text-transform: none" href="/contact">Book a
-								Consultation</a>
+							<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>
 						</div>
 					</div>
 				</div>

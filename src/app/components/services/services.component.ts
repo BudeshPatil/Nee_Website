@@ -21,59 +21,30 @@ export class ServicesComponent {
 	isBrowser: boolean;
 	servicesData: any = [];
 	servicesBannerData: any = [];
+	bannerData: any = [];
 	projects: any = [];
 	private mySwiper: Swiper | null = null;
-	design = [
+
+	// Static services data
+	services = [
 		{
-			'id': '01',
-			'imgUrl': '',
-			'title': 'RESIDENTIAL DESIGN PROJECTS',
-			'projects': [
-				{
-					'id': '01',
-					'imgUrl': '',
-					'title': 'Project Name',
-				},
-				{
-					'id': '02',
-					'imgUrl': '',
-					'title': 'Project Name',
-				},
-				{
-					'id': '03',
-					'imgUrl': '',
-					'title': 'Project Name',
-				}
-			]
-		},
-	];
-	togethers = [
-		{
-			'id': '01',
-			'name': 'Project Name',
-			'description': 'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Mattis Ligula Pellentesque Nisi Tristique Porta.',
-			'img_url': 'assets/images/home/journal1.png',
-			'url_key': 'services'
+			name: 'Land and Plots',
+			short_description: 'Expert services for land acquisition, plot development, and real estate planning.',
+			full_description: 'Our land and plots services encompass comprehensive solutions for identifying, acquiring, and developing prime land parcels. We handle everything from site surveys and feasibility studies to legal documentation and zoning compliance, ensuring your construction projects start on solid ground. With years of experience in the real estate market, we provide strategic advice to maximize the value and potential of your land investments.',
+			image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80' // Placeholder image for land/plots
 		},
 		{
-			'id': '02',
-			'name': 'Project Name',
-			'description': 'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Mattis Ligula Pellentesque Nisi Tristique Porta.',
-			'img_url': 'assets/images/home/journal2.png',
-			'url_key': 'services'
-		},
-		{
-			'id': '03',
-			'name': 'Project Name',
-			'description': 'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Mattis Ligula Pellentesque Nisi Tristique Porta.',
-			'img_url': 'assets/images/home/journal3.png',
-			'url_key': 'services'
+			name: 'Constructions',
+			short_description: 'Full-scale construction services from planning to completion with quality assurance.',
+			full_description: 'From residential complexes to commercial buildings, our construction services deliver end-to-end project management. We specialize in modern construction techniques, sustainable building practices, and timely delivery. Our team of certified engineers, architects, and skilled laborers work together to transform your vision into reality, maintaining the highest standards of safety, quality, and efficiency throughout the entire construction process.',
+			image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80' // Placeholder image for construction
 		}
 	];
 	constructor(
 		@Inject(PLATFORM_ID) private _platformId: Object,
 		public dataService: DataService, public categoryService: CategoryService, private route: ActivatedRoute,
 	) {
+		this.getBannerdata();
 		this.getAllServicesData();
 		this.getAllservices();
 		this.getAllprojects();
@@ -95,7 +66,7 @@ export class ServicesComponent {
 		this.dataService.getAllService({}).subscribe((response: any) => {
 			if (response.code == 200) {
 				if (response.result != null && response.result.length > 0) {
-					this.servicesBannerData = response.result[0];
+					this.servicesBannerData = response.result;
 				}
 			}
 		});
@@ -124,6 +95,21 @@ export class ServicesComponent {
 			}
 		});
 	}
+
+	getBannerdata() {
+    let obj = {};
+    this.dataService.getAllBanner(obj).subscribe((response: any) => {
+      if (response.code == 200) {
+        if (response.result != null && response.result.length > 0) {
+          let tempcat = response.result.filter((cat: any) => cat.name == 'service');
+          if (tempcat && tempcat.length > 0) {
+            this.bannerData = tempcat;
+          }
+        } else {
+        }
+      }
+    });
+  }
 	private scrollToFragment(): void {
 		if (!this.isBrowser) return;
 
@@ -181,20 +167,4 @@ export class ServicesComponent {
 			this.mySwiper = null;
 		}
 	}
-	// initScrollTrigger(): void {
-	// 	const scrollElems = gsap.utils.toArray('.scroll-animate') as HTMLElement[];
-	// 	scrollElems.forEach((el) => {
-	// 		gsap.from(el, {
-	// 			clipPath: 'inset(0 0 100% 0)',
-	// 			ease: 'power3.inOut',
-	// 			duration: 1.5,
-	// 			scrollTrigger: {
-	// 				trigger: el,
-	// 				start: 'top 80%',
-	// 				end: 'top 20%',
-	// 			}
-	// 		});
-	// 	});
-
-	// }
 }

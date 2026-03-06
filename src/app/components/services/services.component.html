@@ -1,140 +1,76 @@
-<section class="service hero-bannerservice bgcl-primary">
-	<div class="content d-lg-flex d-none">
-		<div class="box-left">
-			<div class="content-block">
-				<p class="size16 raisin-black sora-regular mb-0 text-uppercase">
-					{{ servicesBannerData.name }}
-				</p>
-				<h1 class="nelphim-regular size90 raisin-black mb-0">
-					{{ servicesBannerData.short_desc }}
-				</h1>
-				<p class="size18 raisin-black sora-regular csmt30 mb-0">
-					{{ servicesBannerData.desc }}
-				</p>
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5">
+	<div class="container text-center py-5">
+		<h1 class="display-2 text-white mb-4 animated slideInDown">Services</h1>
+		<nav aria-label="breadcrumb animated slideInDown">
+			<ol class="breadcrumb justify-content-center mb-0">
+				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="#">Pages</a></li>
+				<li class="breadcrumb-item" aria-current="page">Services</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+<!-- Page Header End -->
+
+<!-- Services Section -->
+<section class="services-section py-5 mt-6">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center mb-5">
+				<h2 class="display-4 nelphim-regular mb-3">Our Expertise</h2>
+				<p class="lead sora-regular">Delivering excellence in land development and construction services</p>
 			</div>
 		</div>
-		<div class="box-right">
-		</div>
-	</div>
-	<div class="container-fluid d-lg-none d-md-block">
-		<div class="col-md-10 col-sm-11 col-11 mx-auto">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="d-flex justify-content-start align-items-end customheight">
-						<div class="content-block">
-							<p class="size16 raisin-black sora-regular mb-0 text-uppercase">
-								{{ servicesBannerData.name }}
-							</p>
-							<h2 class="nelphim-regular size90 raisin-black mb-0">
-								{{ servicesBannerData.short_desc }}
-							</h2>
-							<p class="size18 raisin-black sora-regular csmt30 mb-0">
-								{{ servicesBannerData.desc }}
-							</p>
+		<div class="row g-4">
+			<div class="col-lg-6 col-md-6" *ngFor="let service of servicesBannerData; let i = index">
+				<div class="service-card card h-100 border-0 shadow-sm">
+					<div class="card-img-wrapper">
+						<img [src]="imagePath + 'service/' + service.image" [alt]="service.name" class="card-img-top service-image">
+						<div class="service-overlay">
+							<div class="service-number">{{ i + 1 | number:'2.0' }}</div>
+						</div>
+					</div>
+					<div class="card-body d-flex flex-column">
+						<h5 class="card-title nelphim-regular mb-3">{{ service.name }}</h5>
+						<p class="card-text sora-regular text-muted mb-3">{{ service.short_desc }}</p>
+						<p class="card-text sora-regular mb-4 flex-grow-1">{{ service.desc }}</p>
+						<button class="btn btn-outline-primary mt-auto" type="button" data-bs-toggle="collapse"
+							[attr.data-bs-target]="'#serviceDetails' + i" aria-expanded="false"
+							[attr.aria-controls]="'serviceDetails' + i">
+							Learn More
+						</button>
+					</div>
+					<div class="collapse" [id]="'serviceDetails' + i">
+						<div class="card-body border-top">
+							<h6 class="nelphim-regular">Detailed Information</h6>
+							<p class="sora-regular">{{ service.full_description }}</p>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
-	<div class="image-attached relative d-lg-none d-md-block">
-		<img src="{{
-				baseUrl
-			}}/assets/images/services/commercial-design1.webp" alt="services banner" title="services banner" loading="eager"
-			width="0" height="0" />
-	</div>
 </section>
-
-<section class="services sectionpt150 bgcl-primary servicelist"
-	*ngFor="let service of servicesData; let i = index">
+<!-- Page Header End -->
+<section class="together bgcl-primary">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto"  id="{{ service.url_key }}">
-				<div class="row">
-					<div class="col-lg-7 col-md-6 csmb80" data-aos="fade-up" data-aos-duration="1500">
-						<div class="content">
-							<h2 class="nelphim-regular size62 raisin-black csmb30 service-title">
-								<span class="d-block">{{ service.name.split(' ')[0] }} Interior</span>
-								<span class="d-block">Design Services</span>
-							</h2>
-							<a [routerLink]="['/portfolio', service.url_key]" class="btn-primary d-md-block d-none">Explore</a>
-						</div>
-					</div>
-					<div class="col-lg-5 col-md-6" data-aos="fade-up" data-aos-duration="1500">
-						<div class="para">
-							<p class="sora-regular size18 raisin-black">
-								{{ service.short_desc }}
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
+						<div class="content-block w-100">
+							<p class="size16 cloud-white sora-regular csmb20">
+								Where Ideas Become Reality
 							</p>
-						</div>
-						<a [routerLink]="['/portfolio', service.name]" class="btn-primary d-md-none d-block mb-4">Explore</a>
-					</div>
-					<div class="col-md-12 ">
-						<div class="mainimg " data-aos="fade-up" data-aos-duration="1000">
-							<!-- "csmb40" this class is removed due to project card removed or projects 3 items removed -->
-							<img class="img-fluid w-100  scroll-animate"
-								src="{{ imagePath }}category/{{ service.galleyimagedata[0].src }}" alt="{{ service.name }}"
-								title="{{ service.name }}" loading="lazy" width="0" height="0" />
-							<!-- <p class="sora-regular raisin-black size16 csmb40 mt-0 text-capitalize"
-								*ngIf="(projects | filterByCategory: service._id).length > 0">
-								{{ service.name.split(' ')[0] }} Interior Design projects
-							</p> -->
+							<h2 class="nelphim-regular size62 cloud-white csmb20">
+								Start Your Project With Us
+							</h2>
+							<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>
 						</div>
 					</div>
-
-					<!-- ✅ Desktop view: Only 3 projects per category -->
-					<!-- <div class="col-12 mb-4 d-sm-block d-none" *ngIf="(projects | filterByCategory: service._id).length > 0">
-						<div class="row g-lg-5 g-3">
-							<ng-container *ngFor="
-                  let project of (projects | filterByCategory: service._id | slice: 0:3);
-                  let j = index
-                ">
-								<div class="col-lg-4 col-md-4 col-sm-6">
-									<div class="card image-zoom-effect">
-										<a href="/project/project-details/{{ project.url_key }}">
-											<div class="image-holder">
-												<img class="img-fluid w-100 h-100 object-fit-cover scroll-animate"
-													src="{{ imagePath }}project/{{ project.image_thumnail }}" alt="{{ project.name }}"
-													title="{{ project.name }}" loading="lazy" width="0" height="0" />
-											</div>
-											<h3 class="raisin-black sora-regular size18 mt-3 mb-0">
-												{{ project.name }}
-											</h3>
-										</a>
-									</div>
-								</div>
-							</ng-container>
-						</div>
-					</div> -->
-					<!-- ✅ Mobile view (Swiper): Only 3 projects per category -->
-					<!-- <div class="swiper mySwiper d-sm-none d-inline" #mySwiper ngSkipHydration
-						*ngIf="(projects | filterByCategory: service._id).length > 0">
-						<div class="swiper-wrapper">
-							<ng-container *ngFor="
-                  let project of (projects | filterByCategory: service._id | slice: 0:3);
-                  let j = index
-                ">
-								<div class="swiper-slide image-zoom-effect">
-									<a href="/project/project-details/{{ project.url_key }}">
-										<div class="image-holder">
-											<img class="img-fluid w-100 h-100 object-fit-cover scroll-animate"
-												src="{{ imagePath }}project/{{ project.image_thumnail }}" alt="{{ project.name }}"
-												title="{{ project.name }}" loading="eager" width="0" height="0" />
-										</div>
-										<div class="card-body cspostion">
-											<h5 class="sora-regular size18 raisin-black mt-3 mb-0">
-												{{ project.name }}
-											</h5>
-										</div>
-									</a>
-								</div>
-							</ng-container>
-						</div>
-						<div class="swiper-pagination"></div>
-					</div> -->
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-<div class="sectionpb150 bgcl-primary"></div>

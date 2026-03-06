@@ -25,7 +25,7 @@ export class AboutComponent {
   imagePath: any;
   bannerData: any;
   companyHistory = {
-    shortIntro: 'Founded in 1984, Neelgund Developers has shaped the future of land development in North Karnataka.',
+    shortIntro: 'Founded in 1982, Neelgund Developers has shaped the future of land development in North Karnataka.',
     fullDescription: `
     <p>What started as a small vision has grown into a legacy of trust, quality, and commitment.</p>
     <p>Over the decades, we have delivered landmark residential layouts, focusing on transparency,

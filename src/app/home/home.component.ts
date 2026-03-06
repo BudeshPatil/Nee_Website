@@ -122,7 +122,7 @@ export class HomeComponent {
         'Street Lighting',
         '24/7 Security'
       ],
-      image: 'assets/images/home/explore/explore-product-slide1.png'
+      image: '../../assets/images/home/explore/explore-product-slide1.png'
     },
     {
       name: 'Neelgund Prime Enclave',
@@ -136,7 +136,7 @@ export class HomeComponent {
         'Water Supply',
         'Children Play Area'
       ],
-      image: 'assets/images/home/explore/explore-product-slide2.png'
+      image: '..assets/images/home/explore/explore-product-slide2.png'
     }
   ];
 
