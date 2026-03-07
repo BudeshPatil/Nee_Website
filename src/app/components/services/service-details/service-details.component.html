@@ -1,0 +1,105 @@
+<!-- Service Details Hero Section -->
+<section class="service-details-hero bgcl-primary" *ngIf="service">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="hero-content position-relative">
+          <div class="hero-image-wrapper">
+            <img [src]="service.image" [alt]="service.name" class="hero-image">
+            <div class="hero-overlay"></div>
+          </div>
+          <div class="hero-text">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <h1 class="display-3 nelphim-regular text-white mb-4">{{ service.name }}</h1>
+                  <p class="lead sora-regular text-white mb-4">{{ service.short_description }}</p>
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                      <li class="breadcrumb-item"><a href="/services" class="text-white">Services</a></li>
+                      <li class="breadcrumb-item active text-white" aria-current="page">{{ service.name }}</li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Service Details Content -->
+<section class="service-details-content py-5" *ngIf="service">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-7">
+        <div class="service-description">
+          <h2 class="nelphim-regular mb-4">About {{ service.name }}</h2>
+          <p class="sora-regular text-muted mb-4 lead">{{ service.full_description }}</p>
+
+          <h3 class="nelphim-regular mb-3">Key Features</h3>
+          <div class="features-list">
+            <div class="row">
+              <div class="col-md-6" *ngFor="let feature of service.features">
+                <div class="feature-item d-flex align-items-center mb-3">
+                  <i class="fas fa-check-circle text-primary me-3"></i>
+                  <span class="sora-regular">{{ feature }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-5">
+        <div class="service-sidebar">
+          <div class="sidebar-card">
+            <h4 class="nelphim-regular mb-3">Get Started</h4>
+            <p class="sora-regular text-muted mb-4">Ready to start your project? Contact us for a free consultation.</p>
+            <a href="/contact" class="btn btn-primary w-100 mb-3">Get Free Consultation</a>
+            <a href="/services" class="btn btn-outline-primary w-100">View All Services</a>
+          </div>
+
+          <div class="sidebar-card mt-4">
+            <h5 class="nelphim-regular mb-3">Why Choose Us?</h5>
+            <ul class="list-unstyled">
+              <li class="d-flex align-items-center mb-2">
+                <i class="fas fa-star text-warning me-2"></i>
+                <span class="sora-regular small">40+ Years Experience</span>
+              </li>
+              <li class="d-flex align-items-center mb-2">
+                <i class="fas fa-users text-primary me-2"></i>
+                <span class="sora-regular small">3500+ Happy Clients</span>
+              </li>
+              <li class="d-flex align-items-center mb-2">
+                <i class="fas fa-building text-success me-2"></i>
+                <span class="sora-regular small">60+ Successful Projects</span>
+              </li>
+              <li class="d-flex align-items-center mb-0">
+                <i class="fas fa-shield-alt text-info me-2"></i>
+                <span class="sora-regular small">Quality Assurance</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Service Not Found -->
+<section class="service-not-found py-5" *ngIf="!service">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <i class="fas fa-exclamation-triangle fa-4x text-muted mb-4"></i>
+        <h2 class="nelphim-regular mb-3">Service Not Found</h2>
+        <p class="sora-regular text-muted mb-4">The service you're looking for doesn't exist or has been moved.</p>
+        <a href="/services" class="btn btn-primary">View All Services</a>
+      </div>
+    </div>
+  </div>
+</section>

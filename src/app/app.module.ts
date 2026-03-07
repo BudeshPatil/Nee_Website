@@ -30,6 +30,7 @@ import { CommonModule } from '@angular/common';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { FilterByCategoryPipe } from './pipe/filter-by-category.pipe';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { ServiceDetailsComponent } from './components/services/service-details/service-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
     PortfolioComponent,
     JournalComponent,
     JournalDetailComponent,
-		FilterByCategoryPipe
+		FilterByCategoryPipe,
+  ServiceDetailsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

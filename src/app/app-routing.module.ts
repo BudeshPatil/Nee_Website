@@ -7,6 +7,7 @@ import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { JournalComponent } from './components/journal/journal.component';
 import { JournalDetailComponent } from './components/journal-detail/journal-detail.component';
 import { ServicesComponent } from './components/services/services.component';
+import { ServiceDetailsComponent } from './components/services/service-details/service-details.component';
 
 const routes: Routes = [
 	{
@@ -22,6 +23,11 @@ const routes: Routes = [
 	{
 		path: 'services',
 		component: ServicesComponent,
+		data: { pageName: 'services' }
+	},
+	{
+		path: 'services/:url_key',
+		component: ServiceDetailsComponent,
 		data: { pageName: 'services' }
 	},
 	{

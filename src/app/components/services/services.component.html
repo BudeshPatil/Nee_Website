@@ -23,29 +23,21 @@
 			</div>
 		</div>
 		<div class="row g-4">
-			<div class="col-lg-6 col-md-6" *ngFor="let service of servicesBannerData; let i = index">
-				<div class="service-card card h-100 border-0 shadow-sm">
+			<div class="col-lg-6 col-md-6" *ngFor="let service of services; let i = index">
+				<div class="service-card card h-100 border-0 shadow-sm" [routerLink]="['/services', service.url_key]" style="cursor: pointer;">
 					<div class="card-img-wrapper">
-						<img [src]="imagePath + 'service/' + service.image" [alt]="service.name" class="card-img-top service-image">
+						<img [src]="service.image" [alt]="service.name" class="card-img-top service-image">
 						<div class="service-overlay">
 							<div class="service-number">{{ i + 1 | number:'2.0' }}</div>
 						</div>
 					</div>
 					<div class="card-body d-flex flex-column">
 						<h5 class="card-title nelphim-regular mb-3">{{ service.name }}</h5>
-						<p class="card-text sora-regular text-muted mb-3">{{ service.short_desc }}</p>
-						<p class="card-text sora-regular mb-4 flex-grow-1">{{ service.desc }}</p>
-						<button class="btn btn-outline-primary mt-auto" type="button" data-bs-toggle="collapse"
-							[attr.data-bs-target]="'#serviceDetails' + i" aria-expanded="false"
-							[attr.aria-controls]="'serviceDetails' + i">
+						<p class="card-text sora-regular text-muted mb-3">{{ service.short_description }}</p>
+						<p class="card-text sora-regular mb-4 flex-grow-1">{{ service.full_description }}</p>
+						<button [routerLink]="['/services', service.url_key]" routerLinkActive="router-link-active" class="btn btn-outline-primary mt-auto" type="button">
 							Learn More
 						</button>
-					</div>
-					<div class="collapse" [id]="'serviceDetails' + i">
-						<div class="card-body border-top">
-							<h6 class="nelphim-regular">Detailed Information</h6>
-							<p class="sora-regular">{{ service.full_description }}</p>
-						</div>
 					</div>
 				</div>
 			</div>
