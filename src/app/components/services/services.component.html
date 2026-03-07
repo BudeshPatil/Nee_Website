@@ -35,9 +35,9 @@
 						<h5 class="card-title nelphim-regular mb-3">{{ service.name }}</h5>
 						<p class="card-text sora-regular text-muted mb-3">{{ service.short_description }}</p>
 						<p class="card-text sora-regular mb-4 flex-grow-1">{{ service.full_description }}</p>
-						<button [routerLink]="['/services', service.url_key]" routerLinkActive="router-link-active" class="btn btn-outline-primary mt-auto" type="button">
+						<a class="btn-primary raisin-black mt-auto" [routerLink]="['/services', service.url_key]" routerLinkActive="router-link-active" type="button">
 							Learn More
-						</button>
+						</a>
 					</div>
 				</div>
 			</div>

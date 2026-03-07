@@ -84,7 +84,7 @@
 			<!-- Project Cards Grid -->
 			<div class="projects-cards-grid">
 				<div class="row g-4">
-					<div class="col-lg-4 col-md-6" *ngFor="let project of allProjects">
+					<div class="col-lg-6 col-md-6" *ngFor="let project of allProjects">
 						<div class="project-card">
 							<div class="card-image-wrapper">
 								<img [src]="imagePath + 'project/' + project.image" [alt]="project.name"
@@ -131,7 +131,7 @@
 								</div>
 
 								<div class="card-footer d-flex justify-content-between align-items-center mt-3 gap-2">
-									<button class="price-btn sora-regular">{{ project.price_text || 'Price on Request' }}</button>
+									<a class=" btn-primary raisin-black ">{{ project.price_text || 'Price on Request' }}</a>
 									<div class="d-flex gap-2">
 										<a [href]="'https://wa.me/' + (project.contact_number || '918050238777')" target="_blank" class="call-btn whatsapp-btn" title="Contact on WhatsApp">
 											<i class="fab fa-whatsapp"></i>
@@ -172,6 +172,27 @@
 				</div>
 			</nav>
 
+		</div>
+	</div>
+</section>
+<section class="together bgcl-primary">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
+						<div class="content-block w-100">
+							<p class="size16 cloud-white sora-regular csmb20">
+								Where Ideas Become Reality
+							</p>
+							<h2 class="nelphim-regular size62 cloud-white csmb20">
+								Start Your Project With Us
+							</h2>
+							<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>

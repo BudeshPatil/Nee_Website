@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
 			.pipe(filter(event => event instanceof NavigationEnd))
 			.subscribe((event: any) => {
 				// Hide footer only on portfolio route
-				this.showFooter = event.urlAfterRedirects !== '/portfolio';
+				this.showFooter = event.urlAfterRedirects !== '/portfolios';
 			});
 
 	}
