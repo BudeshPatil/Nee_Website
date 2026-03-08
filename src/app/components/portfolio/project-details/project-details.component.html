@@ -1,0 +1,274 @@
+<!-- Project Details Page -->
+<div class="project-details-page">
+  <!-- Page Header -->
+  <div class="container-fluid page-header py-5 mb-5">
+    <div class="container py-5">
+      <div class="breadcrumb-container mb-5 animated slideInDown">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/" class="breadcrumb-link">
+                <i class="fas fa-home me-2"></i>Home
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/projects" class="breadcrumb-link">
+                <i class="fas fa-layer-group me-2"></i>Projects
+              </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              <i class="fas fa-file-alt me-2"></i>{{ projectData?.name }}
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <h1 class="display-2 text-white mb-4 animated slideInDown fw-bold">{{ projectData?.name }}</h1>
+      <p class="lead text-white-50 animated slideInDown">Explore detailed information about this amazing project</p>
+    </div>
+  </div>
+
+  <!-- Project Details Section -->
+  <section class="project-details-section py-5">
+    <div class="container">
+      <div class="row g-5">
+        <!-- Project Images Gallery -->
+        <div class="col-lg-8">
+          <div class="project-gallery mb-4">
+            <div class="swiper mySwiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" *ngIf="projectData &&projectData.image" >
+                  <img [src]="imagePath + 'project/' + projectData.image" [alt]="projectData?.name" class="gallery-image" (load)="onImageLoad()">
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <!-- Project Description -->
+          <div class="project-content">
+            <h2 class="project-title mb-4">{{ projectData?.name }}</h2>
+            <div class="project-description mb-4" [innerHTML]="projectData?.desc"></div>
+
+            <!-- Project Features -->
+            <div class="project-features mb-4" *ngIf="projectData?.features">
+              <h4 class="features-title mb-3">Key Features</h4>
+              <div class="features-grid">
+                <div class="feature-item" *ngFor="let feature of projectData.features">
+                  <i class="fas fa-check-circle text-success me-2"></i>
+                  <span>{{ feature }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Information Sidebar -->
+        <div class="col-lg-4">
+          <div class="project-info-card">
+            <h3 class="info-title mb-4">Project Details</h3>
+
+            <div class="info-item" *ngIf="projectData?.location">
+              <div class="info-label">
+                <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                Location
+              </div>
+              <div class="info-value">{{ projectData.location }}</div>
+            </div>
+
+            <div class="info-item" *ngIf="projectData?.area">
+              <div class="info-label">
+                <i class="fas fa-ruler-combined text-primary me-2"></i>
+                Area
+              </div>
+              <div class="info-value">{{ projectData.area }}</div>
+            </div>
+
+            <div class="info-item" *ngIf="projectData?.noofplots || projectData?.plots">
+              <div class="info-label">
+                <i class="fas fa-th text-primary me-2"></i>
+                Plots
+              </div>
+              <div class="info-value">{{ projectData.noofplots || projectData.plots }}</div>
+            </div>
+
+            <div class="info-item" *ngIf="projectData?.amenties || projectData?.amenities">
+              <div class="info-label">
+                <i class="fas fa-leaf text-primary me-2"></i>
+                Amenities
+              </div>
+              <div class="info-value">{{ projectData.amenties || projectData.amenities }}</div>
+            </div>
+
+            <div class="info-item" *ngIf="projectData?.year">
+              <div class="info-label">
+                <i class="fas fa-calendar text-primary me-2"></i>
+                Year
+              </div>
+              <div class="info-value">{{ projectData.year }}</div>
+            </div>
+
+            <!-- Price Section -->
+            <div class="price-section mt-4 p-3 bg-light rounded">
+              <div class="price-label mb-2">
+                <i class="fas fa-tags text-success me-2"></i>
+                Price
+              </div>
+              <div class="price-value h4 text-success mb-3">
+                {{ projectData?.price_text || 'Price on Request' }}
+              </div>
+
+              <!-- Contact Buttons -->
+              <div class="contact-buttons">
+                <a [href]="'https://wa.me/' + (projectData?.contact_number || '918050238777')"
+                   target="_blank"
+                   class="btn btn-success btn-lg w-100 mb-2">
+                  <i class="fab fa-whatsapp me-2"></i>
+                  Contact on WhatsApp
+                </a>
+                <a [href]="'tel:' + (projectData?.contact_number || '+918050238777')"
+                   class="btn btn-primary btn-lg w-100">
+                  <i class="fas fa-phone me-2"></i>
+                  Call Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Design Images Section -->
+      <div class="project-design-images-section mt-5" *ngIf="projectData?.project_design_images && projectData.project_design_images.length > 0">
+        <h3 class="section-title mb-4">Design Images & Gallery</h3>
+        <div class="design-images-gallery">
+          <div class="swiper designImagesSwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" *ngFor="let image of projectData.project_design_images; let i = index">
+                <img [src]="imagePath + 'project/' + image" 
+                     [alt]="projectData?.name + ' - Design ' + (i + 1)" 
+                     class="design-gallery-image" 
+                     (load)="onImageLoad()">
+              </div>
+            </div>
+            <!-- Navigation -->
+            <div class="design-swiper-button-next"></div>
+            <div class="design-swiper-button-prev"></div>
+            <!-- Pagination -->
+            <div class="design-swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Maps Section -->
+      <div class="google-maps-section mt-5" *ngIf="projectData?.location">
+        <h3 class="section-title mb-4">Location</h3>
+        <div class="map-container">
+          <!-- <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4804.136292030373!2d75.12496577593512!3d15.359327658049635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb8d742bc1f4b9d%3A0xceb08e3c5cd1312d!2sNeelgund%20Developers!5e1!3m2!1sen!2sin!4v1770209713078!5m2!1sen!2sin"
+            width="100%"
+            height="400"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Project Location Map">
+          </iframe> -->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.906751526111!2d75.1275407!3d15.359322500000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb8d742bc1f4b9d%3A0xceb08e3c5cd1312d!2sNeelgund%20Developers!5e1!3m2!1sen!2sin!4v1772944518210!5m2!1sen!2sin" 
+            width="600" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div class="map-info mt-3">
+          <div class="location-address mb-3">
+            <i class="fas fa-map-marker-alt text-primary me-2"></i>
+            <strong>Address:</strong>
+            <span *ngIf="!isCoordinates(projectData.location) && !isEmbeddedUrl(projectData.location) && !isShortUrl(projectData.location)">{{ projectData.location }}</span>
+            <span *ngIf="isCoordinates(projectData.location)">
+              {{ projectData.location }} (Coordinates)
+            </span>
+            <span *ngIf="isEmbeddedUrl(projectData.location)">
+              Custom Map Location (Embedded URL)
+            </span>
+            <span *ngIf="isShortUrl(projectData.location)">
+              Google Maps Link (Short URL)
+            </span>
+          </div>
+          <div class="map-actions d-flex gap-2 flex-wrap">
+            <a [href]="getGoogleMapsDirectionsUrl(projectData.location)"
+               target="_blank"
+               class="btn btn-outline-primary"
+               [class.disabled]="isEmbeddedUrl(projectData.location)"
+               [attr.onclick]="isEmbeddedUrl(projectData.location) ? 'return false;' : null">
+              <i class="fas fa-external-link-alt me-2"></i>
+              View on Google Maps
+            </a>
+            <a [href]="getDirectionsToProject(projectData.location)"
+               target="_blank"
+               class="btn btn-outline-success"
+               [class.disabled]="isEmbeddedUrl(projectData.location)"
+               [attr.onclick]="isEmbeddedUrl(projectData.location) ? 'return false;' : null">
+              <i class="fas fa-directions me-2"></i>
+              Get Directions
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Projects Section -->
+  <section class="related-projects-section py-5 bg-light" *ngIf="recentProjects && recentProjects.length > 0">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <h2 class="section-title">Related Projects</h2>
+        <p class="section-subtitle">Discover more projects you might be interested in</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6" *ngFor="let project of recentProjects">
+          <div class="related-project-card">
+            <div class="card-image">
+              <img [src]="imagePath + 'project/' + project.image" [alt]="project.name" class="img-fluid">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ project.name }}</h5>
+              <p class="card-location">
+                <i class="fas fa-map-marker-alt me-1"></i>
+                {{ project.location }}
+              </p>
+              <div class="card-price">{{ project.price_text || 'Price on Request' }}</div>
+              <a [routerLink]="['/portfolio', project.url_key]" class="btn btn-primary btn-sm">
+                View Details
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="together bgcl-primary">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
+						<div class="content-block w-100">
+							<p class="size16 cloud-white sora-regular csmb20">
+								Where Ideas Become Reality
+							</p>
+							<h2 class="nelphim-regular size62 cloud-white csmb20">
+								Start Your Project With Us
+							</h2>
+							<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</div>

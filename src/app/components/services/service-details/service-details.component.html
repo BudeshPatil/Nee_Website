@@ -1,3 +1,31 @@
+<!-- Project Details Page -->
+<div class="project-details-page" *ngIf="service">
+  <!-- Page Header -->
+  <div class="container-fluid page-header py-5 mb-5">
+    <div class="container py-5">
+      <div class="breadcrumb-container mb-5 animated slideInDown">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/" class="breadcrumb-link">
+                <i class="fas fa-home me-2"></i>Home
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/services" class="breadcrumb-link">
+                <i class="fas fa-cogs me-2"></i>Services
+              </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              <i class="fas fa-file-alt me-2"></i>{{ service?.name }}
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <h1 class="display-2 text-white mb-4 animated slideInDown fw-bold">{{ service?.name }}</h1>
+    </div>
+  </div>
+
 <!-- Service Details Hero Section -->
 <section class="service-details-hero bgcl-primary" *ngIf="service">
   <div class="container-fluid">
@@ -11,16 +39,10 @@
           <div class="hero-text">
             <div class="container">
               <div class="row">
-                <div class="col-lg-8 col-md-10">
+                <div class="col-lg-8 col-md-10 mt-4">
                   <h1 class="display-3 nelphim-regular text-white mb-4">{{ service.name }}</h1>
                   <p class="lead sora-regular text-white mb-4">{{ service.short_description }}</p>
-                  <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
-                      <li class="breadcrumb-item"><a href="/services" class="text-white">Services</a></li>
-                      <li class="breadcrumb-item active text-white" aria-current="page">{{ service.name }}</li>
-                    </ol>
-                  </nav>
+                  <!-- <a href="#service-details-content" class="btn btn-primary">Learn More</a> -->
                 </div>
               </div>
             </div>
@@ -103,3 +125,26 @@
     </div>
   </div>
 </section>
+<!-- Page Header End -->
+<section class="together bgcl-primary">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
+						<div class="content-block w-100">
+							<p class="size16 cloud-white sora-regular csmb20">
+								Where Ideas Become Reality
+							</p>
+							<h2 class="nelphim-regular size62 cloud-white csmb20">
+								Start Your Project With Us
+							</h2>
+							<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</div>

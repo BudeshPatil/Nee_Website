@@ -8,6 +8,7 @@ import { JournalComponent } from './components/journal/journal.component';
 import { JournalDetailComponent } from './components/journal-detail/journal-detail.component';
 import { ServicesComponent } from './components/services/services.component';
 import { ServiceDetailsComponent } from './components/services/service-details/service-details.component';
+import { ProjectDetailsComponent } from './components/portfolio/project-details/project-details.component';
 
 const routes: Routes = [
 	{
@@ -36,11 +37,6 @@ const routes: Routes = [
 		data: { pageName: 'projects' }
 	},
 	{
-		path: 'portfolio/:category',
-		component: PortfolioComponent,
-		data: { pageName: 'portfolio' }
-	},
-	{
 		path: 'journal',
 		component: JournalComponent,
 		data: { pageName: 'journal' }
@@ -51,12 +47,22 @@ const routes: Routes = [
 		data: { pageName: 'journal-detail' }
 	},
 	{
+		path: 'portfolio/:url_key',
+		component: ProjectDetailsComponent,
+		data: { pageName: 'portfolio-details' }
+	},
+	{
 		path: 'contact',
 		loadChildren: () => import('./components/contact/contact.module').then(m => m.ContactModule)
 	},
 	{
 		path: 'project',
 		loadChildren: () => import('./components/project/project.module').then(m => m.ProjectModule)
+	},
+	{
+		path: 'project/project-details/:url_key',
+		component: ProjectDetailsComponent,
+		data: { isProject: true, pageName: 'project-details' }
 	},
 	{
 		path: '**',
