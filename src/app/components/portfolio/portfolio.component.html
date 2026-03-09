@@ -40,8 +40,8 @@
 	<!-- Page Header End -->
 	<!-- Projects Grid Section -->
 	<section class="projects-grid-section">
-		<div class="container">
-			<div class="col-lg-10 col-md-11 mx-auto">
+		<div class="container-fluid">
+			<div class="col-xl-12 col-lg-12 col-md-12 mx-auto px-4">
 
 				<!-- Section Header -->
 				<div class="grid-header mb-5">
@@ -96,7 +96,7 @@
 				<!-- Project Cards Grid -->
 				<div class="projects-cards-grid">
 					<div class="row g-4">
-						<div class="col-lg-6 col-md-6" *ngFor="let project of allProjects">
+						<div class="col-lg-4 col-md-4 col-sm-6" *ngFor="let project of allProjects">
 							<div class="project-card" [routerLink]="['/portfolio', project.url_key]"
 								routerLinkActive="router-link-active">
 								<div class="card-image-wrapper">
@@ -104,8 +104,8 @@
 										loading="lazy" (click)="selectProject(project.url_key)" />
 
 									<!-- status badge top-left -->
-									<div class="card-badge" *ngIf="project.status || project.is_featured">
-										{{ project.year }}
+									<div class="card-badge" [ngClass]="getStatusClass(project.category_data)" *ngIf="project.category_data || project.is_featured">
+										{{ project.category_data || (project.is_featured ? 'Featured' : '')	}}
 									</div>
 
 									<!-- brand/logo top-right (optional) -->
@@ -124,34 +124,50 @@
 
 									<div class="card-header">
 										<h3 class="sora-regular mb-1" (click)="selectProject(project.url_key)">{{ project.name }}</h3>
-										<p class="category-label sora-regular"><i class="fas fa-map-marker-alt me-2"></i>{{ project.location
-											}}</p>
+										<p class="category-label sora-regular"><i class="fas fa-map-marker-alt me-2"></i>{{ project.location }}</p>
 									</div>
 
-									<!-- details row -->
-									<div class="project-details-row d-flex gap-3">
-										<div class="detail compact" *ngIf="project.area">
-											<i class="fas fa-ruler"></i>
-											<span>{{ project.area }}</span>
+									<!-- project details with icons -->
+									<div class="project-details-grid">
+										<div class="detail-item" *ngIf="project.area">
+											<i class="fas fa-chart-area"></i>
+											<span class="detail-label">Area:</span>
+											<span class="detail-value">{{ project.area }}</span>
 										</div>
-										<div class="detail compact" *ngIf="project.noofplots || project.plots">
+										<div class="detail-item" *ngIf="project.noofplots || project.plots">
 											<i class="fas fa-th"></i>
-											<span>{{ project.noofplots || project.plots }} Plots</span>
+											<span class="detail-label">Plots:</span>
+											<span class="detail-value">{{ project.noofplots || project.plots }}</span>
 										</div>
-										<div class="detail compact" *ngIf="project.amenties || project.amenities">
+										<div class="detail-item" *ngIf="project.amenties || project.amenities">
 											<i class="fas fa-leaf"></i>
-											<span>{{ project.amenties || project.amenities }}</span>
+											<span class="detail-label">Amenities:</span>
+											<span class="detail-value">{{ project.amenties || project.amenities }}</span>
 										</div>
+										<div class="detail-item" *ngIf="project.category_data">
+											<i class="fas fa-building"></i>
+											<span class="detail-label">Type:</span>
+											<span class="detail-value">Residential Layout</span>
+										</div>
+									</div>
+
+									<!-- approval badge -->
+									<div class="approval-badge">
+										<i class="fas fa-check-circle"></i>
+										<span>Neelgund Developers Approved Project</span>
 									</div>
 
 									<div class="card-footer d-flex justify-content-between align-items-center mt-3 gap-2">
-										<a class=" btn-primary raisin-black ">{{ project.price_text || 'Price on Request' }}</a>
+										<div class="price-info">
+											<span class="price-text">{{ project.price_text || 'Price on Request' }}</span>
+											<span class="project-type">Residential Layout</span>
+										</div>
 										<div class="d-flex gap-2">
 											<a [href]="'https://wa.me/' + (project.contact_number || '918050238777')" target="_blank"
 												class="call-btn whatsapp-btn" title="Contact on WhatsApp">
 												<i class="fab fa-whatsapp"></i>
 											</a>
-											<a [href]="'tel:' + (project.contact_number || '+918050238777')" class="call-btn">
+											<a [href]="'tel:' + (project.contact_number || '+918050238777')" class="call-btn" title="Call Now">
 												<i class="fas fa-phone"></i>
 											</a>
 										</div>

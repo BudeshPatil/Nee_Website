@@ -335,9 +335,8 @@
 						<div class="swiper portfolio-swiper">
 							<div class="swiper-wrapper">
 								<div class="swiper-slide" *ngFor="let project of projects">
-									<a href="{{ baseUrl }}/project/project-details/{{
-											project.url_key
-										}}">
+									<a [routerLink]="['/portfolio', project.url_key]"
+								routerLinkActive="router-link-active">
 										<div class="imgblk">
 											<img [src]="imagePath + 'project/' + project.image"
 												class="img-fluid rounded-0 listimg" alt="{{ project.name }}"
@@ -345,7 +344,7 @@
 										</div>
 										<div class="card-body cspostion">
 											<p class="card-title size16 sora-regular cloud-white mb-0">
-												{{ project.category_name }} / {{ project.year }}
+												{{ project.year }}
 											</p>
 											<h3 class="nelphim-regular size38 cloud-white m-0 text-capitalize">
 												{{ project.name }}

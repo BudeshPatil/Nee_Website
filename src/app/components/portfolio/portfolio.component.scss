@@ -301,6 +301,24 @@
 		font-size: 13px;
 		font-weight: 700;
 		z-index: 3;
+
+		&.status-ongoing {
+			background: #fff3cd;
+			color: #856404;
+			border: 1px solid #ffeaa7;
+		}
+
+		&.status-completed {
+			background: #d4edda;
+			color: #155724;
+			border: 1px solid #c3e6cb;
+		}
+
+		&.status-featured {
+			background: #cce5ff;
+			color: #004085;
+			border: 1px solid #b3d7ff;
+		}
 	}
 
 	.card-brand {
@@ -373,6 +391,58 @@
 
 	.project-details-list { margin: 16px 0 20px; display:flex; gap:12px; }
 
+	// New project details grid
+	.project-details-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 8px;
+		margin: 16px 0;
+
+		.detail-item {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 13px;
+			color: #666;
+			padding: 6px 0;
+
+			i {
+				color: #0d6efd;
+				font-size: 12px;
+				min-width: 14px;
+				text-align: center;
+			}
+
+			.detail-label {
+				font-weight: 600;
+				color: #333;
+				margin-right: 4px;
+			}
+
+			.detail-value {
+				color: #666;
+			}
+		}
+	}
+
+	// Approval badge
+	.approval-badge {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+		color: white;
+		padding: 8px 12px;
+		border-radius: 6px;
+		font-size: 12px;
+		font-weight: 600;
+		margin-top: 12px;
+
+		i {
+			font-size: 11px;
+		}
+	}
+
 	.detail.compact { 
 		display: flex;
 		align-items: center;
@@ -407,6 +477,25 @@
 		justify-content: space-between;
 		align-items: center;
 		gap: 12px;
+	}
+
+	.price-info {
+		flex: 1;
+
+		.price-text {
+			display: block;
+			font-size: 14px;
+			font-weight: 700;
+			color: #0d6efd;
+			margin-bottom: 2px;
+		}
+
+		.project-type {
+			display: block;
+			font-size: 12px;
+			color: #666;
+			font-weight: 500;
+		}
 	}
 
 	.price-btn {

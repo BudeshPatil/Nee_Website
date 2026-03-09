@@ -239,4 +239,17 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         }
       });
   }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'OnGoing Project':
+        return 'status-ongoing';
+      case 'Completed Projects':
+        return 'status-completed';
+      case 'Featured Project':
+        return 'status-featured';
+      default:
+        return '';
+    }
+  }
 }
