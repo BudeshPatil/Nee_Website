@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 	styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-	title = 'ph-design-me';
+	title = 'neelgund';
 	showFooter = true;
 	@ViewChild('footer') footer!: ElementRef;
 	constructor(

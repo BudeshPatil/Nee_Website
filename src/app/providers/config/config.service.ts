@@ -34,7 +34,7 @@ export class ConfigService {
 		headers: HttpHeaders | { [header: string]: string | string[] };
 	} {
 		let headers;
-		const token = localStorage.getItem('ph-design-me-web-token');
+		const token = localStorage.getItem('neelgund-web-token');
 		headers = new HttpHeaders({
 			Authorization: `Bearer ${token}`,
 		});

@@ -1,5 +1,5 @@
 {
-  "name": "ph-design-me",
+  "name": "neelgund",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,10 +7,10 @@
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:ph-design-me": "node dist/ph-design-me/server/server.mjs",
-    "build:ssr": "ng build --configuration production && ng run ph-design-me:server",
-    "serve:ssr": "node dist/ph-design-me/server/main.js",
-    "dev:ssr": "ng run ph-design-me:serve-ssr"
+    "serve:ssr:neelgund": "node dist/neelgund/server/server.mjs",
+    "build:ssr": "ng build --configuration production && ng run neelgund:server",
+    "serve:ssr": "node dist/neelgund/server/main.js",
+    "dev:ssr": "ng run neelgund:serve-ssr"
   },
   "private": true,
   "dependencies": {

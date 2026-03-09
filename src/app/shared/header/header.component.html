@@ -20,7 +20,7 @@
             </div>
           </div>
           <div id="note" class="col-md-3 d-none d-lg-block text-center">
-            <small class="text-secondary"></small>
+            <small class="text-secondary">Note : We fulfill your dreams</small>
           </div>
           <div class="col-12 col-md-3">
             <div class="d-flex justify-content-center justify-content-md-end gap-2 top-link">
@@ -55,11 +55,11 @@
           </button>
           <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
             <div class="navbar-nav ms-auto mx-xl-auto p-0">
-              <a routerLink="/" class="nav-item nav-link active text-secondary">Home</a>
-              <a routerLink="/about" class="nav-item nav-link">About</a>
-              <a routerLink="/services" class="nav-item nav-link">Services</a>
-              <a routerLink="/projects" class="nav-item nav-link">Projects</a>
-              <a routerLink="/contact" class="nav-item nav-link">Contact</a>
+              <a routerLink="/" [class.active]="router.isActive('/', true)" class="nav-item nav-link text-secondary">Home</a>
+              <a routerLink="/about" [class.active]="router.isActive('/about', true)" class="nav-item nav-link">About</a>
+              <a routerLink="/services" [class.active]="router.isActive('/services', true)" class="nav-item nav-link">Services</a>
+              <a routerLink="/projects" [class.active]="router.isActive('/projects', true)" class="nav-item nav-link">Projects</a>
+              <a routerLink="/contact" [class.active]="router.isActive('/contact', true)" class="nav-item nav-link">Contact</a>
             </div>
           </div>
           <div class="d-none d-xl-flex flex-shirink-0">

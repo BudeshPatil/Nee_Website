@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"ph-design-me": {
+		"neelgund": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
@@ -24,7 +24,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:application",
 					"options": {
-						"outputPath": "dist/ph-design-me",
+						"outputPath": "dist/neelgund",
 						"index": "src/index.html",
 						"browser": "src/main.ts",
 						"polyfills": ["zone.js"],
@@ -88,10 +88,10 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "ph-design-me:build:production"
+							"buildTarget": "neelgund:build:production"
 						},
 						"development": {
-							"buildTarget": "ph-design-me:build:development"
+							"buildTarget": "neelgund:build:development"
 						}
 					},
 					"defaultConfiguration": "development",
@@ -102,7 +102,7 @@
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"buildTarget": "ph-design-me:build"
+						"buildTarget": "neelgund:build"
 					}
 				},
 				"test": {
@@ -133,7 +133,7 @@
 				"server": {
 					"builder": "@angular-devkit/build-angular:server",
 					"options": {
-						"outputPath": "dist/ph-design-me/server",
+						"outputPath": "dist/neelgund/server",
 						"main": "src/main.server.ts",
 						"tsConfig": "tsconfig.server.json"
 					}
@@ -141,20 +141,20 @@
 				"build-ssr": {
 					"builder": "@angular-devkit/build-angular:ssr-dev-server",
 					"options": {
-						"browserTarget": "ph-design-me:build:production",
-						"serverTarget": "ph-design-me:server:production"
+						"browserTarget": "neelgund:build:production",
+						"serverTarget": "neelgund:server:production"
 					}
 				},
 				"serve-ssr": {
 					"builder": "@angular-devkit/build-angular:ssr-dev-server",
 					"options": {
-						"browserTarget": "ph-design-me:build",
-						"serverTarget": "ph-design-me:server"
+						"browserTarget": "neelgund:build",
+						"serverTarget": "neelgund:server"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "ph-design-me:build:production",
-							"serverTarget": "ph-design-me:server:production"
+							"browserTarget": "neelgund:build:production",
+							"serverTarget": "neelgund:server:production"
 						}
 					}
 				}

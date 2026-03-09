@@ -1,5 +1,6 @@
 import { Component, Inject, PLATFORM_ID, ElementRef, Renderer2 } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
 import { DataService } from '../providers/data/data.service';
 import { environment } from '../../environments/environment';
 import { CategoryService } from '../providers/category/category.service';
@@ -22,6 +23,8 @@ export class HomeComponent {
   private trendSwiperSwiper: Swiper | null = null;
   private exploreswiperSwiper: Swiper | null = null;
   private bannerSwiper: Swiper | null = null;
+  private testimonialSwiper: Swiper | null = null; // track instance
+
   services = [
     {
       'id': '01',
@@ -301,7 +304,10 @@ export class HomeComponent {
   constructor(
     @Inject(PLATFORM_ID) private _platformId: Object,
     public dataService: DataService,
-    public categoryService: CategoryService, private el: ElementRef, private renderer: Renderer2,
+    public categoryService: CategoryService,
+    private el: ElementRef,
+    private renderer: Renderer2,
+    private router: Router, // injected for navigation events
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
     this.getBannerdata();
@@ -309,7 +315,7 @@ export class HomeComponent {
     this.getAllservices();
     this.getAllcounterData();
     this.getAllprojects();
-    this.gettestimonials();
+    // initial testimonial load moved to ngOnInit/router event
     this.isBrowser = isPlatformBrowser(this._platformId);
     this.imagePath = environment.baseUrl + '/public/';
     this.baseUrl = environment.url;
@@ -320,6 +326,16 @@ export class HomeComponent {
     if (isPlatformBrowser(this._platformId)) {
       window.scrollTo(0, 0);
     }
+
+    // refresh testimonials whenever we navigate to home
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && (event.url === '/' || event.urlAfterRedirects === '/')) {
+        this.gettestimonials();
+      }
+    });
+
+    // initial load
+    this.gettestimonials();
   }
   startCounting() {
     this.stats.forEach((stat, index) => {
@@ -351,7 +367,7 @@ export class HomeComponent {
       }, 0);
       this.initBannerSwiper();
       this.initProjectHighlightsSwiper();
-      this.initTestimonialsSwiper();
+      // other swipers are initialized when data arrives
       this.getAllClients();
       this.initPortfolioSwiper();
       this.initRecentProjectsSwiper();
@@ -442,7 +458,13 @@ export class HomeComponent {
   }
 
   initTestimonialsSwiper() {
-    new Swiper('.review-swiper', {
+    // destroy existing instance before creating again
+    if (this.testimonialSwiper) {
+      this.testimonialSwiper.destroy(true, true);
+      this.testimonialSwiper = null;
+    }
+
+    this.testimonialSwiper = new Swiper('.review-swiper', {
       loop: true,
       centeredSlides: true,
       slidesPerView: 3,
@@ -615,7 +637,8 @@ export class HomeComponent {
       if (response.code == 200) {
         if (response.result != null && response.result != '') {
           this.testimonialData = response.result;
-        } else {
+          // make sure swiper is initialized once data is rendered
+          setTimeout(() => this.initTestimonialsSwiper(), 0);
         }
       }
     });

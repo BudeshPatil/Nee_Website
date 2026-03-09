@@ -18,9 +18,9 @@
 							<div class="row h-100 align-items-end">
 								<div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto">
 									<div class="banner-text">
-										<h1 class="banner-title">{{ banner.name }}</h1>
-										<p class="banner-sub">{{ banner.short_desc }}</p>
-										<p class="banner-location">{{ banner.description }}</p>
+										<h1 class="banner-title" *ngIf="banner.name">{{ banner.name }}</h1>
+										<p class="banner-sub" *ngIf="banner.short_desc">{{ banner.short_desc }}</p>
+										<p class="banner-location" *ngIf="banner.description">{{ banner.description }}</p>
 									</div>
 								</div>
 							</div>
