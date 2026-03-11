@@ -6,7 +6,7 @@
 		<div class="hero-overlay"></div>
 		<div class="hero-text">
 			<p class="hero-label sora-regular">Our Portfolio</p>
-			<h1 class="nelphim-regular">{{ bannerData[0]?.short_desc }}</h1>
+			<h1 class="">{{ bannerData[0]?.short_desc }}</h1>
 			<p class="hero-description">{{ bannerData[0]?.description }}</p>
 		</div>
 	</div>
@@ -41,31 +41,21 @@
 	<!-- Projects Grid Section -->
 	<section class="projects-grid-section">
 		<div class="container-fluid">
+			<div class="container section-title text-center fw-bold" data-aos="fade-up">
+				<span class="description-title">All Projects</span>
+				<h2 class="text-primary"> Discover Our Work </h2>
+				<p class="section-subtitle">
+					Delivering excellence in land development and construction services
+				</p>
+			</div>
 			<div class="col-xl-12 col-lg-12 col-md-12 mx-auto px-4">
-
-				<!-- Section Header -->
-				<div class="grid-header mb-5">
-					<div class="row align-items-center">
-						<div class="col-md-6">
-							<div>
-								<p class="section-label sora-regular mb-2">Discover Our Work</p>
-								<h2 class="nelphim-regular mb-0">All Projects</h2>
-							</div>
-						</div>
-						<div class="col-md-6 text-md-end mt-3 mt-md-0">
-							<p class="text-muted sora-regular">Showing <strong>{{ allProjects.length }}</strong> of
-								<strong>{{ allProjects.length }}</strong> projects
-							</p>
-						</div>
-					</div>
-				</div>
 
 				<!-- Filters & Sort -->
 				<div class="controls-bar mb-4">
 					<div class="row g-3 align-items-end">
 						<!-- Category Filter -->
 						<div class="col-lg-4">
-							<label class="form-label sora-regular mb-2">Category</label>
+							<label class="form-label sora-regular mb-2">Project Status</label>
 							<div class="category-filter-wrapper">
 								<button *ngFor="let cat of servicesData" class="filter-pill" [class.active]="isActive(cat._id)"
 									(click)="selectCategory(cat._id)">
@@ -87,7 +77,9 @@
 						<!-- Results Count -->
 						<div class="col-lg-4 text-end">
 							<div class="results-count">
-								<span class="sora-regular">{{ totalPages }} page<span *ngIf="totalPages !== 1">s</span></span>
+								<p class="text-muted sora-regular">Showing <strong>{{ allProjects.length }}</strong> of
+								<strong>{{ allProjects.length }}</strong> projects
+							</p>
 							</div>
 						</div>
 					</div>
@@ -216,7 +208,7 @@
 								<p class="size16 cloud-white sora-regular csmb20">
 									Where Ideas Become Reality
 								</p>
-								<h2 class="nelphim-regular size62 cloud-white csmb20">
+								<h2 class=" size62 cloud-white csmb20">
 									Start Your Project With Us
 								</h2>
 								<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>

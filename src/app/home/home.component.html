@@ -58,8 +58,7 @@
 							<h3>5000<span>+</span></h3>
 							<h5>Plots</h5>
 							<p>
-								Successfully delivered over five thousand plots with unwavering
-								commitment to quality and precision.
+								Our vast experience in property development has seen the successful delivery of over five thousand plots, each reflecting our unwavering commitment to quality and attention to detail.
 							</p>
 						</div>
 					</div>
@@ -72,8 +71,7 @@
 							<h3>3500<span>+</span></h3>
 							<h5>Happy Clients</h5>
 							<p>
-								Trusted by more than 3,500 satisfied customers with relationships
-								built to last.
+								Our greatest achievement is the trust and satisfaction of our customers. With a clientele of over 3,500, we've fostered relationships that stand the test of time
 							</p>
 						</div>
 					</div>
@@ -86,8 +84,7 @@
 							<h3>40<span>+</span></h3>
 							<h5>Years Experience</h5>
 							<p>
-								Over four decades of excellence driven by resilience, dedication,
-								and expertise.
+								Our journey of over four decades speaks volumes about our resilience, dedication, and unwavering commitment to providing only the best.
 							</p>
 						</div>
 					</div>
@@ -100,8 +97,7 @@
 							<h3>60<span>+</span></h3>
 							<h5>Projects</h5>
 							<p>
-								More than sixty successful development projects reflecting our
-								industry leadership.
+								Over the course of our journey, we've taken on more than sixty development projects, each a testament to our expertise and dedication.
 							</p>
 						</div>
 					</div>
@@ -140,15 +136,15 @@
 				<div class="col-lg-6 col-md-12">
 					<div class="about-content">
 
-						<p class="size16 sora-regular raisin-black text-uppercase csmb12">
+						<p class="size16 raisin-black text-uppercase csmb12">
 							{{ about.desc_short }}
 						</p>
 
-						<h2 class="nelphim-regular size62 raisin-black csmb24">
+						<h2 class="size62 raisin-black csmb24">
 							{{ about.title_sign }}
 						</h2>
 
-						<div class="sora-regular size18 raisin-black csmb36" [innerHTML]="about.desc_long"></div>
+						<div class="size18 raisin-black csmb36" [innerHTML]="about.desc_long"></div>
 
 						<a routerLink="/about" class="btn-primary raisin-black">
 							Know More
@@ -274,17 +270,12 @@
 
 <section class="why-us sectionp bgcl-primary" *ngIf="whyChooseUs">
 	<div class="container">
-
-		<!-- Heading -->
-		<div class="row mb-5" data-aos="fade-up">
-			<div class="col-lg-7 mx-auto text-center">
-				<h2 class="size48 raisin-black mb-3">
-					{{ whyChooseUs.title }}
-				</h2>
-				<p class="size18 raisin-black">
+		<div class="container section-title text-center fw-bold" data-aos="fade-up">
+			<span class="description-title">Trust Throug</span>
+			<h2 class="text-primary">{{ whyChooseUs.title }}</h2>
+			<p class="section-subtitle">
 					{{ whyChooseUs.subtitle }}
-				</p>
-			</div>
+			</p>
 		</div>
 
 		<!-- Content -->
@@ -295,7 +286,7 @@
 					<h5 class="sora-semibold size20 raisin-black mb-2">
 						{{ item.title }}
 					</h5>
-					<p class="sora-regular size16 raisin-black mb-0">
+					<p class="size16 raisin-black mb-0">
 						{{ item.desc }}
 					</p>
 				</div>
@@ -310,14 +301,14 @@
 	<div class="container-fluid">
 		 <div class="container section-title" data-aos="fade-up">
 				<span class="description-title">Our Project</span>
-				<h2 class="text-primary">Completed Projects, Thoughtfully Delivered</h2>
+				<h2 class="text-primary">Completed Projects</h2>
 		</div>
 		<div class="row">
 			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
 				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
 					<div class="col-lg-8 col-md-8 mb-md-0 mb-sm-4 mb-2">
 						<div class="content-block w-100">
-							<p class="size16 raisin-black sora-regular mb-0 text-uppercase">
+							<p class="size16 raisin-black mb-0 text-uppercase">
 								Our Work
 							</p>
 							<h2 class="size62 raisin-black mb-0">
@@ -343,10 +334,10 @@
 												title="{{ project.name }}" loading="lazy" width="0" height="0" />
 										</div>
 										<div class="card-body cspostion">
-											<p class="card-title size16 sora-regular cloud-white mb-0">
+											<p class="card-title size16 cloud-white mb-0">
 												{{ project.year }}
 											</p>
-											<h3 class="nelphim-regular size38 cloud-white m-0 text-capitalize">
+											<h3 class="size38 cloud-white m-0 text-capitalize">
 												{{ project.name }}
 											</h3>
 										</div>
@@ -365,20 +356,11 @@
 <section class="review sectionp bgcl-primary" *ngIf="testimonialData && testimonialData.length > 0">
 
 	<div class="container-fluid">
+		<div class="container section-title" data-aos="fade-up">
+				<span class="description-title">Testimonials</span>
+				<h2 class="text-primary">Our Clients Saying!</h2>
+		</div>
 		<div class="col-xl-10 col-lg-11 col-md-11 col-sm-11 col-11 mx-auto">
-
-			<!-- Heading -->
-			<div class="row sectionmb">
-				<div class="col-lg-8 mb-4">
-					<p class="size16 sora-regular text-uppercase raisin-black">
-						Testimonials
-					</p>
-					<h2 class="nelphim-regular size62 raisin-black">
-						Our Clients Saying!
-					</h2>
-				</div>
-			</div>
-
 			<!-- Swiper -->
 			<div class="swiper review-swiper">
 				<div class="swiper-wrapper">
@@ -426,10 +408,10 @@
 				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
 					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
 						<div class="content-block w-100">
-							<p class="size16 cloud-white sora-regular csmb20">
+							<p class="size16 cloud-white csmb20">
 								Where Ideas Become Reality
 							</p>
-							<h2 class="nelphim-regular size62 cloud-white csmb20">
+							<h2 class="size62 cloud-white csmb20">
 								Start Your Project With Us
 							</h2>
 							<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>

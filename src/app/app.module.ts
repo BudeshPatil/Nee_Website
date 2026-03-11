@@ -32,6 +32,7 @@ import { FilterByCategoryPipe } from './pipe/filter-by-category.pipe';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ServiceDetailsComponent } from './components/services/service-details/service-details.component';
 import { ProjectDetailsComponent } from './components/portfolio/project-details/project-details.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,7 @@ import { ProjectDetailsComponent } from './components/portfolio/project-details/
     JournalDetailComponent,
 		FilterByCategoryPipe,
   ServiceDetailsComponent,
-  ProjectDetailsComponent
+  ProjectDetailsComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

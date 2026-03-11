@@ -399,12 +399,17 @@ export class HomeComponent {
   }
 
   initBannerSwiper() {
+    if (this.bannerSwiper) {
+      this.bannerSwiper.destroy(true, true);
+      this.bannerSwiper = null;
+    }
+
     setTimeout(() => {
       const swiperElement = document.querySelector('.banner-swiper');
       const slides = document.querySelectorAll('.banner-swiper .swiper-slide');
 
       if (swiperElement && slides.length > 1) {
-        this.bannerSwiper = new Swiper(".banner-swiper", {
+        this.bannerSwiper = new Swiper('.banner-swiper', {
           loop: true,
           slidesPerView: 1,
           speed: 1000,
@@ -570,7 +575,11 @@ export class HomeComponent {
       if (response.code == 200) {
         if (response.result != null && response.result.length > 0) {
           this.bannerData = response.result;
+          setTimeout(() => {
+            this.initBannerSwiper();
+          }, 0);
         } else {
+          this.bannerData = [];
         }
       }
     });

@@ -43,10 +43,10 @@ export class AboutComponent {
   };
 
   ceo = {
-    name: 'Current CEO Name',
-    image: 'ceo.jpg',
+    name: 'Mohd. Suleman Neelgund',
+    role: 'Managing Director',
     quote: 'Innovation with responsibility is the future of real estate.',
-    message: 'As CEO, my focus is on modern planning, transparency, and customer-first development while preserving the legacy built over the last four decades.'
+    message: "Real estate is not just about spaces; it's about realizing dreams and creating legacies. At Neelgund, we dedicate ourselves to crafting spaces that embrace the future, honor our commitments, and exceed expectations"
   };
 
   whoWeAre = {
@@ -62,9 +62,9 @@ export class AboutComponent {
     'Green landscaping'
   ];
   visionMissionValues = {
-    vision: 'To be the most trusted real estate developer shaping sustainable communities.',
-    mission: 'Deliver high-quality, legally transparent developments that create long-term value.',
-    values: ['Transparency', 'Quality', 'Customer-first', 'Sustainability']
+    vision: 'To empower every family with the opportunity to own land and build their dream home, through ethical, economical, and high-quality plot development and construction services',
+    mission: 'To become the most trusted plot developers and construction partners in the region by delivering well-planned layouts, transparent processes, and customer-centric homebuilding solutions',
+    values: 'We value trust, quality, and customer satisfaction above everything. From safe, compliant plots to reliable construction, we ensure every customer experiences comfort, clarity, and confidence at every step'
   };
   whyChooseUs = [
     'On-time delivery',
