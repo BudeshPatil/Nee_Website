@@ -42,7 +42,8 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   currentPage: any;
   pages: any;
   displayedList: any = [];
-  sortOption: any;
+  sortOption: any ='latest';
+  selectedCategoryId: any;
   constructor(
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -94,7 +95,8 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   }
 
   setSort(s) {
-
+    this.sortOption = s;
+    this.getAllprojects();
   }
 
   getBannerdata() {
@@ -111,30 +113,6 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
       }
     });
   }
-
-  // private setupImageLoading(): void {
-  //   // Load first slide immediately
-  //   const firstSlide = document.querySelector('swiper-slide[data-index="0"]');
-  //   if (firstSlide) {
-  //     this.visibleSlides.add(0);
-  //     this.renderer.addClass(firstSlide, 'loaded');
-  //   }
-
-  //   // Load all other slides after 1 second
-  //   setTimeout(() => {
-  //     const allSlides = document.querySelectorAll('swiper-slide');
-  //     allSlides.forEach((slide, index) => {
-  //       if (index > 0) {
-  //         this.visibleSlides.add(index);
-  //         this.renderer.addClass(slide, 'loaded');
-  //       }
-  //     });
-  //   }, 1000);
-  // }
-
-  // shouldLoadImage(index: number): boolean {
-  //   return this.visibleSlides.has(index);
-  // }
 
   swiperConfig: SwiperOptions = {
     direction: 'vertical',
@@ -172,6 +150,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   }
 
   selectCategory(categoryId: string): void {
+    this.selectedCategoryId = categoryId;
     this.selectedCategory = categoryId;
     this.updateDisplayedItems();
 
@@ -184,6 +163,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         swiperEl.swiper.update();
       }
     }, 150);
+    this.getAllprojects();
   }
 
   private updateDisplayedItems(): void {
@@ -201,7 +181,9 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
 
   getAllprojects(): void {
     const obj = {
-      limit: 1000,
+      limit: 100,
+      sort: this.sortOption,
+      selected_status: this.selectedCategoryId
     };
     this.dataService
       .getAllProjects(obj)

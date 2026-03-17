@@ -288,6 +288,12 @@
 	font-size: 14px;
 	color: #666;
 	line-height: 1.6;
+	overflow-y: auto;
+	max-height: 150px;
+}
+
+.section-subtitle{
+	color: var(--bs-primary)
 }
 
 

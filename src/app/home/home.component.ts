@@ -12,6 +12,7 @@ import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
 Swiper.use([Navigation, Pagination, Autoplay, EffectFade]);
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Subject, takeUntil } from 'rxjs';
 gsap.registerPlugin(ScrollTrigger);
 @Component({
   selector: 'app-home',
@@ -241,7 +242,6 @@ export class HomeComponent {
   },
   ];
 
-
   portfolio = [
     {
       'id': '01',
@@ -268,6 +268,7 @@ export class HomeComponent {
       'year': 2014
     }
   ];
+
   whyChooseUs = {
     title: 'Why Choose Us',
     subtitle: 'Building trust through quality, transparency, and commitment',
@@ -301,6 +302,10 @@ export class HomeComponent {
   onMouseLeave(i: any) {
     this.isHovered = false;
   }
+  selectedCategory: string = 'all';
+  allProjects: any = [];
+  completedProjects: any = [];
+  private destroy$ = new Subject<void>();
   constructor(
     @Inject(PLATFORM_ID) private _platformId: Object,
     public dataService: DataService,
@@ -315,11 +320,13 @@ export class HomeComponent {
     this.getAllservices();
     this.getAllcounterData();
     this.getAllprojects();
+    this.getAllprojects2();
     // initial testimonial load moved to ngOnInit/router event
     this.isBrowser = isPlatformBrowser(this._platformId);
     this.imagePath = environment.baseUrl + '/public/';
     this.baseUrl = environment.url;
   }
+
   ngOnInit(): void {
     this.currentValues = new Array(this.stats.length).fill(0);
     this.startCounting(); // Or call only when element is in view using IntersectionObserver
@@ -337,6 +344,7 @@ export class HomeComponent {
     // initial load
     this.gettestimonials();
   }
+
   startCounting() {
     this.stats.forEach((stat, index) => {
       const duration = 1500; // 1.5 seconds
@@ -351,6 +359,7 @@ export class HomeComponent {
       }, stepTime);
     });
   }
+
   activeIndex: number = 0;
   setDefaultCenterActive() {
     this.activeIndex = Math.floor(this.categories.length / 2); // center index
@@ -359,6 +368,7 @@ export class HomeComponent {
   setActive(index: number) {
     this.activeIndex = index;
   }
+
   ngAfterViewInit(): void {
     if (this.isBrowser) {
       setTimeout(() => {
@@ -370,10 +380,10 @@ export class HomeComponent {
       // other swipers are initialized when data arrives
       this.getAllClients();
       this.initPortfolioSwiper();
-      this.initRecentProjectsSwiper();
       // this.initScrollTrigger();
     }
   }
+
   toggleAccordion(index: number): void {
     this.showImage(index);
     this.expandedIndex = this.expandedIndex === index ? -1 : index;
@@ -388,12 +398,6 @@ export class HomeComponent {
     }
   }
 
-
-
-  // if want whole stars
-  // getArray(count: number): number[] {
-  //   return Array(Math.floor(count)).fill(0);
-  // }
   counter(i: number) {
     return new Array(i);
   }
@@ -440,7 +444,7 @@ export class HomeComponent {
     if (this.isBrowser) {
       new Swiper('.project-highlights-swiper', {
         loop: true,
-        slidesPerView: 1,
+        slidesPerView: 3,
         spaceBetween: 30,
         autoplay: {
           delay: 4000,
@@ -451,13 +455,16 @@ export class HomeComponent {
           clickable: true,
         },
         breakpoints: {
-          768: {
+          0: {
             slidesPerView: 1,
           },
-          992: {
-            slidesPerView: 1,
-          }
-        }
+          768: {
+            slidesPerView: 2,
+          },
+          1200: {
+            slidesPerView: 3,
+          },
+        },
       });
     }
   }
@@ -496,8 +503,6 @@ export class HomeComponent {
     });
   }
 
-
-
   public initPortfolioSwiper() {
     if (this.isBrowser) {
       new Swiper('.portfolio-swiper', {
@@ -518,33 +523,6 @@ export class HomeComponent {
         },
         pagination: {
           el: ".portfolio-pagination",
-          clickable: true,
-          renderBullet: function (index, className) {
-            return `<span class="${className}"></span>`;
-          },
-        },
-        on: {
-          init: function () {
-            // Optional: Add any initialization code here
-          },
-          slideChange: function () {
-            // Optional: Handle slide change
-          },
-        },
-      });
-    }
-  }
-
-  public initRecentProjectsSwiper() {
-    if (this.isBrowser) {
-      new Swiper('.recent-projects-swiper', {
-        loop: true,
-        slidesPerView: 1,
-        spaceBetween: 30,
-        grabCursor: true,
-        autoplay: { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true },
-        pagination: {
-          el: ".recent-projects-pagination",
           clickable: true,
           renderBullet: function (index, className) {
             return `<span class="${className}"></span>`;
@@ -584,6 +562,7 @@ export class HomeComponent {
       }
     });
   }
+
   getAboutdata() {
     let obj = {};
     this.dataService.getAllAbout(obj).subscribe((response: any) => {
@@ -598,9 +577,10 @@ export class HomeComponent {
       }
     });
   }
+
   getAllservices() {
     let obj = {};
-    this.categoryService.getAllCategory(obj).subscribe((response: any) => {
+    this.dataService.getAllService(obj).subscribe((response: any) => {
       if (response.code == 200) {
         if (response.result != null && response.result.length > 0) {
           this.servicesData = response.result;
@@ -629,17 +609,22 @@ export class HomeComponent {
       }
     });
   }
+
   getAllprojects() {
     let obj = {};
     this.dataService.getAllProjects(obj).subscribe((response: any) => {
       if (response.code == 200) {
         if (response.result != null && response.result != '') {
           this.projects = response.result;
+          this.completedProjects = this.projects.filter((project: any) => project.status === 'Completed Projects');
+          setTimeout(() => this.initProjectHighlightsSwiper(), 0);
+          setTimeout(() => this.initPortfolioSwiper(), 0);
         } else {
         }
       }
     });
   }
+
   gettestimonials() {
     let obj = {};
     this.dataService.getAlltestimonial(obj).subscribe((response: any) => {
@@ -652,7 +637,6 @@ export class HomeComponent {
       }
     });
   }
-
 
   initScrollTrigger(): void {
     const tl = gsap.timeline({
@@ -681,7 +665,6 @@ export class HomeComponent {
         duration: 2,
       }, 1);
 
-
     const scrollElems = gsap.utils.toArray('.scroll-animate') as HTMLElement[];
 
     scrollElems.forEach((el) => {
@@ -697,5 +680,50 @@ export class HomeComponent {
       });
     });
 
+  }
+
+  private updateDisplayedItems(): void {
+    if (this.selectedCategory === 'all') {
+      this.projects = Object.values(this.allProjects)
+        .flat()
+        .sort((a: any, b: any) => (a.sequence_number || 0) - (b.sequence_number || 0));
+    } else {
+      this.projects = (this.allProjects[this.selectedCategory] || [])
+        .slice() // prevent mutation
+        .sort((a: any, b: any) => (a.sequence_number || 0) - (b.sequence_number || 0));
+    }
+  }
+
+  getAllprojects2(): void {
+    const obj = {
+      limit: 1000,
+    };
+    this.dataService
+      .getAllProjects(obj)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response: any) => {
+        if (response.code === 200 && response.result) {
+          this.allProjects = response.result;
+
+          this.updateDisplayedItems();
+        }
+      });
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'OnGoing Project':
+        return 'status-ongoing';
+      case 'Completed Projects':
+        return 'status-completed';
+      case 'Featured Project':
+        return 'status-featured';
+      default:
+        return '';
+    }
+  }
+
+  selectProject(url_key: string): void {
+    this.router.navigate(['/project/project-details', url_key]);
   }
 }

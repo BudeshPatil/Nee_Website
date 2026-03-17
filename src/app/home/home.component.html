@@ -5,9 +5,8 @@
 				<div class="hero-banner">
 					<div class="hero-overlay"></div>
 
-					<img *ngIf="banner.media_data && banner.media_data[0]?.file_type === 'image'"
-						class="banner-img img-fluid" src="{{ imagePath }}banner/{{ banner.media_data[0].src }}"
-						alt="banner" loading="lazy" />
+					<img *ngIf="banner.media_data && banner.media_data[0]?.file_type === 'image'" class="banner-img img-fluid"
+						src="{{ imagePath }}banner/{{ banner.media_data[0].src }}" alt="banner" loading="lazy" />
 
 					<video *ngIf="banner.media_data && banner.media_data[0]?.file_type === 'video'" class="banner-video"
 						[attr.src]="imagePath + 'banner/' + banner.media_data[0].src" autoplay muted loop playsinline>
@@ -45,20 +44,20 @@
 				<div class="text-center mb-5">
 					<h2 class="stats-title">Building Dreams, Earning Trust — <span class="text-secondary"> Since 1982</span>
 					</h2>
-			</div>
+				</div>
 
 				<!-- STATS CARDS -->
-				<div class="row g-4">
+				<div class="row g-4" *ngIf="counterData">
 
 					<div class="col-lg-3 col-md-6">
 						<div class="stats-card">
 							<div class="stats-icon">
 								<i class="fas fa-vector-square text-secondary"></i>
 							</div>
-							<h3>5000<span>+</span></h3>
+							<h3>{{counterData.total_plots}}<span>+</span></h3>
 							<h5>Plots</h5>
 							<p>
-								Our vast experience in property development has seen the successful delivery of over five thousand plots, each reflecting our unwavering commitment to quality and attention to detail.
+								{{counterData.plots_desc}}
 							</p>
 						</div>
 					</div>
@@ -68,10 +67,10 @@
 							<div class="stats-icon">
 								<i class="fas fa-smile text-secondary"></i>
 							</div>
-							<h3>3500<span>+</span></h3>
+							<h3>{{counterData.total_clients}}<span>+</span></h3>
 							<h5>Happy Clients</h5>
 							<p>
-								Our greatest achievement is the trust and satisfaction of our customers. With a clientele of over 3,500, we've fostered relationships that stand the test of time
+								{{counterData.clients_desc}}
 							</p>
 						</div>
 					</div>
@@ -81,10 +80,10 @@
 							<div class="stats-icon">
 								<i class="fas fa-award text-secondary"></i>
 							</div>
-							<h3>40<span>+</span></h3>
+							<h3>{{counterData.total_experience}}<span>+</span></h3>
 							<h5>Years Experience</h5>
 							<p>
-								Our journey of over four decades speaks volumes about our resilience, dedication, and unwavering commitment to providing only the best.
+								{{counterData.experience_desc}}
 							</p>
 						</div>
 					</div>
@@ -94,10 +93,10 @@
 							<div class="stats-icon">
 								<i class="fas fa-building text-secondary"></i>
 							</div>
-							<h3>60<span>+</span></h3>
+							<h3>{{counterData.total_projects}}<span>+</span></h3>
 							<h5>Projects</h5>
 							<p>
-								Over the course of our journey, we've taken on more than sixty development projects, each a testament to our expertise and dedication.
+								{{counterData.projects_desc}}
 							</p>
 						</div>
 					</div>
@@ -111,15 +110,15 @@
 <section class="about section bgcl-primary" *ngIf="aboutData && aboutData.length > 0">
 	<div class="container-fluid">
 		<!-- SECTION TITLE -->
-		  <!-- Section Title -->
-			<div class="container section-title text-center fw-bold" data-aos="fade-up">
-					<span class="description-title">Neelgund Developers</span>
-					<h2 class="text-primary">A Legacy Built on Trust</h2>
-					<p class="section-subtitle">
-							Four decades of commitment, integrity, and excellence in real estate
-					</p>
-			</div>
-			
+		<!-- Section Title -->
+		<div class="container section-title text-center fw-bold" data-aos="fade-up">
+			<span class="description-title">Neelgund Developers</span>
+			<h2 class="text-primary">A Legacy Built on Trust</h2>
+			<p class="section-subtitle">
+				Four decades of commitment, integrity, and excellence in real estate
+			</p>
+		</div>
+
 		<div class="col-xl-10 col-lg-10 col-md-11 col-sm-11 col-11 mx-auto">
 
 			<div class="row align-items-center" *ngFor="let about of aboutData">
@@ -158,115 +157,149 @@
 		</div>
 	</div>
 </section>
-<section class="project-highlights sectionp bgcl-secondary">
-	<div class="container">
-		<!-- Section Title -->
-		<div class="container section-title" data-aos="fade-up">
-				<span class="description-title">Projects</span>
-				<h2 class="text-primary">Completed Projects</h2>
-		</div><!-- End Section Title -->
+<!-- Projects Grid Section -->
+<section class="projects-grid-section">
+	<div class="container-fluid">
+		<div class="container section-title text-center fw-bold" data-aos="fade-up">
+			<span class="description-title">OnGoing Projects</span>
+			<h2 class="text-primary"> Discover Our Work </h2>
+			<p class="section-subtitle">
+				Delivering excellence in Every Project, Turning Ideas into Reality
+			</p>
+		</div>
+		<div class="col-xl-12 col-lg-12 col-md-12 mx-auto px-4">
+			<!-- Project Cards Grid -->
+			<div class="projects-cards-grid swiper project-highlights-swiper">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" *ngFor="let project of allProjects">
+						<div class="project-card" [routerLink]="['/portfolio', project.url_key]"
+							routerLinkActive="router-link-active">
+							<div class="card-image-wrapper">
+								<img [src]="imagePath + 'project/' + project.image" [alt]="project.name" class="card-image"
+									loading="lazy" (click)="selectProject(project.url_key)" />
+								<div class="card-badge" [ngClass]="getStatusClass(project.category_data[0])"
+									*ngIf="project.category_data || project.is_featured">
+									{{ project.category_data || (project.is_featured ? 'Featured' : '') }}
+								</div>
 
-		<!-- <h2 class="section-title text-center mb-5">Completed Projects</h2> -->
+								<div class="card-brand" *ngIf="project.brand_image">
+									<img [src]="imagePath + 'brand/' + project.brand_image" alt="brand" />
+								</div>
 
-		<div class="swiper project-highlights-swiper">
-			<div class="swiper-wrapper">
+								<div class="card-overlay"></div>
+							</div>
 
-				<div class="swiper-slide" *ngFor="let project of projectHighlights">
+							<div class="card-body">
 
-					<div class="project-card">
+								<div class="card-header">
+									<h3 class="sora-regular mb-1" (click)="selectProject(project.url_key)">{{ project.name }}</h3>
+									<p class="category-label sora-regular"><i class="fas fa-map-marker-alt me-2"></i>{{ project.location
+										}}</p>
+								</div>
 
-						<div class="row align-items-center g-4">
-
-							<!-- LEFT CONTENT -->
-							<div class="col-lg-6 col-md-12">
-								<div class="project-content">
-
-									<h3 class="project-title">{{ project.name }}</h3>
-
-									<ul class="project-meta">
-										<li>
-											<i class="fas fa-map-marker-alt"></i>
-											<span><strong>Location:</strong> {{ project.location }}</span>
-										</li>
-
-										<li>
-											<i class="fas fa-expand-arrows-alt"></i>
-											<span><strong>Project Area:</strong> {{ project.area }}</span>
-										</li>
-
-										<li>
-											<i class="fas fa-th-large"></i>
-											<span><strong>Total Plots:</strong> {{ project.plots }}</span>
-										</li>
-
-										<li>
-											<i class="fas fa-calendar-alt"></i>
-											<span><strong>Year:</strong> {{ project.year }}</span>
-										</li>
-
-										<li *ngIf="project.dimensions">
-											<i class="fas fa-ruler-combined"></i>
-											<span><strong>Plot Size:</strong> {{ project.dimensions }}</span>
-										</li>
-									</ul>
-
-									<!-- Amenities -->
-									<div class="project-amenities" *ngIf="project.amenities?.length">
-										<h6>
-											<i class="fas fa-star"></i> Amenities
-										</h6>
-
-										<ul class="amenities-list">
-											<li *ngFor="let amenity of project.amenities">
-												<i class="fas fa-check-circle"></i>
-												{{ amenity }}
-											</li>
-										</ul>
+								<div class="project-details-grid">
+									<div class="detail-item" *ngIf="project.area">
+										<i class="fas fa-chart-area"></i>
+										<span class="detail-label">Area:</span>
+										<span class="detail-value">{{ project.area }}</span>
 									</div>
+									<div class="detail-item" *ngIf="project.noofplots || project.plots">
+										<i class="fas fa-th"></i>
+										<span class="detail-label">Plots:</span>
+										<span class="detail-value">{{ project.noofplots || project.plots }}</span>
+									</div>
+									<div class="detail-item" *ngIf="project.amenties || project.amenities">
+										<i class="fas fa-leaf"></i>
+										<span class="detail-label">Amenities:</span>
+										<span class="detail-value">{{ project.amenties || project.amenities }}</span>
+									</div>
+									<div class="detail-item" *ngIf="project.category_data">
+										<i class="fas fa-building"></i>
+										<span class="detail-label">Type:</span>
+										<span class="detail-value">Residential Layout</span>
+									</div>
+								</div>
 
-									<!-- CTA BUTTONS -->
-									<div class="project-actions">
+								<!-- approval badge -->
+								<div class="approval-badge">
+									<i class="fas fa-check-circle"></i>
+									<span>Neelgund Developers Approved Project</span>
+								</div>
 
-										<a class="btn-primary raisin-black">
-											<i class="fas fa-rupee-sign"></i>
-											Price on Request
-										</a>
-										
-
-										<a class="btn btn-whatsapp" href="https://wa.me/919999999999" target="_blank">
+								<div class="card-footer d-flex justify-content-between align-items-center mt-3 gap-2">
+									<div class="price-info">
+										<span class="price-text">{{ project.price_text || 'Price on Request' }}</span>
+										<span class="project-type">Residential Layout</span>
+									</div>
+									<div class="d-flex gap-2">
+										<a [href]="'https://wa.me/' + (project.contact_number || '918050238777')" target="_blank"
+											class="call-btn whatsapp-btn" title="Contact on WhatsApp">
 											<i class="fab fa-whatsapp"></i>
 										</a>
-
-										<a class="btn btn-call" href="tel:+919999999999">
+										<a [href]="'tel:' + (project.contact_number || '+918050238777')" class="call-btn" title="Call Now">
 											<i class="fas fa-phone"></i>
 										</a>
-
 									</div>
-
 								</div>
 							</div>
-
-							<!-- RIGHT IMAGE -->
-							<div class="col-lg-6 col-md-12">
-								<div class="project-image">
-									<img [src]="project.image" [alt]="project.name" class="img-fluid" />
-								</div>
-							</div>
-
 						</div>
 					</div>
-
 				</div>
 			</div>
-
-			<!-- Pagination -->
-			<div class="swiper-pagination project-pagination"></div>
 		</div>
-
 	</div>
 </section>
+<!-- Services Start -->
+<section class="services-section py-5" id="service">
+		<!-- Section Title -->
+		<div class="container section-title" data-aos="fade-up">
+				<span class="description-title">Our Services</span>
+				<h2 class="text-primary">What We Offer</h2>
+				<p class="section-subtitle">
+					Delivering excellence in Every Project, Turning Ideas into Reality
+				</p>
+		</div><!-- End Section Title -->
+		<div class="container">
+				<div class="row g-4">
 
+						<!-- Service Card -->
+						<div class="col-md-6 col-lg-6" *ngFor="let service of servicesData; let i = index">
+								<div class="service-card">
+										<div class="icon-box">
+												<i class="fa fa-building"></i>
+										</div>
+										<h4 class="card-title  mb-3">{{ service.name }}</h4>
+										<p class="card-text text-muted mb-3">{{ service.short_desc }}</p>
+										<p class="card-text mb-4 flex-grow-1">{{ service.desc }}</p>
+										<a href="#" class="service-link">
+												Read More <i class="fa fa-arrow-right"></i>
+										</a>
+								</div>
+						</div>
 
+						<!-- Service Card -->
+
+						<!-- Service Card -->
+						<!-- <div class="col-md-6 col-lg-">
+								<div class="service-card">
+										<div class="icon-box">
+												<i class="fa fa-industry"></i>
+										</div>
+										<h4>Construction</h4>
+										<p>
+												End-to-end construction solutions built with quality, precision, and customer-focused
+												planning.
+										</p>
+										<a href="#" class="service-link">
+												Read More <i class="fa fa-arrow-right"></i>
+										</a>
+								</div>
+						</div> -->
+
+				</div>
+		</div>
+</section>
+<!-- Services End -->
 
 <section class="why-us sectionp bgcl-primary" *ngIf="whyChooseUs">
 	<div class="container">
@@ -274,7 +307,7 @@
 			<span class="description-title">Trust Throug</span>
 			<h2 class="text-primary">{{ whyChooseUs.title }}</h2>
 			<p class="section-subtitle">
-					{{ whyChooseUs.subtitle }}
+				{{ whyChooseUs.subtitle }}
 			</p>
 		</div>
 
@@ -299,9 +332,9 @@
 
 <section class="portfolio sectionp bgcl-secondary" *ngIf="projects && projects.length > 0">
 	<div class="container-fluid">
-		 <div class="container section-title" data-aos="fade-up">
-				<span class="description-title">Our Project</span>
-				<h2 class="text-primary">Completed Projects</h2>
+		<div class="container section-title" data-aos="fade-up">
+			<span class="description-title">Our Project</span>
+			<h2 class="text-primary">Completed Projects</h2>
 		</div>
 		<div class="row">
 			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
@@ -317,8 +350,7 @@
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4">
-						<div
-							class="h-100 d-flex align-items-md-end justify-content-md-end align-items-start justify-content-start">
+						<div class="h-100 d-flex align-items-md-end justify-content-md-end align-items-start justify-content-start">
 							<a class="btn-primary raisin-black text-p csmt30" href="/portfolio">Explore</a>
 						</div>
 					</div>
@@ -326,12 +358,10 @@
 						<div class="swiper portfolio-swiper">
 							<div class="swiper-wrapper">
 								<div class="swiper-slide" *ngFor="let project of projects">
-									<a [routerLink]="['/portfolio', project.url_key]"
-								routerLinkActive="router-link-active">
+									<a [routerLink]="['/portfolio', project.url_key]" routerLinkActive="router-link-active">
 										<div class="imgblk">
-											<img [src]="imagePath + 'project/' + project.image"
-												class="img-fluid rounded-0 listimg" alt="{{ project.name }}"
-												title="{{ project.name }}" loading="lazy" width="0" height="0" />
+											<img [src]="imagePath + 'project/' + project.image" class="img-fluid rounded-0 listimg"
+												alt="{{ project.name }}" title="{{ project.name }}" loading="lazy" width="0" height="0" />
 										</div>
 										<div class="card-body cspostion">
 											<p class="card-title size16 cloud-white mb-0">
@@ -357,8 +387,11 @@
 
 	<div class="container-fluid">
 		<div class="container section-title" data-aos="fade-up">
-				<span class="description-title">Testimonials</span>
-				<h2 class="text-primary">Our Clients Saying!</h2>
+			<span class="description-title">Testimonials</span>
+			<h2 class="text-primary">Our Clients Saying!</h2>
+			<p class="section-subtitle">
+					Delivering excellence in Every Project, Turning Ideas into Reality
+				</p>
 		</div>
 		<div class="col-xl-10 col-lg-11 col-md-11 col-sm-11 col-11 mx-auto">
 			<!-- Swiper -->
@@ -370,13 +403,13 @@
 
 							<!-- Avatar -->
 							<div class="testimonial-avatar">
-								<img [src]="imagePath + 'testimonial/' + testimonial.image" [alt]="testimonial.name"
-									loading="lazy" />
+								<img [src]="imagePath + 'testimonial/' + testimonial.image" [alt]="testimonial.name" loading="lazy" />
 							</div>
 
 							<!-- Content -->
 							<div class="testimonial-body">
 								<h4 class="name">{{ testimonial.name }}</h4>
+								<p class="location">{{ testimonial.location }}</p>
 
 								<div class="rating">
 									<img src="{{ baseUrl }}/assets/images/home/star_icon.svg"
@@ -399,6 +432,94 @@
 		</div>
 	</div>
 </section>
+<!-- Blog Start -->
+<section class="blog-section py-5">
+	<!-- Section Title -->
+	<div class="container section-title" data-aos="fade-up">
+			<span class="description-title">Our Blog</span>
+			<h2 class="text-primary">Latest Blog & News</h2>
+			<p class="section-subtitle">
+					Delivering excellence in Every Project, Turning Ideas into Reality
+				</p>
+	</div><!-- End Section Title -->
+	<div class="container">
+			<div class="row g-4 justify-content-center">
+
+					<!-- Blog Card -->
+					<div class="col-lg-4 col-md-6">
+							<div class="blog-card">
+									<img src="../../assets/image/pr1.webp" alt="Mumbai Blog">
+
+									<div class="blog-body">
+											<span class="blog-tag">Mumbai</span>
+
+											<h5>Mumbai's Coastal Road: Impact on Affordable Flats</h5>
+
+											<small class="blog-date">24 March 2025</small>
+
+											<p>
+													How will Mumbai's Coastal Road project change affordable flats in the city?
+													A closer look at housing impact.
+											</p>
+
+											<a href="#" class="read-more">
+													Read More <i class="fa fa-arrow-right"></i>
+											</a>
+									</div>
+							</div>
+					</div>
+
+					<!-- Blog Card -->
+					<div class="col-lg-4 col-md-6">
+							<div class="blog-card">
+									<img src="../../assets/image/pr2.webp" alt="Bengaluru Blog">
+
+									<div class="blog-body">
+											<span class="blog-tag">Bengaluru</span>
+
+											<h5>Rental Prices Soar in Major Indian Cities</h5>
+
+											<small class="blog-date">23 April 2025</small>
+
+											<p>
+													Rental prices in Bengaluru, Gurgaon, and Noida are rising sharply.
+													Here's what tenants and investors should know.
+											</p>
+
+											<a href="#" class="read-more">
+													Read More <i class="fa fa-arrow-right"></i>
+											</a>
+									</div>
+							</div>
+					</div>
+
+					<div class="col-lg-4 col-md-6">
+							<div class="blog-card">
+									<img src="../../assets/image/pr3.webp" alt="Bengaluru Blog">
+
+									<div class="blog-body">
+											<span class="blog-tag">Bengaluru</span>
+
+											<h5>Rental Prices Soar in Major Indian Cities</h5>
+
+											<small class="blog-date">23 April 2025</small>
+
+											<p>
+													Rental prices in Bengaluru, Gurgaon, and Noida are rising sharply.
+													Here's what tenants and investors should know.
+											</p>
+
+											<a href="#" class="read-more">
+													Read More <i class="fa fa-arrow-right"></i>
+											</a>
+									</div>
+							</div>
+					</div>
+
+			</div>
+	</div>
+</section>
+	<!-- Blog End -->
 
 
 <section class="together bgcl-primary">

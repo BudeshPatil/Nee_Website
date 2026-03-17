@@ -90,9 +90,11 @@ export class AboutComponent {
     this.imagePath = environment.baseUrl + '/public/';
     this.getAboutdata();
     this.getBannerdata();
+    this.getAllcounterData();
   }
   isBrowser: boolean = isPlatformBrowser(this.platformId);
   aboutData: any = [];
+  counterData: any;
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -263,6 +265,15 @@ export class AboutComponent {
           }
         } else {
         }
+      }
+    });
+  }
+
+  getAllcounterData() {
+    let obj = {};
+    this.dataService.getcounterData(obj).subscribe((response: any) => {
+      if (response.code == 200) {
+        this.counterData = response.result;
       }
     });
   }

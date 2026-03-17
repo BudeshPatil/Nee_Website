@@ -69,8 +69,9 @@
 							<label class="form-label sora-regular mb-2">Sort By</label>
 							<select class="form-select" [value]="sortOption" (change)="setSort($any($event.target).value)">
 								<option value="latest">Latest Projects</option>
-								<option value="oldest">Oldest First</option>
-								<option value="name">Name A-Z</option>
+								<option value="old">Oldest First</option>
+								<option value="A-Z">Name A-Z</option>
+								<option value="Z-A">Name Z-A</option>
 							</select>
 						</div>
 
@@ -96,7 +97,7 @@
 										loading="lazy" (click)="selectProject(project.url_key)" />
 
 									<!-- status badge top-left -->
-									<div class="card-badge" [ngClass]="getStatusClass(project.category_data)" *ngIf="project.category_data || project.is_featured">
+									<div class="card-badge" [ngClass]="getStatusClass(project.category_data[0])" *ngIf="project.category_data || project.is_featured">
 										{{ project.category_data || (project.is_featured ? 'Featured' : '')	}}
 									</div>
 

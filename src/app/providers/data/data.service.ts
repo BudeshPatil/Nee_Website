@@ -274,7 +274,7 @@ getAllServiceProjects(data: any): Observable<any> {
   }
 
 getAlltestimonial = (data:any): Observable<any> => {
-    const endpoint = environment.baseUrl+'/api/home/alltestimonial';
+    const endpoint = environment.baseUrl+'/api/home/getlltestimonials';
     return this.http.post(endpoint, data).pipe(
       catchError((err) => {
         return throwError(err);
