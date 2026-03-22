@@ -270,7 +270,7 @@
 										</div>
 										<h4 class="card-title  mb-3">{{ service.name }}</h4>
 										<p class="card-text text-muted mb-3">{{ service.short_desc }}</p>
-										<p class="card-text mb-4 flex-grow-1">{{ service.desc }}</p>
+										<p class="card-text mb-4 flex-grow-1" [innerHtml]="service.desc"></p>
 										<a href="#" class="service-link">
 												Read More <i class="fa fa-arrow-right"></i>
 										</a>
@@ -330,7 +330,7 @@
 	</div>
 </section>
 
-<section class="portfolio sectionp bgcl-secondary" *ngIf="projects && projects.length > 0">
+<section class="portfolio sectionp bgcl-secondary" *ngIf="completedProjects && completedProjects.length > 0">
 	<div class="container-fluid">
 		<div class="container section-title" data-aos="fade-up">
 			<span class="description-title">Our Project</span>
@@ -357,7 +357,7 @@
 					<div class="col-12 csmt60">
 						<div class="swiper portfolio-swiper">
 							<div class="swiper-wrapper">
-								<div class="swiper-slide" *ngFor="let project of projects">
+								<div class="swiper-slide" *ngFor="let project of completedProjects">
 									<a [routerLink]="['/portfolio', project.url_key]" routerLinkActive="router-link-active">
 										<div class="imgblk">
 											<img [src]="imagePath + 'project/' + project.image" class="img-fluid rounded-0 listimg"
@@ -433,7 +433,7 @@
 	</div>
 </section>
 <!-- Blog Start -->
-<section class="blog-section py-5">
+<section class="blog-section py-5" *ngIf="blogsData && blogsData.length > 0">
 	<!-- Section Title -->
 	<div class="container section-title" data-aos="fade-up">
 			<span class="description-title">Our Blog</span>
@@ -446,67 +446,19 @@
 			<div class="row g-4 justify-content-center">
 
 					<!-- Blog Card -->
-					<div class="col-lg-4 col-md-6">
+					<div class="col-lg-4 col-md-6" *ngFor="let blog of blogsData">
 							<div class="blog-card">
-									<img src="../../assets/image/pr1.webp" alt="Mumbai Blog">
+									<img src="{{imagePath}}/blog/{{blog.image}}" alt="Mumbai Blog">
 
 									<div class="blog-body">
-											<span class="blog-tag">Mumbai</span>
+											<span class="blog-tag">{{blog.name}}</span>
 
-											<h5>Mumbai's Coastal Road: Impact on Affordable Flats</h5>
+											<h5>{{blog.name}}</h5>
 
-											<small class="blog-date">24 March 2025</small>
-
-											<p>
-													How will Mumbai's Coastal Road project change affordable flats in the city?
-													A closer look at housing impact.
-											</p>
-
-											<a href="#" class="read-more">
-													Read More <i class="fa fa-arrow-right"></i>
-											</a>
-									</div>
-							</div>
-					</div>
-
-					<!-- Blog Card -->
-					<div class="col-lg-4 col-md-6">
-							<div class="blog-card">
-									<img src="../../assets/image/pr2.webp" alt="Bengaluru Blog">
-
-									<div class="blog-body">
-											<span class="blog-tag">Bengaluru</span>
-
-											<h5>Rental Prices Soar in Major Indian Cities</h5>
-
-											<small class="blog-date">23 April 2025</small>
+											<small class="blog-date">{{blog.date | date:'dd MMM YYYY'}}</small>
 
 											<p>
-													Rental prices in Bengaluru, Gurgaon, and Noida are rising sharply.
-													Here's what tenants and investors should know.
-											</p>
-
-											<a href="#" class="read-more">
-													Read More <i class="fa fa-arrow-right"></i>
-											</a>
-									</div>
-							</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6">
-							<div class="blog-card">
-									<img src="../../assets/image/pr3.webp" alt="Bengaluru Blog">
-
-									<div class="blog-body">
-											<span class="blog-tag">Bengaluru</span>
-
-											<h5>Rental Prices Soar in Major Indian Cities</h5>
-
-											<small class="blog-date">23 April 2025</small>
-
-											<p>
-													Rental prices in Bengaluru, Gurgaon, and Noida are rising sharply.
-													Here's what tenants and investors should know.
+													{{blog.content}}
 											</p>
 
 											<a href="#" class="read-more">

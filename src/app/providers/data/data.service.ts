@@ -282,6 +282,16 @@ getAlltestimonial = (data:any): Observable<any> => {
     ); 
   };
 
+  //****************** Download API's Starts **************************/
+  getallBlogs = (data: any): Observable<any> => {
+    const endpoint = environment.baseUrl + '/api/blog/allblog';
+    return this.http.post(endpoint, data).pipe(
+      catchError((err) => {
+        return throwError(err);
+      })
+    );
+  };
+
 
 }
 

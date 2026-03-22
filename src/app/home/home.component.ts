@@ -163,6 +163,7 @@ export class HomeComponent {
   recentProjects: any = [];
   recentProjectActive: any;
   productData: any = [];
+  blogsData: any = [];
   currentLimit = 50;
   currentPage = 1;
   totalRecord = 0;
@@ -321,6 +322,8 @@ export class HomeComponent {
     this.getAllcounterData();
     this.getAllprojects();
     this.getAllprojects2();
+    this.getAllblogs();
+    // initiallblogs();
     // initial testimonial load moved to ngOnInit/router event
     this.isBrowser = isPlatformBrowser(this._platformId);
     this.imagePath = environment.baseUrl + '/public/';
@@ -616,7 +619,7 @@ export class HomeComponent {
       if (response.code == 200) {
         if (response.result != null && response.result != '') {
           this.projects = response.result;
-          this.completedProjects = this.projects.filter((project: any) => project.status === 'Completed Projects');
+          this.completedProjects = this.projects.filter((project: any) => project.category_data[0] === 'Completed Projects');
           setTimeout(() => this.initProjectHighlightsSwiper(), 0);
           setTimeout(() => this.initPortfolioSwiper(), 0);
         } else {
@@ -633,6 +636,17 @@ export class HomeComponent {
           this.testimonialData = response.result;
           // make sure swiper is initialized once data is rendered
           setTimeout(() => this.initTestimonialsSwiper(), 0);
+        }
+      }
+    });
+  }
+
+  getAllblogs(){
+    let obj = {};
+    this.dataService.getallBlogs(obj).subscribe((response: any) => {
+      if (response.code == 200) {
+        if (response.result != null && response.result != '') {
+          this.blogsData = response.result;
         }
       }
     });
