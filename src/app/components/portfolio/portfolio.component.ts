@@ -4,7 +4,9 @@ import {
   OnDestroy,
   Renderer2,
   Inject,
-  PLATFORM_ID
+  PLATFORM_ID,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { SwiperOptions } from 'swiper/types';
@@ -15,7 +17,9 @@ import { DataService } from '../../providers/data/data.service';
 import { Subject, takeUntil } from 'rxjs';
 import { CategoryService } from '../../providers/category/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { ContactService } from '../../providers/contact/contact.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SearchCountryField, CountryISO } from 'ngx-intl-tel-input';
 register();
 
 @Component({
@@ -44,20 +48,45 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   displayedList: any = [];
   sortOption: any ='latest';
   selectedCategoryId: any;
+  addcontactForm: FormGroup;
+  submitted: boolean = false;
+  msg_success: boolean = false;
+  msg_danger: boolean = false;
+  throw_msg: any;
+  SearchCountryField = SearchCountryField;
+  CountryISO = CountryISO;
+  preferredCountries: CountryISO[] = [CountryISO.India];
+  service: any;
+  isvalidSubmit: boolean = true;
+  private isInitialized = false;
+  dropdownOpen = false;
+  selectedService:any;
+  @ViewChild('closeModal') closeModal!: ElementRef;
+  isBrowser: boolean;
+    
   constructor(
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object,
     public dataService: DataService,
     public categoryService: CategoryService,
     private router: Router,
-    public route: ActivatedRoute
-
+    private contactservice: ContactService,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
   ) {
     this.getAllprojects();
     this.getAllServices();
     this.getBannerdata();
-    this.route.params.subscribe(params => {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+    this.route.params.subscribe(params => { 
       this.activecategory = params['category'] || '';
+    });
+    this.addcontactForm = this.formBuilder.group({
+      firstname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      phone: ['', Validators.required],
+      subject: ['price_on_request', Validators.required],
+      message: [''],
     });
   }
 
@@ -72,6 +101,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
       }
       window.scrollTo(0, 0);
     }
+    
   }
 
   ngOnDestroy(): void {
@@ -80,10 +110,88 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     }
     this.destroy$.next();
     this.destroy$.complete();
+     if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo(0, 0);
+      this.route.paramMap.subscribe(params => {
+        const serviceName = params.get('url_key');
+        if (serviceName) {
+          this.selectedService = serviceName;
+          this.addcontactForm.get('service')?.setValue(serviceName);
+        }
+      });
+    }
+  }
+
+  public hasError = (controlName: string, errorName: string) => {
+    // return this.addcontactForm.controls[controlName].hasError(errorName);
+    const control = this.addcontactForm.get(controlName);
+    return control?.hasError(errorName) && (control.dirty || control.touched || this.submitted);
+  };
+  public hasEmailError = (controlName: string, errorName: string) => {
+		if (this.addcontactForm.controls['email'].value == "") {
+			return "Email is required";
+		} else if (this.addcontactForm.controls['email'].status == "INVALID") {
+			return "Invalid Email";
+		} else {
+			return this.addcontactForm.controls['email'].hasError(errorName);
+		}
+	};
+
+  onSubmit() {
+    this.submitted = true;
+    let obj = this.addcontactForm.value;
+    if (this.service) {
+      obj['product'] = this.service;
+    }
+    if (this.addcontactForm.invalid) {
+      return;
+    }
+    if (this.isvalidSubmit == false) {
+      return
+    }
+    let internationalNumber = this.addcontactForm.get('phone')?.value;
+    obj['phone'] = internationalNumber.internationalNumber;
+    this.contactservice.addContact(obj).subscribe(
+      (response) => {
+        if (response.code == 200) {
+          this.throw_msg = response.message;
+          this.msg_success = true;
+          // Hide msg_success after 5 seconds
+          setTimeout(() => {
+            this.msg_success = false;
+          }, 5000);
+          this.submitted = true;
+          setTimeout(() => {
+            this.submitted = false;
+            this.addcontactForm.reset();
+            this.isvalidSubmit = true;
+            // Reset the dropdown display value
+            this.selectedService = '';
+            // Also close the dropdown
+            this.dropdownOpen = false;
+            this.closeModal.nativeElement.click();
+          }, 3000);
+        }
+        else if (response.code == 400) {
+          this.throw_msg = response.message;
+          this.addcontactForm.reset();
+          this.msg_danger = true;
+        }
+      },
+    );
+  }
+
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.dropdownOpen = !this.dropdownOpen;
   }
 
   selectProject(url_key: string): void {
-    this.router.navigate(['/project/project-details', url_key]);
+    this.router.navigate(['/portfolio', url_key]);
+  }
+
+   onSelectProject(data){
+    this.service = data;
   }
 
   changePage(i) {

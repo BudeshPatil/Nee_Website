@@ -172,11 +172,10 @@
 			<div class="projects-cards-grid swiper project-highlights-swiper">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide" *ngFor="let project of allProjects">
-						<div class="project-card" [routerLink]="['/portfolio', project.url_key]"
-							routerLinkActive="router-link-active">
-							<div class="card-image-wrapper">
+						<div class="project-card" >
+							<div class="card-image-wrapper" (click)="selectProject(project.url_key)">
 								<img [src]="imagePath + 'project/' + project.image" [alt]="project.name" class="card-image"
-									loading="lazy" (click)="selectProject(project.url_key)" />
+									loading="lazy" />
 								<div class="card-badge" [ngClass]="getStatusClass(project.category_data[0])"
 									*ngIf="project.category_data || project.is_featured">
 									{{ project.category_data || (project.is_featured ? 'Featured' : '') }}
@@ -208,27 +207,23 @@
 										<span class="detail-label">Plots:</span>
 										<span class="detail-value">{{ project.noofplots || project.plots }}</span>
 									</div>
-									<div class="detail-item" *ngIf="project.amenties || project.amenities">
+									<div class="detail-item" *ngIf="project.dimentions || project.dimentions">
 										<i class="fas fa-leaf"></i>
-										<span class="detail-label">Amenities:</span>
-										<span class="detail-value">{{ project.amenties || project.amenities }}</span>
-									</div>
-									<div class="detail-item" *ngIf="project.category_data">
-										<i class="fas fa-building"></i>
-										<span class="detail-label">Type:</span>
-										<span class="detail-value">Residential Layout</span>
+										<span class="detail-label">Dimentions:</span>
+										<span class="detail-value">{{ project.dimentions || project.dimentions }}</span>
 									</div>
 								</div>
 
 								<!-- approval badge -->
-								<div class="approval-badge">
+								<!-- <div class="approval-badge">
 									<i class="fas fa-check-circle"></i>
 									<span>Neelgund Developers Approved Project</span>
-								</div>
+								</div> -->
 
 								<div class="card-footer d-flex justify-content-between align-items-center mt-3 gap-2">
 									<div class="price-info">
-										<span class="price-text">{{ project.price_text || 'Price on Request' }}</span>
+										<span class="price-text" data-bs-toggle="modal"
+                       data-bs-target="#videoModal" (click)="onSelectProject(project.name)">{{ project.price_text || 'Price on Request' }}</span>
 										<span class="project-type">Residential Layout</span>
 									</div>
 									<div class="d-flex gap-2">
@@ -263,15 +258,15 @@
 				<div class="row g-4">
 
 						<!-- Service Card -->
-						<div class="col-md-6 col-lg-6" *ngFor="let service of servicesData; let i = index">
-								<div class="service-card">
+						<div class="col-md-4 col-lg-4" *ngFor="let service of servicesData; let i = index">
+								<div class="service-card" [routerLink]="['/',service.se]" routerLinkActive="router-link-active">
 										<div class="icon-box">
 												<i class="fa fa-building"></i>
 										</div>
 										<h4 class="card-title  mb-3">{{ service.name }}</h4>
 										<p class="card-text text-muted mb-3">{{ service.short_desc }}</p>
-										<p class="card-text mb-4 flex-grow-1" [innerHtml]="service.desc"></p>
-										<a href="#" class="service-link">
+										<!-- <p class="card-text mb-4 flex-grow-1" [innerHtml]="service.desc"></p> -->
+										<a href="/services" class="service-link">
 												Read More <i class="fa fa-arrow-right"></i>
 										</a>
 								</div>
@@ -337,14 +332,14 @@
 			<h2 class="text-primary">Completed Projects</h2>
 		</div>
 		<div class="row">
-			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+			<div class="col-xl-12 col-lg-12 col-md-12 mx-auto px-lg-5 px-4">
 				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
 					<div class="col-lg-8 col-md-8 mb-md-0 mb-sm-4 mb-2">
 						<div class="content-block w-100">
 							<p class="size16 raisin-black mb-0 text-uppercase">
 								Our Work
 							</p>
-							<h2 class="size62 raisin-black mb-0">
+							<h2 class="size62 raisin-black mb-0 banner-title-responsive">
 								Delivering Excellence with Every Project.
 							</h2>
 						</div>
@@ -354,16 +349,17 @@
 							<a class="btn-primary raisin-black text-p csmt30" href="/portfolio">Explore</a>
 						</div>
 					</div>
-					<div class="col-12 csmt60">
+					<div class="col-12 csmt30">
 						<div class="swiper portfolio-swiper">
 							<div class="swiper-wrapper">
 								<div class="swiper-slide" *ngFor="let project of completedProjects">
-									<a [routerLink]="['/portfolio', project.url_key]" routerLinkActive="router-link-active">
-										<div class="imgblk">
+									<a [routerLink]="['/portfolio', project.url_key]" routerLinkActive="router-link-active" class="d-block position-relative portfolio-link">
+										<div class="imgblk position-relative">
 											<img [src]="imagePath + 'project/' + project.image" class="img-fluid rounded-0 listimg"
-												alt="{{ project.name }}" title="{{ project.name }}" loading="lazy" width="0" height="0" />
+												alt="{{ project.name }}" title="{{ project.name }}" loading="lazy" />
+											<div class="card-overlay"></div>
 										</div>
-										<div class="card-body cspostion">
+										<div class="card-body cspostion" style="z-index: 3;">
 											<p class="card-title size16 cloud-white mb-0">
 												{{ project.year }}
 											</p>
@@ -482,12 +478,12 @@
 					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
 						<div class="content-block w-100">
 							<p class="size16 cloud-white csmb20">
-								Where Ideas Become Reality
+								Have A Question?
 							</p>
 							<h2 class="size62 cloud-white csmb20">
-								Start Your Project With Us
+								We're here To help You
 							</h2>
-							<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>
+							<a class="btn-secondary" style="text-transform: none" href="/contact">Contact Us</a>
 						</div>
 					</div>
 				</div>
@@ -495,3 +491,92 @@
 		</div>
 	</div>
 </section>
+
+<!-- Video Modal Start -->
+<div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content rounded-0">
+        <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Price on Request</h3>
+            <button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="addcontactForm" (ngSubmit)="onSubmit()" method="post" *ngIf="!submitted" novalidate>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="name"
+                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">FULL
+                            NAME</label>
+                        <div class="mb-3">
+                            <input type="text" class="helpform form-control sora-regular raisin-black size16"
+                                formControlName="firstname" name="firstname" placeholder="" />
+                            <span *ngIf="submitted && hasError('firstname', 'required')"
+                                class="text-danger mt-2 sora-regular">Please enter your name
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email"
+                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Email
+                            Address</label>
+                        <div class="mb-3">
+                            <input type="email" class="helpform form-control sora-regular raisin-black size16"
+                                formControlName="email" name="email" placeholder="" />
+                            <span *ngIf="submitted && hasEmailError('email', 'required')"
+                                class="text-danger sora-regular">
+                                {{hasEmailError('email','required')}}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="phone"
+                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Phone
+                            Number</label>
+                        <div class="mb-3">
+                            <ngx-intl-tel-input class="interphone form-control" id="floatingInput"
+                                [cssClass]="'custom-intl-tel-input'" [enableAutoCountrySelect]="true"
+                                [enablePlaceholder]="false" [searchCountryFlag]="true"
+                                [preferredCountries]="preferredCountries" [searchCountryField]="[
+                                    SearchCountryField.Iso2,
+                                    SearchCountryField.Name
+                                ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India" [phoneValidation]="true"
+                                [separateDialCode]="true" name="phone" formControlName="phone">
+                            </ngx-intl-tel-input>
+                            <span *ngIf="submitted && hasError('phone', 'required')"
+                                class="text-danger sora-regular">Please
+                                provide your phone number</span>
+                            <span *ngIf="submitted && hasError('phone', 'validatePhoneNumber')"
+                                class="text-danger sora-regular">
+                                Please enter a valid phone number for the selected country
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 mt-3 mt-md-0">
+                        <label for="phone"
+                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Message</label>
+                        <div class="mb-3">
+                            <textarea class="helptextarea sora-regular raisin-black size16"
+                                formControlName="message" name="message" placeholder=""></textarea>
+                            <span *ngIf="submitted && hasError('message', 'required')"
+                                class="text-danger sora-regular">Please
+                                enter your message</span>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button class="btn-primary text-center mt-2 w-100" type="submit">
+                            <span class="text">
+                                Send Message
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+			<p *ngIf="submitted" class="size16 raisin-black mb-0 text-center">Thank you for reaching out to us. We will get back to you as soon as possible</p>
+        </div>
+    </div>
+</div>
+</div>

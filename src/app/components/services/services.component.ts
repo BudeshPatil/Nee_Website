@@ -7,8 +7,7 @@ import { Swiper } from 'swiper';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 // import gsap from 'gsap';
 // import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 // gsap.registerPlugin(ScrollTrigger);
 @Component({
 	selector: 'app-services',
@@ -45,7 +44,7 @@ export class ServicesComponent {
 		}
 	];
 	constructor(
-		@Inject(PLATFORM_ID) private _platformId: Object,
+		@Inject(PLATFORM_ID) private _platformId: Object,private router: Router,
 		public dataService: DataService, public categoryService: CategoryService, private route: ActivatedRoute,
 	) {
 		this.getBannerdata();
@@ -170,5 +169,9 @@ export class ServicesComponent {
 			this.mySwiper?.destroy(true, true);
 			this.mySwiper = null;
 		}
+	}
+
+	goToService(url_key: string): void {
+		this.router.navigate(['/services', url_key]);
 	}
 }

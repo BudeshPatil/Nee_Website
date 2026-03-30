@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { CategoryService } from '../../../providers/category/category.service';
+import { DataService } from '../../../providers/data/data.service';
+import { environment } from '../../../../environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-service-details',
   templateUrl: './service-details.component.html',
@@ -8,7 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ServiceDetailsComponent implements OnInit {
   service: any = null;
-
+  servicesData: any = [];
+  
   // Static services data (same as in services component)
   services = [
     {
@@ -40,13 +44,42 @@ export class ServiceDetailsComponent implements OnInit {
       ]
     }
   ];
+  imagePath: any;
+  baseUrl: any;
+  isBrowser: boolean;
 
-  constructor(private route: ActivatedRoute) {}
+ 
+  constructor(private route: ActivatedRoute, @Inject(PLATFORM_ID) private _platformId: Object, public dataService: DataService) {
+    this.imagePath = environment.baseUrl + '/public/';
+    this.baseUrl = environment.url;
+    this.isBrowser = isPlatformBrowser(this._platformId);
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      const urlKey = params['url_key'];
-      this.service = this.services.find(s => s.url_key === urlKey);
-    });
+    this.getAllservices();
   }
+
+  
+
+  getAllservices() {
+		let obj = {};
+    this.dataService.getAllService({}).subscribe((response: any) => {
+			if (response.code == 200) {
+				if (response.result != null && response.result.length > 0) {
+					this.servicesData = response.result;
+          this.route.params.subscribe(params => {
+            const urlKey = params['url_key'];
+            this.service = this.servicesData.find(s => s.link === urlKey);
+            this.service['features'] =  [
+                  'Project planning and architectural design',
+                  'Construction management and supervision',
+                  'Quality control and safety compliance',
+                  'Sustainable building practices',
+                  'Timely project delivery and handover'
+                ]
+          });
+				}
+			}
+		});
+	}
 }

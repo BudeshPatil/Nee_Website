@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { DataService } from '../providers/data/data.service';
@@ -13,6 +13,10 @@ Swiper.use([Navigation, Pagination, Autoplay, EffectFade]);
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Subject, takeUntil } from 'rxjs';
+import { ContactService } from '../providers/contact/contact.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { SearchCountryField, CountryISO } from 'ngx-intl-tel-input';
 gsap.registerPlugin(ScrollTrigger);
 @Component({
   selector: 'app-home',
@@ -307,10 +311,27 @@ export class HomeComponent {
   allProjects: any = [];
   completedProjects: any = [];
   private destroy$ = new Subject<void>();
+  addcontactForm: FormGroup;
+  submitted: boolean = false;
+  msg_success: boolean = false;
+  msg_danger: boolean = false;
+  throw_msg: any;
+  SearchCountryField = SearchCountryField;
+  CountryISO = CountryISO;
+  preferredCountries: CountryISO[] = [CountryISO.India];
+  service: any;
+  isvalidSubmit: boolean = true;
+  private isInitialized = false;
+  dropdownOpen = false;
+  selectedService:any;
+  @ViewChild('closeModal') closeModal!: ElementRef;
   constructor(
     @Inject(PLATFORM_ID) private _platformId: Object,
     public dataService: DataService,
     public categoryService: CategoryService,
+    private contactservice: ContactService,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
     private el: ElementRef,
     private renderer: Renderer2,
     private router: Router, // injected for navigation events
@@ -328,6 +349,13 @@ export class HomeComponent {
     this.isBrowser = isPlatformBrowser(this._platformId);
     this.imagePath = environment.baseUrl + '/public/';
     this.baseUrl = environment.url;
+    this.addcontactForm = this.formBuilder.group({
+          firstname: ['', Validators.required],
+          email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+          phone: ['', Validators.required],
+          subject: ['price_on_request', Validators.required],
+          message: [''],
+        });
   }
 
   ngOnInit(): void {
@@ -346,6 +374,80 @@ export class HomeComponent {
 
     // initial load
     this.gettestimonials();
+    if (isPlatformBrowser(this._platformId)) {
+      window.scrollTo(0, 0);
+      this.route.paramMap.subscribe(params => {
+        const serviceName = params.get('url_key');
+        if (serviceName) {
+          this.selectedService = serviceName;
+          this.addcontactForm.get('service')?.setValue(serviceName);
+        }
+      });
+    }
+  }
+
+  public hasError = (controlName: string, errorName: string) => {
+    // return this.addcontactForm.controls[controlName].hasError(errorName);
+    const control = this.addcontactForm.get(controlName);
+    return control?.hasError(errorName) && (control.dirty || control.touched || this.submitted);
+  };
+  public hasEmailError = (controlName: string, errorName: string) => {
+		if (this.addcontactForm.controls['email'].value == "") {
+			return "Email is required";
+		} else if (this.addcontactForm.controls['email'].status == "INVALID") {
+			return "Invalid Email";
+		} else {
+			return this.addcontactForm.controls['email'].hasError(errorName);
+		}
+	};
+
+  onSubmit() {
+    this.submitted = true;
+    let obj = this.addcontactForm.value;
+    if (this.service) {
+      obj['product'] = this.service;
+    }
+    if (this.addcontactForm.invalid) {
+      return;
+    }
+    if (this.isvalidSubmit == false) {
+      return
+    }
+    let internationalNumber = this.addcontactForm.get('phone')?.value;
+    obj['phone'] = internationalNumber.internationalNumber;
+    this.contactservice.addContact(obj).subscribe(
+      (response) => {
+        if (response.code == 200) {
+          this.throw_msg = response.message;
+          this.msg_success = true;
+          // Hide msg_success after 5 seconds
+          setTimeout(() => {
+            this.msg_success = false;
+          }, 5000);
+          this.submitted = true;
+          setTimeout(() => {
+            this.submitted = false;
+            this.addcontactForm.reset();
+            this.isvalidSubmit = true;
+            // Reset the dropdown display value
+            this.selectedService = '';
+            // Also close the dropdown
+            this.dropdownOpen = false;
+            this.closeModal.nativeElement.click();
+          }, 3000);
+        }
+        else if (response.code == 400) {
+          this.throw_msg = response.message;
+          this.addcontactForm.reset();
+          this.msg_danger = true;
+        }
+      },
+    );
+  }
+
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.dropdownOpen = !this.dropdownOpen;
   }
 
   startCounting() {
@@ -448,7 +550,7 @@ export class HomeComponent {
       new Swiper('.project-highlights-swiper', {
         loop: true,
         slidesPerView: 3,
-        spaceBetween: 30,
+        spaceBetween: 15,
         autoplay: {
           delay: 4000,
           disableOnInteraction: false,
@@ -460,12 +562,15 @@ export class HomeComponent {
         breakpoints: {
           0: {
             slidesPerView: 1,
+            spaceBetween: 15,
           },
           768: {
             slidesPerView: 2,
+            spaceBetween: 20,
           },
           1200: {
             slidesPerView: 3,
+            spaceBetween: 30,
           },
         },
       });
@@ -511,18 +616,22 @@ export class HomeComponent {
       new Swiper('.portfolio-swiper', {
         loop: true,
         slidesPerView: 1,
-        spaceBetween: 30,
-        // effect: "creative",
+        spaceBetween: 15,
         grabCursor: true,
         autoplay: { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true },
-        creativeEffect: {
-          prev: {
-            shadow: true,
-            translate: ["-20%", 0, -1],
+        breakpoints: {
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 15,
           },
-          next: {
-            translate: ["100%", 0, 0],
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
           },
+          1200: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          }
         },
         pagination: {
           el: ".portfolio-pagination",
@@ -580,6 +689,7 @@ export class HomeComponent {
       }
     });
   }
+
 
   getAllservices() {
     let obj = {};
@@ -738,6 +848,10 @@ export class HomeComponent {
   }
 
   selectProject(url_key: string): void {
-    this.router.navigate(['/project/project-details', url_key]);
+    this.router.navigate(['/portfolio', url_key]);
+  }
+
+  onSelectProject(data){
+    this.service = data;
   }
 }

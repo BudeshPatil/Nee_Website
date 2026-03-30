@@ -27,7 +27,8 @@ export class ContactComponent {
   isvalidSubmit: boolean = true;
   baseUrl: any;
   private isInitialized = false;
-
+  dropdownOpen = false;
+  servicesData: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -133,30 +134,7 @@ export class ContactComponent {
         }
       },
     );
-
   }
-  // get_PageMeta() {
-  // 	let obj = { pageName: 'contact' };
-  // 	this.pageservice.getpageWithName(obj).subscribe(
-  // 		(response) => {
-  // 			if (response.body.code == 200 && response?.body.result) {
-  // 				this.titleService.setTitle(response?.body.result.meta_title);
-  // 				this.metaTagService.addTags([
-  // 					{ name: 'description', content: response?.body.result.meta_description },
-  // 					{ name: 'keywords', content: response?.body.result.meta_keywords },
-  // 				]);
-  // 			} else if (response.body.code == 400) {
-  // 			}
-  // 			else {
-
-  // 			}
-
-  // 		},
-  // 	);
-  // }
-
-  dropdownOpen = false;
-  servicesData: any = [];
 
   getAllservices() {
     let obj = {};

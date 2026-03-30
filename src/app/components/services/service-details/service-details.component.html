@@ -33,7 +33,7 @@
       <div class="col-12">
         <div class="hero-content position-relative">
           <div class="hero-image-wrapper">
-            <img [src]="service.image" [alt]="service.name" class="hero-image">
+            <img src="{{imagePath}}/service/{{service.image}}" alt="{{ service.name }}" class="hero-image">
             <div class="hero-overlay"></div>
           </div>
           <div class="hero-text">
@@ -41,7 +41,7 @@
               <div class="row">
                 <div class="col-lg-8 col-md-10 mt-4">
                   <h1 class="display-3 nelphim-regular text-white mb-4">{{ service.name }}</h1>
-                  <p class="lead sora-regular text-white mb-4">{{ service.short_description }}</p>
+                  <p class="lead sora-regular text-white mb-4">{{ service.short_desc }}</p>
                   <!-- <a href="#service-details-content" class="btn btn-primary">Learn More</a> -->
                 </div>
               </div>
@@ -60,7 +60,7 @@
       <div class="col-lg-8 col-md-7">
         <div class="service-description">
           <h2 class="nelphim-regular mb-4">About {{ service.name }}</h2>
-          <p class="sora-regular text-muted mb-4 lead">{{ service.full_description }}</p>
+          <p class="sora-regular text-muted mb-4 lead" [innerHtml]="service.desc"></p>
 
           <h3 class="nelphim-regular mb-3">Key Features</h3>
           <div class="features-list">
@@ -81,7 +81,7 @@
           <div class="sidebar-card">
             <h4 class="nelphim-regular mb-3">Get Started</h4>
             <p class="sora-regular text-muted mb-4">Ready to start your project? Contact us for a free consultation.</p>
-            <a href="/contact" class="btn btn-primary w-100 mb-3">Get Free Consultation</a>
+            <a href="/contact" class="btn btn-primary w-100 mb-3">Contact Us</a>
             <a href="/services" class="btn btn-outline-primary w-100">View All Services</a>
           </div>
 
@@ -133,13 +133,13 @@
 				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
 					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
 						<div class="content-block w-100">
-							<p class="size16 cloud-white sora-regular csmb20">
-								Where Ideas Become Reality
+							<p class="size16 cloud-white csmb20">
+								Have A Question?
 							</p>
-							<h2 class="nelphim-regular size62 cloud-white csmb20">
-								Start Your Project With Us
+							<h2 class="size62 cloud-white csmb20">
+								We're here To help You
 							</h2>
-							<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>
+							<a class="btn-secondary" style="text-transform: none" href="/contact">Contact Us</a>
 						</div>
 					</div>
 				</div>

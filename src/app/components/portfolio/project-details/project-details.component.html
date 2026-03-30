@@ -78,17 +78,25 @@
             <div class="info-item" *ngIf="projectData?.area">
               <div class="info-label">
                 <i class="fas fa-ruler-combined text-primary me-2"></i>
-                Area
+                Area - {{ projectData.area }}
               </div>
-              <div class="info-value">{{ projectData.area }}</div>
+              <!-- <div class="info-value">{{ projectData.area }}</div> -->
+            </div>
+
+            <div class="info-item" *ngIf="projectData?.dimentions || projectData?.dimentions">
+              <div class="info-label">
+                <i class="fas fa-th text-primary me-2"></i>
+                Dimentions
+              </div>
+              <div class="info-value">{{ projectData.dimentions || projectData.dimentions }}</div>
             </div>
 
             <div class="info-item" *ngIf="projectData?.noofplots || projectData?.plots">
               <div class="info-label">
                 <i class="fas fa-th text-primary me-2"></i>
-                Plots
+                Plots - {{ projectData.noofplots || projectData.plots }}
               </div>
-              <div class="info-value">{{ projectData.noofplots || projectData.plots }}</div>
+              <!-- <div class="info-value">{{ projectData.noofplots || projectData.plots }}</div> -->
             </div>
 
             <div class="info-item" *ngIf="projectData?.amenties || projectData?.amenities">
@@ -102,9 +110,9 @@
             <div class="info-item" *ngIf="projectData?.year">
               <div class="info-label">
                 <i class="fas fa-calendar text-primary me-2"></i>
-                Year
+                Year - {{ projectData.year }}
               </div>
-              <div class="info-value">{{ projectData.year }}</div>
+              <!-- <div class="info-value">{{ projectData.year }}</div> -->
             </div>
 
             <!-- Price Section -->
@@ -138,7 +146,7 @@
 
       <!-- Project Design Images Section -->
       <div class="project-design-images-section mt-5" *ngIf="projectData?.project_design_images && projectData.project_design_images.length > 0">
-        <h3 class="section-title mb-4">Images & Gallery</h3>
+        <h3 class="section-title mb-4">Gallery</h3>
         <div class="design-images-gallery">
           <div class="swiper designImagesSwiper">
             <div class="swiper-wrapper">
@@ -197,14 +205,14 @@
             </span>
           </div>
           <div class="map-actions d-flex gap-2 flex-wrap">
-            <a [href]="getGoogleMapsDirectionsUrl(projectData.location)"
+            <!-- <a [href]="getGoogleMapsDirectionsUrl(projectData.location)"
                target="_blank"
                class="btn btn-outline-primary"
                [class.disabled]="isEmbeddedUrl(projectData.location)"
                [attr.onclick]="isEmbeddedUrl(projectData.location) ? 'return false;' : null">
               <i class="fas fa-external-link-alt me-2"></i>
               View on Google Maps
-            </a>
+            </a> -->
             <a [href]="getDirectionsToProject(projectData.location)"
                target="_blank"
                class="btn btn-outline-success"
@@ -257,13 +265,13 @@
 				<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
 					<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
 						<div class="content-block w-100">
-							<p class="size16 cloud-white sora-regular csmb20">
-								Where Ideas Become Reality
+							<p class="size16 cloud-white csmb20">
+								Have A Question?
 							</p>
-							<h2 class=" size62 cloud-white csmb20">
-								Start Your Project With Us
+							<h2 class="size62 cloud-white csmb20">
+								We're here To help You
 							</h2>
-							<a class="btn-secondary" style="text-transform: none" href="/contact">Get a Free Consultation</a>
+							<a class="btn-secondary" style="text-transform: none" href="/contact">Contact Us</a>
 						</div>
 					</div>
 				</div>
