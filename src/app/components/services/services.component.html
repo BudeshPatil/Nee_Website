@@ -2,6 +2,7 @@
 <div class="project-details-page">
 	<div class="container-fluid page-header py-5 mb-5">
 		<div class="container py-5">
+			<h1 class="display-2 text-white mb-4 animated slideInDown fw-bold">Services</h1>
 			<div class="breadcrumb-container mb-5 animated slideInDown">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
@@ -21,7 +22,6 @@
 					</ol>
 				</nav>
 			</div>
-			<h1 class="display-2 text-white mb-4 animated slideInDown fw-bold">Services</h1>
 		</div>
 	</div>
 
@@ -36,7 +36,7 @@
 				</p>
 			</div>
 			<div class="row g-4">
-				<div class="col-lg-6 col-md-6" *ngFor="let service of servicesBannerData; let i = index">
+				<div class="col-lg-4 col-md-4" *ngFor="let service of servicesBannerData; let i = index">
 					<div class="service-card card h-100 border-0 shadow-sm" (click)="goToService(service.link)"
 						style="cursor: pointer;">
 						<div class="card-img-wrapper">

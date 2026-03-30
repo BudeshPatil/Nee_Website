@@ -25,12 +25,12 @@ export class AboutComponent {
   imagePath: any;
   bannerData: any;
   companyHistory = {
-    shortIntro: 'Founded in 1982, Neelgund Developers has shaped the future of land development in North Karnataka.',
+    shortIntro: 'Since 1982, we have transformed strategically located land into fully developed, ready-to-build residential layouts across Hubballi-Dharwad. We specialize in providing NA plots for sale with 100% clear titles and rigorously verified legal paperwork. Whether you are looking for an investment or a place to build your future, our 40+ years of expertise ensure a secure and transparent buying experience',
     fullDescription: `
-    <p>What started as a small vision has grown into a legacy of trust, quality, and commitment.</p>
-    <p>Over the decades, we have delivered landmark residential layouts, focusing on transparency,
-    legal clarity, and long-term value for our customers.</p>
-    <p>Today, Neelgund Developers stands as a symbol of reliability and sustainable growth.</p>
+    <p><strong>Neelgund Construction: Your Vision, Our Expertise</strong></p>
+    <p class="gray-text">Building a home is a lifetime milestone that should be hassle-free. We provide end-to-end construction services, managing everything from 2D floor plans and 3D elevations to securing government approvals. Our expert team of engineers and architects uses top-quality materials to deliver ready-to-move-in homes that fit your lifestyle and budget.</p>
+    <p><strong>Neelgund Club: Superior Property Maintenance</strong></p>
+    <p class="gray-text">We believe your plot is the foundation of your family’s financial security. Through Neelgund Club, we protect the value of your property by maintaining our layouts ourselves. From continuous water supply and 365-day street lighting to routine pest control and lush green plantations, we ensure your gated community plots in Hubli remain a pristine sanctuary.</p>
   `,
     image: 'history.jpg'
   };

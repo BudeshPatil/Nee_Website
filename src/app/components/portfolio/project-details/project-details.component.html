@@ -224,6 +224,169 @@
           </div>
         </div>
       </div>
+       <!-- Google Maps Section -->
+      <div class="detail-form mt-5" *ngIf="projectData?.location">
+        <h3 class="section-title mb-4">Get In Touch<span class="d-block">We're here To help You</span></h3>
+          <div class="row">
+				<div class="col-lg-6 mb-lg-0 mb-4">
+					<div class="addr">
+						<!-- <p class="sora-regular size16 raisin-black mb-0 text-capitalize">
+							Please contact Neelgund using the details below:
+						</p> -->
+						<!-- <h1 class="nelphim-regular size62 raisin-black text-capitalize">
+							Get In Touch<span class="d-block">Contact for any query</span>
+						</h1> -->
+						<!-- <h1 class="nelphim-regular size62 raisin-black text-capitalize">
+							Let’s discuss <span class="d-block">interior design</span>
+						</h1> -->
+						<p class="sora-regular size18 raisin-black csmt30 mb-1 para-width">
+							Neelgund Developers' vision is to redefine the real estate landscape with
+							pioneering solutions and sustainable growth
+						</p>
+						<div class="details csmt60 row">
+							<div class="col-12">
+								<div class="row">
+									<div class="col-2">
+										<p class="sora-regular size18 raisin-black mb-3 text-capitalize">
+											email
+										</p>
+									</div>
+									<div class="col-10">
+										<a href="mailto:info@neelgund.com"
+											class="sora-regular size18 gray d-block mb-3">info&#64;neelgund.com</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="row">
+									<div class="col-2">
+										<p class="sora-regular size18 raisin-black mb-3 text-capitalize">
+											phone
+										</p>
+									</div>
+									<div class="col-10">
+										<a href="tel:+918050238777" class="sora-regular size18 gray d-block mb-3">+91
+											80502 38777</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="row">
+									<div class="col-2">
+										<p class="sora-regular size18 raisin-black mb-3 text-capitalize">
+											Office
+										</p>
+									</div>
+									<div class="col-10">
+										<a class="sora-regular size18 gray d-block mb-3">
+											No 14A, 3rd Floor, Stellar Mall, <span
+												class="d-xl-block d-lg-inline d-md-block d-block">beside JG commerce
+												college, Jayanagar, Vidya Nagar, Hubballi</span>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="row">
+									<div class="col-2">
+										<p class="sora-regular size18 raisin-black mb-3 text-capitalize">
+											hours
+										</p>
+									</div>
+									<div class="col-10">
+										<a class="sora-regular size18 gray d-block mb-3">
+											Monday - Friday, 9 AM - 6 PM
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 mb-lg-0 mb-4">
+					<div class="alert alert-success alert-dismissable" style="text-align: center" *ngIf="msg_success">
+						{{ throw_msg }}
+					</div>
+					<div class="alert text-danger alert-dismissable" style="text-align: center" *ngIf="msg_danger">
+						{{ throw_msg }}
+					</div>
+					<form [formGroup]="addcontactForm" (ngSubmit)="onSubmit()" method="post" novalidate>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="name"
+									class="form-label sora-regular text-uppercase raisin-black size16 csmb12">FULL
+									NAME</label>
+								<div class="mb-3 ">
+									<input type="text" class="helpform form-control sora-regular raisin-black size16"
+										formControlName="firstname" name="firstname" placeholder="" />
+									<span *ngIf="submitted && hasError('firstname', 'required')"
+										class="text-danger mt-2 sora-regular">Please enter your name
+									</span>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="email"
+									class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Email
+									Address</label>
+								<div class="mb-3 ">
+									<input type="email" class="helpform form-control sora-regular raisin-black size16"
+										formControlName="email" name="email" placeholder="" />
+									<span *ngIf="submitted && hasEmailError('email', 'required')"
+										class="text-danger sora-regular">
+										{{hasEmailError('email','required')}}
+									</span>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label for="phone"
+									class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Phone
+									Number</label>
+								<div class="mb-3 ">
+									<ngx-intl-tel-input class="interphone form-control" id="floatingInput"
+										[cssClass]="'custom-intl-tel-input'" [enableAutoCountrySelect]="true"
+										[enablePlaceholder]="false" [searchCountryFlag]="true"
+										[preferredCountries]="preferredCountries" [searchCountryField]="[
+											SearchCountryField.Iso2,
+											SearchCountryField.Name
+										]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India" [phoneValidation]="true"
+										[separateDialCode]="true" name="phone" formControlName="phone">
+									</ngx-intl-tel-input>
+									<span *ngIf="submitted && hasError('phone', 'required')"
+										class="text-danger sora-regular">Please
+										provide your phone number</span>
+									<span *ngIf="submitted && hasError('phone', 'validatePhoneNumber')"
+										class="text-danger sora-regular">
+										Please enter a valid phone number for the selected country
+									</span>
+
+								</div>
+							</div>
+
+							<div class="form-group col-md-12 mt-3 mt-md-0">
+								<label for="phone"
+									class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Message</label>
+								<div class="mb-3">
+									<textarea class="helptextarea sora-regular raisin-black size16"
+										formControlName="message" name="message" placeholder=""></textarea>
+									<span *ngIf="submitted && hasError('message', 'required')"
+										class="text-danger sora-regular">Please
+										enter your message</span>
+								</div>
+							</div>
+
+							<div class="col-12">
+								<button class="btn-primary text-center mt-2 w-100" type="submit">
+									<span class="text">
+										Submit
+									</span>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+      </div>
     </div>
   </section>
 
@@ -248,7 +411,7 @@
                 <i class="fas fa-map-marker-alt me-1"></i>
                 {{ project.location }}
               </p>
-              <div class="card-price">{{ project.price_text || 'Price on Request' }}</div>
+              <!-- <div class="card-price">{{ project.price_text || 'Price on Request' }}</div> -->
               <a [routerLink]="['/portfolio', project.url_key]" class="btn btn-primary btn-sm">
                 View Details
               </a>

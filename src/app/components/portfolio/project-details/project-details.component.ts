@@ -15,7 +15,9 @@ import { SeoService } from '../../../providers/seo/seo.service';
 import Swiper from 'swiper';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import * as AOS from 'aos';
-
+import { ContactService } from '../../../providers/contact/contact.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SearchCountryField, CountryISO } from 'ngx-intl-tel-input';
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.component.html',
@@ -30,16 +32,37 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   private designImagesSwiper: Swiper | null = null;
   isBrowser = false;
   getmapUrl = '';
-
+  addcontactForm: FormGroup;
+  submitted: boolean = false;
+  msg_success: boolean = false;
+  msg_danger: boolean = false;
+  throw_msg: any;
+  SearchCountryField = SearchCountryField;
+  CountryISO = CountryISO;
+  preferredCountries: CountryISO[] = [CountryISO.India];
+  service: any;
+  isvalidSubmit: boolean = true;
+  private isInitialized = false;
+  dropdownOpen = false;
+  selectedService:any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private projectService: ProjectService,
     private seo: SeoService,
     private cdr: ChangeDetectorRef,
+    private contactservice: ContactService,
+    private formBuilder: FormBuilder,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
+    this.addcontactForm = this.formBuilder.group({
+          firstname: ['', Validators.required],
+          email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+          phone: ['', Validators.required],
+          subject: ['price_on_request', Validators.required],
+          message: [''],
+        });
   }
 
   ngOnInit(): void {
@@ -88,6 +111,7 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit, OnDestroy
     this.projectService.getProjectsByURL({ url_key: urlKey }).subscribe(res => {
       if (res?.code === 200) {
         this.projectData = res.result;
+        this.service = this.projectData.name
         this.getGoogleMapsEmbedUrl(this.projectData.location);
         this.recentProjects = res.result.related_prjects || [];
         this.seo.updateProjectMeta(urlKey, `/project/${urlKey}`);
@@ -255,5 +279,76 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit, OnDestroy
     this.swiper = null;
     this.designImagesSwiper?.destroy(true, true);
     this.designImagesSwiper = null;
+  }
+
+  public hasError = (controlName: string, errorName: string) => {
+    // return this.addcontactForm.controls[controlName].hasError(errorName);
+    const control = this.addcontactForm.get(controlName);
+    return control?.hasError(errorName) && (control.dirty || control.touched || this.submitted);
+  };
+  public hasEmailError = (controlName: string, errorName: string) => {
+		if (this.addcontactForm.controls['email'].value == "") {
+			return "Email is required";
+		} else if (this.addcontactForm.controls['email'].status == "INVALID") {
+			return "Invalid Email";
+		} else {
+			return this.addcontactForm.controls['email'].hasError(errorName);
+		}
+	};
+
+  onSubmit() {
+    this.submitted = true;
+    let obj = this.addcontactForm.value;
+    if (this.service) {
+      obj['product'] = this.service;
+    }
+    if (this.addcontactForm.invalid) {
+      return;
+    }
+    if (this.isvalidSubmit == false) {
+      return
+    }
+    let internationalNumber = this.addcontactForm.get('phone')?.value;
+    obj['phone'] = internationalNumber.internationalNumber;
+    this.contactservice.addContact(obj).subscribe(
+      (response) => {
+        if (response.code == 200) {
+          this.throw_msg = response.message;
+          this.msg_success = true;
+          // Hide msg_success after 5 seconds
+          setTimeout(() => {
+            this.msg_success = false;
+          }, 5000);
+          this.submitted = true;
+          setTimeout(() => {
+            this.submitted = false;
+            this.addcontactForm.reset();
+            this.isvalidSubmit = true;
+            // Reset the dropdown display value
+            this.selectedService = '';
+            // Also close the dropdown
+            this.dropdownOpen = false;
+          }, 3000);
+        }
+        else if (response.code == 400) {
+          this.throw_msg = response.message;
+          this.addcontactForm.reset();
+          this.msg_danger = true;
+        }
+      },
+    );
+  }
+
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  selectProject(url_key: string): void {
+    this.router.navigate(['/portfolio', url_key]);
+  }
+
+   onSelectProject(data){
+    this.service = data;
   }
 }
