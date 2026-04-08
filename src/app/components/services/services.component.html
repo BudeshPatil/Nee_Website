@@ -37,7 +37,7 @@
 			</div>
 			<div class="row g-4">
 				<div class="col-lg-4 col-md-4" *ngFor="let service of servicesBannerData; let i = index">
-					<div class="service-card card h-100 border-0 shadow-sm" (click)="goToService(service.link)"
+					<div class="service-card card h-100 border-0 shadow-sm" 
 						style="cursor: pointer;">
 						<div class="card-img-wrapper">
 							<img src="{{imagePath}}/service/{{service.image}}" [alt]="service.name" class="card-img-top service-image">
@@ -49,7 +49,7 @@
 							<h5 class="card-title  mb-3">{{ service.name }}</h5>
 							<p class="card-text text-muted mb-3">{{ service.short_desc }}</p>
 							<p class="card-text mb-4 flex-grow-1" [innerHtml]="service.desc"></p>
-							<a class="btn-primary raisin-black mt-auto" type="button">
+							<a class="btn-primary raisin-black mt-auto" href="{{service.link}}" type="button">
 								Learn More
 							</a>
 						</div>

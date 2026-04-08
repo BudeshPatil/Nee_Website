@@ -14,7 +14,7 @@
 
 					<div class="banner-content">
 						<div class="container-fluid h-100">
-							<div class="row h-100 align-items-end">
+							<div class="row h-100 align-items-end align-items-center-mobile">
 								<div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto">
 									<div class="banner-text">
 										<h1 class="banner-title" *ngIf="banner.name">{{ banner.name }}</h1>
@@ -174,8 +174,7 @@
 					<div class="swiper-slide" *ngFor="let project of allProjects">
 						<div class="project-card" >
 							<div class="card-image-wrapper" (click)="selectProject(project.url_key)">
-								<img [src]="imagePath + 'project/' + project.image" [alt]="project.name" class="card-image"
-									loading="lazy" />
+								<img [src]="imagePath + 'project/' + project.image" [alt]="project.name" class="card-image" loading="lazy" />
 								<div class="card-badge" [ngClass]="getStatusClass(project.category_data[0])"
 									*ngIf="project.category_data || project.is_featured">
 									{{ project.category_data || (project.is_featured ? 'Featured' : '') }}
@@ -296,7 +295,7 @@
 </section>
 <!-- Services End -->
 
-<section class="why-us sectionp bgcl-primary" *ngIf="whyChooseUs">
+<!-- <section class="why-us sectionp bgcl-primary" *ngIf="whyChooseUs">
 	<div class="container">
 		<div class="container section-title text-center fw-bold" data-aos="fade-up">
 			<span class="description-title">Trust Throug</span>
@@ -305,8 +304,6 @@
 				{{ whyChooseUs.subtitle }}
 			</p>
 		</div>
-
-		<!-- Content -->
 		<div class="row g-4" data-aos="fade-up" data-aos-duration="1000">
 			<div class="col-lg-3 col-md-6 col-12" *ngFor="let item of whyChooseUs.points">
 
@@ -323,7 +320,7 @@
 		</div>
 
 	</div>
-</section>
+</section> -->
 
 <section class="portfolio sectionp bgcl-secondary" *ngIf="completedProjects && completedProjects.length > 0">
 	<div class="container-fluid">
@@ -354,9 +351,8 @@
 							<div class="swiper-wrapper">
 								<div class="swiper-slide" *ngFor="let project of completedProjects">
 									<a [routerLink]="['/portfolio', project.url_key]" routerLinkActive="router-link-active" class="d-block position-relative portfolio-link">
-										<div class="imgblk position-relative">
-											<img [src]="imagePath + 'project/' + project.image" class="img-fluid rounded-0 listimg"
-												alt="{{ project.name }}" title="{{ project.name }}" loading="lazy" />
+										<div class="imgblk">
+											<img [src]="imagePath + 'project/' + project.image" class="listimg" alt="{{ project.name }}" title="{{ project.name }}" loading="lazy" />
 											<div class="card-overlay"></div>
 										</div>
 										<div class="card-body cspostion" style="z-index: 3;">

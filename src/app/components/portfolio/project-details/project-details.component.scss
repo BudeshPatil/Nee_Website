@@ -175,22 +175,31 @@
 }
 
 .project-gallery {
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  background: #f8fafc;
+  position: relative;
 
   .gallery-image {
     width: 100%;
-    height: 500px;
-    object-fit: cover;
+    height: 100%;
+    min-height: 420px;
+    object-fit: contain;
+    object-position: center;
     display: block;
+    background: #f8fafc;
+
+    @media (max-width: 992px) {
+      min-height: 340px;
+    }
 
     @media (max-width: 768px) {
-      height: 300px;
+      min-height: 280px;
     }
 
     @media (max-width: 576px) {
-      height: 250px;
+      min-height: 220px;
     }
   }
 
@@ -200,7 +209,7 @@
     .swiper-pagination-bullet {
       width: 12px;
       height: 12px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.8);
       opacity: 1;
 
       &.swiper-pagination-bullet-active {
@@ -289,23 +298,31 @@
 
 .project-design-images-section {
   .design-images-gallery {
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
     position: relative;
+    background: #f8fafc;
 
     .design-gallery-image {
       width: 100%;
-      height: 450px;
-      object-fit: cover;
+      height: 100%;
+      min-height: 420px;
+      object-fit: contain;
+      object-position: center;
       display: block;
+      background: #f8fafc;
+
+      @media (max-width: 992px) {
+        min-height: 340px;
+      }
 
       @media (max-width: 768px) {
-        height: 300px;
+        min-height: 280px;
       }
 
       @media (max-width: 576px) {
-        height: 250px;
+        min-height: 220px;
       }
     }
 
@@ -709,24 +726,25 @@
 
   .card-image {
     position: relative;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
 
     img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
       transition: transform 0.3s ease;
-    }
-
-    &:hover img {
-      transform: scale(1.1);
     }
 
     .card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.18) 100%);
       opacity: 0;
       transition: opacity 0.3s ease;
     }

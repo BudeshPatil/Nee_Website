@@ -13,11 +13,11 @@
 </section> -->
 <!-- Page Header Start -->
 <div class="project-details-page">
-	<div class="container-fluid page-header py-5 mb-5">
-		<div class="container py-5">
+	<div class="container-fluid page-header">
+		<div class="container">
 			
 			<h1 class="display-2 text-white mb-4 animated slideInDown fw-bold">Projects</h1>
-			<div class="breadcrumb-container mb-5 animated slideInDown">
+			<div class="breadcrumb-container animated slideInDown">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
@@ -93,8 +93,7 @@
 						<div class="col-lg-4 col-md-4 col-sm-6" *ngFor="let project of allProjects">
 							<div class="project-card">
 								<div class="card-image-wrapper" (click)="selectProject(project.url_key)">
-									<img [src]="imagePath + 'project/' + project.image" [alt]="project.name" class="card-image"
-										loading="lazy" (click)="selectProject(project.url_key)" />
+									<img [src]="imagePath + 'project/' + project.image" [alt]="project.name" class="card-image" loading="lazy" />
 
 									<!-- status badge top-left -->
 									<div class="card-badge" [ngClass]="getStatusClass(project.category_data[0])" *ngIf="project.category_data || project.is_featured">
