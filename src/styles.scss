@@ -49,40 +49,40 @@ body.no-scroll {
 // *************** Font family Nelphim *****************
 
 .nelphim-regular {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 .nelphim-italic {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 // ************** Font family Sora *******************
 
 .sora-thin {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 .sora-extralight {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 .sora-light {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 .sora-regular {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 .sora-medium {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 .sora-semibold {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 .sora-bold {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 .sora-extrabold {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 
 .montserrat-bold{
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 // ================================= Important text headings font size ========================
 //Main headings use for h1 per page
@@ -381,27 +381,33 @@ body.no-scroll {
 
 .btn-primary {  
 	@include custom-button($raisin-black, 14px, 37px);
-    font-family: "Poppins", sans-serif;
-    // font-weight: 700;
+    font-family: "OutFit", sans-serif;
+    background-color: var(--accent-color);
+    background: #cfaf56 !important;
+    color: #fff;
+    text-align: center;
+    border: none;
     font-style: normal;
+    letter-spacing: 2px;
 		transition: all 0.3s ease-in-out;
 		font-size: 16px;
+    box-shadow: none;
     @media (max-width: 1600px) {
       font-size: 14px;
     }
-    //  @media (max-width: 991px) {
-    //   font-size: 14px;
-    // }
   &:hover {
-
+    background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+    color: #91722b;
+    transform: translateY(-2px);
 		@include custom-button($grayish-orange, 14px, 37px);
-    font-family: "Poppins", sans-serif;
+    font-family: "OutFit", sans-serif;
     
   }
 }
+
 .btn-secondary {
   @include custom-button2($cloud-white, 14px, 37px);
-    font-family: "Poppins", sans-serif;
+    font-family: "OutFit", sans-serif;
     // font-weight: 700;
     font-style: normal;
 		transition: all 0.3s ease-in-out;
@@ -414,12 +420,12 @@ body.no-scroll {
     // }
   &:hover {
 		@include custom-button2($cloud-white, 14px, 37px);
-    font-family: "Poppins", sans-serif;
+    font-family: "OutFit", sans-serif;
   }
 }
 // .btn-terchary {
 //   @include custom-button();
-//   font-family: "Poppins", sans-serif;
+//   font-family: "OutFit", sans-serif;
 //   // font-weight: 500;
 //   font-size: 18px;
 //   @media (max-width: 1199px) {
@@ -457,8 +463,8 @@ body.no-scroll {
   input[type="email"] {
     height: 35px;
     border: none;
-    // font-family: "Poppins", sans-serif;
-    // font-family: "Poppins", sans-serif;
+    // font-family: "OutFit", sans-serif;
+    // font-family: "OutFit", sans-serif;
     // font-weight: 400;
     background-color: transparent !important;
     color: $raisin-black;
@@ -520,7 +526,13 @@ body.no-scroll {
   background-color:$grayish-orange;
 }
 .text-secondary {
-  color: #0665e3 !important;
+  color: #91722b !important;
+}
+.text-primary {
+    color: #91722b !important;
+}
+.stats-title {
+  color: #000 !important;
 }
 // .bg-beige {
 //   background-color: $text-beige;
@@ -540,7 +552,7 @@ body.no-scroll {
   color: gray;
 }
 .active-page {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
   color: $raisin-black ;
 }
 .circle-btn.filled {
@@ -550,7 +562,7 @@ body.no-scroll {
   text-align: center;
   color: #f00;
   font-size: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 .line{
   height: 1px;
@@ -602,9 +614,9 @@ body.no-scroll {
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Poppins", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Poppins", sans-serif;
-  --nav-font: "Poppins",  sans-serif;
+  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "OutFit", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "OutFit", sans-serif;
+  --nav-font: "OutFit",  sans-serif;
   --font-weight: 400;
   --font-style: normal;
 }
@@ -613,8 +625,8 @@ body.no-scroll {
 :root { 
   --background-color: #f8f9fb; /* Background color for the entire website, including individual sections */
   --default-color: #000103; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #2d465e; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #2986cc; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --heading-color: #cfaf56; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #91722b; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #f8f9fb; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #f8f9fb; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
@@ -622,11 +634,11 @@ body.no-scroll {
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: #000000;  /* The default color of the main navmenu links */
-  --nav-hover-color: #2986cc; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-hover-color: #91722b; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #000103; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #2986cc; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-dropdown-hover-color: #91722b; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -654,7 +666,7 @@ body.no-scroll {
 --------------------------------------------------------------*/
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -682,7 +694,7 @@ h4,
 h5,
 h6 {
   color: var(--heading-color);
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
   font-weight: 800;
 }
 
@@ -829,7 +841,7 @@ h6 {
     color: var(--nav-color);
     padding: 18px 15px;
     font-size: 16px;
-    font-family: "Poppins", sans-serif;
+    font-family: "OutFit", sans-serif;
     font-weight: 400;
     display: flex;
     align-items: center;
@@ -956,7 +968,7 @@ h6 {
   .navmenu a:focus {
     color: var(--nav-dropdown-color);
     padding: 10px 20px;
-    font-family: "Poppins", sans-serif;
+    font-family: "OutFit", sans-serif;
     font-size: 17px;
     font-weight: 500;
     display: flex;
@@ -1069,7 +1081,7 @@ h6 {
 
 .footer .footer-brand h1 .sitename,
 .footer .footer-brand .logo .sitename {
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
   font-size: 26px;
   letter-spacing: 0.8px;
   color: var(--heading-color);
@@ -1119,7 +1131,7 @@ h6 {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 20px;
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
   letter-spacing: 0.5px;
 }
 
@@ -1166,7 +1178,7 @@ h6 {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 18px;
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
 }
 
 .footer .footer-cta .btn-outline {
@@ -3090,8 +3102,8 @@ section,
 }
 
 .blog-details .article-body .main-content .content-block .split-content .monitoring-dashboard .dashboard-header .status-indicator.online {
-  background: color-mix(in srgb, #22c55e, transparent 90%);
-  color: #22c55e;
+  background: color-mix(in srgb, #91722b, transparent 90%);
+  color: #91722b;
 }
 
 .blog-details .article-body .main-content .content-block .split-content .monitoring-dashboard .vital-signs {
@@ -3637,7 +3649,7 @@ section,
   color: var(--heading-color);
   font-size: 32px;
   font-weight: 700;
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
   margin: 0;
 }
 
@@ -4387,13 +4399,14 @@ section,
 
 .about .btn-primary {
   background-color: var(--accent-color);
+  background: #cfaf56 !important;
   border: none;
   padding: 15px 38px;
   font-weight: 500;
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #000000;
+  color: #fff;
   transition: all 0.3s ease;
 }
 
@@ -5211,7 +5224,7 @@ section,
   font-size: clamp(6rem, 15vw, 12rem);
   font-weight: 800;
   color: color-mix(in srgb, var(--heading-color), transparent 10%);
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
   line-height: 1;
 }
 

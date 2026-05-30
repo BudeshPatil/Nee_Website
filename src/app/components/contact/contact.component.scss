@@ -176,6 +176,27 @@ input,
 	border: 2px solid #222423 !important;
 }
 
+.btn-primary {
+  background-color: var(--accent-color);
+  background: #cfaf56 !important;
+  border: none;
+  text-align: center;
+  padding: 15px 20px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.form-group .btn-primary:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  color: #91722b;
+  transform: translateY(-2px);
+}
+
+
 
 
 .custom-dropdown {
@@ -196,7 +217,7 @@ input,
 			right: 15px;
 			top: 50%;
 			transform: translateY(-50%);
-			color: #0d6efd;
+			color: #91722b;
 			transition: all 0.4s ease;
 		}
 
@@ -227,7 +248,7 @@ input,
 			cursor: pointer;
 
 			&:hover {
-				background-color: #0d6efd;
+				background-color: #91722b;
 			}
 		}
 	}
@@ -278,10 +299,10 @@ input,
 		background-color: #F2F1EC !important;
 		background: #F2F1EC !important;
 		scrollbar-width: thin;
-		scrollbar-color: #222423 #0d6efd;
+		scrollbar-color: #222423 #91722b;
 
 		&::-webkit-scrollbar-track {
-			background: #0d6efd;
+			background: #91722b;
 		}
 
 		&::-webkit-scrollbar-thumb {
@@ -301,6 +322,6 @@ input,
 	}
 
 	li.iti__country:hover {
-		background-color: #0d6efd !important;
+		background-color: #91722b !important;
 	}
 }

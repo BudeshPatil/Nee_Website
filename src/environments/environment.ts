@@ -8,18 +8,14 @@ export const environment = {
 	recaptcha_key: '6LdVAeAqAAAAANRiCTIwsrPp7DwcP3jSOpzVk0wi',
 
 	// live
-	// baseUrl: 'https://www.neelgund.com:5015',
-	// url: 'https://www.neelgund.com',
+	baseUrl: 'https://www.neelgund.com:5015',
+	url: 'https://www.neelgund.com',
 
-	frontendUrl: 'https://neelgund.pixtar.ae',
-
-	// Staging
-	// baseUrl: 'https://neelgund.pixtar.ae:5015',
-	// url: 'https://neelgund.pixtar.ae',
+	frontendUrl: 'https://neelgund.com',
 
 	// Local
-	baseUrl: 'http://localhost:5015',
-	url: 'http://localhost:4215',
+	// baseUrl: 'http://localhost:5015',
+	// url: 'http://localhost:4215',
 
 
 

@@ -1,6 +1,6 @@
 .project-details-page {
   .page-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #91722b 0%, #cfaf56 100%);
     position: relative;
     overflow: hidden;
     padding: 60px 0 80px 0 !important;
@@ -188,6 +188,10 @@
    ABOUT CLEAN SECTION
 ========================= */
 
+.size62{
+	color: #91722b !important;
+}
+
 .about-clean {
 	background-color: var(--bgcl-primary);
 }
@@ -241,8 +245,25 @@
 
 /* Card */
 
+.csmb12{
+	color: #91722b !important;
+}
+
+.size48 {
+	color: #91722b !important;
+}
+
+.size24{
+	color: #000 !important;
+}
+
+.csmb36{
+	color: #000 !important;
+}
+
 .stats-card {
 	background: #ffffff;
+	color: #cfaf56;
 	border-radius: 14px;
 	padding: 30px 22px;
 	text-align: center;
@@ -266,15 +287,15 @@
 	justify-content: center;
 
 	/* PRIMARY COLOR */
-	color: var(--bs-primary);
+	color: #91722b;
 
-	background: rgba(var(--bs-primary-rgb), 0.12);
+	background: #91722b;
 	font-size: 26px;
 	transition: all 0.3s ease;
 }
 
 .stats-card:hover .stats-icon {
-	background: var(--bs-primary);
+	background: #91722b;
 	color: #ffffff;
 }
 
@@ -295,14 +316,14 @@
 
 .stats-card p {
 	font-size: 14px;
-	color: #666;
+	color: #202020;
 	line-height: 1.6;
 	overflow-y: auto;
 	max-height: 150px;
 }
 
 .section-subtitle{
-	color: var(--bs-primary)
+	color: #000;
 }
 
 
@@ -363,7 +384,7 @@
 }
 
 .stats-card h3 {
-	font-family: "Poppins", sans-serif;
+	font-family: "OutFit", sans-serif;
 	font-size: 46px;
 	font-weight: 700;
 	margin-bottom: 5px;
@@ -376,7 +397,7 @@
 }
 
 .stats-card h5 {
-	font-family: "Poppins", sans-serif;
+	font-family: "OutFit", sans-serif;
 	font-size: 18px;
 	font-weight: 600;
 	margin-bottom: 12px;
@@ -384,7 +405,7 @@
 }
 
 .stats-card p {
-	font-family: "Poppins", sans-serif;
+	font-family: "OutFit", sans-serif;
 	font-size: 15px;
 	line-height: 1.6;
 	color: #555;

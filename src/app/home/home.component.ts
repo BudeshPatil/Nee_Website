@@ -21,7 +21,7 @@ gsap.registerPlugin(ScrollTrigger);
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   private shopcategorySwiper: Swiper | null = null;
@@ -29,125 +29,7 @@ export class HomeComponent {
   private exploreswiperSwiper: Swiper | null = null;
   private bannerSwiper: Swiper | null = null;
   private testimonialSwiper: Swiper | null = null; // track instance
-
-  services = [
-    {
-      'id': '01',
-      'name': 'RESIDENTIAL DESIGN',
-      'description': 'This is service 1',
-      'img_url': 'assets/images/home/ph-our-service1.png',
-      'url_key': 'services'
-    },
-    {
-      'id': '02',
-      'name': 'COMMERCIAL DESIGN',
-      'description': 'This is service 1',
-      'img_url': 'assets/images/home/ph-our-service2.png',
-      'url_key': 'services'
-    },
-    {
-      'id': '03',
-      'name': 'EDUCATIONAL DESIGN',
-      'description': 'This is service 1',
-      'img_url': 'assets/images/home/ph-our-service3.png',
-      'url_key': 'services'
-    },
-    {
-      'id': '04',
-      'name': 'HOSPITALITY DESIGN',
-      'description': 'This is service 1',
-      'img_url': 'assets/images/home/ph-our-service4.png',
-      'url_key': 'services'
-    },
-  ];
-  togethers = [
-    {
-      'id': '01',
-      'name': 'The 5 Secrets To Pulling Off Simple, Minimal Design',
-      'description': 'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Mattis Ligula Pellentesque Nisi Tristique Porta.',
-      'img_url': 'assets/images/home/journal1.png',
-      'url_key': 'services'
-    },
-    {
-      'id': '02',
-      'name': '9 Unique And Unusual Ways To Display Your TV',
-      'description': 'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Mattis Ligula Pellentesque Nisi Tristique Porta.',
-      'img_url': 'assets/images/home/journal2.png',
-      'url_key': 'services'
-    },
-    {
-      'id': '03',
-      'name': 'Our Favorite Home Decor Trends Of The Year',
-      'description': 'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Mattis Ligula Pellentesque Nisi Tristique Porta.',
-      'img_url': 'assets/images/home/journal3.png',
-      'url_key': 'services'
-    }
-  ];
-  slides1 = ['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5', 'Slide 6', 'Slide 7', 'Slide 8', 'Slide 9', 'Slide 10'];
-
-  customSlides = [
-    {
-      name: 'Explore',
-      image: 'assets/images/home/explore/explore-product-slide1.png',
-      title: 'Custom Slide 1',
-      description: 'This is custom description 1',
-      price: 8299,
-    },
-    {
-      name: 'Explore',
-      image: 'assets/images/home/explore/explore-product-slide2.png',
-      title: 'Custom Slide 2',
-      description: 'This is custom description 2',
-      price: 9299,
-    },
-    {
-      name: 'Explore',
-      image: 'assets/images/home/explore/explore-product-slide3.png',
-      title: 'Custom Slide ',
-      description: 'This is custom description 2',
-      price: 7299,
-    },
-    {
-      name: 'Explore 4',
-      image: 'assets/images/home/explore/explore-product-slide3.png',
-      title: 'Custom Slide ',
-      description: 'This is custom description 2',
-      price: 7299,
-    },
-  ];
-  projectHighlights = [
-    {
-      name: 'Neelgund Green Valley',
-      location: 'Hubli – Dharwad',
-      area: '25 Acres',
-      plots: 320,
-      year: 2022,
-      dimensions: '30x40, 40x60',
-      amenities: [
-        'Black Top Roads',
-        'Underground Drainage',
-        'Parks & Open Spaces',
-        'Street Lighting',
-        '24/7 Security'
-      ],
-      image: '../../assets/images/home/explore/explore-product-slide1.png'
-    },
-    {
-      name: 'Neelgund Prime Enclave',
-      location: 'Vidyanagar, Hubli',
-      area: '18 Acres',
-      plots: 210,
-      year: 2020,
-      dimensions: '30x50',
-      amenities: [
-        'Gated Community',
-        'Water Supply',
-        'Children Play Area'
-      ],
-      image: '..assets/images/home/explore/explore-product-slide2.png'
-    }
-  ];
-
+  services = [];
   bannerData: any = [];
   aboutData: any = [];
   servicesData: any = [];
@@ -208,95 +90,6 @@ export class HomeComponent {
   showImage(index: number) {
     this.currentImage = this.images[index];
   }
-
-  testimonials = [{
-    img: '/assets/images/home/test1.png',
-    name: 'john doe',
-    quote: 'Lorem Ipsum Dolor Sit Amdoet, Cosem Ctetur Adipiscing Elit De Usti Mod Temp Or Incit Gravida Nibh Veles Velit Auctor Aliq Uet. Aenean Sollicitudin, Lorem Auci Elit Conses Quat Ipsutist Em Niuis Sed Odio Sit Amet Nibh Vulputate Cursu S A Sitmet.',
-    rating: 4,
-  },
-  {
-    img: '/assets/images/home/test1.png',
-    name: 'perry doe',
-    quote: 'Lorem Ipsum Dolor Sit Amdoet, Cosem Ctetur Adipiscing Elit De Usti Mod Temp Or Incit Gravida Nibh Veles Velit Auctor Aliq Uet. Aenean Sollicitudin, Lorem Auci Elit Conses Quat Ipsutist Em Niuis Sed Odio Sit Amet Nibh Vulputate Cursu S A Sitmet.',
-    rating: 2,
-  },
-  {
-    img: '/assets/images/home/test1.png',
-    name: 'terry doe',
-    quote: 'Lorem Ipsum Dolor Sit Amdoet, Cosem Ctetur Adipiscing Elit De Usti Mod Temp Or Incit Gravida Nibh Veles Velit Auctor Aliq Uet. Aenean Sollicitudin, Lorem Auci Elit Conses Quat Ipsutist Em Niuis Sed Odio Sit Amet Nibh Vulputate Cursu S A Sitmet.',
-    rating: 3,
-  },
-  {
-    img: '/assets/images/home/test1.png',
-    name: 'terry doe',
-    quote: 'Lorem Ipsum Dolor Sit Amdoet, Cosem Ctetur Adipiscing Elit De Usti Mod Temp Or Incit Gravida Nibh Veles Velit Auctor Aliq Uet. Aenean Sollicitudin, Lorem Auci Elit Conses Quat Ipsutist Em Niuis Sed Odio Sit Amet Nibh Vulputate Cursu S A Sitmet.',
-    rating: 1,
-  },
-  {
-    img: '/assets/images/home/test1.png',
-    name: 'terry doe',
-    quote: 'Lorem Ipsum Dolor Sit Amdoet, Cosem Ctetur Adipiscing Elit De Usti Mod Temp Or Incit Gravida Nibh Veles Velit Auctor Aliq Uet. Aenean Sollicitudin, Lorem Auci Elit Conses Quat Ipsutist Em Niuis Sed Odio Sit Amet Nibh Vulputate Cursu S A Sitmet.',
-    rating: 5,
-  },
-  {
-    img: '/assets/images/home/test1.png',
-    name: 'terry doe',
-    quote: 'Lorem Ipsum Dolor Sit Amdoet, Cosem Ctetur Adipiscing Elit De Usti Mod Temp Or Incit Gravida Nibh Veles Velit Auctor Aliq Uet. Aenean Sollicitudin, Lorem Auci Elit Conses Quat Ipsutist Em Niuis Sed Odio Sit Amet Nibh Vulputate Cursu S A Sitmet.',
-    rating: 0,
-  },
-  ];
-
-  portfolio = [
-    {
-      'id': '01',
-      'img_url': 'assets/images/home/our-portfolio.png',
-      'name': 'PENTHOUSE, Dubai',
-      'type': 'residential',
-      'description': 'This is penthouse',
-      'year': 2014
-    },
-    {
-      'id': '02',
-      'img_url': 'assets/images/home/our-portfolio.png',
-      'name': 'PENTHOUSE, Dubai',
-      'type': 'residential',
-      'description': 'This is penthouse',
-      'year': 2014
-    },
-    {
-      'id': '03',
-      'img_url': 'assets/images/home/our-portfolio.png',
-      'name': 'PENTHOUSE, Dubai',
-      'type': 'residential',
-      'description': 'This is penthouse',
-      'year': 2014
-    }
-  ];
-
-  whyChooseUs = {
-    title: 'Why Choose Us',
-    subtitle: 'Building trust through quality, transparency, and commitment',
-    points: [
-      {
-        title: 'On-Time Delivery',
-        desc: 'Every project is planned and executed with strict adherence to timelines.'
-      },
-      {
-        title: 'RERA Approved Projects',
-        desc: 'All developments comply with legal and regulatory standards.'
-      },
-      {
-        title: 'Premium Construction Quality',
-        desc: 'We use superior materials and modern construction practices.'
-      },
-      {
-        title: 'Transparent & Ethical Process',
-        desc: 'Clear pricing, honest communication, and complete documentation.'
-      }
-    ]
-  };
-
   currentValues: number[] = [];
   categories = [];
 
@@ -335,7 +128,7 @@ export class HomeComponent {
     private el: ElementRef,
     private renderer: Renderer2,
     private router: Router, // injected for navigation events
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.getBannerdata();
     this.getAboutdata();
@@ -445,6 +238,10 @@ export class HomeComponent {
     );
   }
 
+  trackByFn(data:any){
+    return data.id;
+  }
+
   toggleDropdown(event: MouseEvent) {
     event.stopPropagation();
     this.dropdownOpen = !this.dropdownOpen;
@@ -514,33 +311,35 @@ export class HomeComponent {
     }
 
     setTimeout(() => {
-      const swiperElement = document.querySelector('.banner-swiper');
-      const slides = document.querySelectorAll('.banner-swiper .swiper-slide');
+      if(this.isBrowser){
+        const swiperElement = document.querySelector('.banner-swiper');
+        const slides = document.querySelectorAll('.banner-swiper .swiper-slide');
 
-      if (swiperElement && slides.length > 1) {
-        this.bannerSwiper = new Swiper('.banner-swiper', {
-          loop: true,
-          slidesPerView: 1,
-          speed: 1000,
-          effect: 'fade',
-          fadeEffect: {
-            crossFade: true,
-          },
-          autoplay: {
-            delay: 2000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          },
-          navigation: {
-            nextEl: '.banner-button-next',
-            prevEl: '.banner-button-prev',
-          },
-          on: {
-            slideChangeTransitionStart: function () {
-              // Animation on slide change
+        if (swiperElement && slides.length > 1) {
+          this.bannerSwiper = new Swiper('.banner-swiper', {
+            loop: true,
+            slidesPerView: 1,
+            speed: 1000,
+            effect: 'fade',
+            fadeEffect: {
+              crossFade: true,
             },
-          },
-        });
+            autoplay: {
+              delay: 2000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            },
+            navigation: {
+              nextEl: '.banner-button-next',
+              prevEl: '.banner-button-prev',
+            },
+            on: {
+              slideChangeTransitionStart: function () {
+                // Animation on slide change
+              },
+            },
+          });
+        }
       }
     }, 500);
   }
@@ -584,31 +383,33 @@ export class HomeComponent {
       this.testimonialSwiper = null;
     }
 
-    this.testimonialSwiper = new Swiper('.review-swiper', {
-      loop: true,
-      centeredSlides: true,
-      slidesPerView: 3,
-      spaceBetween: 30,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: '.review-pagination',
-        clickable: true,
-      },
-      breakpoints: {
-        0: {
-          slidesPerView: 1,
+    if (this.isBrowser) {
+      this.testimonialSwiper = new Swiper('.review-swiper', {
+        loop: true,
+        centeredSlides: true,
+        slidesPerView: 3,
+        spaceBetween: 30,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
         },
-        768: {
-          slidesPerView: 2,
+        pagination: {
+          el: '.review-pagination',
+          clickable: true,
         },
-        1200: {
-          slidesPerView: 3,
+        breakpoints: {
+          0: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1200: {
+            slidesPerView: 3,
+          },
         },
-      },
-    });
+      });
+  }
   }
 
   public initPortfolioSwiper() {

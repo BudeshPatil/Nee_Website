@@ -23,7 +23,7 @@
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.neelgund.com/portfolio</loc>
+  <loc>https://www.neelgund.com/projects</loc>
   <lastmod>2026-01-14T05:04:56+00:00</lastmod>
   <priority>0.80</priority>
 </url>
@@ -34,111 +34,29 @@
 </url>
 
 <url>
-  <loc>https://www.neelgund.com/portfolio/residential-design</loc>
+  <loc>https://www.neelgund.com/portfolio/oaks</loc>
   <lastmod>2026-01-14T05:04:56+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.neelgund.com/portfolio/hospitality-design</loc>
+  <loc>https://www.neelgund.com/portfolio/blossom</loc>
   <lastmod>2026-01-14T05:04:56+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.neelgund.com/portfolio/educational-design</loc>
+  <loc>https://www.neelgund.com/portfolio/iris</loc>
   <lastmod>2026-01-14T05:04:56+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.neelgund.com/portfolio/commercial-design</loc>
+  <loc>https://www.neelgund.com/portfolio/magnolia</loc>
   <lastmod>2026-01-14T05:04:56+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-
 <url>
-  <loc>https://www.neelgund.com/project/project-details/lyvia-by-palace</loc>
+  <loc>https://www.neelgund.com/portfolio/aster</loc>
   <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/address-grand-downtown</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/terra-heights</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/the-oasis-phase</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/ib-hub-deira-international-school</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/the-al-areesh-club-new-office</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/al-futtaim-group-real-estate</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/ginco-properties-high-rise-office-building</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/the-bristol-hotel-at-emaar-beach-front</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/dubai-creek-harbor-high-rise</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/one-residence</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/dubai-creek-harbor-creek-waters</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/dubai-creek-harbor-albero-and-altan</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/emaar-beach-front-sea</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/the-valley</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-
-<url>
-  <loc>https://www.neelgund.com/project/project-details/dubai-hills-estate</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.neelgund.com/project/project-details/address-residences-zabeel</loc>
-  <lastmod>2026-01-14T05:04:56+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.64</priority>
 </url>
 
 </urlset>

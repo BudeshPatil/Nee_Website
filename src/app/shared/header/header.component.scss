@@ -3,6 +3,13 @@ html,
 body {
   overflow-x: hidden;
 }
+.bg-primary{
+  background-color:#91722b !important;
+}
+.nav-link.active {
+  color: #91722b !important;
+  border-bottom: 2px solid #91722b !important;
+}
 
 /* HEADER */
 header {
@@ -121,23 +128,24 @@ body {
 
 .navbar .navbar-nav .nav-link {
   padding: 10px;
-  color: var(--bs-primary);
+  color: #000;
   font-size: 18px;
   outline: none;
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
   font-weight: 600;
 
 }
 
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .nav-link.active {
-  color: var(--bs-secondary) !important;
+  color: #91722b;
+  border-bottom: 2px solid #91722b !important;
 }
 
 .navbar .dropdown-toggle::after {
   border: none;
   content: "\f107";
-  font-family: "Poppins", sans-serif;
+  font-family: "OutFit", sans-serif;
   font-weight: 900;
   vertical-align: middle;
   margin-left: 8px;

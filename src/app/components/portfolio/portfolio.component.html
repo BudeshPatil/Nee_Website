@@ -1,16 +1,3 @@
-<!-- Hero Banner Section -->
-<!-- <section class="portfolio-hero" *ngIf="bannerData && bannerData.length > 0">
-	<div class="hero-content" [ngStyle]="{
-		'background-image': 'url(' + imagePath + 'banner/' + bannerData[0].media_data[0].src + ')'
-	}">
-		<div class="hero-overlay"></div>
-		<div class="hero-text">
-			<p class="hero-label sora-regular">Our Portfolio</p>
-			<h1 class="">{{ bannerData[0]?.short_desc }}</h1>
-			<p class="hero-description">{{ bannerData[0]?.description }}</p>
-		</div>
-	</div>
-</section> -->
 <!-- Page Header Start -->
 <div class="project-details-page">
 	<div class="container-fluid page-header">
@@ -93,33 +80,27 @@
 						<div class="col-lg-4 col-md-4 col-sm-6" *ngFor="let project of allProjects">
 							<div class="project-card">
 								<div class="card-image-wrapper" (click)="selectProject(project.url_key)">
-									<img [src]="imagePath + 'project/' + project.image" [alt]="project.name" class="card-image" loading="lazy" />
-
-									<!-- status badge top-left -->
-									<div class="card-badge" [ngClass]="getStatusClass(project.category_data[0])" *ngIf="project.category_data || project.is_featured">
-										{{ project.category_data || (project.is_featured ? 'Featured' : '')	}}
-									</div>
-
-									<!-- brand/logo top-right (optional) -->
+									<img [src]="imagePath + 'project/' + project.image" [alt]="project.name"
+										class="card-image" loading="lazy" />
 									<div class="card-brand" *ngIf="project.brand_image">
 										<img [src]="imagePath + 'brand/' + project.brand_image" alt="brand" />
 									</div>
-
-									<div class="card-overlay"></div>
 								</div>
-
 								<div class="card-body">
-									<!-- <div class="card-price-row d-flex justify-content-between align-items-start">
-									<div class="price-label sora-regular">{{ project.price_text || 'Price on Request' }}</div>
-									<div class="chip category-chip">{{ project.category_data }}</div>
-								</div> -->
-
 									<div class="card-header">
-										<h3 class="sora-regular mb-1" (click)="selectProject(project.url_key)">{{ project.name }}</h3>
-										<p class="category-label sora-regular"><i class="fas fa-map-marker-alt me-2"></i>{{ project.location }}</p>
+										<div class="card-title-row mb-3">
+											<h3 class="sora-regular mb-1" (click)="selectProject(project.url_key)">{{
+												project.name }}</h3>
+											<div class="card-badge ms-auto"
+												[ngClass]="getStatusClass(project.category_data[0])"
+												*ngIf="project.category_data || project.is_featured">
+												{{ project.category_data || (project.is_featured ? 'Featured' : '') }}
+											</div>
+										</div>
+										<p class="category-label sora-regular"><i class="fas fa-map-marker-alt me-2"></i>{{
+											project.location
+											}}</p>
 									</div>
-
-									<!-- project details with icons -->
 									<div class="project-details-grid">
 										<div class="detail-item" *ngIf="project.area">
 											<i class="fas fa-chart-area"></i>
@@ -137,24 +118,20 @@
 											<span class="detail-value">{{ project.dimentions || project.dimentions }}</span>
 										</div>
 									</div>
-
-									<!-- approval badge -->
-									<!-- <div class="approval-badge">
-										<i class="fas fa-check-circle"></i>
-										<span>Neelgund Developers Approved Project</span>
-									</div> -->
-
 									<div class="card-footer d-flex justify-content-between align-items-center mt-3 gap-2">
-										<div class="price-info" data-bs-toggle="modal" data-bs-target="#videoModal" (click)="onSelectProject(project.name)">
-											<span class="price-text">{{ project.price_text || 'Price on Request' }}</span>
+										<div class="price-info">
+											<span class="price-text" data-bs-toggle="modal" data-bs-target="#videoModal"
+												(click)="onSelectProject(project.name)">{{ project.price_text || 'Price on
+												Request' }}</span>
 											<span class="project-type">Residential Layout</span>
 										</div>
 										<div class="d-flex gap-2">
-											<a [href]="'https://wa.me/' + (project.contact_number || '918050238777')" target="_blank"
-												class="call-btn whatsapp-btn" title="Contact on WhatsApp">
+											<a [href]="'https://wa.me/' + (project.contact_number || '918050238777')"
+												target="_blank" class="call-btn whatsapp-btn" title="Contact on WhatsApp">
 												<i class="fab fa-whatsapp"></i>
 											</a>
-											<a [href]="'tel:' + (project.contact_number || '+918050238777')" class="call-btn" title="Call Now">
+											<a [href]="'tel:' + (project.contact_number || '+918050238777')"
+												class="call-btn" title="Call Now">
 												<i class="fas fa-phone"></i>
 											</a>
 										</div>
@@ -206,7 +183,7 @@
 								<h2 class="size62 cloud-white csmb20">
 									We're here To help You
 								</h2>
-								<a class="btn-secondary" style="text-transform: none" href="/contact">Contact Us</a>
+								<a class="btn-primary" style="text-transform: none" href="/contact">Contact Us</a>
 							</div>
 						</div>
 					</div>

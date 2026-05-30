@@ -1,17 +1,16 @@
 <section class="homebanner position-relative hero" *ngIf="bannerData && bannerData.length > 0">
 	<div class="swiper banner-swiper">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide" *ngFor="let banner of bannerData">
+			<div class="swiper-slide" *ngFor="let banner of bannerData; trackBy: trackByFn">
 				<div class="hero-banner">
 					<div class="hero-overlay"></div>
-
-					<img *ngIf="banner.media_data && banner.media_data[0]?.file_type === 'image'" class="banner-img img-fluid"
-						src="{{ imagePath }}banner/{{ banner.media_data[0].src }}" alt="banner" loading="lazy" />
+					<img *ngIf="banner.media_data && banner.media_data[0]?.file_type === 'image'"
+						class="banner-img img-fluid" src="{{ imagePath }}banner/{{ banner.media_data[0].src }}"
+						alt="banner" loading="lazy" />
 
 					<video *ngIf="banner.media_data && banner.media_data[0]?.file_type === 'video'" class="banner-video"
 						[attr.src]="imagePath + 'banner/' + banner.media_data[0].src" autoplay muted loop playsinline>
 					</video>
-
 					<div class="banner-content">
 						<div class="container-fluid h-100">
 							<div class="row h-100 align-items-end align-items-center-mobile">
@@ -19,15 +18,14 @@
 									<div class="banner-text">
 										<h1 class="banner-title" *ngIf="banner.name">{{ banner.name }}</h1>
 										<p class="banner-sub" *ngIf="banner.short_desc">{{ banner.short_desc }}</p>
-										<p class="banner-location" *ngIf="banner.description">{{ banner.description }}</p>
+										<p class="banner-location" *ngIf="banner.description">{{ banner.description }}
+										</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 		</div>
 		<div class="swiper-button-prev banner-button-prev"></div>
@@ -40,15 +38,13 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
-
-				<div class="text-center mb-5">
-					<h2 class="stats-title">Building Dreams, Earning Trust — <span class="text-secondary"> Since 1982</span>
+				<div class="text-center mb-4">
+					<h2 class="stats-title">Building Dreams, Earning Trust — <span class="text-secondary"> Since
+							1982</span>
 					</h2>
 				</div>
-
 				<!-- STATS CARDS -->
 				<div class="row g-4" *ngIf="counterData">
-
 					<div class="col-lg-3 col-md-6">
 						<div class="stats-card">
 							<div class="stats-icon">
@@ -61,7 +57,6 @@
 							</p>
 						</div>
 					</div>
-
 					<div class="col-lg-3 col-md-6">
 						<div class="stats-card">
 							<div class="stats-icon">
@@ -74,7 +69,6 @@
 							</p>
 						</div>
 					</div>
-
 					<div class="col-lg-3 col-md-6">
 						<div class="stats-card">
 							<div class="stats-icon">
@@ -87,7 +81,6 @@
 							</p>
 						</div>
 					</div>
-
 					<div class="col-lg-3 col-md-6">
 						<div class="stats-card">
 							<div class="stats-icon">
@@ -100,9 +93,7 @@
 							</p>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -118,11 +109,8 @@
 				Four decades of commitment, integrity, and excellence in real estate
 			</p>
 		</div>
-
 		<div class="col-xl-10 col-lg-10 col-md-11 col-sm-11 col-11 mx-auto">
-
 			<div class="row align-items-center" *ngFor="let about of aboutData">
-
 				<!-- IMAGE (LEFT) -->
 				<div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
 					<div class="about-image-wrapper">
@@ -130,30 +118,22 @@
 							class="img-fluid about-main-image" loading="lazy" />
 					</div>
 				</div>
-
 				<!-- CONTENT (RIGHT) -->
 				<div class="col-lg-6 col-md-12">
 					<div class="about-content">
-
-						<p class="size16 raisin-black text-uppercase csmb12">
+						<p class="size16 text-uppercase csmb12">
 							{{ about.desc_short }}
 						</p>
-
 						<h2 class="size62 raisin-black csmb24">
 							{{ about.title_sign }}
 						</h2>
-
 						<div class="size18 raisin-black csmb36" [innerHTML]="about.desc_long"></div>
-
 						<a routerLink="/about" class="btn-primary raisin-black">
 							Know More
 						</a>
-
 					</div>
 				</div>
-
 			</div>
-
 		</div>
 	</div>
 </section>
@@ -172,29 +152,29 @@
 			<div class="projects-cards-grid swiper project-highlights-swiper">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide" *ngFor="let project of allProjects">
-						<div class="project-card" >
+						<div class="project-card">
 							<div class="card-image-wrapper" (click)="selectProject(project.url_key)">
-								<img [src]="imagePath + 'project/' + project.image" [alt]="project.name" class="card-image" loading="lazy" />
-								<div class="card-badge" [ngClass]="getStatusClass(project.category_data[0])"
-									*ngIf="project.category_data || project.is_featured">
-									{{ project.category_data || (project.is_featured ? 'Featured' : '') }}
-								</div>
-
+								<img [src]="imagePath + 'project/' + project.image" [alt]="project.name"
+									class="card-image" loading="lazy" />
 								<div class="card-brand" *ngIf="project.brand_image">
 									<img [src]="imagePath + 'brand/' + project.brand_image" alt="brand" />
 								</div>
-
-								<div class="card-overlay"></div>
 							</div>
-
 							<div class="card-body">
-
 								<div class="card-header">
-									<h3 class="sora-regular mb-1" (click)="selectProject(project.url_key)">{{ project.name }}</h3>
-									<p class="category-label sora-regular"><i class="fas fa-map-marker-alt me-2"></i>{{ project.location
+									<div class="card-title-row mb-3">
+										<h3 class="sora-regular mb-1" (click)="selectProject(project.url_key)">{{
+											project.name }}</h3>
+										<div class="card-badge ms-auto"
+											[ngClass]="getStatusClass(project.category_data[0])"
+											*ngIf="project.category_data || project.is_featured">
+											{{ project.category_data || (project.is_featured ? 'Featured' : '') }}
+										</div>
+									</div>
+									<p class="category-label sora-regular"><i class="fas fa-map-marker-alt me-2"></i>{{
+										project.location
 										}}</p>
 								</div>
-
 								<div class="project-details-grid">
 									<div class="detail-item" *ngIf="project.area">
 										<i class="fas fa-chart-area"></i>
@@ -212,25 +192,20 @@
 										<span class="detail-value">{{ project.dimentions || project.dimentions }}</span>
 									</div>
 								</div>
-
-								<!-- approval badge -->
-								<!-- <div class="approval-badge">
-									<i class="fas fa-check-circle"></i>
-									<span>Neelgund Developers Approved Project</span>
-								</div> -->
-
 								<div class="card-footer d-flex justify-content-between align-items-center mt-3 gap-2">
 									<div class="price-info">
-										<span class="price-text" data-bs-toggle="modal"
-                       data-bs-target="#videoModal" (click)="onSelectProject(project.name)">{{ project.price_text || 'Price on Request' }}</span>
+										<span class="price-text" data-bs-toggle="modal" data-bs-target="#videoModal"
+											(click)="onSelectProject(project.name)">{{ project.price_text || 'Price on
+											Request' }}</span>
 										<span class="project-type">Residential Layout</span>
 									</div>
 									<div class="d-flex gap-2">
-										<a [href]="'https://wa.me/' + (project.contact_number || '918050238777')" target="_blank"
-											class="call-btn whatsapp-btn" title="Contact on WhatsApp">
+										<a [href]="'https://wa.me/' + (project.contact_number || '918050238777')"
+											target="_blank" class="call-btn whatsapp-btn" title="Contact on WhatsApp">
 											<i class="fab fa-whatsapp"></i>
 										</a>
-										<a [href]="'tel:' + (project.contact_number || '+918050238777')" class="call-btn" title="Call Now">
+										<a [href]="'tel:' + (project.contact_number || '+918050238777')"
+											class="call-btn" title="Call Now">
 											<i class="fas fa-phone"></i>
 										</a>
 									</div>
@@ -245,82 +220,36 @@
 </section>
 <!-- Services Start -->
 <section class="services-section py-5" id="service">
-		<!-- Section Title -->
-		<div class="container section-title" data-aos="fade-up">
-				<span class="description-title">Our Services</span>
-				<h2 class="text-primary">What We Offer</h2>
-				<p class="section-subtitle">
-					Delivering excellence in Every Project, Turning Ideas into Reality
-				</p>
-		</div><!-- End Section Title -->
-		<div class="container">
-				<div class="row g-4">
-
-						<!-- Service Card -->
-						<div class="col-md-4 col-lg-4" *ngFor="let service of servicesData; let i = index">
-								<div class="service-card" [routerLink]="['/',service.se]" routerLinkActive="router-link-active">
-										<div class="icon-box">
-												<i class="fa fa-building"></i>
-										</div>
-										<h4 class="card-title  mb-3">{{ service.name }}</h4>
-										<p class="card-text text-muted mb-3">{{ service.short_desc }}</p>
-										<!-- <p class="card-text mb-4 flex-grow-1" [innerHtml]="service.desc"></p> -->
-										<a href="/services" class="service-link">
-												Read More <i class="fa fa-arrow-right"></i>
-										</a>
-								</div>
-						</div>
-
-						<!-- Service Card -->
-
-						<!-- Service Card -->
-						<!-- <div class="col-md-6 col-lg-">
-								<div class="service-card">
-										<div class="icon-box">
-												<i class="fa fa-industry"></i>
-										</div>
-										<h4>Construction</h4>
-										<p>
-												End-to-end construction solutions built with quality, precision, and customer-focused
-												planning.
-										</p>
-										<a href="#" class="service-link">
-												Read More <i class="fa fa-arrow-right"></i>
-										</a>
-								</div>
-						</div> -->
-
-				</div>
-		</div>
-</section>
-<!-- Services End -->
-
-<!-- <section class="why-us sectionp bgcl-primary" *ngIf="whyChooseUs">
+	<!-- Section Title -->
+	<div class="container section-title" data-aos="fade-up">
+		<span class="description-title">Our Services</span>
+		<h2 class="text-primary">What We Offer</h2>
+		<p class="section-subtitle">
+			Delivering excellence in Every Project, Turning Ideas into Reality
+		</p>
+	</div><!-- End Section Title -->
 	<div class="container">
-		<div class="container section-title text-center fw-bold" data-aos="fade-up">
-			<span class="description-title">Trust Throug</span>
-			<h2 class="text-primary">{{ whyChooseUs.title }}</h2>
-			<p class="section-subtitle">
-				{{ whyChooseUs.subtitle }}
-			</p>
-		</div>
-		<div class="row g-4" data-aos="fade-up" data-aos-duration="1000">
-			<div class="col-lg-3 col-md-6 col-12" *ngFor="let item of whyChooseUs.points">
-
-				<div class="why-card h-100">
-					<h5 class="sora-semibold size20 raisin-black mb-2">
-						{{ item.title }}
-					</h5>
-					<p class="size16 raisin-black mb-0">
-						{{ item.desc }}
-					</p>
+		<div class="row g-4">
+			<!-- Service Card -->
+			<div class="col-md-4 col-lg-4" *ngFor="let service of servicesData; let i = index">
+				<div class="service-card" [routerLink]="['/',service.se]" routerLinkActive="router-link-active">
+					<div class="icon-box">
+						<i class="fa fa-building"></i>
+					</div>
+					<h4 class="card-title  mb-3">{{ service.name }}</h4>
+					<p class="card-text text-muted mb-3">{{ service.short_desc }}</p>
+					<!-- <p class="card-text mb-4 flex-grow-1" [innerHtml]="service.desc"></p> -->
+					<div class="icon-read-more">
+						<a href="/services" class="btn-primary ">
+						Read More
+					</a>
+					</div>
+					
 				</div>
-
 			</div>
 		</div>
-
 	</div>
-</section> -->
+</section>
 
 <section class="portfolio sectionp bgcl-secondary" *ngIf="completedProjects && completedProjects.length > 0">
 	<div class="container-fluid">
@@ -342,17 +271,21 @@
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4">
-						<div class="h-100 d-flex align-items-md-end justify-content-md-end align-items-start justify-content-start">
-							<a class="btn-primary raisin-black text-p csmt30" href="/portfolio">Explore</a>
+						<div
+							class="h-100 d-flex align-items-md-end justify-content-md-end align-items-start justify-content-start">
+							<a class="btn-primary raisin-black text-p csmt30" href="/projects">Explore</a>
 						</div>
 					</div>
 					<div class="col-12 csmt30">
 						<div class="swiper portfolio-swiper">
 							<div class="swiper-wrapper">
 								<div class="swiper-slide" *ngFor="let project of completedProjects">
-									<a [routerLink]="['/portfolio', project.url_key]" routerLinkActive="router-link-active" class="d-block position-relative portfolio-link">
+									<a [routerLink]="['/portfolio', project.url_key]"
+										routerLinkActive="router-link-active"
+										class="d-block position-relative portfolio-link">
 										<div class="imgblk">
-											<img [src]="imagePath + 'project/' + project.image" class="listimg" alt="{{ project.name }}" title="{{ project.name }}" loading="lazy" />
+											<img [src]="imagePath + 'project/' + project.image" class="listimg"
+												alt="{{ project.name }}" title="{{ project.name }}" loading="lazy" />
 											<div class="card-overlay"></div>
 										</div>
 										<div class="card-body cspostion" style="z-index: 3;">
@@ -376,28 +309,25 @@
 </section>
 <!-- Review section -->
 <section class="review sectionp bgcl-primary" *ngIf="testimonialData && testimonialData.length > 0">
-
 	<div class="container-fluid">
 		<div class="container section-title" data-aos="fade-up">
 			<span class="description-title">Testimonials</span>
 			<h2 class="text-primary">Our Clients Saying!</h2>
 			<p class="section-subtitle">
-					Delivering excellence in Every Project, Turning Ideas into Reality
-				</p>
+				Delivering excellence in Every Project, Turning Ideas into Reality
+			</p>
 		</div>
 		<div class="col-xl-10 col-lg-11 col-md-11 col-sm-11 col-11 mx-auto">
 			<!-- Swiper -->
 			<div class="swiper review-swiper">
 				<div class="swiper-wrapper">
-
 					<div class="swiper-slide" *ngFor="let testimonial of testimonialData">
 						<div class="testimonial-card">
-
 							<!-- Avatar -->
 							<div class="testimonial-avatar">
-								<img [src]="imagePath + 'testimonial/' + testimonial.image" [alt]="testimonial.name" loading="lazy" />
+								<img [src]="imagePath + 'testimonial/' + testimonial.image" [alt]="testimonial.name"
+									loading="lazy" />
 							</div>
-
 							<!-- Content -->
 							<div class="testimonial-body">
 								<h4 class="name">{{ testimonial.name }}</h4>
@@ -407,20 +337,15 @@
 									<img src="{{ baseUrl }}/assets/images/home/star_icon.svg"
 										*ngFor="let rate of counter(testimonial.ratings)" alt="star" />
 								</div>
-
 								<p class="message">
 									“{{ testimonial.text }}”
 								</p>
 							</div>
-
 						</div>
 					</div>
-
 				</div>
-
 				<div class="swiper-pagination review-pagination"></div>
 			</div>
-
 		</div>
 	</div>
 </section>
@@ -428,42 +353,35 @@
 <section class="blog-section py-5" *ngIf="blogsData && blogsData.length > 0">
 	<!-- Section Title -->
 	<div class="container section-title" data-aos="fade-up">
-			<span class="description-title">Our Blog</span>
-			<h2 class="text-primary">Latest Blog & News</h2>
-			<p class="section-subtitle">
-					Delivering excellence in Every Project, Turning Ideas into Reality
-				</p>
+		<span class="description-title">Our Blog</span>
+		<h2 class="text-primary">Latest Blog & News</h2>
+		<p class="section-subtitle">
+			Delivering excellence in Every Project, Turning Ideas into Reality
+		</p>
 	</div><!-- End Section Title -->
 	<div class="container">
-			<div class="row g-4 justify-content-center">
-
-					<!-- Blog Card -->
-					<div class="col-lg-4 col-md-6" *ngFor="let blog of blogsData">
-							<div class="blog-card">
-									<img src="{{imagePath}}/blog/{{blog.image}}" alt="Mumbai Blog">
-
-									<div class="blog-body">
-											<span class="blog-tag">{{blog.name}}</span>
-
-											<h5>{{blog.name}}</h5>
-
-											<small class="blog-date">{{blog.date | date:'dd MMM YYYY'}}</small>
-
-											<p>
-													{{blog.content}}
-											</p>
-
-											<a href="#" class="read-more">
-													Read More <i class="fa fa-arrow-right"></i>
-											</a>
-									</div>
-							</div>
+		<div class="row g-4 justify-content-center">
+			<!-- Blog Card -->
+			<div class="col-lg-4 col-md-6" *ngFor="let blog of blogsData">
+				<div class="blog-card">
+					<img src="{{imagePath}}/blog/{{blog.image}}" alt="Mumbai Blog">
+					<div class="blog-body">
+						<span class="blog-tag">{{blog.name}}</span>
+						<h5>{{blog.name}}</h5>
+						<small class="blog-date">{{blog.date | date:'dd MMM YYYY'}}</small>
+						<p>
+							{{blog.content}}
+						</p>
+						<a href="#" class="read-more">
+							Read More <i class="fa fa-arrow-right"></i>
+						</a>
 					</div>
-
+				</div>
 			</div>
+		</div>
 	</div>
 </section>
-	<!-- Blog End -->
+<!-- Blog End -->
 
 
 <section class="together bgcl-primary">
@@ -479,7 +397,7 @@
 							<h2 class="size62 cloud-white csmb20">
 								We're here To help You
 							</h2>
-							<a class="btn-secondary" style="text-transform: none" href="/contact">Contact Us</a>
+							<a class="btn-primary" style="text-transform: none" href="/contact">Contact Us</a>
 						</div>
 					</div>
 				</div>
@@ -490,89 +408,88 @@
 
 <!-- Video Modal Start -->
 <div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content rounded-0">
-        <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel">Price on Request</h3>
-            <button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form [formGroup]="addcontactForm" (ngSubmit)="onSubmit()" method="post" *ngIf="!submitted" novalidate>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="name"
-                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">FULL
-                            NAME</label>
-                        <div class="mb-3">
-                            <input type="text" class="helpform form-control sora-regular raisin-black size16"
-                                formControlName="firstname" name="firstname" placeholder="" />
-                            <span *ngIf="submitted && hasError('firstname', 'required')"
-                                class="text-danger mt-2 sora-regular">Please enter your name
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="email"
-                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Email
-                            Address</label>
-                        <div class="mb-3">
-                            <input type="email" class="helpform form-control sora-regular raisin-black size16"
-                                formControlName="email" name="email" placeholder="" />
-                            <span *ngIf="submitted && hasEmailError('email', 'required')"
-                                class="text-danger sora-regular">
-                                {{hasEmailError('email','required')}}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="phone"
-                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Phone
-                            Number</label>
-                        <div class="mb-3">
-                            <ngx-intl-tel-input class="interphone form-control" id="floatingInput"
-                                [cssClass]="'custom-intl-tel-input'" [enableAutoCountrySelect]="true"
-                                [enablePlaceholder]="false" [searchCountryFlag]="true"
-                                [preferredCountries]="preferredCountries" [searchCountryField]="[
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content rounded-0">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">Price on Request</h3>
+				<button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form [formGroup]="addcontactForm" (ngSubmit)="onSubmit()" method="post" *ngIf="!submitted" novalidate>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="name"
+								class="form-label sora-regular text-uppercase raisin-black size16 csmb12">FULL
+								NAME</label>
+							<div class="mb-3">
+								<input type="text" class="helpform form-control sora-regular raisin-black size16"
+									formControlName="firstname" name="firstname" placeholder="" />
+								<span *ngIf="submitted && hasError('firstname', 'required')"
+									class="text-danger mt-2 sora-regular">Please enter your name
+								</span>
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="email"
+								class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Email
+								Address</label>
+							<div class="mb-3">
+								<input type="email" class="helpform form-control sora-regular raisin-black size16"
+									formControlName="email" name="email" placeholder="" />
+								<span *ngIf="submitted && hasEmailError('email', 'required')"
+									class="text-danger sora-regular">
+									{{hasEmailError('email','required')}}
+								</span>
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="phone"
+								class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Phone
+								Number</label>
+							<div class="mb-3">
+								<ngx-intl-tel-input class="interphone form-control" id="floatingInput"
+									[cssClass]="'custom-intl-tel-input'" [enableAutoCountrySelect]="true"
+									[enablePlaceholder]="false" [searchCountryFlag]="true"
+									[preferredCountries]="preferredCountries" [searchCountryField]="[
                                     SearchCountryField.Iso2,
                                     SearchCountryField.Name
-                                ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India" [phoneValidation]="true"
-                                [separateDialCode]="true" name="phone" formControlName="phone">
-                            </ngx-intl-tel-input>
-                            <span *ngIf="submitted && hasError('phone', 'required')"
-                                class="text-danger sora-regular">Please
-                                provide your phone number</span>
-                            <span *ngIf="submitted && hasError('phone', 'validatePhoneNumber')"
-                                class="text-danger sora-regular">
-                                Please enter a valid phone number for the selected country
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-12 mt-3 mt-md-0">
-                        <label for="phone"
-                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Message</label>
-                        <div class="mb-3">
-                            <textarea class="helptextarea sora-regular raisin-black size16"
-                                formControlName="message" name="message" placeholder=""></textarea>
-                            <span *ngIf="submitted && hasError('message', 'required')"
-                                class="text-danger sora-regular">Please
-                                enter your message</span>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <button class="btn-primary text-center mt-2 w-100" type="submit">
-                            <span class="text">
-                                Send Message
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-			<p *ngIf="submitted" class="size16 raisin-black mb-0 text-center">Thank you for reaching out to us. We will get back to you as soon as possible</p>
-        </div>
-    </div>
-</div>
+                                ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India"
+									[phoneValidation]="true" [separateDialCode]="true" name="phone"
+									formControlName="phone">
+								</ngx-intl-tel-input>
+								<span *ngIf="submitted && hasError('phone', 'required')"
+									class="text-danger sora-regular">Please
+									provide your phone number</span>
+								<span *ngIf="submitted && hasError('phone', 'validatePhoneNumber')"
+									class="text-danger sora-regular">
+									Please enter a valid phone number for the selected country
+								</span>
+							</div>
+						</div>
+						<div class="form-group col-md-12 mt-3 mt-md-0">
+							<label for="phone"
+								class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Message</label>
+							<div class="mb-3">
+								<textarea class="helptextarea sora-regular raisin-black size16"
+									formControlName="message" name="message" placeholder=""></textarea>
+								<span *ngIf="submitted && hasError('message', 'required')"
+									class="text-danger sora-regular">Please
+									enter your message</span>
+							</div>
+						</div>
+						<div class="col-12">
+							<button class="btn-primary text-center mt-2 w-100" type="submit">
+								<span class="text">
+									Send Message
+								</span>
+							</button>
+						</div>
+					</div>
+				</form>
+				<p *ngIf="submitted" class="size16 raisin-black mb-0 text-center">Thank you for reaching out to us. We
+					will get back to you as soon as possible</p>
+			</div>
+		</div>
+	</div>
 </div>
