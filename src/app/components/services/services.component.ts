@@ -172,6 +172,6 @@ export class ServicesComponent {
 	}
 
 	goToService(url_key: string): void {
-		this.router.navigate(['/', url_key]);
+		this.router.navigate(['/services', url_key]);
 	}
 }

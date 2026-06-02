@@ -10,30 +10,47 @@ export class TermsComponent {
 
   faqItems = [
     {
-      question: 'How do I submit a new construction or development project?',
+      question: 'Are your projects NA and KJP approved?',
       answer:
-        'Use the contact form or email our team with the project name, location, site details, expected delivery timeline, and developer contact information. We will review your submission and publish it after verification.',
+        'Yes, many of our projects are developed in compliance with applicable regulations, and NA and KJP-approved projects will have their registration details clearly mentioned. Please contact us for project-specific information.',
     },
     {
-      question: 'What information is collected when I request a project quote?',
+      question: 'What types of properties do you offer?',
       answer:
-        'We collect your name, email, phone number, project interest, and any message you submit. This information helps us respond to your request and share relevant construction and development project details.',
+        'We primarily offer residential plots, gated community developments, and selected commercial plot opportunities in prime locations.',
     },
     {
-      question: 'Can I update project details after posting?',
+      question: 'Where are your projects located?',
       answer:
-        'Yes. Contact our support team with the latest site plan, pricing, or feature updates, and we will revise the project listing once the information is verified.',
+        'Our projects are strategically located in and around Hubli-Dharwad, including Gadag Road, Kusugal Road, and other rapidly developing areas.',
     },
     {
-      question: 'How is my personal information protected?',
+      question: 'Do you provide bank loan assistance?',
       answer:
-        'We follow standard security practices to protect your data. Information transmitted through our forms is stored securely and only shared with authorized team members and service providers required to process your request.',
+        'Yes. We can guide customers through the loan process and connect them with leading banks and financial institutions, subject to eligibility.',
     },
     {
-      question: 'What should I do if I find incorrect project information?',
+      question: 'What documents will I receive after purchasing a plot?',
       answer:
-        'Report the issue immediately using the contact page. Provide the project name and the details that need correction, and we will investigate and update the listing as needed.',
+        'You will receive all legally required documents, including sale deed documentation, approvals, and other relevant records associated with the project.',
     },
+    {
+      question: 'Can I visit the site before booking?',
+      answer:
+        'Absolutely. We encourage customers to schedule a site visit to inspect the location, amenities, and surrounding infrastructure before making a decision.',
+    },
+    {
+      question:"What amenities are available in your layouts?",
+      answer: "Amenities vary by project and may include wide roads, drainage systems, street lighting, parks, children's play areas, water supply, and gated security."
+    },
+    {
+      question:"Are the plots suitable for immediate construction?",
+      answer: "Many of our projects are developed with necessary infrastructure to support residential construction. Availability may vary by project"
+    },
+    {
+      question:"Why choose Neelgund Developers?",
+      answer:"With over 40 years of experience, 60+ projects, and thousands of satisfied customers, we focus on transparency, legal clarity, quality development, and customer satisfaction."
+    }
   ];
 
   toggleFaq(index: number): void {
