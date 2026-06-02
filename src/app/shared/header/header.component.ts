@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { DataService } from '../../providers/data/data.service';
 
 @Component({
 	selector: 'app-header',
@@ -20,6 +21,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	invertRoutes = ['/journal', '/journal-detail'];
 	hideHeader = false;
 	lastScrollTop = 0;
+	searchtxt: any = '';
+	projects: any = [];
+	filteredProjects: any = [];
+	isPopupshow: boolean = false;
+	imagePath: any;
 	menuItems = [
 		{ label: 'home', path: '/', menuText: 'HOME' },
 		{ label: 'about us', path: '/about', menuText: 'ABOUT' },
@@ -35,8 +41,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		public router: Router,
 		private renderer: Renderer2,
 		@Inject(DOCUMENT) private document: Document,
-		@Inject(PLATFORM_ID) private platformId: Object
-	) { }
+		@Inject(PLATFORM_ID) private platformId: Object,
+		public dataService: DataService
+	) {
+		this.imagePath = environment.baseUrl + '/public/';
+	 }
 
 	@HostListener('window:scroll', [])
 	onScroll(): void {
@@ -64,12 +73,69 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			this.currentRoute = event.url.split('?')[0];
 			this.setMenuTextFromRoute(this.currentRoute);
 		});
+		this.getAllprojects();
 	}
 
 	ngOnDestroy() {
 		if (this.routerSubscription) {
 			this.routerSubscription.unsubscribe();
 		}
+	}
+
+	togglePopup() {
+		this.isPopupshow = !this.isPopupshow;
+		if (this.isPopupshow) {
+			this.filteredProjects = [];
+			this.searchtxt = '';
+		}
+	}
+
+	onSearchInput(event: any) {
+		const searchValue = event.target.value.toLowerCase();
+		this.searchtxt = searchValue;
+
+		if (!searchValue.trim()) {
+			this.filteredProjects = [];
+			return;
+		}
+
+		this.filteredProjects = this.projects.filter((project: any) =>
+			project.name?.toLowerCase().includes(searchValue) ||
+			project.location?.toLowerCase().includes(searchValue) ||
+			project.category_data?.some((cat: string) => cat.toLowerCase().includes(searchValue))
+		);
+	}
+
+	goToProjectDetail(project: any) {
+		this.isPopupshow = false;
+		this.searchtxt = '';
+		this.filteredProjects = [];
+		// Navigate to project detail based on project type
+		if (project.is_completed) {
+			this.router.navigate(['/portfolio', project.url_key]);
+		} else {
+			this.router.navigate(['/portfolio', project.url_key]);
+		}
+	}
+
+	getAllprojects() {
+		let obj = {
+			limit:100,
+			page:1,
+			selected_status:'all'
+		};
+		this.dataService.getAllProjects(obj).subscribe((response: any) => {
+		if (response.code == 200) {
+			if (response.result != null && response.result != '') {
+			this.projects = response.result;
+			} else {
+			}
+		}
+		});
+  }
+
+	trackByFn(index: number, project: any): string | number {
+		return project._id;
 	}
 
 	currentRoute: string = '';

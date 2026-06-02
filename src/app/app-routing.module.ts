@@ -9,6 +9,7 @@ import { JournalDetailComponent } from './components/journal-detail/journal-deta
 import { ServicesComponent } from './components/services/services.component';
 import { ServiceDetailsComponent } from './components/services/service-details/service-details.component';
 import { ProjectDetailsComponent } from './components/portfolio/project-details/project-details.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 const routes: Routes = [
 	{
@@ -63,6 +64,11 @@ const routes: Routes = [
 		path: 'project/project-details/:url_key',
 		component: ProjectDetailsComponent,
 		data: { isProject: true, pageName: 'project-details' }
+	},
+	{
+		path: 'terms',
+		component: TermsComponent,
+		data: { pageName: 'terms' }
 	},
 	{
 		path: '**',

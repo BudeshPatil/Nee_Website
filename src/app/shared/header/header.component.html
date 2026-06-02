@@ -76,7 +76,7 @@
               <span class="text-secondary">Call: +91 80502 38777</span>
             </div>
             <div class="d-flex align-items-center justify-content-center ms-4 ">
-              <a href="/projects"><i class="fa fa-search text-secondary fa-2x"></i> </a>
+              <a (click)="togglePopup()"><i class="fa fa-search text-secondary fa-2x"></i> </a>
             </div>
           </div>
         </nav>
@@ -115,3 +115,64 @@
     </div>
   </nav>
 </header> -->
+
+<div class="search-overlay" *ngIf="isPopupshow" (click)="togglePopup()">
+	<div class="search-modal" (click)="$event.stopPropagation()">
+		<!-- Search Header -->
+		<div class="search-header">
+			<div class="search-input-wrapper">
+				<input 
+					type="text" 
+					class="search-input" 
+					placeholder="Search projects by name or location..." 
+					(input)="onSearchInput($event)"
+					[value]="searchtxt"
+					autofocus
+				/>
+				<i class="fas fa-search search-icon"></i>
+			</div>
+			<button class="search-close" (click)="togglePopup()">
+				<i class="fas fa-times"></i>
+			</button>
+		</div>
+
+		<!-- Search Results -->
+		<div class="search-results">
+			<!-- Empty State -->
+			<div class="empty-state" *ngIf="searchtxt && filteredProjects.length === 0">
+				<i class="fas fa-search"></i>
+				<p>No projects found matching "{{ searchtxt }}"</p>
+			</div>
+
+			<!-- Results Grid -->
+			<div class="results-grid" *ngIf="filteredProjects.length > 0">
+				<div class="result-item" *ngFor="let project of filteredProjects; trackBy: trackByFn">
+					<a (click)="goToProjectDetail(project)" class="result-card">
+						<div class="result-image">
+							<img [src]="imagePath + 'project/' + project.image" [alt]="project.name"
+									class="card-image" loading="lazy" />
+						</div>
+						<div class="result-content">
+							<h5 class="result-name">{{ project.name }}</h5>
+							<p class="result-location">
+								<i class="fas fa-map-marker-alt"></i>
+								{{ project.location }}
+							</p>
+							<div class="result-meta">
+								<span class="result-status" *ngIf="project.category_data">
+									{{ project.category_data[0] }}
+								</span>
+								<span class="result-type">{{ project.is_completed ? 'Completed' : 'Ongoing' }}</span>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<!-- Hint Text -->
+			<div class="search-hint" *ngIf="!searchtxt">
+				<p>Start typing to search projects...</p>
+			</div>
+		</div>
+	</div>
+</div>

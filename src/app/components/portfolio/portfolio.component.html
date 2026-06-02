@@ -39,41 +39,50 @@
 			<div class="col-xl-12 col-lg-12 col-md-12 mx-auto px-4">
 
 				<!-- Filters & Sort -->
-				<div class="controls-bar mb-4">
-					<div class="row g-3 align-items-end">
-						<!-- Category Filter -->
-						<div class="col-lg-4">
-							<label class="form-label sora-regular mb-2">Project Status</label>
-							<div class="category-filter-wrapper">
-								<button *ngFor="let cat of servicesData" class="filter-pill" [class.active]="isActive(cat._id)"
-									(click)="selectCategory(cat._id)">
-									{{ cat.name }}
-								</button>
-							</div>
+				<div class="controls-bar">
+					<div class="row align-items-center g-4">
+
+						<!-- Project Status -->
+						<div class="col-lg-6">
+						<label class="form-label">Project Status</label>
+
+						<div class="category-filter-wrapper">
+							<button
+							*ngFor="let cat of servicesData"
+							class="filter-pill"
+							[class.active]="isActive(cat._id)"
+							(click)="selectCategory(cat._id)">
+							{{ cat.name }}
+							</button>
+						</div>
 						</div>
 
-						<!-- Sort Dropdown -->
-						<div class="col-lg-4">
-							<label class="form-label sora-regular mb-2">Sort By</label>
-							<select class="form-select" [value]="sortOption" (change)="setSort($any($event.target).value)">
-								<option value="latest">Latest Projects</option>
-								<option value="old">Oldest First</option>
-								<option value="A-Z">Name A-Z</option>
-								<option value="Z-A">Name Z-A</option>
-							</select>
+						<!-- Sort -->
+						<div class="col-lg-3">
+						<label class="form-label">Sort By</label>
+
+						<select
+							class="form-select"
+							[value]="sortOption"
+							(change)="setSort($any($event.target).value)">
+							<option value="latest">Latest Projects</option>
+							<option value="old">Oldest First</option>
+							<option value="A-Z">Name A-Z</option>
+							<option value="Z-A">Name Z-A</option>
+						</select>
 						</div>
 
-						<!-- Results Count -->
-						<div class="col-lg-4 text-end">
-							<div class="results-count">
-								<p class="text-muted sora-regular">Showing <strong>{{ allProjects.length }}</strong> of
-								<strong>{{ allProjects.length }}</strong> projects
-							</p>
-							</div>
+						<!-- Results -->
+						<div class="col-lg-3">
+						<div class="results-count">
+							Showing
+							<strong>{{ allProjects.length }}</strong>
+							Projects
 						</div>
+						</div>
+
 					</div>
-				</div>
-
+					</div>
 				<!-- Project Cards Grid -->
 				<div class="projects-cards-grid">
 					<div class="row g-4">

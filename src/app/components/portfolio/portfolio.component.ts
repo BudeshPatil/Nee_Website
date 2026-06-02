@@ -43,7 +43,6 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   activecategory: string = '';
   bannerData: any = [];
   totalPages: any;
-  currentPage: any;
   pages: any;
   displayedList: any = [];
   sortOption: any ='latest';
@@ -63,7 +62,9 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   selectedService:any;
   @ViewChild('closeModal') closeModal!: ElementRef;
   isBrowser: boolean;
-    
+  totalRecord: number = 0;
+  currentLimit = 30;
+  currentPage = 1;
   constructor(
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -194,16 +195,9 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     this.service = data;
   }
 
-  changePage(i) {
-
-  }
-
-  goToPage(p) {
-
-  }
-
   setSort(s) {
     this.sortOption = s;
+    this.currentPage = 1;
     this.getAllprojects();
   }
 
@@ -260,7 +254,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   selectCategory(categoryId: string): void {
     this.selectedCategoryId = categoryId;
     this.selectedCategory = categoryId;
-    this.updateDisplayedItems();
+    this.currentPage = 1;
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -289,9 +283,10 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
 
   getAllprojects(): void {
     const obj = {
-      limit: 100,
+      limit: this.currentLimit,
+      page: this.currentPage,
       sort: this.sortOption,
-      selected_status: this.selectedCategoryId
+      selected_status: this.selectedCategoryId,
     };
     this.dataService
       .getAllProjects(obj)
@@ -299,10 +294,37 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
       .subscribe((response: any) => {
         if (response.code === 200 && response.result) {
           this.allProjects = response.result;
-
-          this.updateDisplayedItems();
+          this.totalRecord = response?.count ?? (response.result?.length || 0);
+          this.totalPages = Math.max(Math.ceil(this.totalRecord / this.currentLimit), 1);
+          this.pages = Array.from({ length: this.totalPages }, (_, idx) => idx + 1);
+          if (this.currentPage > this.totalPages) {
+            this.currentPage = this.totalPages;
+          }
         }
       });
+  }
+
+  onListChangePage(event: any) {
+    this.currentPage = Number(event) || 1;
+    this.getAllprojects();
+  }
+
+  changePage(delta: number) {
+    const nextPage = this.currentPage + delta;
+    if (nextPage < 1 || nextPage > this.totalPages) {
+      return;
+    }
+    this.currentPage = nextPage;
+    this.getAllprojects();
+  }
+
+  goToPage(page: number) {
+    const nextPage = Number(page) || 1;
+    if (nextPage === this.currentPage || nextPage < 1 || nextPage > this.totalPages) {
+      return;
+    }
+    this.currentPage = nextPage;
+    this.getAllprojects();
   }
 
   getAllServices(): void {
@@ -325,7 +347,6 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
           } else {
             this.selectedCategory = 'all';
           }
-          this.updateDisplayedItems();
         }
       });
   }
