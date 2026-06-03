@@ -49,17 +49,17 @@
           <a href="index.html" class="navbar-brand text-secondary">
             <img src="../../../assets/logo/logo.png" width="160" height="50" title="Neelgund Developers" class="nav-logo">
           </a>
-          <button type="button" class="navbar-toggler me-0 bg-primary" data-bs-toggle="collapse"
+          <button (click)="toggelmenu()" type="button" class="navbar-toggler me-0 bg-primary" data-bs-toggle="collapse"
             data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
+          <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse" [class.show]="isMenuOpen">
             <div class="navbar-nav ms-auto mx-xl-auto p-0">
-              <a routerLink="/" [class.active]="router.isActive('/', true)" class="nav-item nav-link">Home</a>
-              <a routerLink="/about" [class.active]="router.isActive('/about', true)" class="nav-item nav-link">About</a>
-              <a routerLink="/services" [class.active]="router.isActive('/services', true)" class="nav-item nav-link">Services</a>
-              <a routerLink="/projects" [class.active]="router.isActive('/projects', true)" class="nav-item nav-link">Projects</a>
-              <a routerLink="/contact" [class.active]="router.isActive('/contact', true)" class="nav-item nav-link">Contact</a>
+              <a routerLink="/" (click)="closeMenu()" [class.active]="router.isActive('/', true)" class="nav-item nav-link">Home</a>
+              <a routerLink="/about" (click)="closeMenu()" [class.active]="router.isActive('/about', true)" class="nav-item nav-link">About</a>
+              <a routerLink="/services" (click)="closeMenu()" [class.active]="router.isActive('/services', true)" class="nav-item nav-link">Services</a>
+              <a routerLink="/projects" (click)="closeMenu()" [class.active]="router.isActive('/projects', true)" class="nav-item nav-link">Projects</a>
+              <a routerLink="/contact" (click)="closeMenu()" [class.active]="router.isActive('/contact', true)" class="nav-item nav-link">Contact</a>
             </div>
           </div>
           <div class="d-none d-xl-flex flex-shirink-0 ms-auto">

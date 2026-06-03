@@ -170,6 +170,16 @@ body {
   opacity: 1;
 }
 
+@media (max-width: 991px) {
+  .navbar-collapse {
+    display: none;
+  }
+
+  .navbar-collapse.show {
+    display: block;
+  }
+}
+
 /*** Navbar End ***/
 
 .search-overlay {

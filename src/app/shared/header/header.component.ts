@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		// { label: 'journal', path: '/journal', menuText: 'JOURNAL' },
 		{ label: 'contact us', path: '/contact', menuText: 'CONTACT' }
 	];
+	isMenuOpen:boolean = false;
 
 	private routerSubscription: any;
 
@@ -88,6 +89,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			this.filteredProjects = [];
 			this.searchtxt = '';
 		}
+	}
+	toggelmenu() {
+  		this.isMenuOpen = !this.isMenuOpen;
+	}
+	closeMenu() {
+  		this.isMenuOpen = false;
 	}
 
 	onSearchInput(event: any) {

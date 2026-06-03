@@ -52,7 +52,7 @@
 							</div>
 							<h3>{{counterData.total_plots}}<span>+</span></h3>
 							<h5>Plots</h5>
-							<p>
+							<p class="count-desc">
 								{{counterData.plots_desc}}
 							</p>
 						</div>
@@ -237,7 +237,7 @@
 						<i class="fa fa-building"></i>
 					</div>
 					<h4 class="card-title  mb-3">{{ service.name }}</h4>
-					<p class="card-text text-muted mb-3">{{ service.short_desc }}</p>
+					<p class="card-text text-muted count-desc mb-3">{{ service.short_desc }}</p>
 					<!-- <p class="card-text mb-4 flex-grow-1" [innerHtml]="service.desc"></p> -->
 					<div class="icon-read-more">
 						<a href="/services" class="btn-primary ">
