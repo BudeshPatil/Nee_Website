@@ -6,7 +6,10 @@ import {
   Inject,
   PLATFORM_ID,
   ViewChild,
-  ElementRef
+  ElementRef,
+  signal,
+  effect,
+  computed
 } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { SwiperOptions } from 'swiper/types';
@@ -63,8 +66,9 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   @ViewChild('closeModal') closeModal!: ElementRef;
   isBrowser: boolean;
   totalRecord: number = 0;
-  currentLimit = 30;
+  currentLimit = signal(10);
   currentPage = 1;
+  noofelemtPage = computed(() => `${this.currentLimit()} Products`);
   constructor(
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -89,6 +93,9 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
       subject: ['price_on_request', Validators.required],
       message: [''],
     });
+    effect(() => {
+      this.getAllprojects();
+    })
   }
 
   ngAfterViewInit(): void {
@@ -201,6 +208,10 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     this.getAllprojects();
   }
 
+  setNoPage(limit){
+    this.currentLimit.set(limit);
+  }
+
   getBannerdata() {
     let obj = {};
     this.dataService.getAllBanner(obj).subscribe((response: any) => {
@@ -283,7 +294,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
 
   getAllprojects(): void {
     const obj = {
-      limit: this.currentLimit,
+      limit: this.currentLimit(),
       page: this.currentPage,
       sort: this.sortOption,
       selected_status: this.selectedCategoryId,
@@ -295,7 +306,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         if (response.code === 200 && response.result) {
           this.allProjects = response.result;
           this.totalRecord = response?.count ?? (response.result?.length || 0);
-          this.totalPages = Math.max(Math.ceil(this.totalRecord / this.currentLimit), 1);
+          this.totalPages = Math.max(Math.ceil(this.totalRecord / this.currentLimit()), 1);
           this.pages = Array.from({ length: this.totalPages }, (_, idx) => idx + 1);
           if (this.currentPage > this.totalPages) {
             this.currentPage = this.totalPages;

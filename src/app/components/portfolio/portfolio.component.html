@@ -74,11 +74,20 @@
 
 						<!-- Results -->
 						<div class="col-lg-3">
-						<div class="results-count">
+						<!-- <div class="results-count">
 							Showing
 							<strong>{{ allProjects.length }}</strong>
 							Projects
-						</div>
+						</div> -->
+						<label class="form-label">No of Projects</label>
+						<select class="form-select" [value]="currentLimit()"
+							(change)="setNoPage($any($event.target).value)">
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option value="40">40</option>
+							<option value="50">50</option>
+						</select>
 						</div>
 
 					</div>
@@ -86,7 +95,8 @@
 				<!-- Project Cards Grid -->
 				<div class="projects-cards-grid">
 					<div class="row g-4">
-						<div class="col-lg-4 col-md-4 col-sm-6" *ngFor="let project of allProjects">
+						@for(project of allProjects; track project._id){
+						<div class="col-lg-4 col-md-4 col-sm-6">
 							<div class="project-card">
 								<div class="card-image-wrapper" (click)="selectProject(project.url_key)">
 									<img [src]="imagePath + 'project/' + project.image" [alt]="project.name"
@@ -148,6 +158,7 @@
 								</div>
 							</div>
 						</div>
+					}
 					</div>
 
 					<!-- No Projects Message -->
