@@ -1914,7 +1914,27 @@
 	}		
 	@media (max-width: 768px) {
 		margin-top: 0px !important;
-		height: 75vh !important;
+		height: 70vh !important;
+	}
+	@media (max-width: 650px) {
+		margin-top: 0px !important;
+		height: 62vh !important;
+	}
+	@media (max-width: 576px) {
+		margin-top: 0px !important;
+		height: 55vh !important;
+	}
+	@media (max-width: 476px) {
+		margin-top: 0px !important;
+		height: 50vh !important;
+	}
+	@media (max-width: 376px) {
+		margin-top: 0px !important;
+		height: 47vh !important;
+	}
+	@media (max-width: 276px) {
+		margin-top: 0px !important;
+		height: 32vh !important;
 	}
 
 	.container-fluid {
