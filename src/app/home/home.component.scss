@@ -1914,27 +1914,7 @@
 	}		
 	@media (max-width: 768px) {
 		margin-top: 0px !important;
-		height: 56vh !important;
-	}
-	@media (max-width: 650px) {
-		margin-top: 0px !important;
-		height: 50vh !important;
-	}
-	@media (max-width: 576px) {
-		margin-top: 0px !important;
-		height: 45vh !important;
-	}
-	@media (max-width: 476px) {
-		margin-top: 0px !important;
-		height: 40vh !important;
-	}
-	@media (max-width: 376px) {
-		margin-top: 0px !important;
-		height: 35vh !important;
-	}
-	@media (max-width: 276px) {
-		margin-top: 0px !important;
-		height: 32vh !important;
+		height: 75vh !important;
 	}
 
 	.container-fluid {
@@ -1978,7 +1958,7 @@
 					background: transparent;
 
 					@media (max-width: 768px) {
-						object-fit: contain;
+						object-fit: initial;
 					}
 				}
 

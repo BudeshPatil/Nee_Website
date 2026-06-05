@@ -54,6 +54,7 @@ body {
 			position: relative !important;
 			transform: none !important;
 		}
+		margin-bottom: 0px;
 	}
 
 	// @media (max-width: 364px) {
@@ -109,10 +110,26 @@ app-footer {
 		position: fixed;
 		opacity: 1;
 	}
+	/* On small screens, don't keep footer fixed so it can be fully scrolled into view */
+	@media (max-width: 991px) {
+		&.fixed-footer {
+			position: static;
+			opacity: 1;
+			z-index: 10;
+		}
+		.main-content {
+			margin-bottom: 0px !important;
+		}
+	}
+	@media (max-width: 575px) {
+		height: auto;
+	}
+}
+
+
 
 	// your media queries for height
 	// @media (max-width: 1536px) { height: 530px; }
 	// @media (max-width: 1024px) { height: 490px; }
 	// @media (max-width: 991px) { height: auto; }
 	// @media (max-width: 480px) { height: auto; }
-}
