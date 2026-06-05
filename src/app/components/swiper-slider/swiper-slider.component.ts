@@ -79,7 +79,7 @@ export class SwiperSliderComponent {
   {
     'id':'01',
     'img_url': 'assets/images/home/our-portfolio.png',
-    'name': 'PENTHOUSE, Dubai',
+    'name': 'PENTHOUSE, India',
     'type':'residential',
     'description': 'This is penthouse',
     'year': 2014
@@ -87,7 +87,7 @@ export class SwiperSliderComponent {
   {
     'id':'02',
     'img_url': 'assets/images/home/our-portfolio.png',
-    'name': 'PENTHOUSE, Dubai',
+    'name': 'PENTHOUSE, India',
     'type':'residential',
     'description': 'This is penthouse',
     'year': 2014
@@ -95,7 +95,7 @@ export class SwiperSliderComponent {
   {
     'id':'03',
     'img_url': 'assets/images/home/our-portfolio.png',
-    'name': 'PENTHOUSE, Dubai',
+    'name': 'PENTHOUSE, India',
     'type':'residential',
     'description': 'This is penthouse',
     'year': 2014

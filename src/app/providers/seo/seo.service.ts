@@ -1,23 +1,31 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Meta, Title } from '@angular/platform-browser';
+import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { catchError } from 'rxjs';
+import { of } from 'rxjs';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
-
 	private readonly pageApi = `${environment.baseUrl}/api/home/getpagewithName`;
 	private readonly projectApi = `${environment.baseUrl}/api/project/projectbyurlKey`;
+	constructor(@Inject(DOCUMENT) private doc: Document,private http: HttpClient,private meta: Meta,
+		private title: Title,@Inject(DOCUMENT) private dom: Document) { }
 
-	constructor(
-		private http: HttpClient,
-		private meta: Meta,
-		private title: Title,
-		@Inject(DOCUMENT) private dom: Document
-	) { }
+	setCanonicalURL(url?: string): void {
+		const canonicalUrl = url || this.doc.URL;
+		let link: HTMLLinkElement = this.doc.querySelector("link[rel='canonical']");
+
+		if (link) {
+			link.href = canonicalUrl;
+		} else {
+			link = this.doc.createElement('link');
+			link.setAttribute('rel', 'canonical');
+			link.setAttribute('href', canonicalUrl);
+			this.doc.head.appendChild(link);
+		}
+	}
 
 	/** ------- STATIC PAGE SEO ------- */
 	updatePageMeta(pageName: string, path: string): void {
@@ -60,7 +68,6 @@ export class SeoService {
 				this.insertSchema(this.generateProjectSchema(p, fullUrl));
 			});
 	}
-
 
 	/** ------- COMMON META HANDLER ------- */
 	private applyMeta(title: string, description: string, keywords: string, url: string): void {

@@ -218,7 +218,7 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit, OnDestroy
     // Add country if not present (helps with unmapped locations)
     if (!location.toLowerCase().includes('india') &&
         !location.toLowerCase().includes('uae') &&
-        !location.toLowerCase().includes('dubai')) {
+        !location.toLowerCase().includes('India')) {
       location += ', India'; // Adjust based on your target country
     }
 
