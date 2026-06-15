@@ -172,6 +172,11 @@ export class ServicesComponent {
 	}
 
 	goToService(url_key: string): void {
-		this.router.navigate(['/services', url_key]);
+		if(url_key == 'projects'){
+			this.router.navigate(['/projects']);
+		} else{
+			this.router.navigate(['/services', url_key]);
+		}
+		
 	}
 }

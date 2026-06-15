@@ -64,7 +64,7 @@
 							</div>
 							<h3>{{counterData.total_clients}}<span>+</span></h3>
 							<h5>Happy Clients</h5>
-							<p>
+							<p class="count-desc">
 								{{counterData.clients_desc}}
 							</p>
 						</div>
@@ -76,7 +76,7 @@
 							</div>
 							<h3>{{counterData.total_experience}}<span>+</span></h3>
 							<h5>Years Experience</h5>
-							<p>
+							<p class="count-desc">
 								{{counterData.experience_desc}}
 							</p>
 						</div>
@@ -88,7 +88,7 @@
 							</div>
 							<h3>{{counterData.total_projects}}<span>+</span></h3>
 							<h5>Projects</h5>
-							<p>
+							<p class="count-desc">
 								{{counterData.projects_desc}}
 							</p>
 						</div>
@@ -337,7 +337,7 @@
 									<img src="{{ baseUrl }}/assets/images/home/star_icon.svg"
 										*ngFor="let rate of counter(testimonial.ratings)" alt="star" />
 								</div>
-								<p class="message">
+								<p class="message count-desc">
 									“{{ testimonial.text }}”
 								</p>
 							</div>
@@ -383,6 +383,30 @@
 </section>
 <!-- Blog End -->
 
+<section class="terms-page py-5">
+        <div class="container">
+            <div class="content-section faq-section" id="faqs">
+                <h2>Frequently Asked Questions</h2>
+                <p class="section-summary">
+                    Common questions about constructions, projects, privacy, and how to work with our platform.
+                </p>
+                <div class="row">
+					<div class="col-lg-6 col-md-6"*ngFor="let faq of faqItems; let i = index"
+							[class.expanded]="expandedFaqIndex === i">
+						<div class="faq-item" >
+							<button type="button" class="faq-question" (click)="toggleFaq(i)">
+								<span>{{ faq.question }}</span>
+								<span class="faq-icon" aria-hidden="true">{{ expandedFaqIndex === i ? '−' : '+' }}</span>
+							</button>
+							<div class="faq-answer" [style.maxHeight]="expandedFaqIndex === i ? '1000px' : '0px'">
+								<p>{{ faq.answer }}</p>
+							</div>
+						</div>
+						</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <section class="together bgcl-primary">
 	<div class="container-fluid">

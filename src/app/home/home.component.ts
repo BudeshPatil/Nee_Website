@@ -55,6 +55,7 @@ export class HomeComponent {
   totalRecord = 0;
   nodata_msg = false;
   expandedIndex: number = 0;
+  expandedFaqIndex: number | null = 0;
   stats = [
     { label: 'HOMES TRANSFORMED', value: 120, suffix: '+' },
     { label: 'COMMERCIAL SPACES DESIGNED', value: 50, suffix: '+' },
@@ -84,7 +85,50 @@ export class HomeComponent {
     'assets/images/home/our-process1.png',
     'assets/images/home/our-process2.png'
   ];
-
+  faqItems = [
+    {
+      question: 'Are your projects NA and KJP approved?',
+      answer:
+        'Yes, many of our projects are developed in compliance with applicable regulations, and NA and KJP-approved projects will have their registration details clearly mentioned. Please contact us for project-specific information.',
+    },
+    {
+      question: 'What types of properties do you offer?',
+      answer:
+        'We primarily offer residential plots, gated community developments, and selected commercial plot opportunities in prime locations.',
+    },
+    {
+      question: 'Where are your projects located?',
+      answer:
+        'Our projects are strategically located in and around Hubli-Dharwad, including Gadag Road, Kusugal Road, and other rapidly developing areas.',
+    },
+    {
+      question: 'Do you provide bank loan assistance?',
+      answer:
+        'Yes. We can guide customers through the loan process and connect them with leading banks and financial institutions, subject to eligibility.',
+    },
+    {
+      question: 'What documents will I receive after purchasing a plot?',
+      answer:
+        'You will receive all legally required documents, including sale deed documentation, approvals, and other relevant records associated with the project.',
+    },
+    {
+      question: 'Can I visit the site before booking?',
+      answer:
+        'Absolutely. We encourage customers to schedule a site visit to inspect the location, amenities, and surrounding infrastructure before making a decision.',
+    },
+    {
+      question:"What amenities are available in your layouts?",
+      answer: "Amenities vary by project and may include wide roads, drainage systems, street lighting, parks, children's play areas, water supply, and gated security."
+    },
+    {
+      question:"Are the plots suitable for immediate construction?",
+      answer: "Many of our projects are developed with necessary infrastructure to support residential construction. Availability may vary by project"
+    },
+    {
+      question:"Why choose Neelgund Developers?",
+      answer:"With over 40 years of experience, 60+ projects, and thousands of satisfied customers, we focus on transparency, legal clarity, quality development, and customer satisfaction."
+    }
+  ];
   currentImage = this.images[0];
 
   showImage(index: number) {
@@ -654,5 +698,9 @@ export class HomeComponent {
 
   onSelectProject(data){
     this.service = data;
+  }
+
+  toggleFaq(index: number): void {
+    this.expandedFaqIndex = this.expandedFaqIndex === index ? null : index;
   }
 }
