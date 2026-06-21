@@ -49,40 +49,40 @@ body.no-scroll {
 // *************** Font family Nelphim *****************
 
 .nelphim-regular {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .nelphim-italic {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 // ************** Font family Sora *******************
 
 .sora-thin {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .sora-extralight {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .sora-light {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .sora-regular {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .sora-medium {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .sora-semibold {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .sora-bold {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .sora-extrabold {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .montserrat-bold{
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 // ================================= Important text headings font size ========================
 //Main headings use for h1 per page
@@ -381,7 +381,7 @@ body.no-scroll {
 
 .btn-primary {  
 	@include custom-button($raisin-black, 14px, 37px);
-    font-family: "OutFit", sans-serif;
+    font-family: "Outfit", sans-serif;
     background-color: var(--accent-color);
     background: #cfaf56 !important;
     color: #fff;
@@ -400,14 +400,14 @@ body.no-scroll {
     color: #91722b;
     transform: translateY(-2px);
 		@include custom-button($grayish-orange, 14px, 37px);
-    font-family: "OutFit", sans-serif;
+    font-family: "Outfit", sans-serif;
     
   }
 }
 
 .btn-secondary {
   @include custom-button2($cloud-white, 14px, 37px);
-    font-family: "OutFit", sans-serif;
+    font-family: "Outfit", sans-serif;
     // font-weight: 700;
     font-style: normal;
 		transition: all 0.3s ease-in-out;
@@ -420,7 +420,7 @@ body.no-scroll {
     // }
   &:hover {
 		@include custom-button2($cloud-white, 14px, 37px);
-    font-family: "OutFit", sans-serif;
+    font-family: "Outfit", sans-serif;
   }
 }
 // .btn-terchary {
@@ -552,7 +552,7 @@ body.no-scroll {
   color: gray;
 }
 .active-page {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
   color: $raisin-black ;
 }
 .circle-btn.filled {
@@ -562,7 +562,7 @@ body.no-scroll {
   text-align: center;
   color: #f00;
   font-size: 30px;
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .line{
   height: 1px;
@@ -614,9 +614,9 @@ body.no-scroll {
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "OutFit", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "OutFit", sans-serif;
-  --nav-font: "OutFit",  sans-serif;
+  --default-font: "Outfit", sans-serif;
+  --heading-font: "Outfit", sans-serif;
+  --nav-font: "Outfit", sans-serif;
   --font-weight: 400;
   --font-style: normal;
 }
@@ -666,7 +666,7 @@ body.no-scroll {
 --------------------------------------------------------------*/
 body {
   margin: 0;
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -694,7 +694,7 @@ h4,
 h5,
 h6 {
   color: var(--heading-color);
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-weight: 800;
 }
 
@@ -841,7 +841,7 @@ h6 {
     color: var(--nav-color);
     padding: 18px 15px;
     font-size: 16px;
-    font-family: "OutFit", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-weight: 400;
     display: flex;
     align-items: center;
@@ -968,7 +968,7 @@ h6 {
   .navmenu a:focus {
     color: var(--nav-dropdown-color);
     padding: 10px 20px;
-    font-family: "OutFit", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-size: 17px;
     font-weight: 500;
     display: flex;
@@ -1081,7 +1081,7 @@ h6 {
 
 .footer .footer-brand h1 .sitename,
 .footer .footer-brand .logo .sitename {
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-size: 26px;
   letter-spacing: 0.8px;
   color: var(--heading-color);
@@ -1131,7 +1131,7 @@ h6 {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 20px;
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
   letter-spacing: 0.5px;
 }
 
@@ -1178,7 +1178,7 @@ h6 {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 18px;
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .footer .footer-cta .btn-outline {
@@ -3649,7 +3649,7 @@ section,
   color: var(--heading-color);
   font-size: 32px;
   font-weight: 700;
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
   margin: 0;
 }
 
@@ -5224,7 +5224,7 @@ section,
   font-size: clamp(6rem, 15vw, 12rem);
   font-weight: 800;
   color: color-mix(in srgb, var(--heading-color), transparent 10%);
-  font-family: "OutFit", sans-serif;
+  font-family: "Outfit", sans-serif;
   line-height: 1;
 }
 
