@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		{ label: 'home', path: '/', menuText: 'HOME' },
 		{ label: 'about us', path: '/about', menuText: 'ABOUT' },
 		{ label: 'services', path: '/services', menuText: 'SERVICES' },
+		{ label: 'careers', path: '/career', menuText: 'CAREERS' },
 		{ label: 'portfolio', path: '/portfolio', menuText: 'PORTFOLIO' },
 		// { label: 'journal', path: '/journal', menuText: 'JOURNAL' },
 		{ label: 'contact us', path: '/contact', menuText: 'CONTACT' }

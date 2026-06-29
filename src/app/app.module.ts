@@ -33,6 +33,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ServiceDetailsComponent } from './components/services/service-details/service-details.component';
 import { ProjectDetailsComponent } from './components/portfolio/project-details/project-details.component';
 import { TermsComponent } from './components/terms/terms.component';
+import { CareerComponent } from './components/career/career.component';
+import { NgxUploaderModule } from 'ngx-uploader';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { TermsComponent } from './components/terms/terms.component';
   ServiceDetailsComponent,
   ProjectDetailsComponent,
   TermsComponent,
+  CareerComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -65,6 +68,7 @@ import { TermsComponent } from './components/terms/terms.component';
     ReactiveFormsModule,
     CommonModule,
     NgxIntlTelInputModule,
+    NgxUploaderModule,
     LucideAngularModule.pick({
       Pencil,
       Search,

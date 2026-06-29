@@ -23,6 +23,17 @@ export class ContactService {
 			);
 	};
 
+	addCareerForm = (moreData: any): Observable<any> => {
+		const endpoint = environment.baseUrl + '/api/career/add';
+		return this.http
+			.post(endpoint, moreData)
+			.pipe(
+				catchError((err) => {
+					return throwError(err);
+				})
+			);
+	};
+
 
 
 	// Returns an observable

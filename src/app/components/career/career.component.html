@@ -1,0 +1,216 @@
+<!-- Page Header Start -->
+<div class="career-details-page">
+    <div class="container-fluid page-header">
+        <div class="container">
+
+            <h1 class="display-2 text-white mb-4 animated slideInDown fw-bold">Careers</h1>
+            <div class="breadcrumb-container animated slideInDown">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" class="breadcrumb-link">
+                                <i class="fas fa-home me-2"></i>Home
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/projects" class="breadcrumb-link">
+                                <i class="fas fa-info-circle me-2"></i>Pages
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            <i class="fas fa-users me-2"></i>Careers
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+    <section class="section sectionp bgcl-primary career-page">
+        <div class="container-fluid">
+            <div class="col-md-10 col-sm-10 col-11 mx-auto">
+                <div class="row gy-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="career-copy">
+                            <p class="sora-regular text-uppercase size16 accent-label mb-3">Build the future with us</p>
+                            <h1 class="nelphim-regular size62 raisin-black text-capitalize mb-4">
+                                Career opportunities for modern builder developers
+                            </h1>
+                            <p class="sora-regular size18 raisin-black para-width mb-4">
+                                Neelgund Developers is looking for talented construction professionals, project leads,
+                                and site coordinators who want to shape premium residential and commercial spaces with
+                                precision, speed, and sustainable execution.
+                            </p>
+                            <div class="career-highlights row gx-3 gy-3">
+                                <div class="col-md-6">
+                                    <div class="highlight-card">
+                                        <h5 class="sora-regular size18 raisin-black mb-2">Smart project delivery</h5>
+                                        <p class="sora-regular size16 gray mb-0">Work on projects with strong planning,
+                                            technology, and robust execution standards.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="highlight-card">
+                                        <h5 class="sora-regular size18 raisin-black mb-2">Career development</h5>
+                                        <p class="sora-regular size16 gray mb-0">Gain hands-on experience in large-scale
+                                            builds, site management, and client coordination.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="highlight-card">
+                                        <h5 class="sora-regular size18 raisin-black mb-2">Trusted workmanship</h5>
+                                        <p class="sora-regular size16 gray mb-0">Join a team known for quality finishes,
+                                            safety standards, and on-time delivery.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="highlight-card">
+                                        <h5 class="sora-regular size18 raisin-black mb-2">Strong collaboration</h5>
+                                        <p class="sora-regular size16 gray mb-0">Collaborate with architects, engineers
+                                            and procurement experts on every project.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-card">
+                            <div class="form-header">
+                                <span class="sora-regular text-uppercase size16 gray">Apply now</span>
+                                <h2 class="nelphim-regular size36 raisin-black mt-2">Share your profile</h2>
+                                <p class="sora-regular size16 gray mt-3 mb-0">Send us your details and resume. We review
+                                    every application and follow up with candidates who match our current openings.</p>
+                            </div>
+
+                            <div class="alert alert-success text-center" *ngIf="msg_success">
+                                {{ throw_msg }}
+                            </div>
+                            <div class="alert alert-danger text-center" *ngIf="msg_danger">
+                                {{ throw_msg }}
+                            </div>
+
+                            <form [formGroup]="addCareerForm" (ngSubmit)="onSubmit()" novalidate>
+                                <div class="row gx-3">
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">First
+                                            name</label>
+                                        <div class="mb-3">
+                                            <input type="text"
+                                                class="helpform form-control sora-regular raisin-black size16"
+                                                formControlName="firstname" placeholder="Enter your first name" />
+                                            <span *ngIf="submitted && hasError('firstname', 'required')"
+                                                class="text-danger sora-regular">Please enter your first name</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Last
+                                            name</label>
+                                        <div class="mb-3">
+                                            <input type="text"
+                                                class="helpform form-control sora-regular raisin-black size16"
+                                                formControlName="lastname" placeholder="Enter your last name" />
+                                            <span *ngIf="submitted && hasError('lastname', 'required')"
+                                                class="text-danger sora-regular">Please enter your last name</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Email
+                                            address</label>
+                                        <div class="mb-3">
+                                            <input type="email"
+                                                class="helpform form-control sora-regular raisin-black size16"
+                                                formControlName="email" placeholder="yourname@email.com" />
+                                            <span *ngIf="submitted && hasEmailError('email', 'required')"
+                                                class="text-danger sora-regular">{{ hasEmailError('email', 'required')
+                                                }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Mobile
+                                            number</label>
+                                        <div class="mb-3">
+                                            <input type="tel"
+                                                class="helpform form-control sora-regular raisin-black size16"
+                                                formControlName="mobile" placeholder="Enter your mobile number" />
+                                            <span *ngIf="submitted && hasError('mobile', 'required')"
+                                                class="text-danger sora-regular">Please enter your mobile number</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Position
+                                            / Subject</label>
+                                        <div class="mb-3">
+                                            <input type="text"
+                                                class="helpform form-control sora-regular raisin-black size16"
+                                                formControlName="subject" placeholder="e.g. Site Manager, Estimator" />
+                                            <span *ngIf="submitted && hasError('subject', 'required')"
+                                                class="text-danger sora-regular">Please enter the role or subject</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Engagement
+                                            type</label>
+                                        <div class="mb-3">
+                                            <select class="helpform form-control sora-regular raisin-black size16"
+                                                formControlName="type">
+                                                <option value="full-time">Full-time</option>
+                                                <option value="part-time">Part-time</option>
+                                                <option value="contract">Contract</option>
+                                            </select>
+                                            <span *ngIf="submitted && hasError('type', 'required')"
+                                                class="text-danger sora-regular">Please choose employment type</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label
+                                            class="form-label sora-regular text-uppercase raisin-black size16 csmb12">Upload
+                                            resume</label>
+                                        <div class="mb-3 upload-field">
+                                            <input class="form-control" type="file" #uploader ngFileSelect (uploadOutput)="onUploadFile($event)"
+									[uploadInput]="uploadInput" /><br>
+                                            <div class="file-note sora-regular size14 gray mt-2">Allowed: PDF, DOC,
+                                                DOCX. Max file size 5MB.</div>
+                                            <div *ngIf="document"
+                                                class="uploaded-name sora-regular size14 raisin-black mt-2">Uploaded: <a *ngIf="document" href="{{imagePath}}career/{{document}}" target="_blank" >{{document}}</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                    class="btn btn-primary d-inline-flex align-items-center justify-content-center mt-2">Submit
+                                    application</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="together bgcl-primary">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-10 col-lg-10 col-md-10 col-sm-11 col-11 mx-auto">
+					<div class="row sectionmb" data-aos="fade-up" data-aos-duration="1000">
+						<div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-md-0 mb-sm-0 mb-4">
+							<div class="content-block w-100">
+								<p class="size16 cloud-white csmb20">
+									Have A Question?
+								</p>
+								<h2 class="size62 cloud-white csmb20">
+									We're here To help You
+								</h2>
+								<a class="btn-primary" style="text-transform: none" href="/contact">Contact Us</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>

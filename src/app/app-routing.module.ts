@@ -8,6 +8,7 @@ import { JournalComponent } from './components/journal/journal.component';
 import { JournalDetailComponent } from './components/journal-detail/journal-detail.component';
 import { ServicesComponent } from './components/services/services.component';
 import { ServiceDetailsComponent } from './components/services/service-details/service-details.component';
+import { CareerComponent } from './components/career/career.component';
 import { ProjectDetailsComponent } from './components/portfolio/project-details/project-details.component';
 import { TermsComponent } from './components/terms/terms.component';
 
@@ -31,6 +32,11 @@ const routes: Routes = [
 		path: 'services/:url_key',
 		component: ServiceDetailsComponent,
 		data: { pageName: 'services' }
+	},
+	{
+		path: 'career',
+		component: CareerComponent,
+		data: { pageName: 'career' }
 	},
 	{
 		path: 'projects',
