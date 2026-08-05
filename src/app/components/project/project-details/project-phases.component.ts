@@ -13,7 +13,8 @@ export class ProjectPhasesComponent implements OnChanges {
   selectedPhase: any = null;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.phases) {
+    const phaseChange = changes['phases'];
+    if (phaseChange) {
       if (this.phases && this.phases.length) {
         this.selectPhase(0);
       } else {
