@@ -25,6 +25,9 @@ import { SearchCountryField, CountryISO } from 'ngx-intl-tel-input';
 })
 export class ProjectDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   projectData: any;
+  normalizedPhases: any[] = [];
+  selectedPhaseIndex = 0;
+  selectedPhase: any = null;
   recentProjects: any[] = [];
   imagePath = environment.baseUrl + '/public/';
   googleMapsApiKey = 'AIzaSyC8DsL4Thth1K1cdKX_x_f3zsWaLuFzwoY'; // Replace with your actual API key
@@ -92,32 +95,74 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit, OnDestroy
         }
       });
       
-      // Initialize design images swiper
-      this.designImagesSwiper = new Swiper('.designImagesSwiper', {
-        slidesPerView: 1,
-        loop: true,
-        autoplay: { delay: 4000 },
-        pagination: { el: '.design-swiper-pagination', clickable: true },
-        navigation: {
-          nextEl: '.design-swiper-button-next',
-          prevEl: '.design-swiper-button-prev',
-        }
-      });
     }, 500);
   }
 
-  loadProject(): void {
-    const urlKey = this.route.snapshot.paramMap.get('url_key')!;
-    this.projectService.getProjectsByURL({ url_key: urlKey }).subscribe(res => {
-      if (res?.code === 200) {
-        this.projectData = res.result;
-        this.service = this.projectData.name
-        this.getGoogleMapsEmbedUrl(this.projectData.location);
-        this.recentProjects = res.result.related_prjects || [];
-        this.seo.updateProjectMeta(urlKey, `/project/${urlKey}`);
-        this.cdr.detectChanges();
-      }
+  private initDesignImagesSwiper(): void {
+    if (!this.isBrowser) return;
+
+    const images = this.projectData?.project_design_images || [];
+    const loopMode = images.length > 2;
+
+    this.designImagesSwiper?.destroy(true, true);
+
+    this.designImagesSwiper = new Swiper('.designImagesSwiper', {
+      slidesPerView: 1,
+      loop: loopMode,
+      autoplay: { delay: 4000 },
+      spaceBetween: 12,
+      watchOverflow: true,
+      pagination: { el: '.design-swiper-pagination', clickable: true },
+      navigation: {
+        nextEl: '.design-swiper-button-next',
+        prevEl: '.design-swiper-button-prev',
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 12,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 16,
+        },
+        1200: {
+          slidesPerView: 2,
+          spaceBetween: 24,
+        },
+      },
     });
+  }
+
+  loadProject(): void {
+    const urlKey = this.route.snapshot.paramMap.get('url_key');
+    if (!urlKey) {
+      console.error('Missing url_key for project details route');
+      return;
+    }
+
+    this.projectService.getProjectsByURL({ url_key: urlKey }).subscribe(
+      res => {
+        if (res?.code === 200 && res.result) {
+          this.projectData = res.result;
+          this.normalizedPhases = this.normalizePhases(this.projectData?.phases);
+          // select the first phase with animation for a polished initial render
+          if (this.normalizedPhases.length) {
+            this.selectPhaseWithAnimation(0);
+          }
+          this.service = this.projectData?.name || null;
+          this.getGoogleMapsEmbedUrl(this.projectData?.location || '');
+          this.recentProjects = res.result.related_prjects || [];
+          this.seo.updateProjectMeta(urlKey, `/project/${urlKey}`);
+          setTimeout(() => this.initDesignImagesSwiper(), 100);
+        } else {
+          console.error('Project details response invalid', res);
+        }
+      },
+      err => {
+        console.error('Project details fetch failed', err);
+      }
+    );
   }
 
   onImageLoad(): void {
@@ -137,6 +182,88 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit, OnDestroy
     }
 
     return 0;
+  }
+
+  normalizePhases(phases: any): any[] {
+    if (!phases) {
+      return [];
+    }
+    if (Array.isArray(phases)) {
+      return phases.filter(phase => phase && typeof phase === 'object');
+    }
+    if (typeof phases === 'string') {
+      try {
+        const parsed = JSON.parse(phases);
+        if (Array.isArray(parsed)) {
+          return parsed.filter(phase => phase && typeof phase === 'object');
+        }
+      } catch {
+        return [];
+      }
+    }
+    if (typeof phases === 'object') {
+      return [phases];
+    }
+    return [];
+  }
+
+  selectedPhaseImage: string | null = null;
+  selectedPhaseDetails: { label: string; value: string; icon: string }[] = [];
+  selectedPhaseAdditionalFields: { label: string; value: string }[] = [];
+  phaseAnimating: boolean = true;
+
+  selectPhase(index: number): void {
+    this.selectedPhaseIndex = index;
+    this.selectedPhase = this.normalizedPhases[index] || null;
+
+    if (!this.selectedPhase) {
+      this.selectedPhaseImage = null;
+      this.selectedPhaseDetails = [];
+      this.selectedPhaseAdditionalFields = [];
+      return;
+    }
+
+    this.selectedPhaseImage = this.selectedPhase.image || this.selectedPhase.project_images?.[0] || null;
+
+    const details: { label: string; value: string; icon: string }[] = [];
+    if (this.selectedPhase.area) {
+      details.push({ label: 'Area', value: this.selectedPhase.area, icon: 'fas fa-chart-area text-primary me-2' });
+    }
+    if (this.selectedPhase.noofplots || this.selectedPhase.plots) {
+      details.push({ label: 'Plots', value: this.selectedPhase.noofplots || this.selectedPhase.plots, icon: 'fas fa-th text-primary me-2' });
+    }
+    if (this.selectedPhase.dimentions) {
+      details.push({ label: 'Dimensions', value: this.selectedPhase.dimentions, icon: 'fas fa-ruler-combined text-primary me-2' });
+    }
+    if (this.selectedPhase.price) {
+      details.push({ label: 'Price', value: this.selectedPhase.price, icon: 'fas fa-tags text-primary me-2' });
+    }
+    if (this.selectedPhase.location) {
+      details.push({ label: 'Location', value: this.selectedPhase.location, icon: 'fas fa-map-marker-alt text-primary me-2' });
+    }
+    this.selectedPhaseDetails = details;
+  }
+
+  // Wrap selectPhase to animate content when switching
+  selectPhaseWithAnimation(index: number): void {
+    this.phaseAnimating = false;
+    this.selectPhase(index);
+    // small delay to allow CSS transition
+    setTimeout(() => {
+      this.phaseAnimating = true;
+    }, 20);
+  }
+
+  trackPhaseBy(index: number, phase: any): any {
+    return phase?.id || phase?.name || index;
+  }
+
+  objectKeys(obj: any): string[] {
+    return obj ? Object.keys(obj) : [];
+  }
+
+  prettyKey(key: string): string {
+    return key ? key.replace(/_/g, ' ') : key;
   }
 
   // Generate Google Maps embed URL for unmapped locations or coordinates

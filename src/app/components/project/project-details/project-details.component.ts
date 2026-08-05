@@ -25,6 +25,12 @@ export class ProjectDetailsComponent
   implements OnInit, AfterViewInit, OnDestroy {
 
   projectData: any;
+  normalizedPhases: any[] = [];
+  selectedPhaseIndex = 0;
+  selectedPhase: any = null;
+  selectedPhaseImage: string | null = null;
+  selectedPhaseDetails: { label: string; value: string; icon: string }[] = [];
+  selectedPhaseAdditionalFields: { label: string; value: string }[] = [];
   recentProjects: any[] = [];
   imagePath = environment.baseUrl + '/public/';
   loading = false;
@@ -73,6 +79,8 @@ export class ProjectDetailsComponent
       (res) => {
         if (res?.code === 200) {
           this.projectData = res.result;
+          this.normalizedPhases = this.normalizePhases(this.projectData?.phases);
+          this.selectPhase(0);
           this.recentProjects = res.result.related_prjects || [];
           this.seo.updateProjectMeta(urlKey, `/project/${urlKey}`);
         } else {
@@ -94,6 +102,74 @@ export class ProjectDetailsComponent
 
   onImageLoad(): void {
     if (this.isBrowser) AOS.refresh();
+  }
+
+  normalizePhases(phases: any): any[] {
+    if (!phases) {
+      return [];
+    }
+    if (Array.isArray(phases)) {
+      return phases.filter(phase => phase && typeof phase === 'object');
+    }
+    if (typeof phases === 'string') {
+      try {
+        const parsed = JSON.parse(phases);
+        if (Array.isArray(parsed)) {
+          return parsed.filter(phase => phase && typeof phase === 'object');
+        }
+      } catch {
+        return [];
+      }
+    }
+    if (typeof phases === 'object') {
+      return [phases];
+    }
+    return [];
+  }
+
+  selectPhase(index: number): void {
+    this.selectedPhaseIndex = index;
+    this.selectedPhase = this.normalizedPhases[index] || null;
+
+    if (!this.selectedPhase) {
+      this.selectedPhaseImage = null;
+      this.selectedPhaseDetails = [];
+      this.selectedPhaseAdditionalFields = [];
+      return;
+    }
+
+    this.selectedPhaseImage = this.selectedPhase.image || this.selectedPhase.project_images?.[0] || null;
+
+    const details: { label: string; value: string; icon: string }[] = [];
+    if (this.selectedPhase.area) {
+      details.push({ label: 'Area', value: this.selectedPhase.area, icon: 'fas fa-chart-area text-primary me-2' });
+    }
+    if (this.selectedPhase.noofplots || this.selectedPhase.plots) {
+      details.push({ label: 'Plots', value: this.selectedPhase.noofplots || this.selectedPhase.plots, icon: 'fas fa-th text-primary me-2' });
+    }
+    if (this.selectedPhase.dimentions) {
+      details.push({ label: 'Dimensions', value: this.selectedPhase.dimentions, icon: 'fas fa-ruler-combined text-primary me-2' });
+    }
+    if (this.selectedPhase.price) {
+      details.push({ label: 'Price', value: this.selectedPhase.price, icon: 'fas fa-tags text-primary me-2' });
+    }
+    if (this.selectedPhase.location) {
+      details.push({ label: 'Location', value: this.selectedPhase.location, icon: 'fas fa-map-marker-alt text-primary me-2' });
+    }
+    this.selectedPhaseDetails = details;
+
+    const skipKeys = new Set(['name', 'description', 'image', 'project_images', 'area', 'noofplots', 'plots', 'dimentions', 'price', 'location']);
+    this.selectedPhaseAdditionalFields = this.objectKeys(this.selectedPhase)
+      .filter(key => this.selectedPhase[key] && !skipKeys.has(key))
+      .map(key => ({ label: this.prettyKey(key), value: this.selectedPhase[key] }));
+  }
+
+  objectKeys(obj: any): string[] {
+    return obj ? Object.keys(obj) : [];
+  }
+
+  prettyKey(key: string): string {
+    return key ? key.replace(/_/g, ' ') : key;
   }
 
   ngOnDestroy(): void {

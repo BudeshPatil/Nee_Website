@@ -1,9 +1,9 @@
-<section class="project-phases-section mt-5" *ngIf="phases?.length">
+<section class="project-phases-section mt-5" *ngIf="normalizedPhases?.length">
   <h3 class="section-title mb-4">Project Phases</h3>
 
   <div class="phases-nav" role="tablist" aria-label="Project phases">
     <button
-      *ngFor="let p of phases; let i = index"
+      *ngFor="let p of normalizedPhases; let i = index"
       (click)="selectPhase(i)"
       [attr.aria-selected]="selectedIndex === i"
       class="phase-tab"

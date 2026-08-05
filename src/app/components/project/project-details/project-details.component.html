@@ -111,7 +111,59 @@
 </section>
 
 <!-- PROJECT PHASES -->
-<app-project-phases *ngIf="projectData?.phases?.length" [phases]="projectData?.phases" [imagePath]="imagePath"></app-project-phases>
+<section class="project-phases-section mt-5" *ngIf="normalizedPhases.length">
+  <h3 class="section-title mb-4">Project Phases</h3>
+
+  <div class="phases-nav" role="tablist" aria-label="Project phases">
+    <button
+      *ngFor="let p of normalizedPhases; let i = index"
+      (click)="selectPhase(i)"
+      [attr.aria-selected]="selectedPhaseIndex === i"
+      class="phase-tab"
+      [class.active]="selectedPhaseIndex === i"
+    >
+      {{ p.name || ('Phase ' + (i + 1)) }}
+    </button>
+  </div>
+
+  <div class="phase-details mt-4" *ngIf="selectedPhase">
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-6">
+        <div class="phase-detail-column">
+          <h4 class="phase-name mb-3">{{ selectedPhase.name }}</h4>
+          <p class="phase-description mb-4" *ngIf="selectedPhase.description" [innerHTML]="selectedPhase.description"></p>
+
+          <div class="project-details-grid">
+            <div class="detail-item" *ngFor="let item of selectedPhaseDetails">
+              <i [ngClass]="item.icon"></i>
+              <span class="detail-label">{{ item.label }}</span>
+              <span class="detail-value">{{ item.value }}</span>
+            </div>
+          </div>
+
+          <div class="project-detail-grid mt-4" *ngIf="selectedPhaseAdditionalFields.length">
+            <div class="detail-block" *ngFor="let item of selectedPhaseAdditionalFields">
+              <p class="detail-title">{{ item.label }}</p>
+              <p class="detail-text" [innerHTML]="item.value"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6" *ngIf="selectedPhaseImage">
+        <div class="phase-image-column">
+          <img
+            [src]="imagePath + 'project/' + selectedPhaseImage"
+            [alt]="selectedPhase.name"
+            class="img-fluid phase-main-image"
+            loading="lazy"
+            (load)="onImageLoad()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- IMAGE GALLERY -->
 <section class="bgcl-primary sixth" *ngIf="projectData?.project_design_images?.length">

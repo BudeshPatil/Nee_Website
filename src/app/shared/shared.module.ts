@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProjectPhasesComponent } from '../components/project/project-details/project-phases.component';
-
 @NgModule({
-  declarations: [ProjectPhasesComponent],
+  declarations: [],
   imports: [CommonModule],
-  exports: [ProjectPhasesComponent]
+  exports: []
 })
 export class SharedModule { }

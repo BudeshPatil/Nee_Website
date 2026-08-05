@@ -6,16 +6,18 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
   styleUrls: ['./project-phases.component.scss']
 })
 export class ProjectPhasesComponent implements OnChanges {
-  @Input() phases: any[] = [];
+  @Input() phases: any = [];
   @Input() imagePath = '';
 
+  normalizedPhases: any[] = [];
   selectedIndex = 0;
   selectedPhase: any = null;
 
   ngOnChanges(changes: SimpleChanges): void {
     const phaseChange = changes['phases'];
     if (phaseChange) {
-      if (this.phases && this.phases.length) {
+      this.normalizedPhases = this.normalizePhases(phaseChange.currentValue);
+      if (this.normalizedPhases.length) {
         this.selectPhase(0);
       } else {
         this.selectedPhase = null;
@@ -25,7 +27,7 @@ export class ProjectPhasesComponent implements OnChanges {
 
   selectPhase(index: number): void {
     this.selectedIndex = index;
-    this.selectedPhase = this.phases[index];
+    this.selectedPhase = this.normalizedPhases[index] || null;
   }
 
   get phaseImage(): string | null {
@@ -85,6 +87,29 @@ export class ProjectPhasesComponent implements OnChanges {
 
   isArray(v: any): boolean {
     return Array.isArray(v);
+  }
+
+  normalizePhases(phases: any): any[] {
+    if (!phases) {
+      return [];
+    }
+    if (Array.isArray(phases)) {
+      return phases.filter(phase => phase && typeof phase === 'object');
+    }
+    if (typeof phases === 'string') {
+      try {
+        const parsed = JSON.parse(phases);
+        if (Array.isArray(parsed)) {
+          return parsed.filter(phase => phase && typeof phase === 'object');
+        }
+      } catch {
+        return [];
+      }
+    }
+    if (typeof phases === 'object') {
+      return [phases];
+    }
+    return [];
   }
 
   onImageLoad(): void {}

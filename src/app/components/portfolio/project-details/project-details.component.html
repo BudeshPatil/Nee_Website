@@ -148,25 +148,101 @@
       <div class="project-design-images-section mt-5" *ngIf="projectData?.project_design_images && projectData.project_design_images.length > 0">
         <h3 class="section-title mb-4">Gallery</h3>
         <div class="design-images-gallery">
-          <div class="swiper designImagesSwiper">
+          <div class="swiper designImagesSwiper" aria-label="Project design gallery">
             <div class="swiper-wrapper">
               <div class="swiper-slide" *ngFor="let image of projectData.project_design_images; let i = index">
-                <img [src]="imagePath + 'project/' + image" 
-                     [alt]="projectData?.name + ' - Design ' + (i + 1)" 
-                     class="design-gallery-image" 
-                     (load)="onImageLoad()">
+                <div class="design-image-card">
+                  <img
+                    [src]="imagePath + 'project/' + image"
+                    [alt]="projectData?.name + ' - Design ' + (i + 1)"
+                    class="design-gallery-image"
+                    loading="lazy"
+                    (load)="onImageLoad()"
+                  />
+                </div>
               </div>
             </div>
             <!-- Navigation -->
-            <div class="design-swiper-button-next"></div>
-            <div class="design-swiper-button-prev"></div>
+            <div class="design-swiper-button-next" aria-label="Next slide"></div>
+            <div class="design-swiper-button-prev" aria-label="Previous slide"></div>
             <!-- Pagination -->
             <div class="design-swiper-pagination"></div>
           </div>
         </div>
       </div>
 
-      <app-project-phases *ngIf="projectData?.phases?.length" [phases]="projectData?.phases" [imagePath]="imagePath"></app-project-phases>
+      <!-- Project Phases Section -->
+      <section class="project-phases-section mt-5" *ngIf="normalizedPhases.length">
+        <div class="phases-section-header">
+          <div>
+            <h3 class="section-title">Project Phases</h3>
+            <p class="section-subtitle">Explore each phase with premium clarity and detail.</p>
+          </div>
+        </div>
+
+        <div class="phases-nav-wrapper">
+          <div class="phases-nav" role="tablist" aria-label="Project phases">
+            <button
+              type="button"
+              *ngFor="let p of normalizedPhases; let i = index; trackBy: trackPhaseBy"
+              (click)="selectPhase(i)"
+              [attr.aria-selected]="selectedPhaseIndex === i"
+              class="phase-tab"
+              [class.active]="selectedPhaseIndex === i"
+            >
+              <span class="phase-tab-title">{{ p.name || ('Phase ' + (i + 1)) }}</span>
+              <span class="phase-tab-badge" *ngIf="p.count || p.phase_count || p.phaseCount">
+                {{ p.count || p.phase_count || p.phaseCount }}
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="phase-details" *ngIf="selectedPhase">
+          <div class="phase-content-card">
+            <div class="phase-main-header">
+              <div class="phase-heading-block">
+                <h4 class="phase-name">{{ selectedPhase.name || ('Phase ' + (selectedPhaseIndex + 1)) }}</h4>
+                <div class="phase-divider"></div>
+              </div>
+              <p class="phase-description" *ngIf="selectedPhase.description" [innerHTML]="selectedPhase.description"></p>
+            </div>
+
+            <div class="phase-grid-layout">
+              <div class="phase-copy">
+                <div class="project-details-grid">
+                  <div class="detail-card" *ngFor="let item of selectedPhaseDetails">
+                    <div class="detail-card-icon"><i [ngClass]="item.icon"></i></div>
+                    <div class="detail-card-copy">
+                      <span class="detail-label">{{ item.label }}</span>
+                      <span class="detail-value">{{ item.value }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="project-detail-grid" *ngIf="selectedPhaseAdditionalFields.length">
+                  <div class="info-card" *ngFor="let item of selectedPhaseAdditionalFields">
+                    <h5 class="info-card-title">{{ item.label }}</h5>
+                    <p class="info-card-text" [innerHTML]="item.value"></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="phase-image-column" *ngIf="selectedPhaseImage">
+                <div class="phase-image-card">
+                  <img
+                    [src]="imagePath + 'project/' + selectedPhaseImage"
+                    [alt]="selectedPhase.name || 'Phase image'"
+                    class="phase-main-image"
+                    loading="lazy"
+                    (load)="onImageLoad()"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- Google Maps Section -->
       <div class="google-maps-section mt-5" *ngIf="projectData?.location">
