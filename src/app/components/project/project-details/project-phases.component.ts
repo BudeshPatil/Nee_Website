@@ -28,6 +28,49 @@ export class ProjectPhasesComponent implements OnChanges {
     this.selectedPhase = this.phases[index];
   }
 
+  get phaseImage(): string | null {
+    if (!this.selectedPhase) {
+      return null;
+    }
+    return this.selectedPhase.image || this.selectedPhase.project_images?.[0] || null;
+  }
+
+  get phaseDetails(): { label: string; value: string; icon: string }[] {
+    if (!this.selectedPhase) {
+      return [];
+    }
+    const details: { label: string; value: string; icon: string }[] = [];
+
+    if (this.selectedPhase.area) {
+      details.push({ label: 'Area', value: this.selectedPhase.area, icon: 'fas fa-chart-area text-primary me-2' });
+    }
+    if (this.selectedPhase.noofplots || this.selectedPhase.plots) {
+      details.push({ label: 'Plots', value: this.selectedPhase.noofplots || this.selectedPhase.plots, icon: 'fas fa-th text-primary me-2' });
+    }
+    if (this.selectedPhase.dimentions) {
+      details.push({ label: 'Dimensions', value: this.selectedPhase.dimentions, icon: 'fas fa-ruler-combined text-primary me-2' });
+    }
+    if (this.selectedPhase.price) {
+      details.push({ label: 'Price', value: this.selectedPhase.price, icon: 'fas fa-tags text-primary me-2' });
+    }
+    if (this.selectedPhase.location) {
+      details.push({ label: 'Location', value: this.selectedPhase.location, icon: 'fas fa-map-marker-alt text-primary me-2' });
+    }
+
+    return details;
+  }
+
+  get additionalPhaseFields(): { label: string; value: string }[] {
+    if (!this.selectedPhase) {
+      return [];
+    }
+
+    const skipKeys = new Set(['name', 'description', 'image', 'project_images', 'area', 'noofplots', 'plots', 'dimentions', 'price', 'location']);
+    return this.objectKeys(this.selectedPhase)
+      .filter(key => this.selectedPhase[key] && !skipKeys.has(key))
+      .map(key => ({ label: this.prettyKey(key), value: this.selectedPhase[key] }));
+  }
+
   isImageFile(name: string): boolean {
     return !!name && /\.(jpe?g|png|gif|webp|svg)$/i.test(name);
   }

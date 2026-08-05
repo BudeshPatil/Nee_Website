@@ -1,57 +1,51 @@
-<section class="sectionp120 bgcl-primary project-phases" *ngIf="phases?.length">
-  <div class="container-fluid">
-    <div class="col-xl-10 col-11 mx-auto">
-      <h2 class="nelphim-regular size42 csmb30">Project Phases</h2>
+<section class="project-phases-section mt-5" *ngIf="phases?.length">
+  <h3 class="section-title mb-4">Project Phases</h3>
 
-      <div class="phases-nav" role="tablist" aria-label="Project phases">
-        <button
-          *ngFor="let p of phases; let i = index"
-          (click)="selectPhase(i)"
-          [attr.aria-selected]="selectedIndex === i"
-          class="phase-tab"
-          [class.active]="selectedIndex === i"
-        >
-          {{ p.name || ('Phase ' + (i + 1)) }}
-        </button>
+  <div class="phases-nav" role="tablist" aria-label="Project phases">
+    <button
+      *ngFor="let p of phases; let i = index"
+      (click)="selectPhase(i)"
+      [attr.aria-selected]="selectedIndex === i"
+      class="phase-tab"
+      [class.active]="selectedIndex === i"
+    >
+      {{ p.name || ('Phase ' + (i + 1)) }}
+    </button>
+  </div>
+
+  <div class="phase-details mt-4" *ngIf="selectedPhase">
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-6">
+        <div class="phase-detail-column">
+          <h4 class="phase-name mb-3">{{ selectedPhase.name }}</h4>
+          <p class="phase-description mb-4" *ngIf="selectedPhase.description" [innerHTML]="selectedPhase.description"></p>
+
+          <div class="project-details-grid">
+            <div class="detail-item" *ngFor="let item of phaseDetails">
+              <i [ngClass]="item.icon"></i>
+              <span class="detail-label">{{ item.label }}</span>
+              <span class="detail-value">{{ item.value }}</span>
+            </div>
+          </div>
+
+          <div class="project-detail-grid mt-4" *ngIf="additionalPhaseFields?.length">
+            <div class="detail-block" *ngFor="let item of additionalPhaseFields">
+              <p class="detail-title">{{ item.label }}</p>
+              <p class="detail-text" [innerHTML]="item.value"></p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="phase-details mt-4" *ngIf="selectedPhase">
-        <div class="row">
-          <div class="col-md-6">
-            <h3 class="size28 sora-semibold">{{ selectedPhase.name }}</h3>
-            <p class="size16" *ngIf="selectedPhase.description" [innerHTML]="selectedPhase.description"></p>
-
-            <div class="mt-3" *ngFor="let key of objectKeys(selectedPhase)">
-              <ng-container *ngIf="selectedPhase[key] && key !== 'name' && key !== 'description'">
-                <div *ngIf="!isArray(selectedPhase[key])">
-                  <p class="sora-semibold size14 text-muted text-capitalize">{{ prettyKey(key) }}</p>
-                  <p [innerHTML]="selectedPhase[key]"></p>
-                </div>
-
-                <div *ngIf="isArray(selectedPhase[key])">
-                  <p class="sora-semibold size14 text-muted text-capitalize">{{ prettyKey(key) }}</p>
-                  <div class="d-flex flex-wrap gallery">
-                    <ng-container *ngFor="let item of selectedPhase[key]">
-                      <ng-container *ngIf="isImageFile(item)">
-                        <img (load)="onImageLoad()" [src]="imagePath + 'project/' + item" class="img-fluid phase-img csmb20" alt="{{ selectedPhase.name }}" loading="lazy" />
-                      </ng-container>
-                      <ng-container *ngIf="!isImageFile(item)">
-                        <a class="d-block mb-2" [href]="item" target="_blank" rel="noopener">{{ item }}</a>
-                      </ng-container>
-                    </ng-container>
-                  </div>
-                </div>
-              </ng-container>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div *ngIf="selectedPhase.image || selectedPhase.project_images?.length">
-              <img *ngIf="selectedPhase.image" [src]="imagePath + 'project/' + selectedPhase.image" class="img-fluid w-100 csmb20" alt="{{ selectedPhase.name }}" loading="lazy" />
-
-              <img *ngFor="let img of selectedPhase.project_images" [src]="imagePath + 'project/' + img" class="img-fluid w-100 csmb20" loading="lazy" />
-            </div>
-          </div>
+      <div class="col-lg-6" *ngIf="phaseImage">
+        <div class="phase-image-column">
+          <img
+            [src]="imagePath + 'project/' + phaseImage"
+            [alt]="selectedPhase.name"
+            class="img-fluid phase-main-image"
+            loading="lazy"
+            (load)="onImageLoad()"
+          />
         </div>
       </div>
     </div>

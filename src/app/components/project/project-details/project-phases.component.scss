@@ -1,41 +1,137 @@
-.project-phases {
+.project-phases-section {
+  padding: 3rem 0;
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
   .phases-nav {
     display: flex;
-    gap: 0.5rem;
-    overflow-x: auto;
-    padding: 0.5rem 0;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
 
-    .phase-tab {
-      background: transparent;
-      border: 1px solid rgba(0,0,0,0.08);
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all 200ms ease;
-    }
+  .phase-tab {
+    border: 1px solid rgba(0,0,0,0.08);
+    background: transparent;
+    padding: 0.85rem 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 200ms ease;
+    min-width: 120px;
+    text-align: center;
+  }
 
-    .phase-tab.active {
-      background: #0d47a1;
-      color: #fff;
-      border-color: rgba(0,0,0,0.12);
-    }
+  .phase-tab.active {
+    background: #0d47a1;
+    color: #fff;
+    border-color: rgba(0,0,0,0.18);
   }
 
   .phase-details {
-    .gallery {
-      gap: 0.75rem;
+    .phase-detail-column {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
 
-      .phase-img {
-        width: 48%;
-        border-radius: 6px;
-      }
+    .phase-name {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .phase-description {
+      color: #555;
+      line-height: 1.75;
+    }
+
+    .project-details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .detail-value {
+      color: #555;
+    }
+
+    .project-detail-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .detail-block {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .detail-title {
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    .detail-text {
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .phase-image-column {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .phase-main-image {
+      border-radius: 16px;
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .project-details-grid {
+      grid-template-columns: 1fr;
     }
   }
 
   @media (max-width: 767px) {
-    .phase-details .gallery .phase-img { width: 100%; }
+    padding: 2rem 0;
+
+    .phases-nav {
+      gap: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .phase-tab {
+      min-width: 110px;
+      padding: 0.75rem 0.9rem;
+    }
+
+    .phase-details {
+      .phase-name {
+        font-size: 1.5rem;
+      }
+    }
   }
 }
