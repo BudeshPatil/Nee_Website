@@ -19,6 +19,18 @@
   </div>
 </section>
 
+<section *ngIf="loading" class="py-5 text-center">
+  <div class="col-xl-10 col-11 mx-auto">
+    <p class="size18">Loading project details…</p>
+  </div>
+</section>
+
+<section *ngIf="errorMessage" class="py-5 text-center text-danger">
+  <div class="col-xl-10 col-11 mx-auto">
+    <p class="size18">{{ errorMessage }}</p>
+  </div>
+</section>
+
 <!-- PROJECT INFO -->
 <section class="list sectionp120 bgcl-primary" *ngIf="projectData">
   <div class="container-fluid">
@@ -97,6 +109,9 @@
     </div>
   </div>
 </section>
+
+<!-- PROJECT PHASES -->
+<app-project-phases [phases]="projectData.phases" [imagePath]="imagePath"></app-project-phases>
 
 <!-- IMAGE GALLERY -->
 <section class="bgcl-primary sixth" *ngIf="projectData?.project_design_images?.length">

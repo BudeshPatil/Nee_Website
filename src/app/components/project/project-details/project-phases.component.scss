@@ -1,0 +1,41 @@
+.project-phases {
+  .phases-nav {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+
+    .phase-tab {
+      background: transparent;
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+
+    .phase-tab.active {
+      background: #0d47a1;
+      color: #fff;
+      border-color: rgba(0,0,0,0.12);
+    }
+  }
+
+  .phase-details {
+    .gallery {
+      gap: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+
+      .phase-img {
+        width: 48%;
+        border-radius: 6px;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .phase-details .gallery .phase-img { width: 100%; }
+  }
+}

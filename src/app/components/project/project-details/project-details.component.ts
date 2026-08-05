@@ -27,6 +27,8 @@ export class ProjectDetailsComponent
   projectData: any;
   recentProjects: any[] = [];
   imagePath = environment.baseUrl + '/public/';
+  loading = false;
+  errorMessage: string | null = null;
   private swiper: Swiper | null = null;
   isBrowser = false;
 
@@ -65,14 +67,29 @@ export class ProjectDetailsComponent
 
   loadProject(): void {
     const urlKey = this.route.snapshot.paramMap.get('url_key')!;
-    this.projectService.getProjectsByURL({ url_key: urlKey }).subscribe(res => {
-      if (res?.code === 200) {
-        this.projectData = res.result;
-        this.recentProjects = res.result.related_prjects || [];
-        this.seo.updateProjectMeta(urlKey, `/project/${urlKey}`);
+    this.loading = true;
+    this.errorMessage = null;
+    this.projectService.getProjectsByURL({ url_key: urlKey }).subscribe(
+      (res) => {
+        if (res?.code === 200) {
+          this.projectData = res.result;
+          this.recentProjects = res.result.related_prjects || [];
+          this.seo.updateProjectMeta(urlKey, `/project/${urlKey}`);
+        } else {
+          this.errorMessage = res?.message || 'Failed to load project data.';
+        }
+        this.cdr.detectChanges();
+      },
+      (err) => {
+        this.errorMessage = 'Failed to load project data.';
+        this.loading = false;
+        this.cdr.detectChanges();
+      },
+      () => {
+        this.loading = false;
         this.cdr.detectChanges();
       }
-    });
+    );
   }
 
   onImageLoad(): void {

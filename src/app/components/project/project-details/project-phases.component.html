@@ -1,0 +1,59 @@
+<section class="sectionp120 bgcl-primary project-phases" *ngIf="phases?.length">
+  <div class="container-fluid">
+    <div class="col-xl-10 col-11 mx-auto">
+      <h2 class="nelphim-regular size42 csmb30">Project Phases</h2>
+
+      <div class="phases-nav" role="tablist" aria-label="Project phases">
+        <button
+          *ngFor="let p of phases; let i = index"
+          (click)="selectPhase(i)"
+          [attr.aria-selected]="selectedIndex === i"
+          class="phase-tab"
+          [class.active]="selectedIndex === i"
+        >
+          {{ p.name || ('Phase ' + (i + 1)) }}
+        </button>
+      </div>
+
+      <div class="phase-details mt-4" *ngIf="selectedPhase">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 class="size28 sora-semibold">{{ selectedPhase.name }}</h3>
+            <p class="size16" *ngIf="selectedPhase.description" [innerHTML]="selectedPhase.description"></p>
+
+            <div class="mt-3" *ngFor="let key of objectKeys(selectedPhase)">
+              <ng-container *ngIf="selectedPhase[key] && key !== 'name' && key !== 'description'">
+                <div *ngIf="!isArray(selectedPhase[key])">
+                  <p class="sora-semibold size14 text-muted text-capitalize">{{ key.replace(/_/g,' ') }}</p>
+                  <p [innerHTML]="selectedPhase[key]"></p>
+                </div>
+
+                <div *ngIf="isArray(selectedPhase[key])">
+                  <p class="sora-semibold size14 text-muted text-capitalize">{{ key.replace(/_/g,' ') }}</p>
+                  <div class="d-flex flex-wrap gallery">
+                    <ng-container *ngFor="let item of selectedPhase[key]">
+                      <ng-container *ngIf="isImageFile(item)">
+                        <img (load)="onImageLoad()" [src]="imagePath + 'project/' + item" class="img-fluid phase-img csmb20" alt="{{ selectedPhase.name }}" loading="lazy" />
+                      </ng-container>
+                      <ng-container *ngIf="!isImageFile(item)">
+                        <a class="d-block mb-2" [href]="item" target="_blank" rel="noopener">{{ item }}</a>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div *ngIf="selectedPhase.image || selectedPhase.project_images?.length">
+              <img *ngIf="selectedPhase.image" [src]="imagePath + 'project/' + selectedPhase.image" class="img-fluid w-100 csmb20" alt="{{ selectedPhase.name }}" loading="lazy" />
+
+              <img *ngFor="let img of selectedPhase.project_images" [src]="imagePath + 'project/' + img" class="img-fluid w-100 csmb20" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
