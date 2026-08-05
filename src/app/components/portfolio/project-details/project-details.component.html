@@ -166,6 +166,8 @@
         </div>
       </div>
 
+      <app-project-phases [phases]="projectData.phases" [imagePath]="imagePath"></app-project-phases>
+
       <!-- Google Maps Section -->
       <div class="google-maps-section mt-5" *ngIf="projectData?.location">
         <h3 class="section-title mb-4">Location</h3>
