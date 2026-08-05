@@ -32,7 +32,7 @@ import { FilterByCategoryPipe } from './pipe/filter-by-category.pipe';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ServiceDetailsComponent } from './components/services/service-details/service-details.component';
 import { ProjectDetailsComponent } from './components/portfolio/project-details/project-details.component';
-import { ProjectPhasesComponent } from './components/project/project-details/project-phases.component';
+import { SharedModule } from './shared/shared.module';
 import { TermsComponent } from './components/terms/terms.component';
 import { CareerComponent } from './components/career/career.component';
 import { NgxUploaderModule } from 'ngx-uploader';
@@ -54,7 +54,6 @@ import { NgxUploaderModule } from 'ngx-uploader';
 		FilterByCategoryPipe,
   ServiceDetailsComponent,
   ProjectDetailsComponent,
-  ProjectPhasesComponent,
   TermsComponent,
   CareerComponent,
   ],
@@ -69,6 +68,7 @@ import { NgxUploaderModule } from 'ngx-uploader';
     NgxPayPalModule,
     ReactiveFormsModule,
     CommonModule,
+    SharedModule,
     NgxIntlTelInputModule,
     NgxUploaderModule,
     LucideAngularModule.pick({
