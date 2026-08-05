@@ -111,7 +111,7 @@
 </section>
 
 <!-- PROJECT PHASES -->
-<app-project-phases [phases]="projectData.phases" [imagePath]="imagePath"></app-project-phases>
+<app-project-phases *ngIf="projectData?.phases?.length" [phases]="projectData?.phases" [imagePath]="imagePath"></app-project-phases>
 
 <!-- IMAGE GALLERY -->
 <section class="bgcl-primary sixth" *ngIf="projectData?.project_design_images?.length">
