@@ -42,6 +42,9 @@ export class HomeComponent {
   categorycollection: any;
   imagePath: any;
   isBrowser: boolean;
+  isMobile: boolean = false;
+  bannerPlaceholderImage: string = 'placeholder-banner.jpg';
+  private resizeListener?: () => void;
   baseUrl: any;
   showPopup: boolean = false;
   collectionTypes: any = [];
@@ -213,6 +216,8 @@ export class HomeComponent {
     this.gettestimonials();
     if (isPlatformBrowser(this._platformId)) {
       window.scrollTo(0, 0);
+      this.updateIsMobile();
+      this.listenWindowResize();
       this.route.paramMap.subscribe(params => {
         const serviceName = params.get('url_key');
         if (serviceName) {
@@ -284,6 +289,42 @@ export class HomeComponent {
 
   trackByFn(data:any){
     return data.id;
+  }
+
+  private updateIsMobile(): void {
+    if (this.isBrowser) {
+      this.isMobile = window.innerWidth < 768;
+    }
+  }
+
+  private getBannerImageSrc(banner: any): string {
+    return this.isMobile && banner.mobile_image
+      ? banner.mobile_image
+      : banner.media_data?.[0]?.src || this.bannerPlaceholderImage;
+  }
+
+  private transformBannerResponse(banners: any[]): any[] {
+    return banners.map((banner) => ({
+      ...banner,
+      displayImage: this.getBannerImageSrc(banner),
+    }));
+  }
+
+  updateBannerImages(): void {
+    this.bannerData = this.bannerData.map((banner: any) => ({
+      ...banner,
+      displayImage: this.getBannerImageSrc(banner),
+    }));
+  }
+
+  private listenWindowResize(): void {
+    this.resizeListener = this.renderer.listen('window', 'resize', () => {
+      const previousIsMobile = this.isMobile;
+      this.updateIsMobile();
+      if (this.isMobile !== previousIsMobile) {
+        this.updateBannerImages();
+      }
+    });
   }
 
   toggleDropdown(event: MouseEvent) {
@@ -502,6 +543,10 @@ export class HomeComponent {
       this.bannerSwiper?.destroy(true, true);
       this.bannerSwiper = null;
     }
+    if (this.resizeListener) {
+      this.resizeListener();
+      this.resizeListener = undefined;
+    }
   }
   // Your data methods remain unchanged...
   getBannerdata() {
@@ -509,7 +554,7 @@ export class HomeComponent {
     this.dataService.getAllBanner(obj).subscribe((response: any) => {
       if (response.code == 200) {
         if (response.result != null && response.result.length > 0) {
-          this.bannerData = response.result;
+          this.bannerData = this.transformBannerResponse(response.result);
           setTimeout(() => {
             this.initBannerSwiper();
           }, 0);

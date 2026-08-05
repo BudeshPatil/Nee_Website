@@ -5,9 +5,8 @@
 				<div class="hero-banner">
 					<div class="hero-overlay"></div>
 					<img *ngIf="banner.media_data && banner.media_data[0]?.file_type === 'image'"
-						class="banner-img img-fluid" src="{{ imagePath }}banner/{{ banner.media_data[0].src }}"
-						alt="banner" loading="lazy" />
-
+							class="banner-img img-fluid" [src]="imagePath + banner.displayImage"
+							[alt]="banner.media_data?.[0]?.alt || 'Banner'" loading="lazy" />
 					<video *ngIf="banner.media_data && banner.media_data[0]?.file_type === 'video'" class="banner-video"
 						[attr.src]="imagePath + 'banner/' + banner.media_data[0].src" autoplay muted loop playsinline>
 					</video>
