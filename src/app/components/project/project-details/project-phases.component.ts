@@ -31,6 +31,10 @@ export class ProjectPhasesComponent implements OnChanges {
     return !!name && /\.(jpe?g|png|gif|webp|svg)$/i.test(name);
   }
 
+  prettyKey(key: string): string {
+    return key ? key.replace(/_/g, ' ') : key;
+  }
+
   objectKeys(obj: any): string[] {
     return obj ? Object.keys(obj) : [];
   }

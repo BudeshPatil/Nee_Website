@@ -24,12 +24,12 @@
             <div class="mt-3" *ngFor="let key of objectKeys(selectedPhase)">
               <ng-container *ngIf="selectedPhase[key] && key !== 'name' && key !== 'description'">
                 <div *ngIf="!isArray(selectedPhase[key])">
-                  <p class="sora-semibold size14 text-muted text-capitalize">{{ key.replace(/_/g,' ') }}</p>
+                  <p class="sora-semibold size14 text-muted text-capitalize">{{ prettyKey(key) }}</p>
                   <p [innerHTML]="selectedPhase[key]"></p>
                 </div>
 
                 <div *ngIf="isArray(selectedPhase[key])">
-                  <p class="sora-semibold size14 text-muted text-capitalize">{{ key.replace(/_/g,' ') }}</p>
+                  <p class="sora-semibold size14 text-muted text-capitalize">{{ prettyKey(key) }}</p>
                   <div class="d-flex flex-wrap gallery">
                     <ng-container *ngFor="let item of selectedPhase[key]">
                       <ng-container *ngIf="isImageFile(item)">
