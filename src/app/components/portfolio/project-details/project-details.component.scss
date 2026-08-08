@@ -1330,8 +1330,11 @@ input,
 	}
 }
 .project-phases-section {
-  padding: 3rem 0;
   width: 100%;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-radius: 16px;
+  margin-top: 3rem !important;
 
   .phases-section-header {
     margin-bottom: 1.5rem;
@@ -1339,6 +1342,10 @@ input,
     .section-title {
       font-size: 2rem;
       margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #1f2933;
+      text-align: left;
+      padding-bottom: 1rem;
     }
 
     .section-subtitle {
@@ -1350,6 +1357,8 @@ input,
   }
 
   .phases-nav-wrapper {
+    display: flex;
+    justify-content: center;
     overflow-x: auto;
     padding-bottom: 0.75rem;
     margin-bottom: 1.75rem;
@@ -1357,10 +1366,11 @@ input,
     .phases-nav {
       display: flex;
       gap: 0.75rem;
-      min-width: 100%;
       flex-wrap: nowrap;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      justify-content: center;
+      min-width: auto;
     }
   }
 

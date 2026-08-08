@@ -235,8 +235,8 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit, OnDestroy
     if (this.selectedPhase.dimentions) {
       details.push({ label: 'Dimensions', value: this.selectedPhase.dimentions, icon: 'fas fa-ruler-combined text-primary me-2' });
     }
-    if (this.selectedPhase.price) {
-      details.push({ label: 'Price', value: this.selectedPhase.price, icon: 'fas fa-tags text-primary me-2' });
+    if (this.selectedPhase.amenties) {
+      details.push({ label: 'Amenities', value: this.selectedPhase.amenties, icon: 'fas fa-leaf text-primary me-2' });
     }
     if (this.selectedPhase.location) {
       details.push({ label: 'Location', value: this.selectedPhase.location, icon: 'fas fa-map-marker-alt text-primary me-2' });

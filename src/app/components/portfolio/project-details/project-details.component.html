@@ -143,34 +143,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Project Design Images Section -->
-      <div class="project-design-images-section mt-5" *ngIf="projectData?.project_design_images && projectData.project_design_images.length > 0">
-        <h3 class="section-title mb-4">Gallery</h3>
-        <div class="design-images-gallery">
-          <div class="swiper designImagesSwiper" aria-label="Project design gallery">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide" *ngFor="let image of projectData.project_design_images; let i = index">
-                <div class="design-image-card">
-                  <img
-                    [src]="imagePath + 'project/' + image"
-                    [alt]="projectData?.name + ' - Design ' + (i + 1)"
-                    class="design-gallery-image"
-                    loading="lazy"
-                    (load)="onImageLoad()"
-                  />
-                </div>
-              </div>
-            </div>
-            <!-- Navigation -->
-            <div class="design-swiper-button-next" aria-label="Next slide"></div>
-            <div class="design-swiper-button-prev" aria-label="Previous slide"></div>
-            <!-- Pagination -->
-            <div class="design-swiper-pagination"></div>
-          </div>
-        </div>
-      </div>
-
       <!-- Project Phases Section -->
       <section class="project-phases-section mt-5" *ngIf="normalizedPhases.length">
         <div class="phases-section-header">
@@ -190,7 +162,7 @@
               class="phase-tab"
               [class.active]="selectedPhaseIndex === i"
             >
-              <span class="phase-tab-title">{{ p.name || ('Phase ' + (i + 1)) }}</span>
+              <span class="phase-tab-title">{{ ('Phase ' + (i + 1)) }}</span>
               <span class="phase-tab-badge" *ngIf="p.count || p.phase_count || p.phaseCount">
                 {{ p.count || p.phase_count || p.phaseCount }}
               </span>
@@ -243,6 +215,33 @@
           </div>
         </div>
       </section>
+
+      <!-- Project Design Images Section -->
+      <div class="project-design-images-section mt-5" *ngIf="projectData?.project_design_images && projectData.project_design_images.length > 0">
+        <h3 class="section-title mb-4">Gallery</h3>
+        <div class="design-images-gallery">
+          <div class="swiper designImagesSwiper" aria-label="Project design gallery">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" *ngFor="let image of projectData.project_design_images; let i = index">
+                <div class="design-image-card">
+                  <img
+                    [src]="imagePath + 'project/' + image"
+                    [alt]="projectData?.name + ' - Design ' + (i + 1)"
+                    class="design-gallery-image"
+                    loading="lazy"
+                    (load)="onImageLoad()"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- Navigation -->
+            <div class="design-swiper-button-next" aria-label="Next slide"></div>
+            <div class="design-swiper-button-prev" aria-label="Previous slide"></div>
+            <!-- Pagination -->
+            <div class="design-swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
 
       <!-- Google Maps Section -->
       <div class="google-maps-section mt-5" *ngIf="projectData?.location">
