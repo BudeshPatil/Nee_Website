@@ -586,7 +586,7 @@ export class HomeComponent {
     this.dataService.getAllService(obj).subscribe((response: any) => {
       if (response.code == 200) {
         if (response.result != null && response.result.length > 0) {
-          this.servicesData = response.result;
+          this.servicesData = response.result.sort((a: any, b: any) => (a.sequence_number || 0) - (b.sequence_number || 0));
         }
       }
     });
