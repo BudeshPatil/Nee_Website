@@ -1611,23 +1611,44 @@ input,
   @media (max-width: 767px) {
     padding: 2rem 0;
 
+    .phases-section-header {
+      .section-title {
+        font-size: 1.7rem;
+      }
+
+      .section-subtitle {
+        max-width: 100%;
+        font-size: 0.95rem;
+      }
+    }
+
     .phases-nav-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      justify-content: flex-start;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
       padding-bottom: 0.5rem;
       margin-bottom: 1rem;
     }
 
     .phases-nav {
       gap: 0.65rem;
+      min-width: max-content;
+      justify-content: flex-start;
+      padding-bottom: 0.25rem;
     }
 
     .phase-tab {
       padding: 0.8rem 1rem;
       font-size: 0.92rem;
-      min-width: 150px;
+      min-width: auto;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .phase-content-card {
-      padding: 1.5rem;
+      padding: 1.25rem;
     }
 
     .phase-name {
@@ -1638,9 +1659,15 @@ input,
       font-size: 0.98rem;
     }
 
+    .phase-grid-layout {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
     .project-details-grid,
     .project-detail-grid {
       grid-template-columns: 1fr;
+      gap: 1rem;
     }
 
     .info-card,
@@ -1650,6 +1677,59 @@ input,
 
     .phase-image-column {
       position: static;
+      margin-top: 1.5rem;
+      width: 100%;
+    }
+
+    .phase-image-card {
+      width: 100%;
+    }
+
+    .phase-main-image {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  @media (max-width: 575px) {
+    padding: 1.5rem 0;
+
+    .phase-content-card {
+      padding: 1rem;
+    }
+
+    .phase-name {
+      font-size: 1.4rem;
+    }
+
+    .phase-description {
+      font-size: 0.92rem;
+    }
+
+    .phase-tab {
+      padding: 0.7rem 0.9rem;
+    }
+
+    .phases-nav-wrapper {
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
+
+    .phase-grid-layout {
+      gap: 1rem;
+    }
+
+    .project-details-grid,
+    .project-detail-grid {
+      gap: 0.75rem;
+    }
+
+    .detail-card,
+    .info-card {
+      padding: 1rem;
+    }
+
+    .phase-image-column {
+      margin-top: 1rem;
     }
   }
 }

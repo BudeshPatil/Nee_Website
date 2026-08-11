@@ -180,6 +180,28 @@ body {
   }
 }
 
+.nav-logo {
+  display: block;
+}
+
+.logo-desktop {
+  display: block;
+}
+
+.logo-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .logo-desktop {
+    display: none;
+  }
+
+  .logo-mobile {
+    display: block;
+  }
+}
+
 /*** Navbar End ***/
 
 .search-overlay {
