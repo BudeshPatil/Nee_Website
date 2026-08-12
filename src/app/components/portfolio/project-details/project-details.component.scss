@@ -760,6 +760,10 @@
   padding: 3rem 2rem;
   border-radius: 16px;
   margin-top: 3rem !important;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 
   .section-title {
     font-size: 2rem;
@@ -768,15 +772,100 @@
     text-align: left;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 
     &::before {
       width: 100%;
     }
 
+    @media (max-width: 767px) {
+      font-size: 1.55rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+    }
+
     @media (max-width: 576px) {
-      font-size: 1.5rem;
+      font-size: 1.35rem;
     }
   }
+
+  .addr,
+  form {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .para-width {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contact-detail-row {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 0.35rem 1rem;
+    align-items: start;
+    margin-bottom: 0.9rem;
+  }
+
+  .contact-detail-label {
+    margin: 0;
+  }
+
+  .contact-detail-value {
+    display: block;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.6;
+  }
+
+  .form-group {
+    min-width: 0;
+    margin-bottom: 0;
+  }
+
+  .form-label {
+    margin-bottom: 0.4rem;
+  }
+
+  form .row {
+    --bs-gutter-y: 0.85rem;
+  }
+
+  .helpform,
+  .helptextarea,
+  .form-control,
+  .interphone {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .helptextarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  ::ng-deep {
+    .iti,
+    .custom-intl-tel-input,
+    .iti__flag-container,
+    .iti__selected-flag {
+      max-width: 100%;
+    }
+
+    .iti {
+      width: 100%;
+    }
+
+    .iti__country-list,
+    .iti__dropdown-content {
+      position: absolute;
+      width: min(280px, calc(100vw - 2.5rem)) !important;
+      max-width: 100%;
+    }
+  }
+
   .detail-container {
     border-radius: 12px;
     overflow: hidden;
@@ -796,6 +885,70 @@
       @media (max-width: 576px) {
         height: 250px;
       }
+    }
+  }
+
+  @media (max-width: 1199px) {
+    padding: 2.25rem 1.5rem;
+  }
+
+  @media (max-width: 767px) {
+    padding: 1.75rem 1rem;
+    border-radius: 12px;
+
+    .contact-detail-row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.15rem;
+      margin-bottom: 1rem;
+    }
+
+    form .row {
+      --bs-gutter-y: 0.5rem;
+      --bs-gutter-x: 0.75rem;
+    }
+
+    .form-label {
+      margin-bottom: 0.2rem;
+    }
+
+    .helpform,
+    .form-control:not(textarea) {
+      height: 42px;
+    }
+
+    .interphone {
+      height: 42px;
+      min-height: 42px;
+    }
+
+    ::ng-deep .custom-intl-tel-input {
+      height: 42px !important;
+    }
+
+    .helptextarea {
+      min-height: 110px;
+      height: 110px;
+    }
+
+    .btn-primary {
+      margin-top: 0.15rem !important;
+    }
+  }
+
+  @media (max-width: 575px) {
+    padding: 1.35rem 0.85rem;
+
+    .contact-detail-label,
+    .contact-detail-value {
+      font-size: 0.95rem;
+    }
+
+    form .row {
+      --bs-gutter-y: 0.4rem;
+    }
+
+    .form-label.csmb12 {
+      margin-bottom: 0.15rem;
     }
   }
 }
@@ -1036,7 +1189,10 @@
 }
 
 textarea {
+	width: 100%;
+	max-width: 100%;
 	height: 227px;
+	box-sizing: border-box;
 
 	@media (max-width: 1536px) {
 		height: 150px;
@@ -1045,27 +1201,21 @@ textarea {
 	@media (max-width: 1336px) {
 		height: 120px;
 	}
+
+	@media (max-width: 575px) {
+		height: 140px;
+	}
 }
 
 
 .para-width {
-	// width: 56%;
-	width: 582px;
+	width: min(582px, 100%);
+	max-width: 100%;
 
-	// @media (max-width: 2048px) {
-	// 	width: 60%;
-	// }
-	// @media (max-width: 1920px) {
-	// 	width: 64%;
-	// }
 	@media (max-width: 1599px) {
-		// width: 80%;
-		width: 510px;
+		width: min(510px, 100%);
 	}
 
-	// @media (max-width: 1440px) {
-	// 	width: 86%;
-	// }
 	@media (max-width: 1336px) {
 		width: 100%;
 	}
@@ -1175,13 +1325,14 @@ textarea {
 
 	.iti__country-list {
 		height: 200px;
+		max-width: min(280px, calc(100vw - 2.5rem));
 
 		@media (max-width: 1920px) {
-			width: 259px;
+			width: min(259px, 100%);
 		}
 
 		@media (max-width: 1600px) {
-			width: 174px;
+			width: min(220px, 100%);
 		}
 	}
 }
@@ -1199,6 +1350,9 @@ input,
 /* Textarea with solid border */
 .helptextarea {
 	border: 2px solid #222423 !important;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
 
@@ -1331,6 +1485,9 @@ input,
 }
 .project-phases-section {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
   padding: 3rem 2rem;
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
   border-radius: 16px;
@@ -1357,25 +1514,21 @@ input,
   }
 
   .phases-nav-wrapper {
-    display: flex;
-    justify-content: center;
-    overflow-x: auto;
-    padding-bottom: 0.75rem;
+    width: 100%;
+    max-width: 100%;
     margin-bottom: 1.75rem;
+    padding-bottom: 0.25rem;
+  }
 
-    .phases-nav {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: nowrap;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      justify-content: center;
-      min-width: auto;
-    }
+  .phases-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    width: 100%;
   }
 
   .phase-tab {
-    scroll-snap-align: start;
     display: inline-flex;
     align-items: center;
     gap: 0.65rem;
@@ -1388,6 +1541,7 @@ input,
     transition: transform 200ms ease, background 200ms ease, color 200ms ease, border 200ms ease;
     white-space: nowrap;
     position: relative;
+    max-width: 100%;
   }
 
   .phase-tab:hover {
@@ -1414,14 +1568,22 @@ input,
     align-items: center;
     justify-content: center;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.18);
-    color: #ffffff;
+    background: rgba(145, 114, 43, 0.12);
+    color: #91722b;
     font-size: 0.8rem;
     font-weight: 700;
     padding: 0 0.45rem;
   }
 
+  .phase-tab.active .phase-tab-badge {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+  }
+
   .phase-details {
+    min-width: 0;
+    width: 100%;
+
     .phase-content-card {
       background: #ffffff;
       border-radius: 20px;
@@ -1429,6 +1591,8 @@ input,
       padding: 2rem;
       animation: phaseFadeIn 300ms ease both;
       transition: transform 300ms ease, opacity 300ms ease;
+      overflow: hidden;
+      min-width: 0;
     }
 
     .phase-main-header {
@@ -1445,6 +1609,8 @@ input,
         font-weight: 800;
         margin-bottom: 0.75rem;
         color: #1d2939;
+        overflow-wrap: anywhere;
+        word-break: break-word;
       }
 
       .phase-divider {
@@ -1458,25 +1624,51 @@ input,
         margin-top: 1.5rem;
         color: #515b67;
         line-height: 1.9;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+
+        ::ng-deep {
+          img,
+          table,
+          iframe,
+          video {
+            max-width: 100%;
+            height: auto;
+          }
+
+          table {
+            display: block;
+            overflow-x: auto;
+          }
+        }
       }
     }
 
     .phase-grid-layout {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
       gap: 2rem;
       align-items: start;
+      width: 100%;
     }
 
     .phase-copy {
       display: grid;
       gap: 1.5rem;
+      min-width: 0;
+      width: 100%;
     }
 
-    .project-details-grid {
+    .project-details-grid,
+    .project-detail-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
+      width: 100%;
+    }
+
+    .project-detail-grid {
+      margin-top: 1rem;
     }
 
     .detail-card {
@@ -1488,6 +1680,7 @@ input,
       background: #f8f8f7;
       transition: transform 250ms ease, box-shadow 250ms ease;
       min-height: 120px;
+      min-width: 0;
       border: 1px solid rgba(145, 114, 43, 0.08);
     }
 
@@ -1507,6 +1700,7 @@ input,
     .detail-card-copy {
       display: grid;
       gap: 0.35rem;
+      min-width: 0;
     }
 
     .detail-label {
@@ -1520,13 +1714,8 @@ input,
       color: #1f2937;
       font-size: 1rem;
       font-weight: 700;
-    }
-
-    .project-detail-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .info-card {
@@ -1535,6 +1724,7 @@ input,
       border-radius: 18px;
       border: 1px solid rgba(145, 114, 43, 0.08);
       min-height: 140px;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -1557,6 +1747,18 @@ input,
       color: #5b636d;
       line-height: 1.8;
       margin: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+
+      ::ng-deep {
+        img,
+        table,
+        iframe,
+        video {
+          max-width: 100%;
+          height: auto;
+        }
+      }
     }
 
     .phase-image-column {
@@ -1564,6 +1766,8 @@ input,
       align-items: start;
       position: sticky;
       top: 120px;
+      min-width: 0;
+      width: 100%;
     }
 
     .phase-image-card {
@@ -1572,6 +1776,7 @@ input,
       background: #f8fafc;
       box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
       transition: transform 300ms ease, box-shadow 300ms ease;
+      width: 100%;
     }
 
     .phase-image-card:hover {
@@ -1581,6 +1786,8 @@ input,
     .phase-main-image {
       display: block;
       width: 100%;
+      max-width: 100%;
+      height: auto;
       aspect-ratio: 16 / 10;
       object-fit: cover;
       object-position: center;
@@ -1590,30 +1797,111 @@ input,
     .phase-image-card:hover .phase-main-image {
       transform: scale(1.02);
     }
+
+    @media (max-width: 1199px) {
+      .phase-grid-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.75rem;
+      }
+
+      .phase-image-column {
+        position: static;
+        top: auto;
+        order: -1;
+      }
+
+      .project-details-grid,
+      .project-detail-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .phase-content-card {
+        padding: 1.25rem;
+        border-radius: 16px;
+      }
+
+      .phase-main-header {
+        margin-bottom: 1.5rem;
+
+        .phase-name {
+          font-size: 1.5rem;
+        }
+
+        .phase-description {
+          margin-top: 1rem;
+          font-size: 0.98rem;
+          line-height: 1.7;
+        }
+      }
+
+      .phase-grid-layout {
+        gap: 1.25rem;
+      }
+
+      .phase-copy {
+        gap: 1rem;
+      }
+
+      .project-details-grid,
+      .project-detail-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.85rem;
+      }
+
+      .detail-card,
+      .info-card {
+        min-height: 0;
+        padding: 1rem;
+      }
+
+      .phase-main-image {
+        aspect-ratio: 4 / 3;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .phase-content-card {
+        padding: 1rem;
+        border-radius: 14px;
+      }
+
+      .phase-main-header {
+        .phase-name {
+          font-size: 1.3rem;
+        }
+
+        .phase-description {
+          font-size: 0.92rem;
+        }
+      }
+
+      .detail-card {
+        gap: 0.75rem;
+      }
+
+      .detail-card-icon {
+        min-width: 28px;
+        font-size: 1.1rem;
+      }
+    }
   }
 
   @media (max-width: 1199px) {
-    .project-details-grid,
-    .project-detail-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .phase-grid-layout {
-      grid-template-columns: 1fr;
-    }
-
-    .phase-image-column {
-      position: static;
-      top: auto;
-    }
+    padding: 2.25rem 1.5rem;
   }
 
   @media (max-width: 767px) {
-    padding: 2rem 0;
+    padding: 1.75rem 1rem;
+    border-radius: 12px;
 
     .phases-section-header {
+      margin-bottom: 1.15rem;
+
       .section-title {
-        font-size: 1.7rem;
+        font-size: 1.55rem;
+        padding-bottom: 0.65rem;
       }
 
       .section-subtitle {
@@ -1623,113 +1911,33 @@ input,
     }
 
     .phases-nav-wrapper {
-      width: 100%;
-      overflow-x: auto;
-      justify-content: flex-start;
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.15rem;
     }
 
     .phases-nav {
-      gap: 0.65rem;
-      min-width: max-content;
-      justify-content: flex-start;
-      padding-bottom: 0.25rem;
+      gap: 0.55rem;
     }
 
     .phase-tab {
-      padding: 0.8rem 1rem;
-      font-size: 0.92rem;
-      min-width: auto;
-      white-space: nowrap;
-      flex-shrink: 0;
+      padding: 0.7rem 0.95rem;
     }
 
-    .phase-content-card {
-      padding: 1.25rem;
-    }
-
-    .phase-name {
-      font-size: 1.65rem;
-    }
-
-    .phase-description {
-      font-size: 0.98rem;
-    }
-
-    .phase-grid-layout {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .project-details-grid,
-    .project-detail-grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .info-card,
-    .detail-card {
-      min-height: auto;
-    }
-
-    .phase-image-column {
-      position: static;
-      margin-top: 1.5rem;
-      width: 100%;
-    }
-
-    .phase-image-card {
-      width: 100%;
-    }
-
-    .phase-main-image {
-      aspect-ratio: 4 / 3;
+    .phase-tab-title {
+      font-size: 0.88rem;
     }
   }
 
   @media (max-width: 575px) {
-    padding: 1.5rem 0;
+    padding: 1.35rem 0.85rem;
 
-    .phase-content-card {
-      padding: 1rem;
-    }
-
-    .phase-name {
-      font-size: 1.4rem;
-    }
-
-    .phase-description {
-      font-size: 0.92rem;
+    .phases-section-header {
+      .section-title {
+        font-size: 1.35rem;
+      }
     }
 
     .phase-tab {
-      padding: 0.7rem 0.9rem;
-    }
-
-    .phases-nav-wrapper {
-      padding-left: 0.25rem;
-      padding-right: 0.25rem;
-    }
-
-    .phase-grid-layout {
-      gap: 1rem;
-    }
-
-    .project-details-grid,
-    .project-detail-grid {
-      gap: 0.75rem;
-    }
-
-    .detail-card,
-    .info-card {
-      padding: 1rem;
-    }
-
-    .phase-image-column {
-      margin-top: 1rem;
+      padding: 0.6rem 0.8rem;
     }
   }
 }
