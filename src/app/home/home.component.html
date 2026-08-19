@@ -232,13 +232,13 @@
 			<!-- Service Card -->
 			<div class="col-md-4 col-lg-4" *ngFor="let service of servicesData; let i = index">
 				<div class="service-card" [routerLink]="['/',service.se]" routerLinkActive="router-link-active">
-					<div class="icon-box" *ngIf="!service.icon_image">
+					<!-- <div class="icon-box" *ngIf="!service.icon_image">
 						<i class="fa fa-building"></i>
-					</div>
+					</div> -->
 					<div class="service-icon" *ngIf="service.icon_image">
 						<img [src]="imagePath + 'service/' + service.icon_image" [alt]="service.name" loading="lazy" />
 					</div>
-					<h4 class="card-title  mb-3">{{ service.name }}</h4>
+					<!-- <h4 class="card-title  mb-3">{{ service.name }}</h4>-->
 					<p class="card-text text-muted count-desc mb-3">{{ service.short_desc }}</p>
 					<!-- <p class="card-text mb-4 flex-grow-1" [innerHtml]="service.desc"></p> -->
 					<div class="icon-read-more">
