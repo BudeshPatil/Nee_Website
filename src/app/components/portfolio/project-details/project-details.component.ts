@@ -232,8 +232,8 @@ export class ProjectDetailsComponent implements OnInit, AfterViewInit, OnDestroy
     if (this.selectedPhase.noofplots || this.selectedPhase.plots) {
       details.push({ label: 'Plots', value: this.selectedPhase.noofplots || this.selectedPhase.plots, icon: 'fas fa-th text-primary me-2' });
     }
-    if (this.selectedPhase.dimentions) {
-      details.push({ label: 'Dimensions', value: this.selectedPhase.dimentions, icon: 'fas fa-ruler-combined text-primary me-2' });
+    if (this.selectedPhase.dimensions) {
+      details.push({ label: 'Dimensions', value: this.selectedPhase.dimensions, icon: 'fas fa-ruler-combined text-primary me-2' });
     }
     if (this.selectedPhase.amenties) {
       details.push({ label: 'Amenities', value: this.selectedPhase.amenties, icon: 'fas fa-leaf text-primary me-2' });
