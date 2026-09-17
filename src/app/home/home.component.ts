@@ -128,7 +128,7 @@ export class HomeComponent {
       answer: "Many of our projects are developed with necessary infrastructure to support residential construction. Availability may vary by project"
     },
     {
-      question:"Why choose Neelgund Developers?",
+      question:"Why choose Neelgund Group?",
       answer:"With over 40 years of experience, 60+ projects, and thousands of satisfied customers, we focus on transparency, legal clarity, quality development, and customer satisfaction."
     }
   ];

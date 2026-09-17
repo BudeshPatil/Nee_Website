@@ -51,10 +51,10 @@ export class SchemaService {
 			'logo': `${this.getBaseUrl()}/assets/logo_footer.png`,
 			'description': 'Neelgund Group – Residential Plots, Construction & Club in Hubballi',
 			'sameAs': [
-				'https://www.facebook.com/neelgunddevelopers?mibextid=ZbWKwL',
-				'https://x.com/NeelgunddevlLLP',
-				'https://www.instagram.com/neelgunddevelopers?igsh=aTM5eGRiMWxpZ2N2',
-				'https://www.linkedin.com/company/neelgund/',
+				'https://www.facebook.com/neelgundgroup',
+				'https://x.com/Neelgundgroup',
+				'https://www.instagram.com/neelgundgroup/',
+				'https://in.linkedin.com/company/neelgund',
 			],
 			'contactPoint': {
 				'@type': 'ContactPoint',
@@ -202,10 +202,10 @@ export class SchemaService {
 			},
 			'priceRange': data?.priceRange || '$$$',
 			'sameAs': [
-				'https://www.facebook.com/neelgunddevelopers?mibextid=ZbWKwL',
-				'https://x.com/NeelgunddevlLLP',
-				'https://www.instagram.com/neelgunddevelopers?igsh=aTM5eGRiMWxpZ2N2',
-				'https://www.linkedin.com/company/neelgund/',
+				'https://www.facebook.com/neelgundgroup',
+				'https://x.com/Neelgundgroup',
+				'https://www.instagram.com/neelgundgroup/',
+				'https://in.linkedin.com/company/neelgund',
 			],
 			'openingHoursSpecification': [
 				{

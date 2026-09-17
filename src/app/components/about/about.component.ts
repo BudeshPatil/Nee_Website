@@ -39,7 +39,7 @@ export class AboutComponent {
     name: 'Mr. Neelgund',
     image: 'founder.jpg',
     quote: 'Quality and trust are not built overnight, they are earned over decades.',
-    message: 'As the founder of Neelgund Developers, my vision has always been to create legally sound and thoughtfully planned developments that generations can rely on.'
+    message: 'As the founder of Neelgund Group, my vision has always been to create legally sound and thoughtfully planned developments that generations can rely on.'
   };
 
   ceo = {
