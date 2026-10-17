@@ -150,6 +150,7 @@ export class HomeComponent {
   selectedCategory: string = 'all';
   allProjects: any = [];
   completedProjects: any = [];
+  onGoingProjects: any = [];
   private destroy$ = new Subject<void>();
   addcontactForm: FormGroup;
   submitted: boolean = false;
@@ -304,10 +305,19 @@ export class HomeComponent {
   }
 
   private transformBannerResponse(banners: any[]): any[] {
-    return banners.map((banner) => ({
-      ...banner,
-      displayImage: this.getBannerImageSrc(banner),
-    }));
+    return [...banners]
+      .sort((a, b) => {
+        const aTime = a.created_at ? new Date(a.created_at).getTime() : 0;
+        const bTime = b.created_at ? new Date(b.created_at).getTime() : 0;
+        if (aTime !== bTime) {
+          return bTime - aTime;
+        }
+        return (b.sequence_number || 0) - (a.sequence_number || 0);
+      })
+      .map((banner) => ({
+        ...banner,
+        displayImage: this.getBannerImageSrc(banner),
+      }));
   }
 
   updateBannerImages(): void {
@@ -443,6 +453,10 @@ export class HomeComponent {
           el: '.project-pagination',
           clickable: true,
         },
+        navigation: {
+          nextEl: '.project-highlights-next',
+          prevEl: '.project-highlights-prev',
+        },
         breakpoints: {
           0: {
             slidesPerView: 1,
@@ -505,6 +519,10 @@ export class HomeComponent {
         spaceBetween: 15,
         grabCursor: true,
         autoplay: { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true },
+        navigation: {
+          nextEl: '.portfolio-next',
+          prevEl: '.portfolio-prev',
+        },
         breakpoints: {
           0: {
             slidesPerView: 1,
@@ -620,6 +638,8 @@ export class HomeComponent {
         if (response.result != null && response.result != '') {
           this.projects = response.result;
           this.completedProjects = this.projects.filter((project: any) => project.category_data[0] === 'Completed Projects');
+          this.onGoingProjects = this.projects.filter((project: any) => project.category_data[0] === 'Ongoing Projects');
+          // make sure swipers are initialized once data is rendered
           setTimeout(() => this.initProjectHighlightsSwiper(), 0);
           setTimeout(() => this.initPortfolioSwiper(), 0);
         } else {

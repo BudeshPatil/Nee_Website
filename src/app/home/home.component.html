@@ -150,7 +150,7 @@
 			<!-- Project Cards Grid -->
 			<div class="projects-cards-grid swiper project-highlights-swiper">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide" *ngFor="let project of allProjects">
+					<div class="swiper-slide" *ngFor="let project of onGoingProjects">
 						<div class="project-card">
 							<div class="card-image-wrapper" (click)="selectProject(project.url_key)">
 								<img [src]="imagePath + 'project/' + project.image" [alt]="project.name"
@@ -213,6 +213,12 @@
 						</div>
 					</div>
 				</div>
+				<button type="button" class="mobile-slider-nav project-highlights-prev" aria-label="Previous project">
+					<i class="fas fa-chevron-left" aria-hidden="true"></i>
+				</button>
+				<button type="button" class="mobile-slider-nav project-highlights-next" aria-label="Next project">
+					<i class="fas fa-chevron-right" aria-hidden="true"></i>
+				</button>
 			</div>
 		</div>
 	</div>
@@ -301,6 +307,12 @@
 									</a>
 								</div>
 							</div>
+							<button type="button" class="mobile-slider-nav portfolio-prev" aria-label="Previous project">
+								<i class="fas fa-chevron-left" aria-hidden="true"></i>
+							</button>
+							<button type="button" class="mobile-slider-nav portfolio-next" aria-label="Next project">
+								<i class="fas fa-chevron-right" aria-hidden="true"></i>
+							</button>
 							<div class="swiper-pagination portfolio-pagination"></div>
 						</div>
 					</div>

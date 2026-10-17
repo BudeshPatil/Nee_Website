@@ -33,6 +33,8 @@ export class AppComponent implements OnInit {
 	videoStarted: boolean = false;
 	thumbnailVisible: boolean = true;
 	websiteVisible: boolean = false;
+	private aosResizeObserver?: ResizeObserver;
+	private aosRefreshTimer?: ReturnType<typeof setTimeout>;
 	constructor(
 		@Inject(PLATFORM_ID) private platformId: Object,
 		@Inject(DOCUMENT) private document: Document,
@@ -118,6 +120,15 @@ export class AppComponent implements OnInit {
 		// AOS and intro animation only in browser
 		if (this.isBrowser) {
 			AOS.init({ once: true, duration: 1000, easing: 'ease-in-out' });
+
+			// AOS caches element offsets; content loaded after init shifts them.
+			if (typeof ResizeObserver !== 'undefined') {
+				this.aosResizeObserver = new ResizeObserver(() => {
+					clearTimeout(this.aosRefreshTimer);
+					this.aosRefreshTimer = setTimeout(() => AOS.refresh(), 150);
+				});
+				this.aosResizeObserver.observe(this.document.body);
+			}
 
 			const hasPlayed = sessionStorage.getItem('introPlayed');
 
@@ -426,6 +437,8 @@ export class AppComponent implements OnInit {
 	ngOnDestroy() {
 		if (isPlatformBrowser(this.platformId)) {
 			this.smoothScroll.destroy();
+			this.aosResizeObserver?.disconnect();
+			clearTimeout(this.aosRefreshTimer);
 		}
 	}
 

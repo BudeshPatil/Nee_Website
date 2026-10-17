@@ -180,25 +180,32 @@ body {
   }
 }
 
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  max-width: calc(100% - 64px);
+  margin-right: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 .nav-logo {
   display: block;
+  width: 210px;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
-.logo-desktop {
-  display: block;
-}
-
-.logo-mobile {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .logo-desktop {
-    display: none;
+@media (max-width: 991px) {
+  .nav-logo {
+    width: 172px;
   }
+}
 
-  .logo-mobile {
-    display: block;
+@media (max-width: 360px) {
+  .nav-logo {
+    width: 148px;
   }
 }
 

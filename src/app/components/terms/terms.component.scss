@@ -262,8 +262,30 @@
 		height: 372px;
 	}
 
+	@media (max-width: 767px) {
+		height: auto;
+		min-height: 420px;
+		background-image:
+			linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.35) 45%, rgba(0, 0, 0, 0) 75%),
+			url("../../../assets/image/about.jpeg");
+		background-position: center 25%;
+		background-blend-mode: normal;
+		padding-bottom: 32px;
+
+		.sectionmb {
+			margin-bottom: 0;
+
+			> [class*="col-"] {
+				margin-bottom: 0 !important;
+			}
+		}
+
+		.content-block {
+			text-align: left;
+		}
+	}
+
 	@media (max-width: 575px) {
-		height: 100vh;
-		background-position: center center;
+		min-height: 400px;
 	}
 }
